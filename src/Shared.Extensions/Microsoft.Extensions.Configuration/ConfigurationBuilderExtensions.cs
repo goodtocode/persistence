@@ -6,12 +6,12 @@ namespace GoodToCode.Shared.Extensions
 {
     public static class ConfigurationBuilderExtensions
     {
-        public static IConfiguration AddAzureAppConfigurationDefault(this ConfigurationBuilder item, string sentinelAppConfigKey)
+        public static IConfiguration AddAzureAppConfigurationWithSentinel(this ConfigurationBuilder item, string sentinelAppConfigKey)
         {            
-            return AddAzureAppConfigurationDefault(item, sentinelAppConfigKey, Environment.GetEnvironmentVariable("AppSettingsConnection"));
+            return AddAzureAppConfigurationWithSentinel(item, sentinelAppConfigKey, Environment.GetEnvironmentVariable("AppSettingsConnection"));
         }
 
-        public static IConfiguration AddAzureAppConfigurationDefault(this ConfigurationBuilder item, string sentinelAppConfigKey, string appConfigurationConnection)
+        public static IConfiguration AddAzureAppConfigurationWithSentinel(this ConfigurationBuilder item, string sentinelAppConfigKey, string appConfigurationConnection)
         {
             item.AddAzureAppConfiguration(options =>
                             options
