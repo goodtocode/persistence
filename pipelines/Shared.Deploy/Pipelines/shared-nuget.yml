@@ -8,6 +8,7 @@ trigger:
     include:
     - src/*
 
+
 variables:
 - group: Development
 - name: sourceDirectory
