@@ -6,7 +6,7 @@ namespace GoodToCode.Shared.Extensions
 {
     public static class ConfigurationBuilderExtensions
     {
-        public static IConfiguration AddAzureAppConfigurationWithSentinel(this ConfigurationBuilder item, string appConfigurationConnection, string sentinelAppConfigKey)
+        public static IConfiguration AddAzureAppConfigurationWithSentinel(this ConfigurationBuilder item, string appConfigurationConnection, string sentinelAppConfigKey, string environment)
         {
             item.AddAzureAppConfiguration(options =>
                             options
@@ -17,9 +17,14 @@ namespace GoodToCode.Shared.Extensions
                                            .SetCacheExpiration(new TimeSpan(0, 60, 0));
                                 })
                                 .Select(KeyFilter.Any, LabelFilter.Null)
-                                .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+                                .Select(KeyFilter.Any, environment)
                         );
             return item.Build();
+        }
+
+        public static IConfiguration AddAzureAppConfigurationWithSentinel(this ConfigurationBuilder item, string appConfigurationConnection, string sentinelAppConfigKey)
+        {
+            return AddAzureAppConfigurationWithSentinel(item, appConfigurationConnection, sentinelAppConfigKey, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production");
         }
     }
 }
