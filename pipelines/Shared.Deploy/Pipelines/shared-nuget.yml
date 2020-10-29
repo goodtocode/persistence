@@ -1,4 +1,3 @@
-
 trigger:
   batch: true
   branches:
@@ -7,7 +6,6 @@ trigger:
   paths:
     include:
     - src/*
-
 
 variables:
 - group: Development
@@ -72,7 +70,7 @@ stages:
       inputs:
         command: test
         projects: |
-          $(System.DefaultWorkingDirectory)/**/*.Specs.Unit.csproj
+          $(sourceDirectory)/**/*.csproj
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet pack'
