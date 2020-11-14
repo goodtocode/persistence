@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.Extensions</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Extensions</RootNamespace>
+    <AssemblyName>GoodToCode.Shared.Cqrs</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.Cqrs</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.Extensions</Product>
+    <Product>GoodToCode.Shared.Cqrs</Product>
     <Authors>Robert J. Good</Authors>
     <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
-    <Description>GoodToCode.Shared.Extensions</Description>
+    <Description>GoodToCode.Shared.Cqrs</Description>
     <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
     <PackageProjectUrl>https://github.com/goodtocode/stack</PackageProjectUrl>
     <PackageIcon>storeicon.png</PackageIcon>
@@ -27,11 +27,6 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="4.0.0" />
-    <PackageReference Include="NetTopologySuite" Version="2.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="ProjNET4GeoAPI" Version="1.4.1" />
   </ItemGroup>
 
   <ItemGroup>

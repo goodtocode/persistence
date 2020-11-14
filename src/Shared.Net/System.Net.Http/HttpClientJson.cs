@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Extensions
+namespace GoodToCode.Shared.Net
 {
     public class HttpClientJson<T> : HttpClient where T : class, new()
     {

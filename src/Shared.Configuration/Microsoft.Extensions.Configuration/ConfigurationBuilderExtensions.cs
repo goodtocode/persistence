@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
-namespace GoodToCode.Shared.Extensions
+namespace GoodToCode.Shared.Configuration
 {
     public static class ConfigurationBuilderExtensions
     {

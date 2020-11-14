@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Reflection;
 
-namespace GoodToCode.Shared.Extensions
+namespace GoodToCode.Shared.System
 {
-    public class Caster<T> where T : new()
+    public static class ObjectExtensions
     {
-        public T Cast(object sourceItem)
+        public static void Fill(this object item, object sourceItem)
         {
-            var item = new T();
             var sourceType = sourceItem.GetType();
 
             foreach (PropertyInfo sourceProperty in sourceType.GetRuntimeProperties())
             {
-                PropertyInfo destinationProperty = typeof(T).GetRuntimeProperty(sourceProperty.Name);
+                PropertyInfo destinationProperty = item.GetType().GetRuntimeProperty(sourceProperty.Name);
                 if (destinationProperty != null && destinationProperty.CanWrite)
                 {
                     // Copy data only for Primitive-ish types including Value types, Guid, String, etc.
@@ -24,7 +23,6 @@ namespace GoodToCode.Shared.Extensions
                     }
                 }
             }
-            return item;
         }
     }
 }

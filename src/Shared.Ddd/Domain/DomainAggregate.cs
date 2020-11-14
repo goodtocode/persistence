@@ -1,6 +1,4 @@
-﻿using GoodToCode.Shared.Messaging;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GoodToCode.Shared.Models
 {

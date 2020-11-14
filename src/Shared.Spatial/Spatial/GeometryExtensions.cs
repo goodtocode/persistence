@@ -4,7 +4,7 @@ using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Extensions.Spatial
+namespace GoodToCode.Shared.Spatial.Spatial
 {
     /// <summary>
     /// NTS ignores SRID values during operations.It assumes a planar coordinate system.
