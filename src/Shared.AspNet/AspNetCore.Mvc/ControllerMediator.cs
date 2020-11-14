@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GoodToCode.Extensions.Mvc
+namespace GoodToCode.AspNet.Mvc
 {
     [ApiController]
     public abstract class ControllerMediator : ControllerBase

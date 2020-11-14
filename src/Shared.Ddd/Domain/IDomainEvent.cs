@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace GoodToCode.Shared.Models
+namespace GoodToCode.Shared.Domain
 {
     public interface IDomainEvent<T> : INotification
     {

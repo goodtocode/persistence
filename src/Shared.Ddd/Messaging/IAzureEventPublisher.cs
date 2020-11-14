@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Models;
+﻿using GoodToCode.Shared.Domain;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Messaging

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace GoodToCode.Shared.Models
+namespace GoodToCode.Shared.Domain
 {
     public abstract class DomainModel<TModel> : IDomainModel<TModel>
     {
