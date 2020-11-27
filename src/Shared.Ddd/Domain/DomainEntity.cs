@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace GoodToCode.Shared.Domain
 {
-    public abstract class DomainModel<TModel> : IDomainModel<TModel>
+    public abstract class DomainEntity<TModel> : IDomainEntity<TModel>
     {
         private readonly List<IDomainEvent<TModel>> _domainEvents = new List<IDomainEvent<TModel>>();
 
@@ -16,7 +16,7 @@ namespace GoodToCode.Shared.Domain
         [IgnoreDataMember]
         public IReadOnlyList<IDomainEvent<TModel>> DomainEvents => _domainEvents;        
 
-        protected DomainModel()
+        protected DomainEntity()
         {
         }
 
@@ -32,7 +32,7 @@ namespace GoodToCode.Shared.Domain
         
         public override bool Equals(object obj)
         {
-            if (!(obj is DomainModel<TModel> other))
+            if (!(obj is DomainEntity<TModel> other))
                 return false;
 
             if (ReferenceEquals(this, other))
@@ -47,7 +47,7 @@ namespace GoodToCode.Shared.Domain
             return RowKey == other.RowKey;
         }
 
-        public static bool operator ==(DomainModel<TModel> a, DomainModel<TModel> b)
+        public static bool operator ==(DomainEntity<TModel> a, DomainEntity<TModel> b)
         {
             if (a is null && b is null)
                 return true;
@@ -58,7 +58,7 @@ namespace GoodToCode.Shared.Domain
             return a.Equals(b);
         }
 
-        public static bool operator !=(DomainModel<TModel> a, DomainModel<TModel> b)
+        public static bool operator !=(DomainEntity<TModel> a, DomainEntity<TModel> b)
         {
             return !(a == b);
         }

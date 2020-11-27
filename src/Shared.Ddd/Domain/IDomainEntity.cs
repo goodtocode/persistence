@@ -3,12 +3,10 @@ using System.Collections.Generic;
 
 namespace GoodToCode.Shared.Domain
 {
-    public interface IDomainModel<TModel>
+    public interface IDomainEntity<TModel> : IDomainObject
     {
         Guid RowKey { get; }
         string PartitionKey { get; }
-        bool Equals(object obj);
-        int GetHashCode();
         void RaiseDomainEvent(IDomainEvent<TModel> domainEvent);
         void ClearDomainEvents();
     }
