@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GoodToCode.Shared.Domain
 {
-    public interface IDomainModel<TModel>
+    public interface IDomainEntity<TModel>
     {
         Guid RowKey { get; }
         string PartitionKey { get; }
