@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Spatial", "Shared.Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.System", "Shared.System\Shared.System.csproj", "{9DAADDC3-2850-4475-AF00-2E8889C6D818}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.AspNet", "Shared.AspNet\Shared.AspNet.csproj", "{81DC15AE-4CD9-402A-BC9D-112552B22A3E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.EntityFramework", "Shared.EntityFramework\Shared.EntityFramework.csproj", "{2E31558F-441E-463E-B618-B2B4F02F6EE5}"
 EndProject
 Global
@@ -49,10 +47,6 @@ Global
 		{9DAADDC3-2850-4475-AF00-2E8889C6D818}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DAADDC3-2850-4475-AF00-2E8889C6D818}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DAADDC3-2850-4475-AF00-2E8889C6D818}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81DC15AE-4CD9-402A-BC9D-112552B22A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81DC15AE-4CD9-402A-BC9D-112552B22A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81DC15AE-4CD9-402A-BC9D-112552B22A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81DC15AE-4CD9-402A-BC9D-112552B22A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E31558F-441E-463E-B618-B2B4F02F6EE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E31558F-441E-463E-B618-B2B4F02F6EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E31558F-441E-463E-B618-B2B4F02F6EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU

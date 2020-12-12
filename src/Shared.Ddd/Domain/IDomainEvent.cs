@@ -1,8 +1,7 @@
-﻿using MediatR;
-
+﻿
 namespace GoodToCode.Shared.Domain
 {
-    public interface IDomainEvent<T> : INotification
+    public interface IDomainEvent<T>
     {
         T Item { get; }
     }

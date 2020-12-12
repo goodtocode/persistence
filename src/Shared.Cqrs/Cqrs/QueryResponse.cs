@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using GoodToCode.Shared.Validation;
-using MediatR;
 
 namespace GoodToCode.Shared.Cqrs
 {
     [Serializable]
-    public class QueryResponse<T> : IRequest<T>
+    public class QueryResponse<T>
     {
         public QueryResponse()
         {

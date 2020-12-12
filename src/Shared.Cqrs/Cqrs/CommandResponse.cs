@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using GoodToCode.Shared.Validation;
-using MediatR;
 
 namespace GoodToCode.Shared.Cqrs
 {
-    public class CommandResponse<T> : IRequest<Unit> where T : new()
+    public class CommandResponse<T> where T : new()
     {
         public CommandResponse()
         {
