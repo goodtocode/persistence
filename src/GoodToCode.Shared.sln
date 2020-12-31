@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.System", "Shared.Sys
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.EntityFramework", "Shared.EntityFramework\Shared.EntityFramework.csproj", "{2E31558F-441E-463E-B618-B2B4F02F6EE5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.CognitiveServices", "Shared.CognitiveServices\Shared.CognitiveServices.csproj", "{9FFC69AF-C322-4AC1-9E0E-85D121A6ADE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.CognitiveServices.Abstractions", "Shared.CognitiveServices.Abstractions\Shared.CognitiveServices.Abstractions.csproj", "{4CB88518-4143-40A1-9366-95096263E458}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{2E31558F-441E-463E-B618-B2B4F02F6EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E31558F-441E-463E-B618-B2B4F02F6EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E31558F-441E-463E-B618-B2B4F02F6EE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FFC69AF-C322-4AC1-9E0E-85D121A6ADE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FFC69AF-C322-4AC1-9E0E-85D121A6ADE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FFC69AF-C322-4AC1-9E0E-85D121A6ADE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FFC69AF-C322-4AC1-9E0E-85D121A6ADE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CB88518-4143-40A1-9366-95096263E458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CB88518-4143-40A1-9366-95096263E458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CB88518-4143-40A1-9366-95096263E458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CB88518-4143-40A1-9366-95096263E458}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

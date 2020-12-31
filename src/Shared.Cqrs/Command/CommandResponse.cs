@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using GoodToCode.Shared.Validation;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GoodToCode.Shared.Cqrs
 {
     public class CommandResponse<T> where T : new()
     {
-        public CommandResponse()
-        {
-        }
+        public CommandResponse() { }
 
         public T Result { get; set; } = new T();
 
@@ -15,7 +13,7 @@ namespace GoodToCode.Shared.Cqrs
 
         public ICollection<KeyValuePair<string, string>> Warnings { get; set; } = new List<KeyValuePair<string, string>>();
 
-        public ErrorInfo ErrorInfo { get; set; } = new ErrorInfo();
+        public Exception ThrownException { get; set; }
     }
 }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GoodToCode.Shared.Validation;
 
 namespace GoodToCode.Shared.Cqrs
 {
@@ -9,14 +8,12 @@ namespace GoodToCode.Shared.Cqrs
     {
         public QueryResponse()
         {
-            Errors = new List<KeyValuePair<string, string>>();
-            ErrorInfo = new ErrorInfo();
         }
 
         public T Result { get; set; }
 
-        public ErrorInfo ErrorInfo { get; set; }
-
         public ICollection<KeyValuePair<string, string>> Errors { get; set; } = new List<KeyValuePair<string, string>>();
+
+        public Exception ThrownException { get; set; }
     }
 }
