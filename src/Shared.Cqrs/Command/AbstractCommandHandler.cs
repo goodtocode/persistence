@@ -8,7 +8,6 @@ namespace GoodToCode.Shared.Cqrs
     public abstract class AbstractCommandHandler<TEntity, TValidator> where TEntity : new() where TValidator : AbstractValidator<TEntity>, new()
     {
         private readonly TValidator _validator = new TValidator();
-        private readonly List<KeyValuePair<string, string>> _errors;
 
         public AbstractCommandHandler() { }
 
@@ -34,11 +33,12 @@ namespace GoodToCode.Shared.Cqrs
 
         private List<KeyValuePair<string, string>> GetRequestErrors(GenericCommand<TEntity> request)
         {
-            var issues = _validator.Validate((TEntity)request.Item).Errors;
+            var issues = _validator.Validate(request.Item).Errors;
+            var errors = new List<KeyValuePair<string, string>>();
 
             foreach (var issue in issues)
-                _errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));
-            return _errors;
+                errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));
+            return errors;
         }
 
     }

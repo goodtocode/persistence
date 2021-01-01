@@ -8,7 +8,6 @@ namespace GoodToCode.Shared.Cqrs
     public abstract class AbstractQueryByPredicateHandler<TEntity, TValidator> where TEntity : new() where TValidator : AbstractValidator<Func<TEntity, bool>>, new()
     {
         private readonly TValidator _validator = new TValidator();
-        private readonly List<KeyValuePair<string, string>> _errors;
 
         public AbstractQueryByPredicateHandler() { }
 
@@ -30,16 +29,16 @@ namespace GoodToCode.Shared.Cqrs
             return result;
         }
 
-        protected abstract Task<TEntity> ExecuteQueryAsync(GenericQueryByPredicate<TEntity> request);
+        protected abstract Task<IEnumerable<TEntity>> ExecuteQueryAsync(GenericQueryByPredicate<TEntity> request);
 
         private List<KeyValuePair<string, string>> GetRequestErrors(GenericQueryByPredicate<TEntity> request)
         {
+            var errors = new List<KeyValuePair<string, string>>();
             var issues = _validator.Validate(request.Predicate).Errors;
 
             foreach (var issue in issues)
-                _errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));
-            return _errors;
+                errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));
+            return errors;
         }
-
     }
 }

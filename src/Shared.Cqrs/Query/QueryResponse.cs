@@ -10,7 +10,7 @@ namespace GoodToCode.Shared.Cqrs
         {
         }
 
-        public T Result { get; set; }
+        public IEnumerable<T> Result { get; set; }
 
         public ICollection<KeyValuePair<string, string>> Errors { get; set; } = new List<KeyValuePair<string, string>>();
 

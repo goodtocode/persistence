@@ -8,7 +8,6 @@ namespace GoodToCode.Shared.Cqrs
     public abstract class AbstractQueryByKeyHandler<TEntity, TValidator> where TEntity : new() where TValidator : AbstractValidator<Guid>, new()
     {
         private readonly TValidator _validator = new TValidator();
-        private readonly List<KeyValuePair<string, string>> _errors;
 
         public AbstractQueryByKeyHandler() { }
 
@@ -20,7 +19,7 @@ namespace GoodToCode.Shared.Cqrs
             {
                 try
                 {
-                    result.Result = await ExecuteQueryAsync(request);
+                    result.Result = new TEntity[] { await ExecuteQueryAsync(request) };
                 }
                 catch (Exception e)
                 {
@@ -34,11 +33,12 @@ namespace GoodToCode.Shared.Cqrs
 
         private List<KeyValuePair<string, string>> GetRequestErrors(GenericQueryByKey request)
         {
+            var errors = new List<KeyValuePair<string, string>>();
             var issues = _validator.Validate(request.Key).Errors;
 
             foreach (var issue in issues)
-                _errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));
-            return _errors;
+                errors.Add(new KeyValuePair<string, string>(issue.PropertyName, issue.ErrorMessage));
+            return errors;
         }
 
     }
