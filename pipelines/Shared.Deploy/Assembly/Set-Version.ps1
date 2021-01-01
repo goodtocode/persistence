@@ -4,8 +4,9 @@
 param
 (
 	[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
-    [string] $Path= $(throw '-Path is a required parameter. $(Build.SourcesDirectory)'),
-	[Version] $VersionToReplace = '5.20.1',
+    [string] $Path = $(throw '-Path is a required parameter. i.e. $(Build.SourcesDirectory)'),
+	[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
+	[Version] $VersionToReplace = $(throw '-VersionToReplace is a required parameter. i.e. 1.20.1'),
 	[String] $Major = '-1',
 	[String] $Minor = '-1',
 	[String] $Revision = '-1',
@@ -41,7 +42,7 @@ $Path = Set-Unc -Path $Path
 # *** Execute
 # ***
 $Major = $Major.Replace('-1', '1')
-$Minor = $Minor.Replace('-1', (Get-Date -UFormat '%m').ToString()) # MM
+$Minor = $Minor.Replace('-1', (Get-Date -UFormat '%Y').ToString().Substring(2,2)) # YY
 $Revision = $Revision.Replace('-1', (Get-Date -UFormat '%j').ToString()) # DayOfYear
 $Build = $Build.Replace('-1', (Get-Date -UFormat '%H%M').ToString()) # HrMinSec
 
