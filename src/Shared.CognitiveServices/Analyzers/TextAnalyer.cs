@@ -30,14 +30,14 @@ namespace GoodToCode.Shared.CognitiveServices
             if (text.Length > 0)
             {
                 var result = await client.AnalyzeSentimentAsync(text, languageIso);
-                returnData = ToSentimentResult(result, languageIso);
+                returnData = ToSentimentResult(result);
             }
             return returnData;
         }
 
         public async Task<IList<ISentimentResult>> AnalyzeSentimentBatchAsync(string text)
         {
-            List<ISentimentResult> returnData = new List<ISentimentResult>();
+            List<ISentimentResult> returnData;
             AnalyzeSentimentResultCollection results = null;
             var sentences = SplitParagraph(text);
             string language = "en-US";
@@ -82,7 +82,7 @@ namespace GoodToCode.Shared.CognitiveServices
            return returnValue;
         }
 
-        public ISentimentResult ToSentimentResult(DocumentSentiment result, string languageIso)
+        public ISentimentResult ToSentimentResult(DocumentSentiment result)
         {
             
             return new SentimentResult()
