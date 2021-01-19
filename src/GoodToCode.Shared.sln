@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.CognitiveServices", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.CognitiveServices.Abstractions", "Shared.CognitiveServices.Abstractions\Shared.CognitiveServices.Abstractions.csproj", "{4CB88518-4143-40A1-9366-95096263E458}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Repository", "Shared.Repository\Shared.Repository.csproj", "{5BA08F15-BE50-473F-B3CF-38D6C7DDC553}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{4CB88518-4143-40A1-9366-95096263E458}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CB88518-4143-40A1-9366-95096263E458}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CB88518-4143-40A1-9366-95096263E458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BA08F15-BE50-473F-B3CF-38D6C7DDC553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BA08F15-BE50-473F-B3CF-38D6C7DDC553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BA08F15-BE50-473F-B3CF-38D6C7DDC553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BA08F15-BE50-473F-B3CF-38D6C7DDC553}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
