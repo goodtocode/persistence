@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GoodToCode.Shared.System
 {
-    public class Convert
+    public class Converter
     {
         public static Dictionary<string, StringValues> ToDictionary(string key, string value)
         {

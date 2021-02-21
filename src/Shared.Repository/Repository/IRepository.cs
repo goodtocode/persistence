@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Shared.Repository
 {
     public interface IRepository<T> where T : class
     {
