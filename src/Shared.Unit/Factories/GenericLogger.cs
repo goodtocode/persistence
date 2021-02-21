@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Shared.Unit
+namespace GoodToCode.Shared.Unit
 {
     public class GenericLogger<T> : ILogger<T>
     {

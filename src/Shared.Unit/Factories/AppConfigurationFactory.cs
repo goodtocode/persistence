@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
-namespace Shared.Unit
+namespace GoodToCode.Shared.Unit
 {
     public class AppConfigurationFactory
     {

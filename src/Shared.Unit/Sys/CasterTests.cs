@@ -1,7 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using GoodToCode.Shared.System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
 
-namespace Shared.Unit
+namespace GoodToCode.Shared.Unit
 {
     [Binding]
     public class CasterTests
@@ -27,7 +28,7 @@ namespace Shared.Unit
         [When(@"Caster is used to cast Object A to Object B")]
         public void WhenCasterIsUsedToCastObjectAToObjectB()
         {
-            //SutB = new Caster<ObjectB>().Cast(SutA);
+            SutB = new Caster<ObjectB>().Cast(SutA);
         }
 
         [Then(@"Object B contains the same data from Object A")]

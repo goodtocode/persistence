@@ -1,4 +1,4 @@
-﻿namespace Shared.Unit
+﻿namespace GoodToCode.Shared.Unit
 {
     public enum LoggerTypes
     {

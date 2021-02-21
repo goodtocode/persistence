@@ -3,11 +3,15 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>GoodToCode.Shared.Unit</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Unit</RootNamespace>
+    <RootNamespace>Shared.Unit</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Sys\CasterTests - Copy.feature.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="appsettings.Local.json">
