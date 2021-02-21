@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Shared.Unit</AssemblyName>
-    <RootNamespace>Shared.Unit</RootNamespace>
-    <Version>1.20.1</Version>
+    <AssemblyName>GoodToCode.Shared.Unit</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.Unit</RootNamespace>
+    <Version>5.20.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -38,7 +38,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
-    <PackageReference Include="coverlet.collector" Version="3.0.2">
+    <PackageReference Include="coverlet.collector" Version="3.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -57,7 +57,6 @@
     <Folder Include="Net\" />
     <Folder Include="Spatial\" />
     <Folder Include="Repository\" />
-    <Folder Include="System\" />
   </ItemGroup>
 
   <ItemGroup>
