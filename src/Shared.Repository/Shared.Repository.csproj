@@ -25,9 +25,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoodToCode.Shared.Configuration" Version="5.12.354.454" />
-    <PackageReference Include="GoodToCode.Shared.Ddd" Version="5.12.354.454" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
-﻿using GoodToCode.Shared.Configuration;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
 namespace GoodToCode.Shared.Repository
@@ -16,7 +16,17 @@ namespace GoodToCode.Shared.Repository
         public string GetConnectionFromAzureSettings(string configKey)
         {
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfigurationWithSentinel(Environment.GetEnvironmentVariable("AppSettingsConnection"), "Reflections:Shared:Sentinel");
+            builder.AddAzureAppConfiguration(options =>
+                            options
+                                .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
+                                .ConfigureRefresh(refresh =>
+                                {
+                                    refresh.Register("Reflections:Shared:Sentinel", refreshAll: true)
+                                           .SetCacheExpiration(new TimeSpan(0, 60, 0));
+                                })
+                                .Select(KeyFilter.Any, LabelFilter.Null)
+                                .Select(KeyFilter.Any, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+                        );
             var config = builder.Build();
 
             return config[configKey];
