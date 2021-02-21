@@ -76,4 +76,17 @@
     <ProjectReference Include="..\Shared.System\Shared.System.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Sys\ObjectExtensionsTests.feature.cs">
+      <DependentUpon>ObjectExtensionsTests.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Sys\ObjectExtensionsTests.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+
 </Project>

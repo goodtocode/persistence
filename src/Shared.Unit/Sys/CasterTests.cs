@@ -37,14 +37,4 @@ namespace GoodToCode.Shared.Unit
             Assert.IsTrue(SutA.SomeData == SutB.SomeData);
         }
     }
-
-    public class ObjectA
-    {
-        public string SomeData { get; set; }
-    }
-
-    public class ObjectB
-    {
-        public string SomeData { get; set; }
-    }
 }
