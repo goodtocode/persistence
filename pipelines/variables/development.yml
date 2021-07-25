@@ -3,13 +3,13 @@ variables:
   - name: Environment
     value: 'Development'
   - name: rgName
-    value: 'gtc-rg-shared-dev-001'
+    value: 'gtc-rg-shared-dev-225'
   - name: locationName
     value: 'West US 2'
   - name: 'appInsightsName'
-    value: 'appi-shared-dev-001'
+    value: 'appi-shared-dev-225'
   - name: 'kvName'
-    value: 'kv-shared-dev-001'
+    value: 'kv-shared-dev-225'
   - name: 'nugetFeeds'
     value: 'select'
   - name: 'nugetId'
@@ -17,8 +17,8 @@ variables:
   - name: 'nugetType'
     value: 'internal'
   - name: storageName
-    value: 'stshareddev001'
+    value: 'stshareddev225'
   - name: workspaceName
-    value: 'work-shared-dev-001'
+    value: 'work-shared-dev-225'
   - name: cognitiveServicesName
-    value: 'cog-shared-dev-001'
+    value: 'cog-shared-dev-225'

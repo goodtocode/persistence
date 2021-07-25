@@ -3,13 +3,13 @@ variables:
   - name: Environment
     value: 'Production'
   - name: rgName
-    value: 'gtc-rg-shared-prod-001'
+    value: 'gtc-rg-shared-prod-225'
   - name: locationName
     value: 'West US 2'
   - name: 'appInsightsName'
-    value: 'appi-shared-prod-001'
+    value: 'appi-shared-prod-225'
   - name: 'kvName'
-    value: 'kv-shared-prod-001'    
+    value: 'kv-shared-prod-225'    
   - name: 'nugetFeeds'
     value: 'config'
   - name: 'nugetId'
@@ -17,8 +17,8 @@ variables:
   - name: 'nugetType'
     value: 'external'
   - name: storageName
-    value: 'stsharedprod001'
+    value: 'stsharedprod225'
   - name: workspaceName
-    value: 'work-shared-prod-001'
+    value: 'work-shared-prod-225'
   - name: cognitiveServicesName
-    value: 'cog-shared-prod-001'
+    value: 'cog-shared-prod-225'
