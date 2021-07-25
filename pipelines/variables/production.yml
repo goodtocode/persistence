@@ -1,40 +1,24 @@
 variables:
-  - template: common.yml
+  - template: common.yml  
   - name: Environment
     value: 'Production'
   - name: rgName
     value: 'gtc-rg-shared-prod-001'
-  - name: rgAnalyticsName
-    value: 'gtc-rg-analytics-prod-001'
-  - name: rgBotName
-    value: 'gtc-rg-bot-prod-001'
   - name: locationName
     value: 'West US 2'
-  - name: appInsightsName
-    value: 'appi-daily3-prod-001'
-  - name: apprBotId
-    value: 'db149915-3302-4161-bae4-3ddd6041836c'
-  - name: apprBotVal
-    value: 'rdR9~UQC~AO8QWK8lmrt8_Rc0vtTEp7DB~'
-  - name: 'botName'
-    value: 'bot-daily3-prod-001'
-  - name: kvName
-    value: 'kv-daily3-prod-019'
-  - name: 'luisName'
-    value: 'luis-daily3-prod-001'
-  - name: 'luisSku'
-    value: 'S0'
-  - name: 'luisAuthoringName'
-    value: 'luis-daily3-prod-001-author'
-  - name: 'qnaName'
-    value: 'qna-daily3-prod-001'
-  - name: 'qnaSku'
-    value: 'S0'
-  - name: 'qnaSearchSku'
-    value: 'basic'
+  - name: 'appInsightsName'
+    value: 'appi-shared-prod-001'
+  - name: 'kvName'
+    value: 'kv-shared-prod-001'    
+  - name: 'nugetFeeds'
+    value: 'config'
+  - name: 'nugetId'
+    value: '525a0dbd-3d6d-4f62-aba4-f4d004295d7d'
+  - name: 'nugetType'
+    value: 'external'
   - name: storageName
-    value: 'stdaily3prod001'
+    value: 'stsharedprod001'
   - name: workspaceName
-    value: 'work-daily3-prod-001'
+    value: 'work-shared-prod-001'
   - name: cognitiveServicesName
-    value: 'cog-daily3-prod-001'
+    value: 'cog-shared-prod-001'

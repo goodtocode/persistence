@@ -2,7 +2,7 @@ variables:
   - name: subscriptionId
     value: '0eaf4b4f-0589-4f40-bb2f-008b0e160524'
   - name: subscriptionName
-    value: 'mysun-daily3-001'
+    value: 'mysun-shared-001'
   - name: subscriptionSharedId
     value: '7ff496d5-8747-4a50-b5a9-ed99706a855c'
   - name: subscriptionSharedName

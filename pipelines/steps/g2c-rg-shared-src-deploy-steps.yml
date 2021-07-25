@@ -11,21 +11,12 @@ steps:
         artifactName: 'drop'
         downloadPath: '$(System.ArtifactsDirectory)'
 
-    - task: AzureRmWebAppDeployment@4
-      inputs:
-        ConnectionType: 'AzureRM'
-        ConnectedServiceName: $(subscriptionName)
-        subscriptionName: $(subscriptionId)
-        appType: 'webApp'
-        WebAppName: '$(webName)'
-        packageForLinux: '$(Pipeline.Workspace)/**/src.zip'
-        AppSettings: '-ASPNETCORE_ENVIRONMENT $(Environment)'
-
     - task: NuGetCommand@2
       inputs:
         command: 'push'
         packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;'
-        nuGetFeedType: 'internal'
-        publishVstsFeed: '525a0dbd-3d6d-4f62-aba4-f4d004295d7d'
+        feedsToUse: '$(nugetFeeds)'
+        nuGetFeedType: '$(nugetType)'
+        publishVstsFeed: '$(nugetId)'
         allowPackageConflicts: true
         continueOnError: true
