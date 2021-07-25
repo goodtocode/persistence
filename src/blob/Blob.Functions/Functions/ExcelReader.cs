@@ -8,7 +8,7 @@ namespace GoodToCode.Blob.Excel.Functions
 {
     public class ExcelReader
     {
-        public const string FunctionName = "excel-read";
+        public const string FunctionName = "blob-excel-reader";
         private readonly IFileValidationService _fileValidator;
         private readonly ExcelFileService _fileReader;
 
@@ -38,7 +38,7 @@ namespace GoodToCode.Blob.Excel.Functions
                 var contents = _fileReader.GetFileContent(excelFile);
                 if (contents != null)
                 {
-                    await _dataService.AddAsync(contents);
+                    //await _dataService.AddAsync(contents);
                 }
             }
             else
