@@ -15,9 +15,9 @@ namespace GoodToCode.Blob.Excel
             if (reportSheet != null)
             {
                 int rowCount = reportSheet.LastRowNum + 1;
-                for (int i = 0; i < rowCount; i++)
+                for (int count = 0; count < rowCount; count++)
                 {
-                    IRow row = reportSheet.GetRow(i);
+                    IRow row = reportSheet.GetRow(count);
                     if (row != null)
                     {
                         foreach (var cell in row.Cells)
