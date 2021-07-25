@@ -1,12 +1,8 @@
 variables:
   - name: subscriptionId
-    value: '0eaf4b4f-0589-4f40-bb2f-008b0e160524'
+    value: 'f7848ca5-85e0-4331-9f90-cbcaa786c302'
   - name: subscriptionName
-    value: 'mysun-shared-001'
-  - name: subscriptionSharedId
-    value: '7ff496d5-8747-4a50-b5a9-ed99706a855c'
-  - name: subscriptionSharedName
-    value: 'gtc-appdev-001'
+    value: 'gtc-shared-001'
   - name: pipelinesPath
     value: '$(System.DefaultWorkingDirectory)/pipelines'
   - name: integrationPath
