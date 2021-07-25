@@ -14,7 +14,7 @@ steps:
     - task: NuGetCommand@2
       inputs:
         command: 'push'
-        packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;'
+        packagesToPush: '$(artifactsPath)/**/*.nupkg;'
         feedsToUse: '$(nugetFeeds)'
         nuGetFeedType: '$(nugetType)'
         publishVstsFeed: '$(nugetId)'
