@@ -11,6 +11,8 @@ variables:
     value: '$(System.DefaultWorkingDirectory)/pipelines'
   - name: integrationPath
     value: '$(System.DefaultWorkingDirectory)/integration'
+  - name: srcPath
+    value: '$(System.DefaultWorkingDirectory)/src'
   - name: buildConfiguration
     value: 'Release'
   - name: MSBUILDSINGLELOADCONTEXT
