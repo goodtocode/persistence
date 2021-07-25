@@ -109,9 +109,9 @@ stages:
             parameters:
               armPath: 'infrastructure'
 
-      - job: deploy_src
+      - job: deploy_nuget
         dependsOn: test_src
         steps:
-          - template: steps/gtc-rg-shared-src-deploy-steps.yml
+          - template: steps/gtc-rg-shared-nuget-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
