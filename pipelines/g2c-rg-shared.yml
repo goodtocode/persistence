@@ -1,0 +1,97 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - infrastructure/*
+    - src/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - template: variables/development.yml
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value: 'Release'
+
+stages:
+  - stage: development
+    variables:
+      - template: variables/development.yml
+      
+    jobs:
+      - job: deploy_landing_zone                
+        steps:
+          - template: steps/lz-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: deploy_infrastructure
+        dependsOn: deploy_landing_zone
+        steps:
+          - template: steps/gtc-rg-shared-infrastructure-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: build_src
+        dependsOn: deploy_infrastructure
+        steps:
+          - template: steps/gtc-rg-shared-src-build-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: test_src
+        dependsOn: build_src
+        steps:
+          - template: steps/gtc-rg-shared-src-test-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: deploy_src
+        dependsOn: test_src
+        steps:
+          - template: steps/gtc-rg-shared-src-deploy-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+  - stage: production
+    variables:
+      - template: variables/production.yml
+    jobs:
+      - job: deploy_landing_zone
+        steps:
+          - template: steps/lz-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: deploy_infrastructure
+        dependsOn: deploy_landing_zone
+        steps:
+          - template: steps/gtc-rg-shared-infrastructure-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+              
+      - job: build_src
+        dependsOn: deploy_infrastructure
+        steps:
+          - template: steps/gtc-rg-shared-src-build-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: test_src
+        dependsOn: build_src
+        steps:
+          - template: steps/gtc-rg-shared-src-test-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: deploy_src
+        dependsOn: test_src
+        steps:
+          - template: steps/gtc-rg-shared-src-deploy-steps.yml
+            parameters:
+              armPath: 'infrastructure'

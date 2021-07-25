@@ -1,0 +1,40 @@
+variables:
+  - template: common.yml  
+  - name: Environment
+    value: 'Development'
+  - name: rgName
+    value: 'gtc-rg-shared-dev-001'
+  - name: rgAnalyticsName
+    value: 'gtc-rg-analytics-dev-001'
+  - name: rgBotName
+    value: 'gtc-rg-bot-dev-001'    
+  - name: locationName
+    value: 'West US 2'
+  - name: 'appInsightsName'
+    value: 'appi-daily3-dev-001'
+  - name: apprBotId
+    value: '2d95d9a9-297f-4b78-adfb-6d6c19af6890'
+  - name: apprBotVal
+    value: 'R40~Otpun7X~jV7DU9ZtTc-MQ-41Okc~kk'
+  - name: 'botName'
+    value: 'bot-daily3-dev-001'
+  - name: 'kvName'
+    value: 'kv-daily3-dev-001'
+  - name: 'luisName'
+    value: 'luis-daily3-dev-001'
+  - name: 'luisAuthoringName'
+    value: 'luis-daily3-dev-001-author'
+  - name: 'luisSku'
+    value: 'F0'
+  - name: 'qnaName'
+    value: 'qna-daily3-dev-001'
+  - name: 'qnaSku'
+    value: 'F0'
+  - name: 'qnaSearchSku'
+    value: 'free'
+  - name: storageName
+    value: 'stdaily3dev001'
+  - name: workspaceName
+    value: 'work-daily3-dev-001'
+  - name: cognitiveServicesName
+    value: 'cog-daily3-dev-001'
