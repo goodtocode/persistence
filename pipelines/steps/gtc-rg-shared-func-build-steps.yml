@@ -1,0 +1,43 @@
+parameters:
+- name: armPath 
+  type: string 
+  default: "."
+
+steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet restore'
+    inputs:
+      command: 'restore'
+      projects: |
+        $(srcPath)/**/*.csproj
+      feedsToUse: config
+      nugetConfigPath: .nuget/NuGet.config
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build functions'
+    inputs:
+      command: 'build'
+      projects: $(functionProject)
+      arguments: --output $(functionArchivePath) --configuration $(buildConfiguration)
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test'
+    inputs:
+      command: test
+      projects: |
+        $(srcPath)/**/*.csproj
+
+  - task: ArchiveFiles@2
+    displayName: 'Archive functions'
+    inputs:
+      rootFolderOrFile: '$(functionArchivePath)'
+      includeRootFolder: false
+      archiveType: zip
+      archiveFile: $(Build.ArtifactStagingDirectory)/$(functionArchiveFile)
+      replaceExistingArchive: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      pathToPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: drop

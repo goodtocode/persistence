@@ -74,6 +74,26 @@ stages:
           - template: steps/gtc-rg-shared-infrastructure-steps.yml
             parameters:
               armPath: 'infrastructure'
+
+      - job: build_func
+        dependsOn: deploy_infrastructure
+        steps:
+          - template: steps/gtc-rg-shared-func-build-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: deploy_func
+        dependsOn: build_func
+        steps:
+          - template: steps/gtc-rg-shared-func-deploy-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+              archiveName: 
+              envKey: 'ASPNETCORE_ENVIRONMENT'
+              envValue: '$(Environment)'
+              funcName: '$(funcBlobServiceName)'
+              subscriptionId: '$(subscriptionId)'
+              subscriptionName: '$(subscriptionName)'
               
       - job: build_src
         dependsOn: deploy_infrastructure

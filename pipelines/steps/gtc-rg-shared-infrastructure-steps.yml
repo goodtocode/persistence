@@ -33,3 +33,33 @@ steps:
         csmParametersFile: "${{ parameters.armPath }}/cog-cognitiveservices.parameters.json"
         deploymentMode: "Incremental"
         overrideParameters: -name "$(cognitiveServicesName)"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Validate $(funcBlobServiceName)"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "$(subscriptionName)"
+        subscriptionId: "$(subscriptionId)"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "$(rgName)"
+        location: "$(locationName)"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/func-functionsapp.json"        
+        csmParametersFile: "${{ parameters.armPath }}/func-functionsapp.parameters.json"        
+        deploymentMode: "Validation"
+        overrideParameters: -name "$(funcBlobServiceName)" -workspaceName "$(workspaceName)" -storageName "$(storageName)"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Deploy $(funcBlobServiceName)"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "$(subscriptionName)"
+        subscriptionId: "$(subscriptionId)"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "$(rgName)"
+        location: "$(locationName)"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/func-functionsapp.json"
+        csmParametersFile: "${{ parameters.armPath }}/func-functionsapp.parameters.json"
+        deploymentMode: "Incremental"
+        overrideParameters: -name "$(funcBlobServiceName)" -workspaceName "$(workspaceName)" -storageName "$(storageName)"

@@ -8,6 +8,8 @@ variables:
     value: 'West US 2'
   - name: 'appInsightsName'
     value: 'appi-shared-prod-225'
+  - name: 'funcBlobServiceName'
+    value: 'func-blob-prod-225'
   - name: 'kvName'
     value: 'kv-shared-prod-225'    
   - name: 'nugetFeeds'
