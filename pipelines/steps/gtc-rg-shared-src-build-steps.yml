@@ -29,14 +29,6 @@ steps:
         $(srcPath)/**/*.csproj
 
   - task: DotNetCoreCLI@2
-    displayName: 'dotnet publish'
-    inputs:
-      command: publish
-      projects: |
-        $(srcPath)/**/*.csproj
-      arguments: '--output $(Build.ArtifactStagingDirectory)'
-
-  - task: DotNetCoreCLI@2
     displayName: 'dotnet pack'
     inputs:
       command: pack
