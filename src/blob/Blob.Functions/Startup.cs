@@ -13,7 +13,7 @@ namespace GoodToCode.Blob.Excel.Functions
             ConfigureSettings(builder);
 
             builder.Services.AddSingleton<IFileValidationService, FileValidationService>();
-            builder.Services.AddTransient<IExcelFileService, ExcelFileService>();
+            builder.Services.AddTransient<IExcelFileService, ExcelService>();
         }
 
         private void ConfigureSettings(IFunctionsHostBuilder builder)

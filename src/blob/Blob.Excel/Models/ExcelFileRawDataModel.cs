@@ -1,6 +1,6 @@
 ﻿namespace GoodToCode.Blob.Excel
 {
-    public class ExcelFileRawDataModel : IEntity
+    public class ExcelFileRawDataModel
     {
         public string Id { get; set; }
         public string CarBrand { get; set; }

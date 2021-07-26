@@ -4,7 +4,7 @@ using System.IO;
 
 namespace GoodToCode.Blob.Excel
 {
-    public class ExcelFileService : IExcelFileService
+    public class ExcelService : IExcelFileService
     {
         public ExcelFileRawDataModel GetFileContent(Stream fileStream)
         {
@@ -22,7 +22,7 @@ namespace GoodToCode.Blob.Excel
                     {
                         foreach (var cell in row.Cells)
                         {
-                            var cellValue = cell.GetFormattedCellValue();
+                            var cellValue = cell.ToStringFormatted();
                             if (!string.IsNullOrEmpty(cellValue))
                             {
                                 cellValues.Add(cell.Address.FormatAsString(), cellValue);
