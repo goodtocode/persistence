@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-[assembly: FunctionsStartup(typeof(GoodToCode.Blob.Excel.Functions.Startup))]
-namespace GoodToCode.Blob.Excel.Functions
+[assembly: FunctionsStartup(typeof(GoodToCode.Shared.Blob.Excel.Functions.Startup))]
+namespace GoodToCode.Shared.Blob.Excel.Functions
 {
     internal class Startup : FunctionsStartup
     {
@@ -13,7 +13,7 @@ namespace GoodToCode.Blob.Excel.Functions
             ConfigureSettings(builder);
 
             builder.Services.AddSingleton<IFileValidationService, FileValidationService>();
-            builder.Services.AddTransient<IExcelFileService, ExcelService>();
+            builder.Services.AddTransient<IExcelService, ExcelService>();
         }
 
         private void ConfigureSettings(IFunctionsHostBuilder builder)

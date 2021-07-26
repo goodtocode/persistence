@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace GoodToCode.Blob.Excel
+namespace GoodToCode.Shared.Blob.Excel
 {
     public class LoggerFactory
     {

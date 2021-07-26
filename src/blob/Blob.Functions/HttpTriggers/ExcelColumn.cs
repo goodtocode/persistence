@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Blob.Excel
 {
-    public class ExcelSheet
+    public class ExcelColumn
     {
         private IConfiguration configuration { set; get; }
         private ILogger log { get; set; }
-        public const string FunctionName = "ExcelSheet";
+        public const string FunctionName = "ExcelColumn";
 
         private readonly IFileValidationService _fileValidator;
         private readonly ExcelService _fileReader;
 
-        public ExcelSheet(ILogger<ExcelSheet> logger, IConfiguration config, IFileValidationService fileValidator, ExcelService fileService)
+        public ExcelColumn(ILogger<ExcelColumn> logger, IConfiguration config, IFileValidationService fileValidator, ExcelService fileService)
         {
             log = logger;
             configuration = config;

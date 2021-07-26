@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Blob.Excel
+namespace GoodToCode.Shared.Blob.Excel
 {
     public interface IFileValidationService
     {

@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Blob.Excel
+﻿namespace GoodToCode.Shared.Blob.Excel
 {
     public class FunctionHealth
     {

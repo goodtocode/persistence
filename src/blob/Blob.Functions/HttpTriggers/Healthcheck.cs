@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Blob.Excel
+namespace GoodToCode.Shared.Blob.Excel
 {
     public class Healthcheck
     {

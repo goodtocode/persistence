@@ -4,15 +4,15 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Blob.Excel.Functions
+namespace GoodToCode.Shared.Blob.Excel.Functions
 {
-    public class ExcelLoad
+    public class ExcelWorkbook
     {
         public const string FunctionName = "excel-load";
         private readonly IFileValidationService _fileValidator;
         private readonly ExcelService _fileReader;
 
-        public ExcelLoad(IFileValidationService fileValidator,
+        public ExcelWorkbook(IFileValidationService fileValidator,
                                                 ExcelService fileService)
         {
             _fileValidator = fileValidator;
@@ -22,20 +22,20 @@ namespace GoodToCode.Blob.Excel.Functions
         /// <summary>
         /// //public async Task Run([BlobTrigger("file-drop/{name}", Connection = "")] Stream excelFile, string name, Uri uri, ILogger log)
         /// </summary>
-        /// <param name="excelFile"></param>
+        /// <param name="fileStream"></param>
         /// <param name="name"></param>
-        /// <param name="uri"></param>
+        /// <param name="fileUri"></param>
         /// <param name="log"></param>
         /// <returns></returns>
         [FunctionName(FunctionName)]
-        public async Task Run([BlobTrigger("file-drop/{name}", Connection = "")] Stream excelFile, string name, Uri uri, ILogger log)
+        public async Task Run([BlobTrigger("file-drop/{name}", Connection = "")] Stream fileStream, string name, Uri fileUri, ILogger log)
         {
             log.LogInformation($"{FunctionName} triggered.");
 
-            var isValidFileExtension = _fileValidator.IsValidExtension(uri);
+            var isValidFileExtension = _fileValidator.IsValidExtension(fileUri);
             if (isValidFileExtension)
             {
-                var contents = _fileReader.GetFileContent(excelFile);
+                var contents = _fileReader.GetWorkbook(fileStream);
                 if (contents != null)
                 {
                     //await _dataService.AddAsync(contents);

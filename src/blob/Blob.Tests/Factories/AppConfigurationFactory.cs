@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
-namespace GoodToCode.Blob.Excel
+namespace GoodToCode.Shared.Blob.Excel
 {
     public class AppConfigurationFactory
     {
