@@ -17,6 +17,7 @@ namespace GoodToCode.Shared.Blob.Excel
             IWorkbook currWorkbook = WorkbookFactory.Create(fileStream);
             return currWorkbook.GetSheetAt(sheet);
         }
+
         public IEnumerable<ICell> GetColumn(Stream fileStream, int sheet, int column)
         {
             ISheet currSheet = GetSheet(fileStream, sheet);

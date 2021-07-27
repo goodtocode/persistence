@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Shared.Unit.Excel
+namespace GoodToCode.Shared.Blob.Tests.Excel
 {
     using TechTalk.SpecFlow;
     using System;
@@ -70,12 +70,12 @@ namespace Shared.Unit.Excel
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Must be able to read from local file in XLSX format", SourceLine=3)]
-        public virtual void MustBeAbleToReadFromLocalFileInXLSXFormat()
+        [TechTalk.SpecRun.ScenarioAttribute("Must read XLSX format", SourceLine=3)]
+        public virtual void MustReadXLSXFormat()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Must be able to read from local file in XLSX format", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Must read XLSX format", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -109,12 +109,12 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Must be able to read from local file in XLS format", SourceLine=8)]
-        public virtual void MustBeAbleToReadFromLocalFileInXLSFormat()
+        [TechTalk.SpecRun.ScenarioAttribute("Must read XLS format", SourceLine=8)]
+        public virtual void MustReadXLSFormat()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Must be able to read from local file in XLS format", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Must read XLS format", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -148,12 +148,12 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Must be able to read from local file in CSV format", SourceLine=13)]
-        public virtual void MustBeAbleToReadFromLocalFileInCSVFormat()
+        [TechTalk.SpecRun.ScenarioAttribute("Must read CSV format", SourceLine=13)]
+        public virtual void MustReadCSVFormat()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Must be able to read from local file in CSV format", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Must read CSV format", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

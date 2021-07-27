@@ -21,21 +21,23 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>GoodToCode.Stack.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>GoodToCode.Shared.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
-    <PackageReference Include="NPOI" Version="2.5.3" />
-  </ItemGroup>
+  
 
   <ItemGroup>
     <None Include="storeicon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
+    <PackageReference Include="NPOI" Version="2.5.3" />
   </ItemGroup>
   
 </Project>

@@ -7,6 +7,11 @@ namespace GoodToCode.Shared.Blob.Excel
 {
     public class ExcelBlobReader
     {
+        public ExcelBlobReader()
+        {
+
+        }
+
         public IWorkbook ReadFile(Stream fileStream)
         {
             IWorkbook workbook = WorkbookFactory.Create(fileStream);
@@ -19,7 +24,7 @@ namespace GoodToCode.Shared.Blob.Excel
             return workbook;
         }
 
-        public async Task<IWorkbook> ReadFile(string blobConnectionString, string blobContainer, string blobFileName)
+        public async Task<IWorkbook> ReadFileAsync(string blobConnectionString, string blobContainer, string blobFileName)
         {
             BlobServiceClient blobServiceClient = new BlobServiceClient(blobConnectionString);
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(blobContainer);
