@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using TechTalk.SpecFlow;
 using NPOI.SS.UserModel;
+using System.Reflection;
 
 namespace GoodToCode.Shared.Blob.Excel
 {
@@ -13,6 +14,9 @@ namespace GoodToCode.Shared.Blob.Excel
         private readonly string sutCsvFile = @"Assets\TestFile.csv";
         private readonly string sutXlsFile = @"Assets\TestFile.xls";
         private readonly string sutXlsxFile = @"Assets\TestFile.xlsx";
+        private readonly string sutCsvFullPath;
+        private readonly string sutXlsFullPath;
+        private readonly string sutXlsxFullPath;
         private ExcelBlobReader reader;
         public IWorkbook SutCsv { get; private set; }
         public IWorkbook SutXls { get; private set; }
@@ -22,18 +26,22 @@ namespace GoodToCode.Shared.Blob.Excel
         public ExcelBlobReaderTests()
         {
             reader = new ExcelBlobReader();
+            var cwd = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            sutCsvFullPath = $@"{cwd}\{sutCsvFile}";
+            sutXlsFullPath = $@"{cwd}\{sutXlsFile}";
+            sutXlsxFullPath = $@"{cwd}\{sutXlsxFile}";
         }
 
         [Given(@"I have an XLSX file")]
         public void GivenIHaveAnXLSXFile()
         {
-            Assert.IsTrue(File.Exists(sutXlsxFile));
+            Assert.IsTrue(File.Exists(sutXlsxFullPath));
         }
 
         [When(@"read XLSX in via ExcelBlobReader")]
         public void WhenReadXLSXInViaExcelBlobReader()
         {
-            SutXlsx = reader.ReadFile(sutXlsxFile);
+            SutXlsx = reader.ReadFile(sutXlsxFullPath);
             Assert.IsTrue(SutXlsx.GetSheetAt(0) != null);
         }
 
@@ -46,13 +54,13 @@ namespace GoodToCode.Shared.Blob.Excel
         [Given(@"I have an XLS file")]
         public void GivenIHaveAnXLSFile()
         {
-            Assert.IsTrue(File.Exists(sutXlsFile));
+            Assert.IsTrue(File.Exists(sutXlsFullPath));
         }
 
         [When(@"read XLS in via ExcelBlobReader")]
         public void WhenReadXLSInViaExcelBlobReader()
         {
-            SutXls = reader.ReadFile(sutXlsFile);
+            SutXls = reader.ReadFile(sutXlsFullPath);
             Assert.IsTrue(SutXls.GetSheetAt(0) != null);
         }
 
@@ -61,24 +69,6 @@ namespace GoodToCode.Shared.Blob.Excel
         {
             
         }
-
-        [Given(@"I have an CSV file")]
-        public void GivenIHaveAnCSVFile()
-        {
-            Assert.IsTrue(File.Exists(sutCsvFile));
-        }
-
-        [When(@"read CSV in via ExcelBlobReader")]
-        public void WhenReadCSVInViaExcelBlobReader()
-        {
-            SutCsv = reader.ReadFile(sutCsvFile);
-            Assert.IsTrue(SutCsv.GetSheetAt(0) != null);
-        }
-
-        [Then(@"all readable CSV data is available to systems")]
-        public void ThenAllReadableCSVDataIsAvailableToSystems()
-        {
-            
-        }
     }
 }
+

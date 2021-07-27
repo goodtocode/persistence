@@ -10,8 +10,3 @@ Scenario: Must read XLS format
 	Given I have an XLS file
 	When read XLS in via ExcelBlobReader
 	Then all readable XLS data is available to systems
-
-Scenario: Must read CSV format
-	Given I have an CSV file
-	When read CSV in via ExcelBlobReader
-	Then all readable CSV data is available to systems
