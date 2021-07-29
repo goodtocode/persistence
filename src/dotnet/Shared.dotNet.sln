@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotNet.System", "dotNet.Sys
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotNet.Tests", "dotNet.Tests\dotNet.Tests.csproj", "{B6EFA5FB-AA98-4F62-B0C9-379355B10F68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNet.Identity", "dotNet.Identity\dotNet.Identity.csproj", "{69F32802-F756-4ED0-82F6-721FD824B927}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B6EFA5FB-AA98-4F62-B0C9-379355B10F68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6EFA5FB-AA98-4F62-B0C9-379355B10F68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6EFA5FB-AA98-4F62-B0C9-379355B10F68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69F32802-F756-4ED0-82F6-721FD824B927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69F32802-F756-4ED0-82F6-721FD824B927}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69F32802-F756-4ED0-82F6-721FD824B927}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69F32802-F756-4ED0-82F6-721FD824B927}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace MySundial.Reflections.Services.Functions
+namespace GoodToCode.Shared.Blob.Functions
 {
     public class SwaggerJson
     {
@@ -24,7 +24,7 @@ namespace MySundial.Reflections.Services.Functions
             if (req is null)
                 throw new System.ArgumentNullException(nameof(req));
 
-            return Task.FromResult(swashBuckleClient.CreateSwaggerDocumentResponse(req));
+            return Task.FromResult(swashBuckleClient.CreateSwaggerJsonDocumentResponse(req));
         }
     }
 }

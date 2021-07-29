@@ -3,16 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MySundial.Reflections.Api;
-using MySundial.Reflections.Services.Functions;
-using System.Net;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace GoodToCode.Shared.Blob.Excel
 {
     [Binding]
-    public class HealthCheckSteps
+    public class HealthcheckSteps
     {
         private readonly ILogger<Healthcheck> logger = LoggerFactory.CreateLogger<Healthcheck>();
         private readonly IConfiguration config = new AppConfigurationFactory().Create();
@@ -20,7 +17,7 @@ namespace GoodToCode.Shared.Blob.Excel
         public string Sut { get; private set; }
         public bool SutResponse { get; private set; }
 
-        public HealthCheckSteps()
+        public HealthcheckSteps()
         {            
         }
 
@@ -36,7 +33,7 @@ namespace GoodToCode.Shared.Blob.Excel
         {
             var request = new HttpRequestFactory("GET").CreateHttpRequest("code", config["Reflections:Shared:FunctionsCode"]);
             var response = (OkObjectResult)await new Healthcheck(logger, config).Run(request);
-            var returnedItem = (ServicesHealth)response.Value;
+            var returnedItem = (FunctionHealth)response.Value;
             SutResponse = returnedItem.Connected;
             Assert.IsTrue(response.StatusCode == StatusCodes.Status200OK);
         }

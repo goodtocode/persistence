@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MySundial.Reflections.Api;
-using MySundial.Reflections.Services.Functions;
-using System.Net;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -36,7 +33,7 @@ namespace GoodToCode.Shared.Blob.Excel
         {
             var request = new HttpRequestFactory("GET").CreateHttpRequest("code", config["Reflections:Shared:FunctionsCode"]);
             var response = (OkObjectResult)await new Healthcheck(logger, config).Run(request);
-            var returnedItem = (ServicesHealth)response.Value;
+            var returnedItem = (FunctionHealth)response.Value;
             SutResponse = returnedItem.Connected;
             Assert.IsTrue(response.StatusCode == StatusCodes.Status200OK);
         }
