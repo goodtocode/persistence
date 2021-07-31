@@ -9,7 +9,10 @@ steps:
     inputs:
       command: 'restore'
       projects: |
-        '$(srcBlobFunctionsPath)/*.csproj'
+        $(srcBlobFunctionsPath)/*.csproj
+        $(srcBlobFunctionsPath)/**/*.csproj
+        $(srcPath)/*.csproj
+        $(srcPath)/**/*.csproj
       feedsToUse: config
       nugetConfigPath: .nuget/NuGet.config
 
