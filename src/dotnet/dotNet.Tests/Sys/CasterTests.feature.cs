@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Shared.Unit.Sys
+namespace dotNet.Tests.Sys
 {
     using TechTalk.SpecFlow;
     using System;

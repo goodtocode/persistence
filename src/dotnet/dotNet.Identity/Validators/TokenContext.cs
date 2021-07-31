@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
@@ -19,9 +20,9 @@ namespace GoodToCode.Shared.Identity
         public string Authority { get { return _tenantName == null ? "https://login.microsoftonline.com/common/" : $"https://login.microsoftonline.com/{_tenantName}/v2.0"; } }
         public string WellKnownUrl { get { return $"{Authority}/.well-known/openid-configuration"; } }
 
-        private TokenContext(string audience, string clientId, string tenantId)
+        public TokenContext(string audienceUri, string clientId, string tenantId)
         {
-            _audience = audience;
+            _audience = audienceUri;
             _clientId = clientId;
             _validIssuers ??= new List<string>()
             {
@@ -33,7 +34,7 @@ namespace GoodToCode.Shared.Identity
             };
         }
 
-        private TokenContext(string audience, string clientId, string tenantId, string tenantName) : this(audience, clientId, tenantId)
+        public TokenContext(string audience, string clientId, string tenantId, string tenantName) : this(audience, clientId, tenantId)
         {
             _tenantName = tenantName;
         }
@@ -53,7 +54,7 @@ namespace GoodToCode.Shared.Identity
         private async Task<ClaimsPrincipal> ValidateAccessTokenAsync(string accessToken)
         {
 #if DEBUG
-            Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
+            IdentityModelEventSource.ShowPII = true;
 #endif
 
             ConfigurationManager<OpenIdConnectConfiguration> configManager =
@@ -70,8 +71,7 @@ namespace GoodToCode.Shared.Identity
                 IssuerSigningKeys = config.SigningKeys
             };
 
-            SecurityToken securityToken;
-            var claimsPrincipal = tokenValidator.ValidateToken(accessToken, validationParameters, out securityToken);
+            var claimsPrincipal = tokenValidator.ValidateToken(accessToken, validationParameters, out SecurityToken securityToken);
             return claimsPrincipal;
         }
     }

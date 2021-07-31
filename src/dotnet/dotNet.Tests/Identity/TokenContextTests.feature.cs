@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace dotNet.Tests.Sys
+namespace dotNet.Tests.Identity
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,22 +19,22 @@ namespace dotNet.Tests.Sys
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.7.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("ObjectExtensions", Description="\tCheck functionality of ObjectExtensions", SourceFile="Sys\\ObjectExtensionsTests.feature", SourceLine=0)]
-    public partial class ObjectExtensionsFeature
+    [TechTalk.SpecRun.FeatureAttribute("TokenContext", Description="\tCheck functionality of TokenContext class", SourceFile="Identity\\TokenContextTests.feature", SourceLine=0)]
+    public partial class TokenContextFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "ObjectExtensionsTests.feature"
+#line 1 "TokenContextTests.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Sys", "ObjectExtensions", "\tCheck functionality of ObjectExtensions", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Identity", "TokenContext", "\tCheck functionality of TokenContext class", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,12 +70,12 @@ namespace dotNet.Tests.Sys
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Must be able to fill Object A with Object B data", SourceLine=3)]
-        public virtual void MustBeAbleToFillObjectAWithObjectBData()
+        [TechTalk.SpecRun.ScenarioAttribute("TokenContext validate a bearer token from HttpRequest", SourceLine=3)]
+        public virtual void TokenContextValidateABearerTokenFromHttpRequest()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Must be able to fill Object A with Object B data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TokenContext validate a bearer token from HttpRequest", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -97,13 +97,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 5
- testRunner.Given("I have object A to Fill to object B by property name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have a TokenContext to a valid AAD app registration", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
- testRunner.When("Fill is used to cast Object A to Object B", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("a HttpRequest object is validated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
- testRunner.Then("Object B is Filled with the same data from Object A", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the bearer token validation is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
