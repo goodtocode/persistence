@@ -1,6 +1,6 @@
-﻿namespace ExcelFileContentExtractor.Infrastructure.Configuration.Interfaces
+﻿namespace GoodToCode.Shared.Persistence
 {
-    public interface ICosmosDbDataServiceConfiguration
+    public interface ICosmosDbServiceConfiguration
     {
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.CosmosDb", "Per
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.Tests", "Persistence.Tests\Persistence.Tests.csproj", "{9FC37BF7-7CCC-4BB6-9FCE-E13245453234}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.Abstractions", "Persistence.Abstractions\Persistence.Abstractions.csproj", "{1119ABB5-B0E9-4B23-8B03-380BC6B73F42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9FC37BF7-7CCC-4BB6-9FCE-E13245453234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FC37BF7-7CCC-4BB6-9FCE-E13245453234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FC37BF7-7CCC-4BB6-9FCE-E13245453234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1119ABB5-B0E9-4B23-8B03-380BC6B73F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1119ABB5-B0E9-4B23-8B03-380BC6B73F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1119ABB5-B0E9-4B23-8B03-380BC6B73F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1119ABB5-B0E9-4B23-8B03-380BC6B73F42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

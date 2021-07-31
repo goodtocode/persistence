@@ -1,9 +1,9 @@
-﻿using ExcelFileContentExtractor.Infrastructure.Configuration.Interfaces;
+﻿using GoodToCode.Shared.Persistence;
 using Microsoft.Extensions.Options;
 
-namespace ExcelFileContentExtractor.Infrastructure.Configuration
+namespace GoodToCode.Shared.Persistence
 {
-    public class CosmosDbDataServiceConfiguration : ICosmosDbDataServiceConfiguration
+    public class CosmosDbDataServiceConfiguration : ICosmosDbServiceConfiguration
     {
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }

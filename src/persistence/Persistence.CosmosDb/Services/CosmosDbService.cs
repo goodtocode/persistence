@@ -1,30 +1,26 @@
-﻿
-using ExcelFileContentExtractor.Core.Model;
-using ExcelFileContentExtractor.Infrastructure.Configuration.Interfaces;
-using ExcelFileContentExtractor.Infrastructure.Services.Interfaces;
+﻿using GoodToCode.Shared.Persistence;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace ExcelFileContentExtractor.Infrastructure.Services
+namespace GoodToCode.Shared.Persistence
 {
-    //        private readonly IExcelFileContentExtractorService _excelFileContentExtractorService;
-    //        private readonly IDataService<ExcelFileRawDataModel> _dataService;
-    //                var excelFileContent = _excelFileContentExtractorService.GetFileContent(excelFile);
-    //                if (excelFileContent != null)
-    //                {
-    //                    await _dataService.AddAsync(excelFileContent);
-    //                }
+    //private readonly IDataService<myFileRawDataModel> _dataService;
+    //var myFileContent = GetFileContents(myFile);
+    //if (myFileContent != null)
+    //{
+    //    await _dataService.AddAsync(myFileContent);
+    //}
 
-    public sealed class CosmosDbDataService<T> : IDataService<T> where T : class, IEntity
+    public sealed class CosmosDbService<T> : IPersistenceService<T> where T : class, IEntity
     {
-        private readonly ICosmosDbDataServiceConfiguration _dataServiceConfiguration;
+        private readonly ICosmosDbServiceConfiguration _dataServiceConfiguration;
         private readonly CosmosClient _client;
-        private readonly ILogger<CosmosDbDataService<T>> _logger;
+        private readonly ILogger<CosmosDbService<T>> _logger;
 
-        public CosmosDbDataService(ICosmosDbDataServiceConfiguration dataServiceConfiguration,
+        public CosmosDbService(ICosmosDbServiceConfiguration dataServiceConfiguration,
                                    CosmosClient client,
-                                   ILogger<CosmosDbDataService<T>> logger)
+                                   ILogger<CosmosDbService<T>> logger)
         {
             _dataServiceConfiguration = dataServiceConfiguration;
             _client = client;
