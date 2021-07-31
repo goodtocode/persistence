@@ -9,7 +9,7 @@ steps:
     inputs:
       command: 'restore'
       projects: |
-        $(srcPath)/**/*.csproj
+        '$(srcBloFunctionsPath)/**/*.csproj'
       feedsToUse: config
       nugetConfigPath: .nuget/NuGet.config
 
@@ -17,7 +17,8 @@ steps:
     displayName: 'dotnet build functions'
     inputs:
       command: 'build'
-      projects: $(functionProject)
+      projects: |
+        '$(srcBloFunctionsPath)/**/*.csproj'
       arguments: --output $(functionArchivePath) --configuration $(buildConfiguration)
 
   - task: DotNetCoreCLI@2
@@ -25,7 +26,7 @@ steps:
     inputs:
       command: test
       projects: |
-        $(srcPath)/**/*.csproj
+        '$(srcBloFunctionsPath)/**/*.csproj'
 
   - task: ArchiveFiles@2
     displayName: 'Archive functions'
