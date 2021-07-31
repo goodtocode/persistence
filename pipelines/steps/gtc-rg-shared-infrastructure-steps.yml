@@ -35,6 +35,36 @@ steps:
         overrideParameters: -name "$(cognitiveServicesName)"
 
   - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Validate $(appcsName)"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "$(subscriptionName)"
+        subscriptionId: "$(subscriptionId)"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "$(rgName)"
+        location: "$(locationName)"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/appcs-appconfigurationstore.json"
+        csmParametersFile: "${{ parameters.armPath }}/appcs-appconfigurationstore.parameters.json"        
+        deploymentMode: "Validation"
+        overrideParameters: -name "$(appcsName)" -sku "$(appcsSku)"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Deploy $(appcsName)"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "$(subscriptionName)"
+        subscriptionId: "$(subscriptionId)"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "$(rgName)"
+        location: "$(locationName)"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/appcs-appconfigurationstore.json"
+        csmParametersFile: "${{ parameters.armPath }}/appcs-appconfigurationstore.parameters.json"
+        deploymentMode: "Incremental"
+        overrideParameters: -name "$(appcsName)" -sku "$(appcsSku)"
+
+  - task: AzureResourceManagerTemplateDeployment@3
     displayName: "Validate $(funcBlobServiceName)"
     inputs:
         deploymentScope: "Resource Group"

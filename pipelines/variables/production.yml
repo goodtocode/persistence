@@ -6,6 +6,10 @@ variables:
     value: 'gtc-rg-shared-prod-225'
   - name: locationName
     value: 'West US 2'
+  - name: 'appcsName'
+    value: 'appcs-shared-prod-225'
+  - name: 'appcsSku'
+    value: 'Free'
   - name: 'appInsightsName'
     value: 'appi-shared-prod-225'
   - name: 'funcBlobServiceName'

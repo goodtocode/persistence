@@ -6,6 +6,10 @@ variables:
     value: 'gtc-rg-shared-dev-225'
   - name: locationName
     value: 'West US 2'
+  - name: 'appcsName'
+    value: 'appcs-shared-dev-225'
+  - name: 'appcsSku'
+    value: 'Free'
   - name: 'appInsightsName'
     value: 'appi-shared-dev-225'
   - name: 'kvName'
