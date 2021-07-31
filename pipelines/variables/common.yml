@@ -11,8 +11,8 @@ variables:
     value: '$(System.DefaultWorkingDirectory)/integration'
   - name: srcPath
     value: '$(System.DefaultWorkingDirectory)/src'
-  - name: srcBlobFunctionsPath
-    value: '$(System.DefaultWorkingDirectory)/src/blob/Blob.Functions'
+  - name: srcBlobPath
+    value: '$(System.DefaultWorkingDirectory)/src/blob'
   - name: buildConfiguration
     value: 'Release'
   - name: MSBUILDSINGLELOADCONTEXT

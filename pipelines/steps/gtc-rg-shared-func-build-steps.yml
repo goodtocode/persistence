@@ -9,10 +9,7 @@ steps:
     inputs:
       command: 'restore'
       projects: |
-        $(srcBlobFunctionsPath)/*.csproj
-        $(srcBlobFunctionsPath)/**/*.csproj
-        $(srcPath)/*.csproj
-        $(srcPath)/**/*.csproj
+        $()/**/*.csproj
       feedsToUse: config
       nugetConfigPath: .nuget/NuGet.config
 
@@ -21,7 +18,7 @@ steps:
     inputs:
       command: 'build'
       projects: |
-        '$(srcBloFunctionsPath)/*.csproj'
+        '$(srcBlobPath)/*.csproj'
       arguments: --output $(functionArchivePath) --configuration $(buildConfiguration)
 
   - task: DotNetCoreCLI@2
