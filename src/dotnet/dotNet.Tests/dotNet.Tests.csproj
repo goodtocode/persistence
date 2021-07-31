@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Identity\CasterTests.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Sys\CasterTests - Copy.feature.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -52,26 +47,6 @@
     <ProjectReference Include="..\dotNet.Identity\dotNet.Identity.csproj" />
     <ProjectReference Include="..\dotNet.Net\dotNet.Net.csproj" />
     <ProjectReference Include="..\dotNet.System\dotNet.System.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Identity\TokenContextTests.feature.cs">
-      <DependentUpon>TokenContextTests.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Sys\ObjectExtensionsTests.feature.cs">
-      <DependentUpon>ObjectExtensionsTests.feature</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowFeatureFiles Update="Identity\TokenContextTests.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Sys\ObjectExtensionsTests.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
 ﻿using dotNet.Identity.Cryptography;
 using GoodToCode.Shared.Identity;
-using GoodToCode.Shared.System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,12 +23,9 @@ namespace GoodToCode.Shared.Unit
         public TokenContextTests()
         {
 
-            string original = "Here is some data to encrypt!";
-            var enc = new Encryptor();
-
-            using Aes myAes = Aes.Create();
-            byte[] encrypted = enc.Encrypt(original, myAes.Key, myAes.IV);
-            string roundtrip = enc.Decrypt(encrypted, myAes.Key, myAes.IV);
+            audience = configuration["Gtc: Shared:Tests: AzureAd:Audience"];
+            tenantId = configuration["Gtc: Shared:Tests: AzureAd:TenantId"];
+            clientId = configuration["Gtc: Shared:Tests: AzureAd:ClientId"];
         }
 
         [Given(@"I have a TokenContext to a valid AAD app registration")]
