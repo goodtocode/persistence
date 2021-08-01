@@ -21,7 +21,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>GoodToCode.Stack.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>GoodToCode.Shared.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

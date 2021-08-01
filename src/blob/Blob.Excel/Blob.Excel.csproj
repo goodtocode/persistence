@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.Blob.Excel</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Blob.Excel</RootNamespace>
+    <AssemblyName>GoodToCode.Shared.Excel</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.Excel</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.Blob.Excel</Product>
+    <Product>GoodToCode.Shared.Excel</Product>
     <Authors>Robert J. Good</Authors>
     <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
     <Description>GoodToCode shared aspect-oriented (AOP) library for cross-cutting utility concerns.</Description>

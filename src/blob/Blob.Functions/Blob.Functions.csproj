@@ -2,8 +2,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-    <AssemblyName>GoodToCode.Shared.Blob.Functions</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Blob.Functions</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable>false</IsPackable>
