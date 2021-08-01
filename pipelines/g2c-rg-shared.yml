@@ -50,7 +50,7 @@ stages:
           - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
-              archiveName: '$(archiveFile)'
+              archiveName: '$(archiveName)'
               appcsKey: '$(appcsKey)'
               appcsValue: '$(appcsConnection)'
               envKey: 'ASPNETCORE_ENVIRONMENT'
@@ -111,7 +111,7 @@ stages:
           - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
-              archiveName: '$(archiveFile)'
+              archiveName: '$(archiveName)'
               appcsKey: '$(appcsKey)'
               appcsValue: '$(appcsConnection)'
               envKey: 'ASPNETCORE_ENVIRONMENT'
