@@ -13,10 +13,10 @@ namespace GoodToCode.Shared.Blob.Excel
     {
         private ExcelBlobReader reader;
         private readonly string executingPath;
-        private string assetsFolder { get { return @$"{executingPath}\Assets"; } }
-        private string sutCsvFile { get { return @$"{assetsFolder}\TestFile.csv"; } }
-        private string sutXlsFile { get { return @$"{assetsFolder}\TestFile.xls"; } }
-        private string sutXlsxFile { get { return @$"{assetsFolder}\TestFile.xlsx"; } }        
+        private string assetsFolder { get { return @$"{executingPath}/Assets"; } }
+        private string sutCsvFile { get { return @$"{assetsFolder}/TestFile.csv"; } }
+        private string sutXlsFile { get { return @$"{assetsFolder}/TestFile.xls"; } }
+        private string sutXlsxFile { get { return @$"{assetsFolder}/TestFile.xlsx"; } }        
 
         public IWorkbook SutCsv { get; private set; }
         public IWorkbook SutXls { get; private set; }
