@@ -6,7 +6,8 @@ namespace GoodToCode.Shared.Unit
 {
     public class AppConfigurationFactory
     {
-        public IConfiguration Configuration { get; private set; }
+        private IConfiguration Configuration;
+
         public IConfiguration Create()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";

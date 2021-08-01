@@ -12,7 +12,7 @@ namespace GoodToCode.Shared.Unit
     [Binding]
     public class TokenContextTests
     {
-        private readonly IConfiguration configuration = new AppConfigurationFactory().Configuration;
+        private readonly IConfiguration configuration = new AppConfigurationFactory().Create();
         public HttpRequest SutHttpRequest { get; private set; }
         public TokenContext SutTokenContext { get; private set; }
 
@@ -23,9 +23,9 @@ namespace GoodToCode.Shared.Unit
         public TokenContextTests()
         {
 
-            audience = configuration["Gtc: Shared:Tests: AzureAd:Audience"];
-            tenantId = configuration["Gtc: Shared:Tests: AzureAd:TenantId"];
-            clientId = configuration["Gtc: Shared:Tests: AzureAd:ClientId"];
+            audience = configuration["Gtc:Shared:Tests:AzureAd:Audience"];
+            tenantId = configuration["Gtc:Shared:Tests:AzureAd:TenantId"];
+            clientId = configuration["Gtc:Shared:Tests:AzureAd:ClientId"];
         }
 
         [Given(@"I have a TokenContext to a valid AAD app registration")]
@@ -37,8 +37,15 @@ namespace GoodToCode.Shared.Unit
         [When(@"a HttpRequest object is validated")]
         public void WhenAHttpRequestObjectIsValidated()
         {
+            //curl--location--request POST 'https://login.microsoftonline.com/common/oauth2/v2.0/token' \
+            //    --header 'Content-Type: application/x-www-form-urlencoded' \
+            //    --data - urlencode 'client_id={clientid}' \
+            //    --data - urlencode 'refresh_token={refreshtoken}' \
+            //    --data - urlencode 'redirect_uri={redirect_uri}' \
+            //    --data - urlencode 'grant_type=refresh_token' \
+            //    --data - urlencode 'client_secret={client_secret}
             SutHttpRequest = new HttpRequestFactory().CreateHttpRequest("GET");
-
+            SutHttpRequest.Headers.Add("Authorization", new Microsoft.Extensions.Primitives.StringValues(new string[] { $"Bearer{clientId}" }));
         }
 
         [Then(@"the bearer token validation is successful")]
