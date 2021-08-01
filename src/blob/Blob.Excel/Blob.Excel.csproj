@@ -24,16 +24,12 @@
     <AssemblyOriginatorKeyFile>GoodToCode.Shared.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  
-
   <ItemGroup>
     <None Include="storeicon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-
-  
 
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
