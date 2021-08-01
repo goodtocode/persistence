@@ -50,7 +50,9 @@ stages:
           - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
-              archiveName: 
+              archiveName: '$(archiveFile)'
+              appcsKey: '$(appcsKey)'
+              appcsValue: '$(appcsConnection)'
               envKey: 'ASPNETCORE_ENVIRONMENT'
               envValue: '$(Environment)'
               funcName: '$(funcBlobServiceName)'
@@ -81,6 +83,7 @@ stages:
   - stage: production
     variables:
       - template: variables/production.yml
+
     jobs:
       - job: deploy_landing_zone
         steps:
@@ -108,7 +111,9 @@ stages:
           - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
-              archiveName: 
+              archiveName: '$(archiveFile)'
+              appcsKey: '$(appcsKey)'
+              appcsValue: '$(appcsConnection)'
               envKey: 'ASPNETCORE_ENVIRONMENT'
               envValue: '$(Environment)'
               funcName: '$(funcBlobServiceName)'

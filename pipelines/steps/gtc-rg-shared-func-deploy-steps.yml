@@ -4,6 +4,12 @@ parameters:
   default: "."
 - name: archiveName
   type: string 
+- name: appcsKey
+  type: string
+  default: "AppSettingsConnection"
+- name: appcsValue
+  type: string
+  default: "" 
 - name: envKey
   type: string
   default: "ASPNETCORE_ENVIRONMENT"
@@ -33,4 +39,4 @@ steps:
         appType: 'webApp'
         WebAppName: '$(funcName)'
         packageForLinux: '$(artifactsPath)/**/$(archiveName)'
-        AppSettings: '-$(envKey) $(envValue)'
+        AppSettings: '-$(envKey) $(envValue) -$(appcsKey) $(appcsValue)'

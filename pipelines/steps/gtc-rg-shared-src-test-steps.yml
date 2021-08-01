@@ -26,6 +26,5 @@ steps:
     inputs:
       command: test
       projects: |
-        $(srcPath)/**/*.Specs.csproj
-        $(srcPath)/**/*.Tests.csproj
+        $(srcPath)/**/*.csproj
     continueOnError: true

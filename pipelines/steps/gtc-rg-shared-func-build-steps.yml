@@ -21,13 +21,6 @@ steps:
         $(srcBlobPath)/**/*.csproj
       arguments: --output $(archivePath) --configuration $(buildConfiguration)
 
-  - task: DotNetCoreCLI@2
-    displayName: 'dotnet test'
-    inputs:
-      command: test
-      projects: |
-        $(srcBlobPath)/**/*.csproj
-
   - task: ArchiveFiles@2
     displayName: 'Archive functions'
     inputs:
