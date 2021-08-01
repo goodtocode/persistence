@@ -22,15 +22,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NPOI" Version="2.5.3" />
-    <PackageReference Include="SpecFlow" Version="3.9.8" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.8" />
+    <PackageReference Include="NPOI" Version="2.5.4" />
+    <PackageReference Include="SpecFlow" Version="3.9.22" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.22" />
     <PackageReference Include="SpecRun.SpecFlow" Version="3.9.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Assets\" />
-    <Folder Include="Functions\Profile\User\" />
   </ItemGroup>
 
   <ItemGroup>
