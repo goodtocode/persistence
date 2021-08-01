@@ -11,13 +11,13 @@ namespace GoodToCode.Shared.Blob.Excel
     [Binding]
     public class ExcelBlobReaderTests
     {
-        private readonly string sutCsvFile = @"Assets\TestFile.csv";
-        private readonly string sutXlsFile = @"Assets\TestFile.xls";
-        private readonly string sutXlsxFile = @"Assets\TestFile.xlsx";
-        private readonly string sutCsvFullPath;
-        private readonly string sutXlsFullPath;
-        private readonly string sutXlsxFullPath;
         private ExcelBlobReader reader;
+        private readonly string executingPath;
+        private string assetsFolder { get { return @$"{executingPath}\Assets"; } }
+        private string sutCsvFile { get { return @$"{assetsFolder}\TestFile.csv"; } }
+        private string sutXlsFile { get { return @$"{assetsFolder}\TestFile.xls"; } }
+        private string sutXlsxFile { get { return @$"{assetsFolder}\TestFile.xlsx"; } }        
+
         public IWorkbook SutCsv { get; private set; }
         public IWorkbook SutXls { get; private set; }
         public IWorkbook SutXlsx { get; private set; }
@@ -26,48 +26,46 @@ namespace GoodToCode.Shared.Blob.Excel
         public ExcelBlobReaderTests()
         {
             reader = new ExcelBlobReader();
-            var cwd = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            sutCsvFullPath = $@"{cwd}\{sutCsvFile}";
-            sutXlsFullPath = $@"{cwd}\{sutXlsFile}";
-            sutXlsxFullPath = $@"{cwd}\{sutXlsxFile}";
+            executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);            
+            executingPath = Directory.Exists(assetsFolder) ? "." : executingPath; // Visual Studio vs. dotnet test execute different folders            
         }
 
         [Given(@"I have an XLSX file")]
         public void GivenIHaveAnXLSXFile()
         {
-            Assert.IsTrue(File.Exists(sutXlsxFullPath));
+            Assert.IsTrue(File.Exists(sutXlsxFile), $"{sutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
         }
 
         [When(@"read XLSX in via ExcelBlobReader")]
         public void WhenReadXLSXInViaExcelBlobReader()
         {
-            SutXlsx = reader.ReadFile(sutXlsxFullPath);
+            SutXlsx = reader.ReadFile(sutXlsxFile);
             Assert.IsTrue(SutXlsx.GetSheetAt(0) != null);
         }
 
         [Then(@"all readable XLSX data is available to systems")]
         public void ThenAllReadableXLSXDataIsAvailableToSystems()
         {
-            
+            Assert.IsTrue(SutXlsx.NumberOfSheets > 0, $"SutXlsx.NumberOfSheets={SutXlsx.NumberOfSheets} > 0");
         }
 
         [Given(@"I have an XLS file")]
         public void GivenIHaveAnXLSFile()
         {
-            Assert.IsTrue(File.Exists(sutXlsFullPath));
+            Assert.IsTrue(File.Exists(sutXlsFile), $"{sutXlsFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
         }
 
         [When(@"read XLS in via ExcelBlobReader")]
         public void WhenReadXLSInViaExcelBlobReader()
         {
-            SutXls = reader.ReadFile(sutXlsFullPath);
+            SutXls = reader.ReadFile(sutXlsFile);
             Assert.IsTrue(SutXls.GetSheetAt(0) != null);
         }
 
         [Then(@"all readable XLS data is available to systems")]
         public void ThenAllReadableXLSDataIsAvailableToSystems()
         {
-            
+            Assert.IsTrue(SutXls.NumberOfSheets > 0, $"SutXls.NumberOfSheets={SutXls.NumberOfSheets} > 0");
         }
     }
 }
