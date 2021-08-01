@@ -27,7 +27,7 @@ namespace GoodToCode.Shared.Blob.Excel
         {
             reader = new ExcelBlobReader();
             executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);            
-            executingPath = Directory.Exists(assetsFolder) ? "." : executingPath; // Visual Studio vs. dotnet test execute different folders            
+            executingPath = Directory.Exists(assetsFolder) ? "../.." : executingPath; // Visual Studio vs. dotnet test execute different folders            
         }
 
         [Given(@"I have an XLSX file")]
