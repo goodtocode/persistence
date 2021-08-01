@@ -19,7 +19,7 @@ steps:
       command: 'build'
       projects: |
         $(srcBlobPath)/**/*.csproj
-      arguments: --output $(functionArchivePath) --configuration $(buildConfiguration)
+      arguments: --output $(archivePath) --configuration $(buildConfiguration)
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet test'
@@ -31,10 +31,10 @@ steps:
   - task: ArchiveFiles@2
     displayName: 'Archive functions'
     inputs:
-      rootFolderOrFile: '$(functionArchivePath)'
+      rootFolderOrFile: '$(archivePath)'
       includeRootFolder: false
       archiveType: zip
-      archiveFile: $(Build.ArtifactStagingDirectory)/$(functionArchiveFile)
+      archiveFile: $(Build.ArtifactStagingDirectory)/$(archiveFile)
       replaceExistingArchive: true
 
   - task: PublishBuildArtifacts@1

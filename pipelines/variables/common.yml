@@ -5,6 +5,10 @@ variables:
     value: 'gtc-shared-001'
   - name: artifactsPath
     value: '$(Build.ArtifactStagingDirectory)'
+  - name: archiveFile
+    value: 'archive.zip'
+  - name: archivePath
+    value: '$(System.DefaultWorkingDirectory)/archive'
   - name: pipelinesPath
     value: '$(System.DefaultWorkingDirectory)/pipelines'
   - name: integrationPath

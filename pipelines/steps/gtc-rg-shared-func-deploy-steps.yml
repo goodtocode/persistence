@@ -32,5 +32,5 @@ steps:
         subscriptionName: $(subscriptionId)
         appType: 'webApp'
         WebAppName: '$(funcName)'
-        packageForLinux: '$(Pipeline.Workspace)/**/$(archiveName)'
+        packageForLinux: '$(artifactsPath)/**/$(archiveName)'
         AppSettings: '-$(envKey) $(envValue)'
