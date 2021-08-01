@@ -21,13 +21,13 @@ steps:
         $(srcBlobPath)/**/*.csproj
       arguments: --output $(archivePath) --configuration $(buildConfiguration)
 
-  - task: archiveNames@2
+  - task: ArchiveFiles@2
     displayName: 'Archive functions'
     inputs:
       rootFolderOrFile: '$(archivePath)'
       includeRootFolder: false
       archiveType: zip
-      archiveName: $(Build.ArtifactStagingDirectory)/$(archiveName)
+      archiveFile: $(Build.ArtifactStagingDirectory)/$(archiveName)
       replaceExistingArchive: true
 
   - task: PublishBuildArtifacts@1
