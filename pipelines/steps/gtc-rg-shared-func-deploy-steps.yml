@@ -19,5 +19,5 @@ steps:
         subscriptionName: $(subscriptionId)
         appType: 'webApp'
         WebAppName: '$(funcName)'
-        packageForLinux: '$(archivePath)/**/$(archiveFile)'
+        packageForLinux: '$(Pipeline.Workspace)/**/$(archiveName)'
         AppSettings: '-ASPNETCORE_ENVIRONMENT $(Environment) -AppSettingsConnection $(appcsValue)'
