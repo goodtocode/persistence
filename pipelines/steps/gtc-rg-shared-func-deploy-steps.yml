@@ -1,28 +1,28 @@
 parameters:
 - name: armPath
   type: string 
-  default: "."
+  default: '.'
 - name: archiveName
   type: string 
-  default: ""
+  default: ''
 - name: appcsKey
   type: string
-  default: "AppSettingsConnection"
+  default: 'AppSettingsConnection'
 - name: appcsValue
   type: string
-  default: "" 
+  default: '' 
 - name: envKey
   type: string
-  default: "ASPNETCORE_ENVIRONMENT"
+  default: 'ASPNETCORE_ENVIRONMENT'
 - name: envValue
   type: string
-  default: "Production" 
+  default: 'Production' 
 - name: subscriptionId
   type: string 
-  default: ""
+  default: ''
 - name: subscriptionName
   type: string 
-  default: ""
+  default: ''
 
 steps:
     - task: DownloadBuildArtifacts@0
