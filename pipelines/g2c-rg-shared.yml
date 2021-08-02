@@ -71,6 +71,7 @@ stages:
           - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
+              archivePath: '$(archivePath)'
               archiveName: '$(archiveName)'
               appcsKey: '$(appcsKey)'
               appcsValue: '$(appcsConnection)'
