@@ -12,6 +12,7 @@ steps:
         downloadPath: '$(System.ArtifactsDirectory)'
 
     - task: NuGetCommand@2
+      displayName: 'Deploying nuget'
       inputs:
         command: 'push'
         packagesToPush: '$(artifactsPath)/**/*.nupkg;'

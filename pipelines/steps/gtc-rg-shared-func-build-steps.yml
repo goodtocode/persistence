@@ -22,7 +22,7 @@ steps:
       arguments: --output $(archivePath) --configuration $(buildConfiguration)
 
   - task: ArchiveFiles@2
-    displayName: 'Archive functions'
+    displayName: 'Archive $(archiveName)'
     inputs:
       rootFolderOrFile: '$(archivePath)'
       includeRootFolder: false

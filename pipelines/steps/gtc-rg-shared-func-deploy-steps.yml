@@ -32,6 +32,7 @@ steps:
         downloadPath: '$(System.ArtifactsDirectory)'
 
     - task: AzureRmWebAppDeployment@4
+      displayName: 'Deploying $(funcName)'
       inputs:
         ConnectionType: 'AzureRM'
         ConnectedServiceName: $(subscriptionName)
