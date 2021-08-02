@@ -19,15 +19,15 @@ steps:
       command: 'build'
       projects: |
         $(srcBlobPath)/**/*.csproj
-      arguments: --output $(archivePath) --configuration $(buildConfiguration)
+      arguments: --output $(artifactsPath) --configuration $(buildConfiguration)
 
   - task: ArchiveFiles@2
     displayName: 'Archive $(archiveFile)'
     inputs:
-      rootFolderOrFile: '$(archivePath)'
+      rootFolderOrFile: '$(artifactsPath)'
       includeRootFolder: false
       archiveType: zip
-      archiveFile: $(archivePath)/$(archiveFile)
+      archiveFile: $(artifactsPath)/$(archiveFile)
       replaceExistingArchive: true
 
   - task: PublishBuildArtifacts@1
