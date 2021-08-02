@@ -9,8 +9,6 @@ variables:
     value: '$(Build.ArtifactStagingDirectory)'
   - name: archiveFile
     value: 'archive.zip'
-  - name: archivePath
-    value: '$(System.DefaultWorkingDirectory)/archive'
   - name: pipelinesPath
     value: '$(System.DefaultWorkingDirectory)/pipelines'
   - name: integrationPath
