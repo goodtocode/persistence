@@ -71,15 +71,6 @@ stages:
           - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
-              archivePath: '$(archivePath)'
-              archiveFile: '$(archiveName)'
-              appcsKey: '$(appcsKey)'
-              appcsValue: '$(appcsValue)'
-              envKey: 'ASPNETCORE_ENVIRONMENT'
-              envValue: '$(Environment)'
-              funcName: '$(funcName)'
-              subscriptionId: '$(subscriptionId)'
-              subscriptionName: '$(subscriptionName)'
 
   - stage: production
     variables:
