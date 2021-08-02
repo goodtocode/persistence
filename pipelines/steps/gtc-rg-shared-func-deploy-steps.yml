@@ -4,7 +4,7 @@ parameters:
   default: '.'
 - name: archivePath
   type: string 
-- name: archiveName
+- name: archiveFile
   type: string 
 - name: appcsKey
   type: string
@@ -40,5 +40,5 @@ steps:
         subscriptionName: $(subscriptionId)
         appType: 'webApp'
         WebAppName: '$(funcName)'
-        packageForLinux: '$(artifactsPath)/**/$(archiveName)'
+        packageForLinux: '$(archivePath)/**/$(archiveFile)'
         AppSettings: '-$(envKey) $(envValue) -$(appcsKey) $(appcsValue)'
