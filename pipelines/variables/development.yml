@@ -20,10 +20,10 @@ variables:
     value: 'func-blob-dev-225'
   - name: 'nugetFeeds'
     value: 'select'
-  - name: 'nugetId'
-    value: '525a0dbd-3d6d-4f62-aba4-f4d004295d7d'
   - name: 'nugetType'
     value: 'internal'
+  - name: 'nugetId'
+    value: '525a0dbd-3d6d-4f62-aba4-f4d004295d7d'
   - name: storageName
     value: 'stshareddev225'
   - name: workspaceName
