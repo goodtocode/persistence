@@ -90,37 +90,16 @@ stages:
             parameters:
               armPath: 'infrastructure'
 
-      - job: build_src
+      - job: deploy_func
         dependsOn: deploy_infrastructure
         steps:
-          - template: steps/gtc-rg-shared-src-build-steps.yml
-            parameters:
-              armPath: 'infrastructure'
-
-      - job: test_src
-        dependsOn: build_src
-        steps:
-          - template: steps/gtc-rg-shared-src-test-steps.yml
+          - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
 
       - job: deploy_nuget
-        dependsOn: test_src
-        steps:
-          - template: steps/gtc-rg-shared-nuget-deploy-steps.yml
-            parameters:
-              armPath: 'infrastructure'
-
-      - job: build_func
         dependsOn: deploy_infrastructure
         steps:
-          - template: steps/gtc-rg-shared-func-build-steps.yml
-            parameters:
-              armPath: 'infrastructure'
-
-      - job: deploy_func
-        dependsOn: test_src
-        steps:
-          - template: steps/gtc-rg-shared-func-deploy-steps.yml
+          - template: steps/gtc-rg-shared-nuget-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
