@@ -1,0 +1,32 @@
+variables:
+  - template: common.yml  
+  - name: Environment
+    value: 'Production'
+  - name: rgName
+    value: 'gtc-rg-shared-prod-225'
+  - name: locationName
+    value: 'West US 2'
+  - name: 'appcsName'
+    value: 'appcs-shared-prod-225'
+  - name: 'appcsSku'
+    value: 'Standard'
+  - name: appcsValue
+    value: 'Endpoint=https://appcs-shared-dev-225.azconfig.io;Id=DN4W-l2-s0:BAz2c2t0G9EytIeEf1L4;Secret=YResuosA03uCXHSrl3gD8HOdzgHM35fhtP91sZ/Z0qQ='
+  - name: 'appInsightsName'
+    value: 'appi-shared-prod-225'
+  - name: 'funcName'
+    value: 'func-blob-prod-225'
+  - name: 'kvName'
+    value: 'kv-shared-prod-225'    
+  - name: 'nugetFeeds'
+    value: 'select'
+  - name: 'nugetType'
+    value: 'internal'
+  - name: 'nugetId'
+    value: '525a0dbd-3d6d-4f62-aba4-f4d004295d7d'
+  - name: storageName
+    value: 'stsharedprod225'
+  - name: workspaceName
+    value: 'work-shared-prod-225'
+  - name: cognitiveServicesName
+    value: 'cog-shared-prod-225'

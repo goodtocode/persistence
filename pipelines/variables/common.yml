@@ -1,0 +1,23 @@
+variables:
+  - name: subscriptionId
+    value: 'f7848ca5-85e0-4331-9f90-cbcaa786c302'
+  - name: subscriptionName
+    value: 'gtc-shared-001'
+  - name: appcsKey
+    value: 'AppSettingsConnection'
+  - name: artifactsPath
+    value: '$(Build.ArtifactStagingDirectory)'
+  - name: archiveFile
+    value: 'archive.zip'
+  - name: pipelinesPath
+    value: '$(System.DefaultWorkingDirectory)/pipelines'
+  - name: integrationPath
+    value: '$(System.DefaultWorkingDirectory)/integration'
+  - name: srcPath
+    value: '$(System.DefaultWorkingDirectory)/src'
+  - name: srcBlobPath
+    value: '$(System.DefaultWorkingDirectory)/src/blob'
+  - name: buildConfiguration
+    value: 'Release'
+  - name: MSBUILDSINGLELOADCONTEXT
+    value: 1

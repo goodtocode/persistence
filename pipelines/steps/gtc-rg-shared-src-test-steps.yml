@@ -1,0 +1,30 @@
+parameters:
+- name: armPath 
+  type: string 
+  default: "."
+
+steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet restore'
+    inputs:
+      command: 'restore'
+      projects: |
+        $(srcPath)/**/*.csproj
+      feedsToUse: config
+      nugetConfigPath: .nuget/NuGet.config
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      command: 'build'
+      projects: |
+        $(srcPath)/**/*.csproj
+      arguments: '--configuration $(buildConfiguration)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test'
+    inputs:
+      command: test
+      projects: |
+        $(srcPath)/**/*.csproj
+    continueOnError: true
