@@ -19,11 +19,11 @@ variables:
   - name: 'kvName'
     value: 'kv-shared-prod-225'    
   - name: 'nugetFeeds'
-    value: 'config'
+    value: 'select'
+  - name: 'nugetType'
+    value: 'internal'
   - name: 'nugetId'
     value: '525a0dbd-3d6d-4f62-aba4-f4d004295d7d'
-  - name: 'nugetType'
-    value: 'external'
   - name: storageName
     value: 'stsharedprod225'
   - name: workspaceName
