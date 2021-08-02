@@ -9,7 +9,7 @@ variables:
   - name: 'appcsName'
     value: 'appcs-shared-prod-225'
   - name: 'appcsSku'
-    value: 'Free'
+    value: 'Standard'
   - name: appcsValue
     value: 'Endpoint=https://appcs-shared-dev-225.azconfig.io;Id=DN4W-l2-s0:BAz2c2t0G9EytIeEf1L4;Secret=YResuosA03uCXHSrl3gD8HOdzgHM35fhtP91sZ/Z0qQ='
   - name: 'appInsightsName'
