@@ -74,10 +74,10 @@ stages:
               archivePath: '$(archivePath)'
               archiveFile: '$(archiveName)'
               appcsKey: '$(appcsKey)'
-              appcsValue: '$(appcsConnection)'
+              appcsValue: '$(appcsValue)'
               envKey: 'ASPNETCORE_ENVIRONMENT'
               envValue: '$(Environment)'
-              funcName: '$(funcBlobServiceName)'
+              funcName: '$(funcName)'
               subscriptionId: '$(subscriptionId)'
               subscriptionName: '$(subscriptionName)'
 
@@ -133,12 +133,3 @@ stages:
           - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
-              archivePath: '$(archivePath)'
-              archiveFile: '$(archiveName)'
-              appcsKey: '$(appcsKey)'
-              appcsValue: '$(appcsConnection)'
-              envKey: 'ASPNETCORE_ENVIRONMENT'
-              envValue: '$(Environment)'
-              funcName: '$(funcBlobServiceName)'
-              subscriptionId: '$(subscriptionId)'
-              subscriptionName: '$(subscriptionName)'

@@ -65,7 +65,7 @@ steps:
         overrideParameters: -name "$(appcsName)" -sku "$(appcsSku)"
 
   - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Validate $(funcBlobServiceName)"
+    displayName: "Validate $(funcName)"
     inputs:
         deploymentScope: "Resource Group"
         azureResourceManagerConnection: "$(subscriptionName)"
@@ -77,10 +77,10 @@ steps:
         csmFile: "${{ parameters.armPath }}/func-functionsapp.json"        
         csmParametersFile: "${{ parameters.armPath }}/func-functionsapp.parameters.json"        
         deploymentMode: "Validation"
-        overrideParameters: -name "$(funcBlobServiceName)" -workspaceName "$(workspaceName)" -storageName "$(storageName)"
+        overrideParameters: -name "$(funcName)" -workspaceName "$(workspaceName)" -storageName "$(storageName)"
 
   - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Deploy $(funcBlobServiceName)"
+    displayName: "Deploy $(funcName)"
     inputs:
         deploymentScope: "Resource Group"
         azureResourceManagerConnection: "$(subscriptionName)"
@@ -92,4 +92,4 @@ steps:
         csmFile: "${{ parameters.armPath }}/func-functionsapp.json"
         csmParametersFile: "${{ parameters.armPath }}/func-functionsapp.parameters.json"
         deploymentMode: "Incremental"
-        overrideParameters: -name "$(funcBlobServiceName)" -workspaceName "$(workspaceName)" -storageName "$(storageName)"
+        overrideParameters: -name "$(funcName)" -workspaceName "$(workspaceName)" -storageName "$(storageName)"

@@ -7,7 +7,7 @@ variables:
     value: 'AppSettingsConnection'
   - name: artifactsPath
     value: '$(Build.ArtifactStagingDirectory)'
-  - name: archiveName
+  - name: archiveFile
     value: 'archive.zip'
   - name: archivePath
     value: '$(System.DefaultWorkingDirectory)/archive'
