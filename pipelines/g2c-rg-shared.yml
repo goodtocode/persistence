@@ -58,20 +58,6 @@ stages:
             parameters:
               armPath: 'infrastructure'
 
-      - job: build_func
-        dependsOn: deploy_infrastructure
-        steps:
-          - template: steps/gtc-rg-shared-func-build-steps.yml
-            parameters:
-              armPath: 'infrastructure'
-
-      - job: deploy_func
-        dependsOn: test_src
-        steps:
-          - template: steps/gtc-rg-shared-func-deploy-steps.yml
-            parameters:
-              armPath: 'infrastructure'
-
   - stage: production
     variables:
       - template: variables/production.yml
@@ -87,13 +73,6 @@ stages:
         dependsOn: deploy_landing_zone
         steps:
           - template: steps/gtc-rg-shared-infrastructure-steps.yml
-            parameters:
-              armPath: 'infrastructure'
-
-      - job: deploy_func
-        dependsOn: deploy_infrastructure
-        steps:
-          - template: steps/gtc-rg-shared-func-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
 
