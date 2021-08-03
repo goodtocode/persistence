@@ -63,33 +63,3 @@ steps:
         csmParametersFile: "${{ parameters.armPath }}/appcs-appconfigurationstore.parameters.json"
         deploymentMode: "Incremental"
         overrideParameters: -name "$(appcsName)" -sku "$(appcsSku)"
-
-  - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Validate $(funcName)"
-    inputs:
-        deploymentScope: "Resource Group"
-        azureResourceManagerConnection: "$(subscriptionName)"
-        subscriptionId: "$(subscriptionId)"
-        action: "Create Or Update Resource Group"
-        resourceGroupName: "$(rgName)"
-        location: "$(locationName)"
-        templateLocation: "Linked artifact"
-        csmFile: "${{ parameters.armPath }}/func-functionsapp.json"        
-        csmParametersFile: "${{ parameters.armPath }}/func-functionsapp.parameters.json"        
-        deploymentMode: "Validation"
-        overrideParameters: -name "$(funcName)" -workspaceName "$(workspaceName)" -storageName "$(storageName)"
-
-  - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Deploy $(funcName)"
-    inputs:
-        deploymentScope: "Resource Group"
-        azureResourceManagerConnection: "$(subscriptionName)"
-        subscriptionId: "$(subscriptionId)"
-        action: "Create Or Update Resource Group"
-        resourceGroupName: "$(rgName)"
-        location: "$(locationName)"
-        templateLocation: "Linked artifact"
-        csmFile: "${{ parameters.armPath }}/func-functionsapp.json"
-        csmParametersFile: "${{ parameters.armPath }}/func-functionsapp.parameters.json"
-        deploymentMode: "Incremental"
-        overrideParameters: -name "$(funcName)" -workspaceName "$(workspaceName)" -storageName "$(storageName)"
