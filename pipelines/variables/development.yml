@@ -1,6 +1,6 @@
 variables:
   - template: common.yml  
-  - group: gtc-shared-dev
+  - group: gtc-rg-shared-dev
   - name: Environment
     value: 'Development'
   - name: rgName
