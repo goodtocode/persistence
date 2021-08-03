@@ -1,5 +1,6 @@
 variables:
   - template: common.yml  
+  - group: gtc-shared-prod
   - name: Environment
     value: 'Production'
   - name: rgName
