@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace GoodToCode.Shared.Unit
+namespace GoodToCode.Shared.dotNet
 {
     [Binding]
     public class TokenContextTests

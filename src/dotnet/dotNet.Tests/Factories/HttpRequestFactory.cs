@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Internal;
 using Newtonsoft.Json;
 
-namespace GoodToCode.Shared.Unit
+namespace GoodToCode.Shared.dotNet
 {
     public class HttpRequestFactory
     {

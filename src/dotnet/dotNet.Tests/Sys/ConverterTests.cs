@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using TechTalk.SpecFlow;
 
-namespace GoodToCode.Shared.Unit
+namespace GoodToCode.Shared.dotNet
 {
     [Binding]
     public class ConverterTests
