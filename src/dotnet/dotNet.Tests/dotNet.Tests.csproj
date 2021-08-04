@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.dotNet.Tests</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.dotNet.Tests</RootNamespace>
+    <AssemblyName>GoodToCode.Shared.NetFramework.Tests</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.NetFramework.Tests</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable>false</IsPackable>

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
 
-namespace GoodToCode.Shared.dotNet
+namespace GoodToCode.Shared.NetFramework.Tests.Sys
 {
     [Binding]
     public class CasterTests

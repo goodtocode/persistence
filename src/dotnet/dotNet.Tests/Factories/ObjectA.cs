@@ -1,5 +1,5 @@
 ﻿
-namespace GoodToCode.Shared.dotNet
+namespace GoodToCode.Shared.NetFramework.Tests
 {
     public class ObjectA
     {

@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace GoodToCode.Shared.dotNet
+namespace GoodToCode.Shared.NetFramework.Tests.Identity
 {
     [Binding]
     public class TokenContextTests
@@ -52,14 +52,13 @@ namespace GoodToCode.Shared.dotNet
         [Then(@"the bearer token validation is successful")]
         public async Task ThenTheBearerTokenValidationIsSuccessful()
         {
-            var isAuthed = false;
+            bool isAuthed;
             try
             {
                 isAuthed = await SutTokenContext.IsAuthenticatedAsync(SutHttpRequest);
             }
-            catch(Exception ex)
+            catch//(Exception ex)
             {
-                isAuthed = false;
                 //Assert.Fail($"Exception: {ex.Message} - {ex?.InnerException?.Message} - {ex.StackTrace}");
             }
 

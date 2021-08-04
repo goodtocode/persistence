@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace dotNet.Tests.Identity
+namespace GoodToCode.Shared.NetFramework.Tests.Identity
 {
     using TechTalk.SpecFlow;
     using System;
