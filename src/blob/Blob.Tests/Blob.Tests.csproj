@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>GoodToCode.Shared.Blob.Tests</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.Blob.Tests</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable>false</IsPackable>

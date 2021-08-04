@@ -2,28 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>GoodToCode.Shared.dotNet.Tests</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.dotNet.Tests</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Configuration\**" />
-    <Compile Remove="EntityFramework\**" />
-    <Compile Remove="Net\**" />
-    <EmbeddedResource Remove="Configuration\**" />
-    <EmbeddedResource Remove="EntityFramework\**" />
-    <EmbeddedResource Remove="Net\**" />
-    <None Remove="Configuration\**" />
-    <None Remove="EntityFramework\**" />
-    <None Remove="Net\**" />
-    <SpecFlowFeatureFiles Remove="Configuration\**" />
-    <SpecFlowFeatureFiles Remove="EntityFramework\**" />
-    <SpecFlowFeatureFiles Remove="Net\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Configuration\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="EntityFramework\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Net\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="appsettings.json">
