@@ -1,3 +1,9 @@
+ #-----------------------------------------------------------------------
+# Set-Version [-Path [<String>]] [-VersionToReplace [<String>]]
+#
+# Example: .\Set-Version -Path \\source\path -Major 1
+#-----------------------------------------------------------------------
+
 # ***
 # *** Parameters
 # ***
