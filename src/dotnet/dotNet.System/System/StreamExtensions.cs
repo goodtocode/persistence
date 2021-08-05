@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace GoodToCode.Shared.System.System
+namespace GoodToCode.Shared.System
 {
     public static class StreamExtensions
     {
