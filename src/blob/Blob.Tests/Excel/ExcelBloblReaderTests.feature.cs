@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Blob.Tests.Excel
+namespace GoodToCode.Shared.Blob.Tests.Excel
 {
     using TechTalk.SpecFlow;
     using System;
