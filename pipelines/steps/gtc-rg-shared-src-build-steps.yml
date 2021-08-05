@@ -6,7 +6,7 @@ parameters:
 steps:
   - task: PowerShell@2
     inputs:
-      filePath: '$(pipelinesPath)/scripts/Set-Version'
+      filePath: '$(pipelinesPath)/scripts/Set-Version.ps1'
       arguments: '-Path $(srcPath) -Major 1'
       workingDirectory: '$(pipelinesPath)/scripts'
 
