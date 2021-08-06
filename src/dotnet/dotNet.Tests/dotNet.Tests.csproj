@@ -37,4 +37,8 @@
     <PackageReference Include="SpecRun.SpecFlow" Version="3.9.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\dotNet.Identity\dotNet.Identity.csproj" />
+  </ItemGroup>
+
 </Project>
