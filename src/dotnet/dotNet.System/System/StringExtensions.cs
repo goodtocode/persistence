@@ -7,7 +7,7 @@ namespace GoodToCode.Shared.System
     /// <summary>
     /// StringExtension
     /// </summary>
-    public static class StringExtension
+    public static class StringExtensions
     {
         /// <summary>
         /// Adds string/char if string begins with that string/char

@@ -7,7 +7,7 @@ namespace GoodToCode.Shared.System
     /// <summary>
     /// StringExtension
     /// </summary>
-    public static class StringExtension
+    public static class StringExtensions
     {
         /// <summary>
         /// Converts string to Stream
