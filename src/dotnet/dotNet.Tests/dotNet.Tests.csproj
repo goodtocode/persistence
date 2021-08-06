@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Configuration\TokenContextTests.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -38,7 +42,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\dotNet.Configuration\dotNet.Configuration.csproj" />
+    <ProjectReference Include="..\dotNet.EntityFramework\dotNet.EntityFramework.csproj" />
     <ProjectReference Include="..\dotNet.Identity\dotNet.Identity.csproj" />
+    <ProjectReference Include="..\dotNet.Net\dotNet.Net.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EntityFramework\" />
+    <Folder Include="Net\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Configuration\ConfigurationBuilderTests.feature.cs">
+      <DependentUpon>ConfigurationBuilderTests.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Configuration\ConfigurationBuilderTests.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>
