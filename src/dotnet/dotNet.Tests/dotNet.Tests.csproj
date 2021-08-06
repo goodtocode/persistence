@@ -12,6 +12,7 @@
   <ItemGroup>
     <SpecFlowObsoleteCodeBehindFiles Remove="Configuration\TokenContextTests.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="EntityFramework\ConfigurationBuilderTests.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Net\ConfigurationBuilderTests.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,15 +51,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Net\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Configuration\ConfigurationBuilderTests.feature.cs">
       <DependentUpon>ConfigurationBuilderTests.feature</DependentUpon>
     </Compile>
     <Compile Update="EntityFramework\IDbContextTests.feature.cs">
       <DependentUpon>IDbContextTests.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Net\HttpRequestExtensionsTests.feature.cs">
+      <DependentUpon>HttpRequestExtensionsTests.feature</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -68,6 +68,10 @@
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="EntityFramework\IDbContextTests.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Net\HttpRequestExtensionsTests.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>

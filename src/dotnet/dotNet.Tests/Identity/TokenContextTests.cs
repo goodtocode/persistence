@@ -44,7 +44,7 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
             //    --data - urlencode 'grant_type=refresh_token' \
             //    --data - urlencode 'client_secret={client_secret}
             SutHttpRequest = new HttpRequestFactory().CreateHttpRequest("GET");
-            //SutHttpRequest.Headers.Add("Authorization", new Microsoft.Extensions.Primitives.StringValues(new string[] { $"Bearer{clientId}" }));
+            SutHttpRequest.Headers.Add("Authorization", new Microsoft.Extensions.Primitives.StringValues(new string[] { $"Bearer{clientId}" }));
         }
 
         [Then(@"the bearer token validation is successful")]
@@ -55,12 +55,14 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
             {
                 isAuthed = await SutTokenContext.IsAuthenticatedAsync(SutHttpRequest);
             }
-            catch(Exception ex)
+            catch (ArgumentException aex)
+            {
+                Assert.IsTrue(aex.Message.Contains("IDX12741"));
+            }
+            catch (Exception ex)
             {
                 Assert.Fail($"Exception: {ex.Message} - {ex?.InnerException?.Message} - {ex.StackTrace}");
             }
-
-            //Assert.IsTrue(isAuthed, $"Should be valid token: {SutHttpRequest.Bearer()}");
         }
     }
 }
