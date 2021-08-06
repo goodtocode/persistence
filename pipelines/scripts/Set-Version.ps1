@@ -37,7 +37,9 @@ Import-Module ".\Helpers.System.psm1"
 # ***
 # *** Validate and cleanse
 # ***
-$Path = Set-Unc -Path $Path
+If($IsWindows){
+	$Path = Set-Unc -Path $Path
+}
 
 # ***
 # *** Locals
