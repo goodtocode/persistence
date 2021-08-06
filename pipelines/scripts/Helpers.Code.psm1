@@ -7,9 +7,9 @@ function Add-CopyrightApache
 {
 	param (
 		[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
- 		[string]$Path = $(throw '-Path is a required parameter.'),
- 		[string[]]$Include = "*.cs",
- 		[string[]]$Exclude = "",
+		[string]$Path = $(throw '-Path is a required parameter.'),
+		[string[]]$Include = "*.cs",
+		[string[]]$Exclude = "",
 		[Int32]$First = 100
 
 		)
@@ -59,7 +59,7 @@ export-modulemember -function Add-CopyrightApache
 
 #-----------------------------------------------------------------------
 # Clear-Solution [-Path [<String>]]
-#                  [-Include [<String[]>] [-Exclude [<String[]>]]
+# [-Include [<String[]>] [-Exclude [<String[]>]]
 #
 # Example: .\Clear-Solution \\source\path
 #-----------------------------------------------------------------------
@@ -67,9 +67,9 @@ function Clear-Solution
 {
 	param (
 	 [Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
- 	 [string]$Path = $(throw '-Path is a required parameter.'),
- 	 [string[]]$Include = ("*.snk", "*.zip", "*.log", "*.bak", "*.tmp,  *.vspscc", "*.vssscc", "*.csproj.vspscc", "*.sqlproj.vspscc", "*.cache"),
- 	 [string]$Exclude = ""
+	 [string]$Path = $(throw '-Path is a required parameter.'),
+	 [string[]]$Include = ("*.snk", "*.zip", "*.log", "*.bak", "*.tmp,  *.vspscc", "*.vssscc", "*.csproj.vspscc", "*.sqlproj.vspscc", "*.cache"),
+	 [string]$Exclude = ""
 	)
 	Write-Host "Clear-Solution -Path $Path -Include $Include -Exclude $Exclude"
 	$Path = Set-Unc -Path $Path
@@ -86,7 +86,7 @@ export-modulemember -function Clear-Solution
 
 #-----------------------------------------------------------------------
 # Clear-Lib [-Path [<String>]]
-#                  [-Include [<String[]>] [-Exclude [<String[]>]]
+# [-Include [<String[]>] [-Exclude [<String[]>]]
 #
 # Example: .\Clear-Lib \\source\path
 #-----------------------------------------------------------------------
@@ -94,9 +94,9 @@ function Clear-Lib
 {
 	param (
 	 [Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
- 	 [string]$Path = $(throw '-Path is a required parameter.'),
- 	 [string[]]$Include = ("*.snk", "*.zip", "*.log", "*.bak", "*.tmp,  *.vspscc", "*.vssscc", "*.csproj.vspscc", "*.sqlproj.vspscc", "*.cache"),
- 	 [string]$Exclude = ""
+	 [string]$Path = $(throw '-Path is a required parameter.'),
+	 [string[]]$Include = ("*.snk", "*.zip", "*.log", "*.bak", "*.tmp,  *.vspscc", "*.vssscc", "*.csproj.vspscc", "*.sqlproj.vspscc", "*.cache"),
+	 [string]$Exclude = ""
 	)
 	Write-Host "Clear-Lib -Path $Path -Include $Include -Exclude $Exclude"
 	$Path = Set-Unc -Path $Path
@@ -115,19 +115,17 @@ export-modulemember -function Clear-Lib
 
 #-----------------------------------------------------------------------
 # Compress-Solution [-Path [<String>]] [-Destination [<String>]] 
-#                 	[-Include [<String[]>] [-Exclude [<String[]>]]
+#	[-Include [<String[]>] [-Exclude [<String[]>]]
 #					[-RepoName [<String>]] [-File [<String>]]
 #
 # Example: .\Compress-Solution \\source\path \\destination\path
 #-----------------------------------------------------------------------
 function Compress-Solution
 {
-	param (
+	param ( 
 		[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
- 		[string]$Path=$(throw '-Path is a required parameter.'),
-		[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
- 		[string]$Destination=$(throw '-Destination is a required parameter.'),
-		[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
+		[string]$Path=$(throw '-Path is a required parameter.'),
+		[string]$Destination=$(throw '-Destination is a required parameter.'),
 		[String]$RepoName=$(throw '-RepoName is a required parameter.'),		
 		[String]$Lib=("\lib"),
 		[String]$Build = '',
@@ -203,8 +201,7 @@ function Get-Version
 export-modulemember -function Get-Version
 
 #-----------------------------------------------------------------------
-# Set-Version [-Path [<String>]]
-#                  [-Contains [<String[]>] [-Close [<String[]>]]
+# Set-Version [-Path [<String>]]a [-Contains [<String[]>] [-Close [<String[]>]]
 #
 # Example: .\Set-Version -Path \\source\path
 #-----------------------------------------------------------------------
@@ -212,11 +209,11 @@ function Set-Version
 {
 	param (
 		[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
- 		[string]$Path = $(throw '-Path is a required parameter.'),
+		[string]$Path = $(throw '-Path is a required parameter.'),
 		[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
 		[Version] $VersionToReplace = $(throw '-VersionToReplace is a required parameter. i.e. 1.20.1'),
-		[String]$Major = '4',
-		[String]$Minor = '19',
+		[String]$Major = '1',
+		[String]$Minor = '',
 		[String]$Revision = '',
 		[String]$Build = ''
 	)
@@ -308,7 +305,7 @@ function Remove-Subdomain
 {
 	param (
 		[Parameter(Mandatory=$true,ValueFromPipelineByPropertyName=$true)]
- 		[string]$Domain = $(throw '-Domain is a required parameter.')
+		[string]$Domain = $(throw '-Domain is a required parameter.')
 	)
 	Write-Host "Remove-Subdomain -Domain $Domain"
 	[string]$ReturnValue = $Domain

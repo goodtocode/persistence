@@ -4,6 +4,13 @@ parameters:
   default: "."
 
 steps:
+  - task: PowerShell@2
+    displayName: 'Set-Version.ps1'
+    inputs:
+      filePath: '$(pipelinesPath)/scripts/Set-Version.ps1'
+      arguments: '-Path $(srcPath) -VersionToReplace 5.20.1 -Major 5'
+      workingDirectory: '$(pipelinesPath)/scripts'
+
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'
     inputs:

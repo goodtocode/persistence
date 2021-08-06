@@ -1,3 +1,9 @@
+ #-----------------------------------------------------------------------
+# Set-Version [-Path [<String>]] [-VersionToReplace [<String>]]
+#
+# Example: .\Set-Version -Path \\source\path -Major 1
+#-----------------------------------------------------------------------
+
 # ***
 # *** Parameters
 # ***
@@ -31,7 +37,9 @@ Import-Module ".\Helpers.System.psm1"
 # ***
 # *** Validate and cleanse
 # ***
-$Path = Set-Unc -Path $Path
+If($IsWindows){
+	$Path = Set-Unc -Path $Path
+}
 
 # ***
 # *** Locals
