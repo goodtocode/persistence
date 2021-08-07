@@ -5,10 +5,18 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
 {
     public class CosmosDbServiceConfiguration : ICosmosDbServiceConfiguration
     {
-        public string ConnectionString { get; set; }
-        public string DatabaseName { get; set; }
-        public string ContainerName { get; set; }
-        public string PartitionKeyPath { get; set; }
+        public string ConnectionString { get; private set; }
+        public string DatabaseName { get; private set; }
+        public string ContainerName { get; private set; }
+        public string PartitionKeyPath { get; private set; }
+
+        public CosmosDbServiceConfiguration(string connectionString, string databaseName, string containerName, string partitionKeyPath)
+        {
+            ConnectionString = connectionString;
+            DatabaseName = databaseName;
+            ContainerName = containerName;
+            PartitionKeyPath = partitionKeyPath;
+        }
     }
 
     public class CosmosDbServiceConfigurationValidation : IValidateOptions<CosmosDbServiceConfiguration>
