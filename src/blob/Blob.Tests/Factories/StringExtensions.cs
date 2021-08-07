@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Shared.Blob.Tests
 {
     /// <summary>
     /// StringExtension
@@ -181,12 +181,11 @@ namespace GoodToCode.Shared.Blob.Excel
             var returnValue = default(bool);
             if (String.IsNullOrEmpty(item) == false)
             {
-                bool convertValue;
                 if (item.ToInt16() != -1) // Catch integers, as To only evaluates "true" and "false", not "0".
                 {
-                    returnValue = item.ToInt16() == 0 ? false : true;
+                    returnValue = item.ToInt16() != 0;
                 }
-                else if (Boolean.TryParse(item, out convertValue))
+                else if (Boolean.TryParse(item, out bool convertValue))
                 {
                     returnValue = convertValue;
                 }
@@ -269,7 +268,7 @@ namespace GoodToCode.Shared.Blob.Excel
             if (String.IsNullOrEmpty(item) == false)
             {
                 if(!Guid.TryParse(item, out returnValue))
-                    returnValue = default(Guid);
+                    returnValue = default;
             }
 
             return returnValue;
@@ -304,14 +303,8 @@ namespace GoodToCode.Shared.Blob.Excel
         public static double ToDouble(this string item)
         {
             var returnValue = default(double);
-            if (String.IsNullOrEmpty(item) == false)
-            {
-                double convertValue;
-                if (Double.TryParse(item, out convertValue))
-                {
-                    returnValue = convertValue;
-                }
-            }
+            if (String.IsNullOrEmpty(item) == false && Double.TryParse(item, out double convertValue))
+                returnValue = convertValue;
 
             return returnValue;
         }
@@ -451,7 +444,7 @@ namespace GoodToCode.Shared.Blob.Excel
             string returnValue;
             if (itemLength > length - (starting + 1))
             {
-                returnValue = length > -1 ? item.Substring(starting, length) : item.Substring(starting);
+                returnValue = length > -1 ? item.Substring(starting, length) : item[starting..];
             }
             else
             {

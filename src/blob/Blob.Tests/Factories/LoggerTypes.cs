@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Blob.Excel
+﻿namespace GoodToCode.Shared.Blob.Tests
 {
     public enum LoggerTypes
     {

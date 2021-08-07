@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 
 namespace GoodToCode.Shared.Persistence
 {
-    public class CosmosDbDataServiceConfiguration : ICosmosDbServiceConfiguration
+    public class CosmosDbServiceConfiguration : ICosmosDbServiceConfiguration
     {
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
@@ -11,9 +11,9 @@ namespace GoodToCode.Shared.Persistence
         public string PartitionKeyPath { get; set; }
     }
 
-    public class CosmosDbDataServiceConfigurationValidation : IValidateOptions<CosmosDbDataServiceConfiguration>
+    public class CosmosDbServiceConfigurationValidation : IValidateOptions<CosmosDbServiceConfiguration>
     {
-        public ValidateOptionsResult Validate(string name, CosmosDbDataServiceConfiguration options)
+        public ValidateOptionsResult Validate(string name, CosmosDbServiceConfiguration options)
         {
             if (string.IsNullOrEmpty(options.ConnectionString))
             {

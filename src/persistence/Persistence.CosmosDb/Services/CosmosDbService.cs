@@ -1,17 +1,19 @@
-﻿using GoodToCode.Shared.Persistence;
-using Microsoft.Azure.Cosmos;
+﻿using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence
 {
-    //private readonly IDataService<myFileRawDataModel> _dataService;
-    //var myFileContent = GetFileContents(myFile);
-    //if (myFileContent != null)
-    //{
-    //    await _dataService.AddAsync(myFileContent);
-    //}
-
+    /// <summary>
+    /// Usage:
+    ///     private readonly IDataService<IEntity> _dataService;
+    ///     var myFileContent = GetFileContents(myFile);
+    ///     if (myFileContent != null)
+    ///     {
+    ///         await _dataService.AddAsync(myFileContent);
+    ///     }
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public sealed class CosmosDbService<T> : IPersistenceService<T> where T : class, IEntity
     {
         private readonly ICosmosDbServiceConfiguration _dataServiceConfiguration;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Shared.Blob.Tests
 {
     public class NullScope : IDisposable
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Shared.Blob.Tests
 {
     public class ObjectA
     {

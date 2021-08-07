@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Unit
+namespace GoodToCode.Shared.Analytics
 {
     public class NullScope : IDisposable
     {

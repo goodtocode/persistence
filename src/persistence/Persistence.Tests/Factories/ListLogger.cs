@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Unit
+namespace GoodToCode.Shared.Persistence
 {
     public class ListLogger : ILogger
     {

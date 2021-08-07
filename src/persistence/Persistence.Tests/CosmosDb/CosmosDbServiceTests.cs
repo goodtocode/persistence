@@ -1,48 +1,40 @@
-﻿using GoodToCode.Shared.Blob.Excel;
+﻿using System.IO;
 using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NPOI.SS.UserModel;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using TechTalk.SpecFlow;
+using NPOI.SS.UserModel;
+using System.Reflection;
+using GoodToCode.Shared.Persistence;
+using GoodToCode.Shared.Persistence;
 
-namespace GoodToCode.Shared.Blob.Tests
+namespace GoodToCode.Shared.Persistence
 {
     [Binding]
-    public class ExcelBlobReaderTests
+    public class CosmosDbServiceTests
     {
-        private readonly ExcelBlobReader reader;
-        private readonly string executingPath;
-        private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
-
-        private string SutXlsFile { get { return @$"{AssetsFolder}/TestFile.xls"; } }
-        private string SutXlsxFile { get { return @$"{AssetsFolder}/TestFile.xlsx"; } }        
-
-        public IWorkbook SutCsv { get; private set; }
-        public IWorkbook SutXls { get; private set; }
-        public IWorkbook SutXlsx { get; private set; }
+        public CosmosDbService<ObjectA> SutService { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public ExcelBlobReaderTests()
+        public CosmosDbServiceTests()
         {
             reader = new ExcelBlobReader();
             // Visual Studio vs. dotnet test execute different folders
             executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);                        
-            executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();
-            executingPath = Directory.Exists(AssetsFolder) ? executingPath : $"{Directory.GetParent(executingPath)}/bin/Debug/net5.0";
+            executingPath = Directory.Exists(assetsFolder) ? executingPath : Directory.GetCurrentDirectory();
+            executingPath = Directory.Exists(assetsFolder) ? executingPath : $"{Directory.GetParent(executingPath)}/bin/Debug/net5.0";
         }
 
         [Given(@"I have an XLSX file")]
         public void GivenIHaveAnXLSXFile()
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(sutXlsxFile), $"{sutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
         }
 
         [When(@"read XLSX in via ExcelBlobReader")]
         public void WhenReadXLSXInViaExcelBlobReader()
         {
-            SutXlsx = reader.ReadFile(SutXlsxFile);
+            SutXlsx = reader.ReadFile(sutXlsxFile);
             Assert.IsTrue(SutXlsx.GetSheetAt(0) != null);
         }
 
@@ -55,13 +47,13 @@ namespace GoodToCode.Shared.Blob.Tests
         [Given(@"I have an XLS file")]
         public void GivenIHaveAnXLSFile()
         {
-            Assert.IsTrue(File.Exists(SutXlsFile), $"{SutXlsFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(sutXlsFile), $"{sutXlsFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
         }
 
         [When(@"read XLS in via ExcelBlobReader")]
         public void WhenReadXLSInViaExcelBlobReader()
         {
-            SutXls = reader.ReadFile(SutXlsFile);
+            SutXls = reader.ReadFile(sutXlsFile);
             Assert.IsTrue(SutXls.GetSheetAt(0) != null);
         }
 
