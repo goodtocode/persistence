@@ -1,6 +1,7 @@
 ﻿using GoodToCode.Shared.Persistence.Abstractions;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.CosmosDb
@@ -20,6 +21,9 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
         private readonly ICosmosDbServiceConfiguration _dataServiceConfiguration;
         private readonly CosmosClient _client;
         private readonly ILogger<CosmosDbService<T>> _logger;
+
+        public CosmosDbService(IOptions<CosmosDbServiceOptions> options) =>
+            _dataServiceConfiguration = options.Value;
 
         public CosmosDbService(ICosmosDbServiceConfiguration dataServiceConfiguration,
                                    CosmosClient client,
