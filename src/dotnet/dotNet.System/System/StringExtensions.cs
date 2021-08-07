@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace GoodToCode.Shared.System
 {
     /// <summary>
     /// StringExtension
     /// </summary>
-    public static class StringExtension
+    public static class StringExtensions
     {
         /// <summary>
         /// Adds string/char if string begins with that string/char
@@ -359,32 +357,6 @@ namespace GoodToCode.Shared.System
             if ((!(String.IsNullOrEmpty(item))) & (item.Trim().Length >= 8))
                 if (DateTime.TryParse(item, out DateTime convertDate))
                     returnValue = convertDate;
-
-            return returnValue;
-        }
-
-        /// <summary>
-        /// Converts string to Stream
-        /// </summary>
-        /// <param name="item">Source item to convert</param>
-        /// <returns>Converted value if success. 
-        /// Failure returns empty stream</returns>
-        public static Stream ToStream(this string item)
-        {
-            var returnValue = new MemoryStream();
-
-            if (String.IsNullOrEmpty(item) == false)
-            {
-                try
-                {
-                    byte[] bytes = Encoding.UTF8.GetBytes(item);
-                    returnValue = new MemoryStream(bytes);
-                }
-                catch
-                {
-                    returnValue = new MemoryStream();
-                }
-            }
 
             return returnValue;
         }
