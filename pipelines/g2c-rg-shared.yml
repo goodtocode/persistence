@@ -61,6 +61,7 @@ stages:
   - stage: production
     variables:
       - template: variables/production.yml
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
 
     jobs:
       - job: deploy_landing_zone                
