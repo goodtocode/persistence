@@ -1,4 +1,4 @@
-﻿//using GoodToCode.Shared.System;
+﻿//using GoodToCode.Shared.dotNet.System;
 //using Microsoft.Extensions.Primitives;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using System.Collections.Generic;

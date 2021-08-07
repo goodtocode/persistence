@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Analytics.CognitiveServices.Abstractions\Analytics.CognitiveServices.Abstractions.csproj" />
+    <ProjectReference Include="..\Analytics.CognitiveServices.Abstractions\Analytics.Abstractions.csproj" />
     <ProjectReference Include="..\Analytics.CognitiveServices\Analytics.CognitiveServices.csproj" />
   </ItemGroup>
 

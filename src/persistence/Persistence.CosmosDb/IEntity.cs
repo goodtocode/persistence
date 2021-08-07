@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Persistence
+namespace GoodToCode.Shared.Persistence.CosmosDb
 {
     public interface IEntity
     {

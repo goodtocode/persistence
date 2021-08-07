@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Cqrs
+namespace GoodToCode.Shared.Patterns.Cqrs
 {
     public class GenericQueryByKey
     {

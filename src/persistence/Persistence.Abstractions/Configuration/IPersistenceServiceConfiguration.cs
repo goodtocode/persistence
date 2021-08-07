@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Persistence
+﻿namespace GoodToCode.Shared.Persistence.Abstractions
 {
     public interface IPersistenceServiceConfiguration
     {

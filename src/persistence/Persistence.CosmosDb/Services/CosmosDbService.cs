@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Persistence
+namespace GoodToCode.Shared.Persistence.CosmosDb
 {
     /// <summary>
     /// Usage:

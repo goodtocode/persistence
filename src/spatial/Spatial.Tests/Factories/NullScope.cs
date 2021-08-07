@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Unit
+namespace GoodToCode.Shared.Spatial.Tests
 {
     public class NullScope : IDisposable
     {

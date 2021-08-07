@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.Configuration</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Configuration</RootNamespace>
+    <AssemblyName>GoodToCode.Shared.dotNet.Configuration</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.dotNet.Configuration</RootNamespace>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.Configuration</Product>
+    <Product>GoodToCode.Shared.dotNet.Configuration</Product>
     <Authors>Robert J. Good</Authors>
     <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
     <Description>GoodToCode shared aspect-oriented (AOP) library for cross-cutting utility concerns.</Description>

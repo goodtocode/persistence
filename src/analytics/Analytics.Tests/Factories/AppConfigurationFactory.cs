@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
-namespace GoodToCode.Shared.Analytics
+namespace GoodToCode.Shared.Analytics.Tests
 {
     public class AppConfigurationFactory
     {

@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Unit
+﻿namespace GoodToCode.Shared.Patterns.Tests
 {
     public enum LoggerTypes
     {

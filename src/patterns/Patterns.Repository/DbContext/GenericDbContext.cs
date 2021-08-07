@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
-namespace GoodToCode.Shared.Repository
+namespace GoodToCode.Shared.Patterns.Repository
 {
     public class GenericDbContext<T> : DbContext, IGenericDbContext<T> where T : class
     {

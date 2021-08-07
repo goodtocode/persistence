@@ -1,4 +1,4 @@
-﻿//using GoodToCode.Shared.System;
+﻿//using GoodToCode.Shared.dotNet.System;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using TechTalk.SpecFlow;
 

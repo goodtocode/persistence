@@ -1,5 +1,5 @@
 ﻿
-namespace GoodToCode.Shared.Persistence
+namespace GoodToCode.Shared.Persistence.Tests
 {
     public class ObjectA
     {

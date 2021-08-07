@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Shared.Patterns.Ddd
 {
     public abstract class DomainAggregate<TAggregate> : IDomainAggregate<TAggregate> where TAggregate : IDomainAggregate<TAggregate>
     {

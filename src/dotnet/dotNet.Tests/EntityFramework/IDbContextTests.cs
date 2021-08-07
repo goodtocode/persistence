@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.EntityFramework;
+﻿using GoodToCode.Shared.dotNet.EntityFramework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

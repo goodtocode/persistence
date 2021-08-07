@@ -1,5 +1,5 @@
 ﻿
-namespace GoodToCode.Shared.Cqrs
+namespace GoodToCode.Shared.Patterns.Cqrs
 {
     public class GenericCommand<T>
     {

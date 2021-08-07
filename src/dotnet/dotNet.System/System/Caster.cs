@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace GoodToCode.Shared.System
+namespace GoodToCode.Shared.dotNet.System
 {
     public class Caster<T> where T : new()
     {

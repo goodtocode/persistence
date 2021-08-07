@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Net;
+﻿using GoodToCode.Shared.dotNet.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

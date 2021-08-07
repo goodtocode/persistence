@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Analytics
+namespace GoodToCode.Shared.Analytics.Tests
 {
     public class GenericLogger<T> : ILogger<T>
     {

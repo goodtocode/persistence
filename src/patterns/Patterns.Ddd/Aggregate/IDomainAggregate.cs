@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Domain
+namespace GoodToCode.Shared.Patterns.Ddd
 {
     public interface IDomainAggregate<TAggregate> : IDomainObject
     {

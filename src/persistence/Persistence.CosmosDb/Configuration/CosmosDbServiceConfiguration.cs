@@ -1,7 +1,7 @@
 ﻿using GoodToCode.Shared.Persistence;
 using Microsoft.Extensions.Options;
 
-namespace GoodToCode.Shared.Persistence
+namespace GoodToCode.Shared.Persistence.CosmosDb
 {
     public class CosmosDbServiceConfiguration : ICosmosDbServiceConfiguration
     {

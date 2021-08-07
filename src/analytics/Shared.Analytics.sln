@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analytics.CognitiveServices", "Analytics.CognitiveServices\Analytics.CognitiveServices.csproj", "{B0FB8F5A-49B0-4836-8C31-40BF2692865D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analytics.CognitiveServices.Abstractions", "Analytics.CognitiveServices.Abstractions\Analytics.CognitiveServices.Abstractions.csproj", "{1762D7FE-B8AC-4B4E-A9D8-65B6875AA419}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analytics.Abstractions", "Analytics.CognitiveServices.Abstractions\Analytics.Abstractions.csproj", "{1762D7FE-B8AC-4B4E-A9D8-65B6875AA419}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analytics.Tests", "Analytics.Tests\Analytics.Tests.csproj", "{81D0693A-9852-4266-97E7-404117B8561D}"
 EndProject

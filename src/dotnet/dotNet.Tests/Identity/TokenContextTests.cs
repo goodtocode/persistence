@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Identity;
+﻿using GoodToCode.Shared.dotNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

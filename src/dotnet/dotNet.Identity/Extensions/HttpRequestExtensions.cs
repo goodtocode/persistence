@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace GoodToCode.Shared.Identity
+namespace GoodToCode.Shared.dotNet.Identity
 {
     public static class HttpRequestExtensions
     {

@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.CognitiveServices</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.CognitiveServices</RootNamespace>
+    <AssemblyName>GoodToCode.Shared.Analytics.CognitiveServices</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.Analytics.CognitiveServices</RootNamespace>
+    <Product>GoodToCode.Shared.Analytics.CognitiveServices</Product>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.CognitiveServices</Product>
+    <Company>GoodToCode</Company>    
     <Authors>Robert J. Good</Authors>
     <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
     <Description>GoodToCode shared aspect-oriented (AOP) library for cross-cutting utility concerns.</Description>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Analytics.CognitiveServices.Abstractions\Analytics.CognitiveServices.Abstractions.csproj" />
+    <ProjectReference Include="..\Analytics.CognitiveServices.Abstractions\Analytics.Abstractions.csproj" />
   </ItemGroup>
   
 </Project>
