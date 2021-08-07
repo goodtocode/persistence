@@ -15,7 +15,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
     ///     }
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public sealed class CosmosDbService<T> : IPersistenceService<T> where T : class, IEntity
+    public sealed class CosmosDbService<T> : ICosmosDbService<T> where T : class, IEntity
     {
         private readonly ICosmosDbServiceConfiguration _dataServiceConfiguration;
         private readonly CosmosClient _client;
