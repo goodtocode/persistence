@@ -1,12 +1,12 @@
-﻿Feature: ExcelBlobReader
-	Check functionality of ExcelBloblReader
+﻿Feature: CosmosDbService
+	Check functionality of CosmosDbService
 
-Scenario: Must read XLSX format
-	Given I have an XLSX file
-	When read XLSX in via ExcelBlobReader
-	Then all readable XLSX data is available to systems
+Scenario: Must read CosmosDb from service
+	Given I have an CosmosDbService for reading
+	When read a record via CosmosDbService
+	Then all the CosmosDbService record contains the expected data
 
-Scenario: Must read XLS format
-	Given I have an XLS file
-	When read XLS in via ExcelBlobReader
-	Then all readable XLS data is available to systems
+Scenario: Must write to the CosmosDb service
+	Given I have an CosmosDbService for writing
+	When write a record via CosmosDbService
+	Then the record can be read back from CosmosDbService

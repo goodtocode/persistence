@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Cosmos;
+﻿using GoodToCode.Shared.Persistence.Abstractions;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
