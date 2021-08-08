@@ -5,5 +5,6 @@ namespace GoodToCode.Shared.Blob.Excel
     public interface ISheetMetadata
     {
         int SheetIndex { get; }
+        string SheetKey { get; }
     }
 }

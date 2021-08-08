@@ -4,6 +4,6 @@ namespace GoodToCode.Shared.Blob.Excel
 {
     public interface IRowData : IRowMetadata
     {        
-        IEnumerable<ICellData> Cells { get; }
+        ICollection<ICellData> Cells { get; }
     }
 }
