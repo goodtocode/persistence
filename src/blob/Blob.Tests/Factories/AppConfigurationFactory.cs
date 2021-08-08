@@ -2,12 +2,11 @@
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
-namespace GoodToCode.Shared.Blob
+namespace GoodToCode.Shared.Persistence.Tests
 {
     public class AppConfigurationFactory
     {
-        private IConfiguration Configuration;
-
+        public IConfiguration Configuration { get; private set; }
         public IConfiguration Create()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
@@ -17,7 +16,7 @@ namespace GoodToCode.Shared.Blob
                         .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
                         .ConfigureRefresh(refresh =>
                         {
-                            refresh.Register("Gtc:Shared:Sentinel", refreshAll: true)
+                            refresh.Register("Reflections:Shared:Sentinel", refreshAll: true)
                                     .SetCacheExpiration(new TimeSpan(0, 60, 0));
                         })
                         .Select(KeyFilter.Any, LabelFilter.Null)

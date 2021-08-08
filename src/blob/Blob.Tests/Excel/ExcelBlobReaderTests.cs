@@ -2,16 +2,14 @@
 using GoodToCode.Shared.Blob.Excel;
 using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NPOI.SS.UserModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using TechTalk.SpecFlow;
 
 namespace GoodToCode.Shared.Blob.Tests
 {
-    [Binding]
+    [TestClass]
     public class ExcelBlobReaderTests
     {
         private readonly NpoiBlobReader reader;
@@ -34,15 +32,10 @@ namespace GoodToCode.Shared.Blob.Tests
             executingPath = Directory.Exists(AssetsFolder) ? executingPath : $"{Directory.GetParent(executingPath)}/bin/Debug/net5.0";
         }
 
-        [Given(@"I have an XLSX file")]
-        public void GivenIHaveAnXLSXFile()
+        [TestMethod]
+        public void ExcelBlob_Xlsx()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
-        }
-
-        [When(@"read XLSX in via ExcelBlobReader")]
-        public void WhenReadXLSXInViaExcelBlobReader()
-        {
             var sheet = reader.ReadFile(SutXlsxFile).GetSheetAt(0);
             var rows = new List<IRowData>();
             for (int count = sheet.FirstRowNum; count < sheet.LastRowNum; count++)
@@ -53,23 +46,13 @@ namespace GoodToCode.Shared.Blob.Tests
             }
             SutXlsx = new SheetData(sheet.SheetName, rows);
             Assert.IsTrue(SutXlsx != null);
-        }
-
-        [Then(@"all readable XLSX data is available to systems")]
-        public void ThenAllReadableXLSXDataIsAvailableToSystems()
-        {
             Assert.IsTrue(SutXlsx.Rows.Count() > 0, $"SutXlsx.Rows.Count={SutXlsx.Rows.Count()} > 0");
         }
 
-        [Given(@"I have an XLS file")]
-        public void GivenIHaveAnXLSFile()
+        [TestMethod]
+        public void ExcelBlob_Xls()
         {
             Assert.IsTrue(File.Exists(SutXlsFile), $"{SutXlsFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
-        }
-
-        [When(@"read XLS in via ExcelBlobReader")]
-        public void WhenReadXLSInViaExcelBlobReader()
-        {
             var sheet = reader.ReadFile(SutXlsFile).GetSheetAt(0);
             var rows = new List<IRowData>();
             for (int count = sheet.FirstRowNum; count < sheet.LastRowNum; count++)
@@ -80,11 +63,6 @@ namespace GoodToCode.Shared.Blob.Tests
             }
             SutXls = new SheetData(sheet.SheetName, rows);
             Assert.IsTrue(SutXls != null);
-        }
-
-        [Then(@"all readable XLS data is available to systems")]
-        public void ThenAllReadableXLSDataIsAvailableToSystems()
-        {
             Assert.IsTrue(SutXls.Rows.Count() > 0, $"SutXlsx.Rows.Count={SutXls.Rows.Count()} > 0");
         }
     }

@@ -1,11 +1,11 @@
 ﻿using GoodToCode.Shared.Persistence.CosmosDb;
 using Microsoft.Extensions.Primitives;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using TechTalk.SpecFlow;
 
 namespace GoodToCode.Shared.Persistence.Tests
 {
-    [Binding]
+    [TestClass]
     public class CosmosDbServiceTests
     {
         public CosmosDbService<EntityA> SutService { get; private set; }
@@ -21,41 +21,22 @@ namespace GoodToCode.Shared.Persistence.Tests
             ///     }
         }
 
-        [Given(@"I have an CosmosDbService for reading")]
-        public void GivenIHaveAnCosmosDbServiceForReading()
+        [TestInitialize]
+        public void Initialize()
+        {
+            SutService = new CosmosDbService<EntityA>();
+        }
+
+        [TestMethod]
+        public void CosmosDb_Read()
         {
             
         }
 
-        [When(@"read a record via CosmosDbService")]
-        public void WhenReadARecordViaCosmosDbService()
-        {
-            
-        }
 
-        [Then(@"all the CosmosDbService record contains the expected data")]
-        public void ThenAllTheCosmosDbServiceRecordContainsTheExpectedData()
+        public void CosmosDb_Write()
         {
-            
-        }
 
-        [Given(@"I have an CosmosDbService for writing")]
-        public void GivenIHaveAnCosmosDbServiceForWriting()
-        {
-            
         }
-
-        [When(@"write a record via CosmosDbService")]
-        public void WhenWriteARecordViaCosmosDbService()
-        {
-            
-        }
-
-        [Then(@"the record can be read back from CosmosDbService")]
-        public void ThenTheRecordCanBeReadBackFromCosmosDbService()
-        {
-            
-        }
-
     }
 }
