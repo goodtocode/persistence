@@ -4,7 +4,7 @@ namespace GoodToCode.Shared.Persistence.Abstractions
 {
     public interface IEntity
     {
-        Guid Id { get; }
+        Guid RowKey { get; }
         string PartitionKey { get; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GoodToCode.Shared.Blob.Abstractions
 {
-    public class SheetData : List<RowData>, ISheetData
+    public class SheetData : ISheetData
     {
         public string SheetKey { get; set; }
 

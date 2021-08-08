@@ -44,7 +44,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             }
             catch (CosmosException ex)
             {
-                _logger.LogError($"New entity with ID: {newEntity.Id} was not added successfully - error details: {ex.Message}");
+                _logger.LogError($"New entity {newEntity.RowKey} in {newEntity.PartitionKey} was not added successfully - error details: {ex.Message}");
                 throw;
             }
         }
