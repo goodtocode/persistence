@@ -14,14 +14,14 @@ namespace GoodToCode.Shared.Blob.Abstractions
 
         public RowData(int rowIndex, ICollection<ICellData> cells)
         {
-            RowIndex = RowIndex;
+            RowIndex = rowIndex;
             Cells = cells;
         }
 
         public RowData(int rowIndex, IEnumerable<ICellData> cells)
         {
-            RowIndex = RowIndex;
-            Cells = (ICollection<ICellData>)cells;
+            RowIndex = rowIndex;
+            Cells = cells;
         }
     }
 }
