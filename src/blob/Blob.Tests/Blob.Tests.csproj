@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Excel\NpoiBloblReaderTests - Copy.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
@@ -61,5 +65,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blob.Excel\Blob.Excel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Excel\ExcelBloblReaderTests.feature.cs">
+      <DependentUpon>ExcelBloblReaderTests.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Excel\ExcelBloblReaderTests.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 </Project>

@@ -19,9 +19,9 @@ namespace GoodToCode.Shared.Blob.Excel
             {
                 var row = currSheet.GetRow(count);
                 var cells = row.Cells.GetRange(0, row.Cells.Count - 1).Select(c => new CellData() { CellValue = c.StringCellValue, ColumnIndex = c.ColumnIndex, RowIndex = count, SheetKey = currSheet.SheetName });
-                rows.Add(new RowData(count, "", cells ));
+                rows.Add(new RowData(count, cells ));
             }               
-            return new SheetData(sheetIndex, currSheet.SheetName, rows);
+            return new SheetData(currSheet.SheetName, rows);
         }
 
         public IColumnData GetColumn(Stream fileStream, int sheet, int column)

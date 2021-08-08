@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Blob.Excel
 {
-    public class ExcelBlobReader
+    public class NpoiBlobReader
     {
-        public ExcelBlobReader()
+        public NpoiBlobReader()
         {
 
         }
@@ -33,7 +33,7 @@ namespace GoodToCode.Shared.Blob.Excel
             if (await blobClient.ExistsAsync())
             {
                 var response = await blobClient.DownloadAsync();
-                returnData = new ExcelBlobReader().ReadFile(response.Value.Content);
+                returnData = new NpoiBlobReader().ReadFile(response.Value.Content);
             }
 
             return returnData;
