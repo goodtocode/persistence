@@ -12,7 +12,7 @@ namespace GoodToCode.Shared.Blob.Abstractions
 
         public string WorkbookKey { get; set; }
 
-        public SheetData(string sheetKey, ICollection<IRowData> rows)
+        public SheetData(string sheetKey, IEnumerable<IRowData> rows)
         {
             SheetKey = sheetKey;
             Rows = rows;

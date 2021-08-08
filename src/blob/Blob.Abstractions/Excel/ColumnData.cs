@@ -20,14 +20,10 @@ namespace GoodToCode.Shared.Blob.Abstractions
 
         }
 
-        public ColumnData(int columnIndex, ICollection<ICellData> cells)
+        public ColumnData(int columnIndex, IEnumerable<ICellData> cells)
         {
             ColumnIndex = columnIndex;
             Cells = cells;
-        }
-
-        public ColumnData(int columnIndex, IEnumerable<ICellData> cells) : this(columnIndex, (ICollection<ICellData>)cells)
-        {
         }
     }
 }
