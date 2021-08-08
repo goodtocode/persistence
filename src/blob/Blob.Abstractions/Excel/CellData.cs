@@ -1,19 +1,11 @@
-﻿namespace GoodToCode.Shared.Blob.Excel
+﻿namespace GoodToCode.Shared.Blob.Abstractions
 {
     public class CellData : ICellData
     {
         public string CellValue { get; set; }
-
         public int ColumnIndex { get; set; }
-
-        public string ColumnKey { get; set; }
-
-        public int SheetIndex { get; set; }
-
         public string SheetKey { get; set; }
-
         public int RowIndex { get; set; }
-
-        public string RowKey { get; set; }
+        public string WorkbookKey { get; set; }
     }
 }

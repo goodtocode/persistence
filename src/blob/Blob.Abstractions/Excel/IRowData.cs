@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Shared.Blob.Abstractions
 {
     public interface IRowData : IRowMetadata
     {        
-        ICollection<ICellData> Cells { get; }
+        IEnumerable<ICellData> Cells { get; }
     }
 }
