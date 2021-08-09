@@ -13,7 +13,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
                 if (config == null) throw new ArgumentNullException(nameof(config));
 
                 collection.Configure<CosmosDbServiceOptions>(config);
-                return collection.AddTransient<ICosmosDbService<T>, CosmosDbService<T>>();
+                return collection.AddTransient<ICosmosDbContainerService<T>, CosmosDbContainerService<T>>();
         }
     }
 }

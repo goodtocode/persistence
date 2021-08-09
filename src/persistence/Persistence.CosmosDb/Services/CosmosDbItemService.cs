@@ -1,6 +1,7 @@
 ﻿using GoodToCode.Shared.Persistence.Abstractions;
 using Microsoft.Azure.Cosmos;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.CosmosDb.Services
@@ -19,7 +20,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb.Services
 
         public async Task AddItemAsync(T item)
         {
-            await this._container.CreateItemAsync<T>(item, new PartitionKey(item.Id));
+            await this._container.CreateItemAsync<T>(item, new PartitionKey(item.PartitionKey));
         }
 
         public async Task DeleteItemAsync(string id)
@@ -36,7 +37,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb.Services
             }
             catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                return null;
+                return new T();
             }
 
         }

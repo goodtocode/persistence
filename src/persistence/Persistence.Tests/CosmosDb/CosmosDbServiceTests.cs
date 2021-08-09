@@ -13,10 +13,10 @@ namespace GoodToCode.Shared.Persistence.Tests
     public class CosmosDbServiceTests
     {
         private IConfiguration configuration = new AppConfigurationFactory().Create();
-        private ILogger<CosmosDbService<EntityA>> logger = LoggerFactory.CreateLogger<CosmosDbService<EntityA>>();
+        private ILogger<CosmosDbContainerService<EntityA>> logger = LoggerFactory.CreateLogger<CosmosDbContainerService<EntityA>>();
         private readonly string cosmosDbSetting = "Ciac:Haas:Persistence";
 
-        public CosmosDbService<EntityA> SutService { get; private set; }
+        public CosmosDbContainerService<EntityA> SutService { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public CosmosDbServiceTests()
@@ -38,7 +38,7 @@ namespace GoodToCode.Shared.Persistence.Tests
                 cosmosDbSection["DatabaseName"],
                 $"{DateTime.UtcNow:o}",
                 "PartitionKey");
-            SutService = new CosmosDbService<EntityA>(config, logger);
+            SutService = new CosmosDbContainerService<EntityA>(config, logger);
         }
 
         [TestMethod]

@@ -2,7 +2,7 @@
 
 namespace GoodToCode.Shared.Persistence.CosmosDb
 {
-    public interface ICosmosDbService<T> : IPersistenceService<T> where T : class, IEntity
+    public interface ICosmosDbContainerService<T>
     {
     }
 }
