@@ -5,6 +5,6 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
     public interface ICosmosDbServiceConfiguration : IPersistenceServiceConfiguration
     {
         string ContainerName { get; }
-        string PartitionKeyName { get; }
+        string PartitionKey { get; }
     }
 }

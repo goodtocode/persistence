@@ -6,15 +6,29 @@ namespace GoodToCode.Shared.Persistence.Tests
 {
     public class EntityA : IEntity
     {
-        public string PartitionKey => "12345";
-        public Guid RowKey => new();
+        private string _partitionKey;
+        public string partitionKey { get { return _partitionKey; } }
+        public Guid id => new();
         public string SomeData { get; set; }
+
+        public EntityA() { }
+        public EntityA(string partition)
+        {
+            _partitionKey = partition;
+        }
     }
 
     public class EntityB : IEntity
     {
-        public string PartitionKey => "67890";
-        public Guid RowKey => new();
+        private string _partitionKey;
+        public string partitionKey { get { return _partitionKey; } }
+        public Guid id => new();
         public string SomeMoreData { get; set; }
+
+        public EntityB() { }
+        public EntityB(string partition)
+        {
+            _partitionKey = partition;
+        }
     }
 }

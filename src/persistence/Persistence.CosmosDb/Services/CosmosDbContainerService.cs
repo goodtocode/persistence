@@ -44,11 +44,11 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             try
             {
                 var db = await CreateDatabaseAsync();
-                return await db.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKeyName);
+                return await db.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKey);
             }
             catch (CosmosException ex)
             {
-                logger.LogError($"New container {cosmosConfig.ContainerName} with partition {cosmosConfig.PartitionKeyName} was not added successfully - error details: {ex.Message}");
+                logger.LogError($"New container {cosmosConfig.ContainerName} with partition {cosmosConfig.PartitionKey} was not added successfully - error details: {ex.Message}");
                 throw;
             }
         }

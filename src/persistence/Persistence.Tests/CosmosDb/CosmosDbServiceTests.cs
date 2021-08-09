@@ -14,8 +14,7 @@ namespace GoodToCode.Shared.Persistence.Tests
     {
         private IConfiguration configuration = new AppConfigurationFactory().Create();
         private ILogger<CosmosDbContainerService<EntityA>> logger = LoggerFactory.CreateLogger<CosmosDbContainerService<EntityA>>();
-        private readonly string cosmosDbSetting = "Ciac:Haas:Persistence";
-
+        private CosmosDbServiceOptions configCosmos;
         public CosmosDbContainerService<EntityA> SutContainer { get; private set; }
         public CosmosDbItemService<EntityA> SutItem { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
@@ -33,31 +32,40 @@ namespace GoodToCode.Shared.Persistence.Tests
         [TestInitialize]
         public void Initialize()
         {
-            var cosmosDbSection = configuration.GetSection(cosmosDbSetting);
-            var config = new CosmosDbServiceOptions(
-                cosmosDbSection["ConnectionString"],
-                cosmosDbSection["DatabaseName"],
-                $"{DateTime.UtcNow:o}",
+            configCosmos = new CosmosDbServiceOptions(
+                configuration["Ciac:Haas:Ingress:CosmosDb:ConnectionString"],
+                configuration["Ciac:Haas:Ingress:CosmosDb:DatabaseName"],
+                $"AutomatedTest-{DateTime.UtcNow.Year}-{DateTime.UtcNow.Month}-{DateTime.UtcNow.Day}",
                 "PartitionKey");
-            SutContainer = new CosmosDbContainerService<EntityA>(config, logger);
-            SutItem = new CosmosDbItemService<EntityA>(config);
+            SutContainer = new CosmosDbContainerService<EntityA>(configCosmos, logger);
+            SutItem = new CosmosDbItemService<EntityA>(configCosmos);
         }
 
         [TestMethod]
         public async Task CosmosDb_Create()
         {
-
+            var db = await SutContainer.CreateDatabaseAsync();
+            Assert.IsTrue(db != null);
         }
 
         [TestMethod]
         public async Task CosmosDb_Read()
         {
+            var item = new EntityA(configCosmos.Value.PartitionKey) { SomeData = "Some content data." };
+            await SutContainer.CreateDatabaseAsync();
+            await SutItem.AddItemAsync(item);
+            var readItem = await SutItem.GetItemAsync(item.id.ToString());
+            Assert.IsTrue(readItem.id == item.id);
         }
 
         [TestMethod]
         public async Task CosmosDb_Write()
         {
-
+            var item = new EntityA(configCosmos.Value.PartitionKey) { SomeData = "Some content data." };
+            await SutContainer.CreateDatabaseAsync();
+            await SutItem.AddItemAsync(item);
+            var readItem = await SutItem.GetItemAsync(item.id.ToString());
+            Assert.IsTrue(readItem.id == item.id);
         }
     }
 }
