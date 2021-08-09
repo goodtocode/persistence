@@ -16,8 +16,10 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
         private Database database;
         private Container container;
 
-        public CosmosDbItemService(CosmosDbServiceOptions options)
+        public CosmosDbItemService(CosmosDbServiceOptions options,
+                           ILogger<CosmosDbItemService<T>> log)
         {
+            logger = log;
             config = options.Value;
         }
 
