@@ -11,6 +11,8 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
         private readonly ILogger<CosmosDbContainerService<T>> logger;
         private readonly ICosmosDbServiceConfiguration cosmosConfig;
         private readonly CosmosClient client;
+        private Database database;
+        private Container container;
 
         public CosmosDbContainerService(CosmosDbServiceOptions options) =>
             cosmosConfig = options.Value;
@@ -25,10 +27,9 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
 
         public async Task<Database> CreateDatabaseAsync()
         {
-            Database db;
             try
-            {                
-                db = await client.CreateDatabaseIfNotExistsAsync(cosmosConfig.DatabaseName);                
+            {
+                database = await client.CreateDatabaseIfNotExistsAsync(cosmosConfig.DatabaseName);                
             }
             catch (CosmosException ex)
             {
@@ -36,19 +37,47 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
                 throw;
             }
  
-            return db;
+            return database;
         }
 
         public async Task<Container> CreateContainerAsync()
         {            
             try
             {
-                var db = await CreateDatabaseAsync();
-                return await db.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKey);
+                var database = await CreateDatabaseAsync();
+                container = await database.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKey);
+                return container; 
             }
             catch (CosmosException ex)
             {
                 logger.LogError($"New container {cosmosConfig.ContainerName} with partition {cosmosConfig.PartitionKey} was not added successfully - error details: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task DeleteDatabaseAsync()
+        {
+            try
+            {
+                await database.DeleteAsync();
+            }
+            catch (CosmosException ex)
+            {
+                logger.LogError($"Database {cosmosConfig.DatabaseName} was not deleted successfully - error details: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task DeleteContainerAsync()
+        {
+            try
+            {
+                container = await database.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKey);
+                await container.DeleteContainerAsync();
+            }
+            catch (CosmosException ex)
+            {
+                logger.LogError($"Container {cosmosConfig.ContainerName} was not deleted successfully - error details: {ex.Message}");
                 throw;
             }
         }

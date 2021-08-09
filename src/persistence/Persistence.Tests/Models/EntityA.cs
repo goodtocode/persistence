@@ -7,8 +7,8 @@ namespace GoodToCode.Shared.Persistence.Tests
     public class EntityA : IEntity
     {
         private string _partitionKey;
-        public string partitionKey { get { return _partitionKey; } }
-        public Guid id => new();
+        public string PartitionKey { get { return _partitionKey; } set { _partitionKey = value; } }
+        public Guid id { get; set; } = Guid.NewGuid();
         public string SomeData { get; set; }
 
         public EntityA() { }
@@ -21,8 +21,8 @@ namespace GoodToCode.Shared.Persistence.Tests
     public class EntityB : IEntity
     {
         private string _partitionKey;
-        public string partitionKey { get { return _partitionKey; } }
-        public Guid id => new();
+        public string PartitionKey { get { return _partitionKey; } set { _partitionKey = value; } }
+        public Guid id { get; set; } = Guid.NewGuid();
         public string SomeMoreData { get; set; }
 
         public EntityB() { }

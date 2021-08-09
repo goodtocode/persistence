@@ -40,7 +40,7 @@ namespace GoodToCode.Shared.Persistence.Tests
                 configuration["Ciac:Haas:Ingress:CosmosDb:ConnectionString"],
                 configuration["Ciac:Haas:Ingress:CosmosDb:DatabaseName"],
                 $"AutomatedTest-{DateTime.UtcNow.Year}-{DateTime.UtcNow.Month}-{DateTime.UtcNow.Day}",
-                "PartitionKey");
+                "/PartitionKey");
             SutContainer = new CosmosDbContainerService<EntityA>(configCosmos, logContainer);
             SutItem = new CosmosDbItemService<EntityA>(configCosmos, logItem);
         }
@@ -55,21 +55,30 @@ namespace GoodToCode.Shared.Persistence.Tests
         [TestMethod]
         public async Task CosmosDb_Read()
         {
-            var item = new EntityA(configCosmos.Value.PartitionKey) { SomeData = "Some content data." };
+            var item = new EntityA("PartRead") { SomeData = "Some read data." };
             await SutContainer.CreateDatabaseAsync();
             await SutItem.AddItemAsync(item);
-            var readItem = await SutItem.GetItemAsync(item.id.ToString());
+            var readItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
             Assert.IsTrue(readItem.id == item.id);
         }
 
         [TestMethod]
         public async Task CosmosDb_Write()
         {
-            var item = new EntityA(configCosmos.Value.PartitionKey) { SomeData = "Some content data." };
+            var item = new EntityA("PartWrite") { SomeData = "Some write data." };
             await SutContainer.CreateDatabaseAsync();
             await SutItem.AddItemAsync(item);
-            var readItem = await SutItem.GetItemAsync(item.id.ToString());
-            Assert.IsTrue(readItem.id == item.id);
+            var writeItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
+            Assert.IsTrue(writeItem.id == item.id);
+            await SutItem.DeleteItemAsync(writeItem.id.ToString(), writeItem.PartitionKey);
+            writeItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
+            Assert.IsTrue(writeItem.id != item.id);
+        }
+
+        [TestCleanup]
+        public async Task Cleanup()
+        {
+            //await SutContainer.DeleteContainerAsync();
         }
     }
 }

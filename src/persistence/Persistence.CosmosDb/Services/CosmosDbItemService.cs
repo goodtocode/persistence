@@ -27,7 +27,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
                            ILogger<CosmosDbItemService<T>> log)
         {
             logger = log;
-            config = dataServiceConfiguration;            
+            config = dataServiceConfiguration;
         }
 
         private async Task CreateAsync()
@@ -52,11 +52,11 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             try
             {
                 await CreateAsync();
-                await container.CreateItemAsync<T>(item, new PartitionKey(item.partitionKey));
+                await container.CreateItemAsync<T>(item);
             }
             catch (CosmosException ex)
             {
-                logger.LogError($"Item {item.partitionKey}-{item.id} was not added successfully - error details: {ex.Message}");
+                logger.LogError($"Item {item.PartitionKey}-{item.id} was not added successfully - error details: {ex.Message}");
                 throw;
             }
 
@@ -67,31 +67,17 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             await DeleteItemAsync(id, id);
         }
 
-        public async Task DeleteItemAsync(string id, string partitionKey)
+        public async Task<T> GetItemAsync(Guid id, string partitionKey)
+        {
+            return await GetItemAsync(id.ToString(), partitionKey);
+        }
+
+        public async Task<T> GetItemAsync(string id, string partitionKey)
         {
             try
             {
                 await CreateAsync();
-                await container.DeleteItemAsync<T>(id, new PartitionKey(partitionKey));
-            }
-            catch (CosmosException ex)
-            {
-                logger.LogError($"Item {partitionKey}-{id} was not deleted successfully - error details: {ex.Message}");
-                throw;
-            }
-        }
-
-        public async Task<T> GetItemAsync(Guid id)
-        {
-            return await GetItemAsync(id.ToString());
-        }
-
-        public async Task<T> GetItemAsync(string id)
-        {
-            try
-            {
-                await CreateAsync();
-                ItemResponse<T> response = await container.ReadItemAsync<T>(id, new PartitionKey(id));
+                ItemResponse<T> response = await container.ReadItemAsync<T>(id, new PartitionKey(partitionKey));
                 return response.Resource;
             }
             catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -132,11 +118,25 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             try
             {
                 await CreateAsync();
-                await container.UpsertItemAsync<T>(item, new PartitionKey(id));
+                await container.UpsertItemAsync<T>(item);
             }
             catch (CosmosException ex)
             {
-                logger.LogError($"Item {item.partitionKey}-{item.id} was not updated successfully - error details: {ex.Message}");
+                logger.LogError($"Item {item.PartitionKey}-{item.id} was not updated successfully - error details: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task DeleteItemAsync(string id, string partitionKey)
+        {
+            try
+            {
+                await CreateAsync();
+                await container.DeleteItemAsync<T>(id, new PartitionKey(partitionKey));
+            }
+            catch (CosmosException ex)
+            {
+                logger.LogError($"Item {partitionKey}-{id} was not deleted successfully - error details: {ex.Message}");
                 throw;
             }
         }
