@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Primitives;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.System
+namespace GoodToCode.Shared.dotNet.System
 {
     public class Converter
     {

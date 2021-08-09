@@ -10,16 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.Local.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="appsettings.Development.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+    <Compile Remove="CognitiveServices.Abstractions\**" />
+    <Compile Remove="CognitiveServices\**" />
+    <EmbeddedResource Remove="CognitiveServices.Abstractions\**" />
+    <EmbeddedResource Remove="CognitiveServices\**" />
+    <None Remove="CognitiveServices.Abstractions\**" />
+    <None Remove="CognitiveServices\**" />
+    <SpecFlowFeatureFiles Remove="CognitiveServices.Abstractions\**" />
+    <SpecFlowFeatureFiles Remove="CognitiveServices\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="CognitiveServices.Abstractions\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="CognitiveServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -42,18 +45,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SpecFlow" Version="3.7.13" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.7.13" />
-    <PackageReference Include="SpecRun.SpecFlow" Version="3.7.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CognitiveServices\" />
-    <Folder Include="CognitiveServices.Abstractions\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Analytics.CognitiveServices.Abstractions\Analytics.CognitiveServices.Abstractions.csproj" />
+    <ProjectReference Include="..\Analytics.CognitiveServices.Abstractions\Analytics.Abstractions.csproj" />
     <ProjectReference Include="..\Analytics.CognitiveServices\Analytics.CognitiveServices.csproj" />
   </ItemGroup>
 

@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Identity
+namespace GoodToCode.Shared.dotNet.Identity
 {
     public class TokenContext
     {

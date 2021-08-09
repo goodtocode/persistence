@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.Excel</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Excel</RootNamespace>
+    <AssemblyName>GoodToCode.Shared.Blob.Excel</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.Blob.Excel</RootNamespace>
+    <Product>GoodToCode.Shared.Blob.Excel</Product>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.Excel</Product>
+    <Company>GoodToCode</Company>    
     <Authors>Robert J. Good</Authors>
     <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
     <Description>GoodToCode shared aspect-oriented (AOP) library for cross-cutting utility concerns.</Description>
@@ -34,6 +34,14 @@
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
     <PackageReference Include="NPOI" Version="2.5.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blob.Abstractions\Blob.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   
 </Project>

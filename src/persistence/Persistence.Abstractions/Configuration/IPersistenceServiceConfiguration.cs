@@ -1,8 +1,8 @@
-﻿namespace GoodToCode.Shared.Persistence
+﻿namespace GoodToCode.Shared.Persistence.Abstractions
 {
     public interface IPersistenceServiceConfiguration
     {
-        string ConnectionString { get; set; }
-        string DatabaseName { get; set; }
+        string ConnectionString { get; }
+        string DatabaseName { get;  }
     }
 }

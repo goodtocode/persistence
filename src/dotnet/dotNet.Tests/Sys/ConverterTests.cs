@@ -1,41 +1,30 @@
-﻿//using GoodToCode.Shared.System;
-//using Microsoft.Extensions.Primitives;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using System.Collections.Generic;
-//using TechTalk.SpecFlow;
+﻿using GoodToCode.Shared.dotNet.System;
+using Microsoft.Extensions.Primitives;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
-//namespace GoodToCode.Shared.dotNet.Tests.Sys
-//{
-//    [Binding]
-//    public class ConverterTests
-//    {
-//        public string SutA { get; private set; }
-//        public string SutB { get; private set; }
-//        public Dictionary<string, StringValues> SutReturn { get; private set; }
+namespace GoodToCode.Shared.dotNet.Tests.Sys
+{
+    [TestClass]
+    public class ConverterTests
+    {
+        public string SutA { get; private set; }
+        public string SutB { get; private set; }
+        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-//        public ConverterTests()
-//        {
-//        }
+        public ConverterTests()
+        {
+        }
 
-//        [Given(@"I have two strings")]
-//        public void GivenIHaveTwoStrings()
-//        {
-//            SutA = "MyKeyString";
-//            SutB = "MyValueString";
-//        }
-
-//        [When(@"Converter ToDictionary is called")]
-//        public void WhenConverterToDictionaryIsCalled()
-//        {
-//            SutReturn = Converter.ToDictionary(SutA, SutB);
-//        }
-
-//        [Then(@"A dictionary object of those strings is returned")]
-//        public void ThenADictionaryObjectOfThoseStringsIsReturned()
-//        {
-//            Assert.IsTrue(SutReturn.ContainsKey(SutA));
-//            Assert.IsTrue(SutReturn.ContainsValue(SutB));
-//            Assert.IsTrue(SutReturn[SutA] == SutB);
-//        }
-//    }
-//}
+        [TestMethod]
+        public void Converter_ToDictionary()
+        {
+            SutA = "MyKeyString";
+            SutB = "MyValueString";
+            SutReturn = Converter.ToDictionary(SutA, SutB);
+            Assert.IsTrue(SutReturn.ContainsKey(SutA));
+            Assert.IsTrue(SutReturn.ContainsValue(SutB));
+            Assert.IsTrue(SutReturn[SutA] == SutB);
+        }
+    }
+}

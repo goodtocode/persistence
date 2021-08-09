@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GoodToCode.Shared.System
+namespace GoodToCode.Shared.dotNet.System
 {
     /// <summary>
     /// StringExtension

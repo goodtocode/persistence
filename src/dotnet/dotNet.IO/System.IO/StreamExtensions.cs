@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace GoodToCode.Shared.IO
+namespace GoodToCode.Shared.dotNet.IO
 {
     public static class StreamExtensions
     {

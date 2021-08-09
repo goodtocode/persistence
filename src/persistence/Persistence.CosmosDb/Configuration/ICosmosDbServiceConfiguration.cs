@@ -1,10 +1,10 @@
-﻿namespace GoodToCode.Shared.Persistence
+﻿using GoodToCode.Shared.Persistence.Abstractions;
+
+namespace GoodToCode.Shared.Persistence.CosmosDb
 {
-    public interface ICosmosDbServiceConfiguration
+    public interface ICosmosDbServiceConfiguration : IPersistenceServiceConfiguration
     {
-        string ConnectionString { get; set; }
-        string DatabaseName { get; set; }
-        string ContainerName { get; set; }
-        string PartitionKeyPath { get; set; }
+        string ContainerName { get; }
+        string PartitionKey { get; }
     }
 }

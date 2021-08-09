@@ -1,14 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.CosmosDb</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.CosmosDb</RootNamespace>
+    <AssemblyName>GoodToCode.Shared.Persistence.CosmosDb</AssemblyName>
+    <RootNamespace>GoodToCode.Shared.Persistence.CosmosDb</RootNamespace>
+    <Product>GoodToCode.Shared.Persistence.CosmosDb</Product>
     <Version>5.20.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Company>GoodToCode</Company>
-    <Product>GoodToCode.Shared.CosmosDb</Product>
+    <Company>GoodToCode</Company>    
     <Authors>Robert J. Good</Authors>
     <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
     <Description>GoodToCode shared aspect-oriented (AOP) library for cross-cutting utility concerns.</Description>
@@ -26,8 +26,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.20.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
     <PackageReference Include="NPOI" Version="2.5.4" />
   </ItemGroup>
 
@@ -36,6 +38,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Persistence.Abstractions\Persistence.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

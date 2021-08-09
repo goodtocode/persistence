@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
-namespace GoodToCode.Shared.Unit
+namespace GoodToCode.Shared.Persistence.Tests
 {
     public class AppConfigurationFactory
     {

@@ -1,39 +1,28 @@
-﻿//using GoodToCode.Shared.System;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using TechTalk.SpecFlow;
+﻿using GoodToCode.Shared.dotNet.System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-//namespace GoodToCode.Shared.dotNet.Tests.Sys
-//{
-//    [Binding]
-//    public class ObjectExtensionsTests
-//    {
-//        public ObjectA SutA { get; private set; }
-//        public ObjectB SutB { get; private set; }
+namespace GoodToCode.Shared.dotNet.Tests.Sys
+{
+    [TestClass]
+    public class ObjectExtensionsTests
+    {
+        public ObjectA SutA { get; private set; }
+        public ObjectB SutB { get; private set; }
 
-//        public ObjectExtensionsTests()
-//        {
-//            SutA = new ObjectA();
-//            SutB = new ObjectB();
-//        }
+        public ObjectExtensionsTests()
+        {
+            SutA = new ObjectA();
+            SutB = new ObjectB();
+        }
 
-//        [Given(@"I have object A to Fill to object B by property name")]
-//        public void GivenIHaveObjectAToFillToObjectBByPropertyName()
-//        {
-//            SutA.SomeData = "Data from ObjectA";
-//            Assert.IsTrue(SutA.SomeData.Length > 0);
-//        }
+        [TestMethod]
+        public void Object_Fill()
+        {
+            SutA.SomeData = "Data from ObjectA";
+            Assert.IsTrue(SutA.SomeData.Length > 0);
+            SutB.Fill(SutA);
+            Assert.IsTrue(SutA.SomeData == SutB.SomeData);
+        }
 
-//        [When(@"Fill is used to cast Object A to Object B")]
-//        public void WhenFillIsUsedToCastObjectAToObjectB()
-//        {
-//            SutB.Fill(SutA);
-//        }
-
-//        [Then(@"Object B is Filled with the same data from Object A")]
-//        public void ThenObjectBIsFilledWithTheSameDataFromObjectA()
-//        {
-//            Assert.IsTrue(SutA.SomeData == SutB.SomeData);
-//        }
-
-//    }
-//}
+    }
+}

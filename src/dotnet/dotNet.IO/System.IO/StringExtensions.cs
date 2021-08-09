@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace GoodToCode.Shared.System
+namespace GoodToCode.Shared.dotNet.System
 {
     /// <summary>
     /// StringExtension
