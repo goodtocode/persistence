@@ -1,11 +1,11 @@
 ﻿using GoodToCode.Shared.Persistence.CosmosDb;
-using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.Tests
 {
@@ -16,7 +16,8 @@ namespace GoodToCode.Shared.Persistence.Tests
         private ILogger<CosmosDbContainerService<EntityA>> logger = LoggerFactory.CreateLogger<CosmosDbContainerService<EntityA>>();
         private readonly string cosmosDbSetting = "Ciac:Haas:Persistence";
 
-        public CosmosDbContainerService<EntityA> SutService { get; private set; }
+        public CosmosDbContainerService<EntityA> SutContainer { get; private set; }
+        public CosmosDbItemService<EntityA> SutItem { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public CosmosDbServiceTests()
@@ -33,21 +34,28 @@ namespace GoodToCode.Shared.Persistence.Tests
         public void Initialize()
         {
             var cosmosDbSection = configuration.GetSection(cosmosDbSetting);
-            var config = new CosmosDbServiceConfiguration(
+            var config = new CosmosDbServiceOptions(
                 cosmosDbSection["ConnectionString"],
                 cosmosDbSection["DatabaseName"],
                 $"{DateTime.UtcNow:o}",
                 "PartitionKey");
-            SutService = new CosmosDbContainerService<EntityA>(config, logger);
+            SutContainer = new CosmosDbContainerService<EntityA>(config, logger);
+            SutItem = new CosmosDbItemService<EntityA>(config);
         }
 
         [TestMethod]
-        public void CosmosDb_Read()
+        public async Task CosmosDb_Create()
+        {
+
+        }
+
+        [TestMethod]
+        public async Task CosmosDb_Read()
         {
         }
 
-
-        public void CosmosDb_Write()
+        [TestMethod]
+        public async Task CosmosDb_Write()
         {
 
         }

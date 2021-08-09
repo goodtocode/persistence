@@ -1,21 +1,14 @@
-﻿namespace GoodToCode.Shared.Persistence.CosmosDb
+﻿using Microsoft.Extensions.Options;
+
+namespace GoodToCode.Shared.Persistence.CosmosDb
 {
-    public class CosmosDbServiceOptions : ICosmosDbServiceConfiguration
+    public class CosmosDbServiceOptions : IOptions<ICosmosDbServiceConfiguration>
     {
-        public string ContainerName { get; set; }
-
-        public string PartitionKeyName { get; set; }
-
-        public string ConnectionString { get; set; }
-
-        public string DatabaseName { get; set; }
+        public ICosmosDbServiceConfiguration Value { get; }
 
         public CosmosDbServiceOptions(string connectionString, string databaseName, string containerName, string partitionKeyName)
         {
-            ConnectionString = connectionString;
-            DatabaseName = databaseName;
-            ContainerName = containerName;
-            PartitionKeyName = partitionKeyName;
+            Value = new CosmosDbServiceConfiguration(connectionString, databaseName, containerName, partitionKeyName);
         }
     }
 }

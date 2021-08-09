@@ -10,21 +10,22 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
     {
         private readonly ILogger<CosmosDbContainerService<T>> logger;
         private readonly ICosmosDbServiceConfiguration cosmosConfig;
+        private readonly CosmosClient client;
 
-        public CosmosDbContainerService(CosmosDbServiceConfiguration config, IOptions<CosmosDbServiceOptions> options) =>
+        public CosmosDbContainerService(CosmosDbServiceOptions options) =>
             cosmosConfig = options.Value;
 
-        public CosmosDbContainerService(ICosmosDbServiceConfiguration dataServiceConfiguration,
+        public CosmosDbContainerService(CosmosDbServiceOptions dataServiceConfiguration,
                                    ILogger<CosmosDbContainerService<T>> log)
         {
-            cosmosConfig = dataServiceConfiguration;            
+            cosmosConfig = dataServiceConfiguration.Value;
+            client = new CosmosClient(cosmosConfig.ConnectionString);
             logger = log;
         }
 
         public async Task<Database> CreateDatabaseAsync()
         {
             Database db;
-            var client = new CosmosClient(cosmosConfig.ConnectionString);
             try
             {                
                 db = await client.CreateDatabaseIfNotExistsAsync(cosmosConfig.DatabaseName);                
@@ -34,10 +35,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
                 logger.LogError($"New database {cosmosConfig.DatabaseName} was not added successfully - error details: {ex.Message}");
                 throw;
             }
-            finally
-            {
-                client.Dispose();
-            }
+ 
             return db;
         }
 
