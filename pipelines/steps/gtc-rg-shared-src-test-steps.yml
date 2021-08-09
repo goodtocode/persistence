@@ -4,6 +4,12 @@ parameters:
   default: "."
 
 steps:
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo $(AppSettingsConnection)
+        echo $(appcsKey)
+
   - task: DotNetCoreCLI@2
     displayName: 'dotnet test'
     inputs:
