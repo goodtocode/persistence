@@ -9,5 +9,13 @@
         public string ConnectionString { get; set; }
 
         public string DatabaseName { get; set; }
+
+        public CosmosDbServiceOptions(string connectionString, string databaseName, string containerName, string partitionKeyName)
+        {
+            ConnectionString = connectionString;
+            DatabaseName = databaseName;
+            ContainerName = containerName;
+            PartitionKeyName = partitionKeyName;
+        }
     }
 }

@@ -18,23 +18,69 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
     /// <typeparam name="T"></typeparam>
     public sealed class CosmosDbService<T> : ICosmosDbService<T> where T : class, IEntity
     {
-        private readonly ICosmosDbServiceConfiguration _dataServiceConfiguration;
-        private readonly CosmosClient _client;
-        private readonly ILogger<CosmosDbService<T>> _logger;
+        private readonly ILogger<CosmosDbService<T>> logger;
+        private readonly ICosmosDbServiceConfiguration cosmosConfig;
+        private Database db;
 
-        public CosmosDbService(IOptions<CosmosDbServiceOptions> options) =>
-            _dataServiceConfiguration = options.Value;
+        public CosmosDbService(CosmosDbServiceConfiguration config, IOptions<CosmosDbServiceOptions> options) =>
+            cosmosConfig = options.Value;
 
         public CosmosDbService(ICosmosDbServiceConfiguration dataServiceConfiguration,
-                                   CosmosClient client,
-                                   ILogger<CosmosDbService<T>> logger)
+                                   ILogger<CosmosDbService<T>> log)
         {
-            _dataServiceConfiguration = dataServiceConfiguration;
-            _client = client;
-            _logger = logger;
+            cosmosConfig = dataServiceConfiguration;            
+            logger = log;
+        }
+        public async Task<Database> CreateDatabaseAsync()
+        {
+            var client = new CosmosClient(cosmosConfig.ConnectionString);
+            try
+            {                
+                db = await client.CreateDatabaseIfNotExistsAsync(cosmosConfig.DatabaseName);                
+            }
+            catch (CosmosException ex)
+            {
+                logger.LogError($"New database {cosmosConfig.DatabaseName} was not added successfully - error details: {ex.Message}");
+                throw;
+            }
+            finally
+            {
+                client.Dispose();
+            }
+            return db;
         }
 
-        public async Task<T> AddAsync(T newEntity)
+        public async Task<Container> CreateContainerAsync()
+        {
+            try
+            {
+                return await db.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKeyName);
+            }
+            catch (CosmosException ex)
+            {
+                logger.LogError($"New container {cosmosConfig.ContainerName} with partition {cosmosConfig.PartitionKeyName} was not added successfully - error details: {ex.Message}");
+                throw;
+            }
+        }
+
+        private Container GetContainer()
+        {
+            var client = new CosmosClient(cosmosConfig.ConnectionString);
+            Container container;
+
+            try
+            {
+                var database = client.GetDatabase(cosmosConfig.DatabaseName);
+                container = database.GetContainer(cosmosConfig.ContainerName);
+            }
+            finally
+            {
+                client.Dispose();
+            }
+            return container;
+        }
+
+        public async Task<T> AddItemAsync(T newEntity)
         {
             try
             {
@@ -44,16 +90,9 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             }
             catch (CosmosException ex)
             {
-                _logger.LogError($"New entity {newEntity.RowKey} in {newEntity.PartitionKey} was not added successfully - error details: {ex.Message}");
+                logger.LogError($"New entity {newEntity.RowKey} in {newEntity.PartitionKey} was not added successfully - error details: {ex.Message}");
                 throw;
             }
-        }
-
-        private Container GetContainer()
-        {
-            var database = _client.GetDatabase(_dataServiceConfiguration.DatabaseName);
-            var container = database.GetContainer(_dataServiceConfiguration.ContainerName);
-            return container;
         }
     }
 }

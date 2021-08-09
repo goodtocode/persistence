@@ -26,8 +26,6 @@ steps:
       command: 'build'
       projects: |
         $(srcPath)/**/*.csproj
-        !$(srcPath)/**/dotNet.Tests.csproj
-        !$(srcPath)/**/Persistence.Tests.csproj
       arguments: '--configuration $(buildConfiguration)'
 
   - task: DotNetCoreCLI@2
