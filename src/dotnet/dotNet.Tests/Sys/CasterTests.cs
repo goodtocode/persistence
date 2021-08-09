@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TechTalk.SpecFlow;
+﻿using GoodToCode.Shared.dotNet.System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoodToCode.Shared.dotNet.Tests.Sys
 {
-    [Binding]
+    [TestClass]
     public class CasterTests
     {
         public ObjectA SutA { get; private set; }
@@ -15,24 +15,14 @@ namespace GoodToCode.Shared.dotNet.Tests.Sys
             SutB = new ObjectB();
         }
 
-        [Given(@"I have object A to cast to object B by property name")]
-        public void GivenIHaveObjectAToCastToObjectBByPropertyName()
+        [TestMethod]
+        public void Caster_CastObject()
         {
             SutA.SomeData = "This is a test";
             SutB.SomeData = string.Empty;
             Assert.IsTrue(SutA.SomeData.Length > 0);
             Assert.IsTrue(SutA.SomeData != SutB.SomeData);
-        }
-
-        [When(@"Caster is used to cast Object A to Object B")]
-        public void WhenCasterIsUsedToCastObjectAToObjectB()
-        {
-            //SutB = new Caster<ObjectB>().Cast(SutA);
-        }
-
-        [Then(@"Object B contains the same data from Object A")]
-        public void ThenObjectBContainsTheSameDataFromObjectA()
-        {
+            SutB = new Caster<ObjectB>().Cast(SutA);
             Assert.IsTrue(SutA.SomeData == SutB.SomeData);
         }
     }

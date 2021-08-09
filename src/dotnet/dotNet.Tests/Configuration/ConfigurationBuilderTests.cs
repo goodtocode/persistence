@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TechTalk.SpecFlow;
 
 namespace GoodToCode.Shared.dotNet.Tests.Identity
 {
-    [Binding]
+    [TestClass]
     public class ConfigurationBuilderTests
     {
         private readonly IConfiguration configuration = new AppConfigurationFactory().Create();
@@ -18,21 +17,11 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
         public ConfigurationBuilderTests()
         { }
 
-        [Given(@"I have a ConfigurationBuilder to a valid AzureAppConfiguration connection")]
-        public void GivenIHaveAConfigurationBuilderToAValidAzureAppConfigurationConnection()
+        [TestMethod]
+        public void ConfigurationBuilder_GetKey()
         {
             Assert.IsTrue(configuration != null);
-        }
-
-        [When(@"a AzureAppConfiguration value is requested")]
-        public void WhenAAzureAppConfigurationValueIsRequested()
-        {
             sentinelValue = configuration[sentinelKey];
-        }
-
-        [Then(@"the AzureAppConfiguration value can be evaluated")]
-        public void ThenTheAzureAppConfigurationValueCanBeEvaluated()
-        {
             Assert.IsTrue(!string.IsNullOrEmpty(sentinelValue));
         }
     }

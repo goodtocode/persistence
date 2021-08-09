@@ -6,8 +6,7 @@ namespace GoodToCode.Shared.dotNet.Tests
 {
     public class AppConfigurationFactory
     {
-        private IConfiguration Configuration;
-
+        public IConfiguration Configuration { get; private set; }
         public IConfiguration Create()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
@@ -17,7 +16,7 @@ namespace GoodToCode.Shared.dotNet.Tests
                         .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
                         .ConfigureRefresh(refresh =>
                         {
-                            refresh.Register("Gtc:Shared:Sentinel", refreshAll: true)
+                            refresh.Register("Reflections:Shared:Sentinel", refreshAll: true)
                                     .SetCacheExpiration(new TimeSpan(0, 60, 0));
                         })
                         .Select(KeyFilter.Any, LabelFilter.Null)
