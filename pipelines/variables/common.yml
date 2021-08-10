@@ -2,7 +2,7 @@ variables:
   - name: subscriptionId
     value: '7ff496d5-8747-4a50-b5a9-ed99706a855c'
   - name: subscriptionName
-    value: 'gtc-appdev-001'
+    value: 'gtc-shared-001'
   - name: appcsKey
     value: 'AppSettingsConnection'
   - name: artifactsPath
