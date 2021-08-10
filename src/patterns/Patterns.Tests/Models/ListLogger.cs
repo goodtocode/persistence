@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Spatial.Tests
+namespace GoodToCode.Shared.dotNet.Tests
 {
     public class ListLogger : ILogger
     {

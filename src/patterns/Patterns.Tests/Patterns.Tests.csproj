@@ -10,6 +10,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cqrs\**" />
+    <Compile Remove="Ddd\**" />
+    <Compile Remove="Repository\**" />
+    <EmbeddedResource Remove="Cqrs\**" />
+    <EmbeddedResource Remove="Ddd\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="Cqrs\**" />
+    <None Remove="Ddd\**" />
+    <None Remove="Repository\**" />
+    <SpecFlowFeatureFiles Remove="Cqrs\**" />
+    <SpecFlowFeatureFiles Remove="Ddd\**" />
+    <SpecFlowFeatureFiles Remove="Repository\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Cqrs\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Ddd\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Repository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="appsettings.Local.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -42,15 +60,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SpecFlow" Version="3.7.13" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.7.13" />
-    <PackageReference Include="SpecRun.SpecFlow" Version="3.7.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Cqrs\" />
-    <Folder Include="Ddd\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Patterns.Tests
+namespace GoodToCode.Shared.dotNet.Tests
 {
     public class NullScope : IDisposable
     {

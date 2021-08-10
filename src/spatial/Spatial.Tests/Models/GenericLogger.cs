@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.dotNet
+namespace GoodToCode.Shared.dotNet.Tests
 {
-    public class ListLogger : ILogger
+    public class GenericLogger<T> : ILogger<T>
     {
         public IList<string> Logs;
 
@@ -12,7 +12,7 @@ namespace GoodToCode.Shared.dotNet
 
         public bool IsEnabled(LogLevel logLevel) => false;
 
-        public ListLogger()
+        public GenericLogger()
         {
             this.Logs = new List<string>();
         }

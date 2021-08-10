@@ -4,11 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
 
 namespace GoodToCode.Shared.dotNet.Tests.Identity
 {
-    [Binding]
+    [TestClass]
     public class TokenContextTests
     {
         private readonly IConfiguration configuration = new AppConfigurationFactory().Create();
@@ -27,15 +26,11 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
             clientId = configuration["Gtc:Shared:Tests:AzureAd:ClientId"];
         }
 
-        [Given(@"I have a TokenContext to a valid AAD app registration")]
-        public void GivenIHaveATokenContextToAValidAADAppRegistration()
+        [TestMethod]
+        public async Task TokenContext_IsAuthenticated()
         {
             SutTokenContext = new TokenContext(audience, clientId, tenantId);
-        }
 
-        [When(@"a HttpRequest object is validated")]
-        public void WhenAHttpRequestObjectIsValidated()
-        {
             //curl--location--request POST 'https://login.microsoftonline.com/common/oauth2/v2.0/token' \
             //    --header 'Content-Type: application/x-www-form-urlencoded' \
             //    --data - urlencode 'client_id={clientid}' \
@@ -45,11 +40,7 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
             //    --data - urlencode 'client_secret={client_secret}
             SutHttpRequest = new HttpRequestFactory().CreateHttpRequest("GET");
             SutHttpRequest.Headers.Add("Authorization", new Microsoft.Extensions.Primitives.StringValues(new string[] { $"Bearer{clientId}" }));
-        }
 
-        [Then(@"the bearer token validation is successful")]
-        public async Task ThenTheBearerTokenValidationIsSuccessful()
-        {
             bool isAuthed;
             try
             {
