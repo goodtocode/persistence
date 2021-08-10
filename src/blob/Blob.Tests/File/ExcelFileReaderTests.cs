@@ -10,7 +10,7 @@ using System.Reflection;
 namespace GoodToCode.Shared.Blob.Tests
 {
     [TestClass]
-    public class ExcelBlobReaderTests
+    public class ExcelFileReaderTests
     {
         private readonly NpoiBlobReader reader;
         private readonly string executingPath;
@@ -23,7 +23,7 @@ namespace GoodToCode.Shared.Blob.Tests
         public ISheetData SutXlsx { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public ExcelBlobReaderTests()
+        public ExcelFileReaderTests()
         {
             reader = new NpoiBlobReader();
             // Visual Studio vs. dotnet test execute different folders
