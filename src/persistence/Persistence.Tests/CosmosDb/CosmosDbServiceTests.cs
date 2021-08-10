@@ -78,7 +78,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         [TestCleanup]
         public async Task Cleanup()
         {
-            //await SutContainer.DeleteContainerAsync();
+            await SutContainer.DeleteContainerAsync();
         }
     }
 }
