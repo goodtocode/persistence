@@ -10,7 +10,7 @@ using System.Reflection;
 namespace GoodToCode.Shared.Blob.Tests
 {
     [TestClass]
-    public class ExcelFileReaderTests
+    public class NpoiExtensionsTests
     {
         private readonly NpoiBlobReader reader;
         private readonly string executingPath;
@@ -23,7 +23,7 @@ namespace GoodToCode.Shared.Blob.Tests
         public ISheetData SutXlsx { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public ExcelFileReaderTests()
+        public NpoiExtensionsTests()
         {
             reader = new NpoiBlobReader();
             // Visual Studio vs. dotnet test execute different folders
@@ -32,33 +32,22 @@ namespace GoodToCode.Shared.Blob.Tests
             executingPath = Directory.Exists(AssetsFolder) ? executingPath : $"{Directory.GetParent(executingPath)}/bin/Debug/net5.0";
         }
 
-        public void ExcelFile_Workbook_Xlsx()
+        [TestMethod]
+        public void ExcelFile_ToWorkbookData()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             var wb = reader.ReadFile(SutXlsxFile);
-            SutXlsx = wb.GetSheetAt(0).ToSheetData();
-            Assert.IsTrue(SutXlsx != null);
-            Assert.IsTrue(SutXlsx.Rows.Count() > 0, $"SutXlsx.Rows.Count={SutXlsx.Rows.Count()} > 0");
+            var workbookData = wb.ToWorkbookData();
+            Assert.IsTrue(workbookData.SheetMetadata.Any(), $"workbookData.SheetMetadata.Any={workbookData.SheetMetadata.Any()}");
         }
 
         [TestMethod]
-        public void ExcelFile_Sheet_Xlsx()
+        public void ExcelFile_ToSheetData()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
-            var sheet = reader.ReadFile(SutXlsxFile).GetSheetAt(0);
-            SutXlsx = sheet.ToSheetData();
-            Assert.IsTrue(SutXlsx != null);
-            Assert.IsTrue(SutXlsx.Rows.Count() > 0, $"SutXlsx.Rows.Count={SutXlsx.Rows.Count()} > 0");
-        }
-
-        [TestMethod]
-        public void ExcelFile_Sheet_Xls()
-        {
-            Assert.IsTrue(File.Exists(SutXlsFile), $"{SutXlsFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
-            var sheet = reader.ReadFile(SutXlsFile).GetSheetAt(0);
-            SutXls = sheet.ToSheetData();
-            Assert.IsTrue(SutXls != null);
-            Assert.IsTrue(SutXls.Rows.Any(), $"SutXls.Rows.Any()={SutXls.Rows.Any()}");
+            var wb = reader.ReadFile(SutXlsxFile);
+            var sheetData = wb.GetSheetAt(0).ToSheetData();
+            Assert.IsTrue(sheetData.Rows.Any(), $"sheetData.Rows.Any={sheetData.Rows.Any()}");
         }
     }
 }

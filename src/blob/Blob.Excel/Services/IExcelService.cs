@@ -9,5 +9,6 @@ namespace GoodToCode.Shared.Blob.Excel
         IColumnData GetColumn(Stream fileStream, int sheet, int column);
         IRowData GetRow(Stream fileStream, int sheet, int row);
         ISheetData GetSheet(Stream fileStream, int sheet);
+        IWorkbookData GetWorkbook(Stream fileStream);
     }
 }

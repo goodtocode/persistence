@@ -4,8 +4,14 @@ namespace GoodToCode.Shared.Blob.Abstractions
 {
     public class WorkbookData : IWorkbookData
     {
-        public IEnumerable<ISheetData> Sheets { get; set; }
-
         public string WorkbookKey { get; set; }
+
+        public IEnumerable<ISheetMetadata> SheetMetadata { get; set; }
+
+        public WorkbookData(string workbookKey, IEnumerable<ISheetMetadata> sheetMetadatas)
+        {
+            WorkbookKey = workbookKey;
+            SheetMetadata = sheetMetadatas;
+        }
     }
 }
