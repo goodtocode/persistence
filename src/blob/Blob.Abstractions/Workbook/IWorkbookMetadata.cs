@@ -2,6 +2,6 @@
 {
     public interface IWorkbookMetadata
     {
-        string WorkbookKey { get; }
+        string WorkbookName { get; }
     }
 }

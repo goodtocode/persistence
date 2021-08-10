@@ -3,9 +3,13 @@ using System.Linq;
 
 namespace GoodToCode.Shared.Blob.Abstractions
 {
-    public class ColumnData : IColumnData
+    public class ColumnTransformData : IColumnTransformData
     {
-        public IEnumerable<ICellData> Cells { get; set; }
+        public string ColumnValue { get; set; }
+
+        public string TransformedColumnName { get; set; }
+
+        public string TransformedColumnValue { get; set; }
 
         public int ColumnIndex { get; set; }
 
@@ -17,15 +21,13 @@ namespace GoodToCode.Shared.Blob.Abstractions
 
         public string WorkbookName { get; set; }
 
-        public ColumnData()
+        public ColumnTransformData()
         {
-
         }
 
-        public ColumnData(int columnIndex, IEnumerable<ICellData> cells)
+        public ColumnTransformData(int columnIndex, IEnumerable<ICellData> cells)
         {
             ColumnIndex = columnIndex;
-            Cells = cells;
             var cell = cells.FirstOrDefault();
             ColumnName = cell.ColumnName;
             SheetIndex = cell.SheetIndex;

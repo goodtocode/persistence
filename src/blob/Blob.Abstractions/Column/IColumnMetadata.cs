@@ -3,5 +3,6 @@
     public interface IColumnMetadata : ISheetMetadata
     {
         int ColumnIndex { get; }
+        string ColumnName { get; }
     }
 }

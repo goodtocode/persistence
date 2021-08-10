@@ -13,7 +13,8 @@ namespace GoodToCode.Shared.Blob.Excel
             for (int count = item.FirstRowNum; count < item.LastRowNum; count++)
             {
                 var row = item.GetRow(count);
-                var cells = row.Cells.GetRange(0, row.Cells.Count - 1).Select(c => new CellData() { CellValue = c.ToString(), ColumnIndex = c.ColumnIndex, RowIndex = count, SheetKey = item.SheetName });
+                var cells = row.Cells.GetRange(0, row.Cells.Count - 1).Select(c => 
+                            new CellData() { CellValue = c.ToString(), ColumnIndex = c.ColumnIndex, RowIndex = count, SheetName = item.SheetName });
                 rows.Add(new RowData(count, cells));
             }
             return new SheetData(item.SheetName, rows);

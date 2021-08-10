@@ -6,16 +6,22 @@ namespace GoodToCode.Shared.Blob.Abstractions
 {
     public class SheetData : ISheetData
     {
-        public string SheetKey { get; set; }
+        public int SheetIndex { get; set; }
+        public string SheetName { get; set; }
 
         public IEnumerable<IRowData> Rows { get; set; }
 
-        public string WorkbookKey { get; set; }
+        public string WorkbookName { get; set; }
 
-        public SheetData(string sheetKey, IEnumerable<IRowData> rows)
+        public SheetData(string sheetName, IEnumerable<IRowData> rows)
         {
-            SheetKey = sheetKey;
+            SheetName = sheetName;
             Rows = rows;
+        }
+
+        public SheetData(int sheetIndex, string sheetName, IEnumerable<IRowData> rows) : this(sheetName, rows)
+        {
+            SheetIndex = sheetIndex;
         }
 
         public IColumnData GetColumn(int columnIndex)
