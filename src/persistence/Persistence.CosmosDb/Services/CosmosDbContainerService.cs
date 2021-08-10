@@ -45,12 +45,12 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             try
             {
                 var database = await CreateDatabaseAsync();
-                container = await database.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKey);
+                container = await database.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKeyPath);
                 return container; 
             }
             catch (CosmosException ex)
             {
-                logger.LogError($"New container {cosmosConfig.ContainerName} with partition {cosmosConfig.PartitionKey} was not added successfully - error details: {ex.Message}");
+                logger.LogError($"New container {cosmosConfig.ContainerName} with partition {cosmosConfig.PartitionKeyPath} was not added successfully - error details: {ex.Message}");
                 throw;
             }
         }
@@ -72,7 +72,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
         {
             try
             {
-                container = await database.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKey);
+                container = await database.CreateContainerIfNotExistsAsync(cosmosConfig.ContainerName, cosmosConfig.PartitionKeyPath);
                 await container.DeleteContainerAsync();
             }
             catch (CosmosException ex)

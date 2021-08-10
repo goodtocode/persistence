@@ -36,7 +36,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             {
                 client ??= new CosmosClient(config.ConnectionString);
                 database ??= await client.CreateDatabaseIfNotExistsAsync(config.DatabaseName);
-                container ??= await database.CreateContainerIfNotExistsAsync(config.ContainerName, $"/PartitionKey");
+                container ??= await database.CreateContainerIfNotExistsAsync(config.ContainerName, config.PartitionKeyPath);
             }
             catch (CosmosException ex)
             {
