@@ -69,7 +69,7 @@ namespace GoodToCode.Shared.Blob.Tests
             // Service
             var excelService = new ExcelService();
             var columns = excelService.GetColumn(stream, 0, 1);
-            Assert.IsTrue(columns.Cells.Any());
+            Assert.IsTrue(columns.Any());
         }
 
         [TestMethod]

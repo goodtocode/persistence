@@ -24,10 +24,9 @@ namespace GoodToCode.Shared.Blob.Abstractions
             SheetIndex = sheetIndex;
         }
 
-        public IColumnData GetColumn(int columnIndex)
-        {
-            var cells = Rows.SelectMany(r => r.Cells.Where(c => c.ColumnIndex == columnIndex));
-            return new ColumnData() { Cells = cells, ColumnIndex = columnIndex };
+        public IEnumerable<ICellData> GetColumn(int columnIndex)
+        {            
+            return Rows.SelectMany(r => r.Cells.Where(c => c.ColumnIndex == columnIndex));
         }
 
         public IRowData GetRow(int rowIndex)

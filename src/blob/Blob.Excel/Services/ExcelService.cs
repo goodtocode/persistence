@@ -25,7 +25,7 @@ namespace GoodToCode.Shared.Blob.Excel
             return currSheet.ToSheetData();
         }
 
-        public IColumnData GetColumn(Stream fileStream, int sheet, int column)
+        public IEnumerable<ICellData> GetColumn(Stream fileStream, int sheet, int column)
         {
             ISheetData currSheet = GetSheet(fileStream, sheet);
             if (currSheet == null)
