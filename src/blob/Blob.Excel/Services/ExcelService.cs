@@ -3,18 +3,24 @@ using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace GoodToCode.Shared.Blob.Excel
 {
     public class ExcelService : IExcelService
     {
+        public string WorkbookName { get; }
+
+        public ExcelService(string workbookName)
+        {
+            WorkbookName = workbookName;
+        }
+
         public IWorkbookData GetWorkbook(Stream fileStream)
         {
             var wb = WorkbookFactory.Create(fileStream);
             if (wb == null)
                 throw new ArgumentOutOfRangeException("Sheet not found.");
-            return wb.ToWorkbookData(); 
+            return wb.ToWorkbookData(WorkbookName); 
         }
 
         public ISheetData GetSheet(Stream fileStream, int sheetIndex)
@@ -22,7 +28,7 @@ namespace GoodToCode.Shared.Blob.Excel
             var currSheet = WorkbookFactory.Create(fileStream).GetSheetAt(sheetIndex);
             if (currSheet == null)
                 throw new ArgumentOutOfRangeException("Sheet not found.");
-            return currSheet.ToSheetData();
+            return currSheet.ToSheetData(WorkbookName, sheetIndex);
         }
 
         public IEnumerable<ICellData> GetColumn(Stream fileStream, int sheet, int column)

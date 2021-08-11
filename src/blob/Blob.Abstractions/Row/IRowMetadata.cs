@@ -3,6 +3,5 @@
     public interface IRowMetadata
     {
         int RowIndex { get; }
-        string RowName { get; }
     }
 }

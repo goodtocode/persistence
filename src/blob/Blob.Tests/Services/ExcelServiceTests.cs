@@ -41,7 +41,7 @@ namespace GoodToCode.Shared.Blob.Tests
             var bytes = await File.ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
-            var excelService = new ExcelService();
+            var excelService = new ExcelService(Path.GetFileName(SutXlsxFile));
             var sheet = excelService.GetSheet(stream, 0);
             Assert.IsTrue(sheet.Rows.Any());
         }
@@ -54,9 +54,18 @@ namespace GoodToCode.Shared.Blob.Tests
             var bytes = await File.ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
-            var excelService = new ExcelService();
+            var excelService = new ExcelService(Path.GetFileName(SutXlsxFile));
             var rows = excelService.GetRow(stream, 0, 1);
             Assert.IsTrue(rows.Cells.Any());
+            var first = rows.Cells.FirstOrDefault();
+            Assert.IsNotNull(first);
+            Assert.IsNotNull(first.CellValue);
+            Assert.IsTrue(first.ColumnIndex > -1);
+            Assert.IsNotNull(first.ColumnName);
+            Assert.IsTrue(first.RowIndex > -1);
+            Assert.IsTrue(first.SheetIndex > -1);
+            Assert.IsNotNull(first.SheetName);
+            Assert.IsNotNull(first.WorkbookName);
         }
 
         [TestMethod]
@@ -67,9 +76,18 @@ namespace GoodToCode.Shared.Blob.Tests
             var bytes = await File.ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
-            var excelService = new ExcelService();
-            var columns = excelService.GetColumn(stream, 0, 1);
+            var excelService = new ExcelService(Path.GetFileName(SutXlsxFile));
+            var columns = excelService.GetColumn(stream, 0, 1);            
             Assert.IsTrue(columns.Any());
+            var first = columns.FirstOrDefault();
+            Assert.IsNotNull(first);
+            Assert.IsNotNull(first.CellValue);
+            Assert.IsTrue(first.ColumnIndex > -1);
+            Assert.IsNotNull(first.ColumnName);
+            Assert.IsTrue(first.RowIndex > -1);
+            Assert.IsTrue(first.SheetIndex > -1);
+            Assert.IsNotNull(first.SheetName);
+            Assert.IsNotNull(first.WorkbookName);
         }
 
         [TestMethod]
@@ -80,9 +98,16 @@ namespace GoodToCode.Shared.Blob.Tests
             var bytes = await File.ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
-            var excelService = new ExcelService();
+            var excelService = new ExcelService(Path.GetFileName(SutXlsxFile));
             var cell = excelService.GetCell(stream, 0, 1, 1);
             Assert.IsTrue(cell.CellValue.Length > 0);
+            Assert.IsNotNull(cell.CellValue);
+            Assert.IsTrue(cell.ColumnIndex > -1);
+            Assert.IsNotNull(cell.ColumnName);
+            Assert.IsTrue(cell.RowIndex > -1);
+            Assert.IsTrue(cell.SheetIndex > -1);
+            Assert.IsNotNull(cell.SheetName);
+            Assert.IsNotNull(cell.WorkbookName);
         }
     }
 }

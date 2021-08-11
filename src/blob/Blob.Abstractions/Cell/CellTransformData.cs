@@ -19,8 +19,6 @@ namespace GoodToCode.Shared.Blob.Abstractions
 
         public int RowIndex { get ;set; }
 
-        public string RowName { get ;set; }
-
         public int ColumnIndex { get; set; }
 
         public string ColumnName { get; set; }
@@ -36,7 +34,6 @@ namespace GoodToCode.Shared.Blob.Abstractions
             ColumnIndex = cell.ColumnIndex;
             ColumnName = cell.ColumnName;
             RowIndex = cell.RowIndex;
-            RowName = cell.RowName;
             SheetIndex = cell.SheetIndex;
             SheetName = cell.SheetName;
             WorkbookName = cell.WorkbookName;

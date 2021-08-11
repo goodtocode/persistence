@@ -15,7 +15,5 @@
         public string WorkbookName { get; set; }
 
         public int RowIndex { get; set; }
-
-        public string RowName { get; set; }
     }
 }

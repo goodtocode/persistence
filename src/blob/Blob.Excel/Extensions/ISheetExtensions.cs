@@ -7,14 +7,31 @@ namespace GoodToCode.Shared.Blob.Excel
 {
     public static class ISheetExtensions
     {
-        public static SheetData ToSheetData(this ISheet item)
+        public static SheetData ToSheetData(this ISheet item, string workbookName, int sheetIndex = 0, bool hasHeaderRow = true)
         {
+            IRow header = null;
             var rows = new List<IRowData>();
-            for (int count = item.FirstRowNum; count < item.LastRowNum; count++)
+            int firstRow = item.FirstRowNum;
+            if (hasHeaderRow && firstRow == 0)
+            {
+                header = item.GetRow(firstRow);
+                firstRow = 1;
+            }
+            for (int count = firstRow; count < item.LastRowNum; count++)
             {
                 var row = item.GetRow(count);
-                var cells = row.Cells.GetRange(0, row.Cells.Count - 1).Select(c => 
-                            new CellData() { CellValue = c.ToString(), ColumnIndex = c.ColumnIndex, RowIndex = count, SheetName = item.SheetName });
+                var rowIndex = count;
+                var cells = row.Cells.GetRange(0, row.Cells.Count - 1).Select(c =>
+                            new CellData()
+                            {
+                                CellValue = c.ToString(),
+                                ColumnName = (header != null ? header.GetCell(c.ColumnIndex).ToString() : c.ColumnIndex.ToString()),
+                                ColumnIndex = c.ColumnIndex,
+                                RowIndex = rowIndex,
+                                SheetName = item.SheetName,
+                                SheetIndex = sheetIndex,
+                                WorkbookName = workbookName
+                            });
                 rows.Add(new RowData(count, cells));
             }
             return new SheetData(item.SheetName, rows);

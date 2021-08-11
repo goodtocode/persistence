@@ -37,7 +37,7 @@ namespace GoodToCode.Shared.Blob.Tests
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             var wb = reader.ReadFile(SutXlsxFile);
-            var workbookData = wb.ToWorkbookData();
+            var workbookData = wb.ToWorkbookData(Path.GetFileName(SutXlsxFile));
             Assert.IsTrue(workbookData.SheetMetadata.Any(), $"workbookData.SheetMetadata.Any={workbookData.SheetMetadata.Any()}");
         }
 
@@ -46,7 +46,7 @@ namespace GoodToCode.Shared.Blob.Tests
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             var wb = reader.ReadFile(SutXlsxFile);
-            var sheetData = wb.GetSheetAt(0).ToSheetData();
+            var sheetData = wb.GetSheetAt(0).ToSheetData(Path.GetFileName(SutXlsxFile));
             Assert.IsTrue(sheetData.Rows.Any(), $"sheetData.Rows.Any={sheetData.Rows.Any()}");
         }
     }
