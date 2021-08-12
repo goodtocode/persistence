@@ -1,6 +1,7 @@
 ﻿
 using GoodToCode.Shared.Persistence.Abstractions;
 using System;
+using System.Text.Json.Serialization;
 
 namespace GoodToCode.Shared.Persistence.Tests
 {

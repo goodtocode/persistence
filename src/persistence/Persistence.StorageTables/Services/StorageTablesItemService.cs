@@ -22,9 +22,6 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         private StorageTablesItemService(ILogger<StorageTablesItemService<T>> log)
         {
             logger = log;
-            serviceClient = new TableServiceClient(config.ConnectionString);
-            tableClient = new TableClient(config.ConnectionString, config.TableName);
-
         }
 
         public StorageTablesItemService(StorageTablesServiceOptions options,
@@ -32,12 +29,17 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         {
 
             config = options.Value;
+            serviceClient = new TableServiceClient(config.ConnectionString);
+            tableClient = new TableClient(config.ConnectionString, config.TableName);
+
         }
 
         public StorageTablesItemService(IStorageTablesServiceConfiguration dataServiceConfiguration,
                            ILogger<StorageTablesItemService<T>> log) : this(log)
         {
             config = dataServiceConfiguration;
+            serviceClient = new TableServiceClient(config.ConnectionString);
+            tableClient = new TableClient(config.ConnectionString, config.TableName);
         }
 
         public async Task<TableItem> CreateOrGetTableAsync()

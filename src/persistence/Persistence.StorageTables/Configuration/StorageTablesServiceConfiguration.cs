@@ -4,8 +4,9 @@ namespace GoodToCode.Shared.Persistence.StorageTables
 {
     public class StorageTablesServiceConfiguration : IStorageTablesServiceConfiguration
     {
+        private string tableName;
         public string ConnectionString { get; private set; }
-        public string TableName { get; private set; }
+        public string TableName { get { return tableName.Replace("-", "").Replace(".", "").Replace(" ", ""); } private set { tableName = value; } }
 
         public StorageTablesServiceConfiguration(string connectionString, string tableName)
         {
