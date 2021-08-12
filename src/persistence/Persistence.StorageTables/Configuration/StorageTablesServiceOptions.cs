@@ -6,9 +6,9 @@ namespace GoodToCode.Shared.Persistence.StorageTables
     {
         public IStorageTablesServiceConfiguration Value { get; }
 
-        public StorageTablesServiceOptions(string connectionString, string databaseName, string containerName, string partitionKeyName)
+        public StorageTablesServiceOptions(string connectionString, string tableName)
         {
-            Value = new StorageTablesServiceConfiguration(connectionString, databaseName, containerName, partitionKeyName);
+            Value = new StorageTablesServiceConfiguration(connectionString, tableName);
         }
     }
 }

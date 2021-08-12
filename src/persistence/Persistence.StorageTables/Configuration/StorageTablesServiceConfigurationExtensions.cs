@@ -13,7 +13,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
                 if (config == null) throw new ArgumentNullException(nameof(config));
 
                 collection.Configure<StorageTablesServiceOptions>(config);
-                return collection.AddTransient<IStorageTablesContainerService<T>, StorageTablesContainerService<T>>();
+                return collection.AddTransient<IStorageTablesItemService<T>, StorageTablesItemService<T>>();
         }
     }
 }

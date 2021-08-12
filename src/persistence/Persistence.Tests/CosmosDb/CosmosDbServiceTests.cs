@@ -58,8 +58,8 @@ namespace GoodToCode.Shared.Persistence.Tests
             var item = new EntityA("PartRead") { SomeData = "Some read data." };
             await SutContainer.CreateDatabaseAsync();
             await SutItem.AddItemAsync(item);
-            var readItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
-            Assert.IsTrue(readItem.id == item.id);
+            var readItem = await SutItem.GetItemAsync(item.RowKey.ToString(), item.PartitionKey);
+            Assert.IsTrue(readItem.RowKey == item.RowKey);
         }
 
         [TestMethod]
@@ -68,11 +68,11 @@ namespace GoodToCode.Shared.Persistence.Tests
             var item = new EntityA("PartWrite") { SomeData = "Some write data." };
             await SutContainer.CreateDatabaseAsync();
             await SutItem.AddItemAsync(item);
-            var writeItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
-            Assert.IsTrue(writeItem.id == item.id);
-            await SutItem.DeleteItemAsync(writeItem.id.ToString(), writeItem.PartitionKey);
-            writeItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
-            Assert.IsTrue(writeItem.id != item.id);
+            var writeItem = await SutItem.GetItemAsync(item.RowKey.ToString(), item.PartitionKey);
+            Assert.IsTrue(writeItem.RowKey == item.RowKey);
+            await SutItem.DeleteItemAsync(writeItem.RowKey.ToString(), writeItem.PartitionKey);
+            writeItem = await SutItem.GetItemAsync(item.RowKey.ToString(), item.PartitionKey);
+            Assert.IsTrue(writeItem.RowKey != item.RowKey);
         }
 
         [TestCleanup]

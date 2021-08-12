@@ -56,7 +56,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             }
             catch (CosmosException ex)
             {
-                logger.LogError($"Item {item.PartitionKey}-{item.id} was not added successfully - error details: {ex.Message}");
+                logger.LogError($"Item {item.PartitionKey}-{item.RowKey} was not added successfully - error details: {ex.Message}");
                 throw;
             }
 
@@ -122,7 +122,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             }
             catch (CosmosException ex)
             {
-                logger.LogError($"Item {item.PartitionKey}-{item.id} was not updated successfully - error details: {ex.Message}");
+                logger.LogError($"Item {item.PartitionKey}-{item.RowKey} was not updated successfully - error details: {ex.Message}");
                 throw;
             }
         }

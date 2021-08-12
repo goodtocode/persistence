@@ -2,7 +2,6 @@
 {
     public interface IPersistenceServiceConfiguration
     {
-        string ConnectionString { get; }
-        string DatabaseName { get;  }
+        string ConnectionString { get; }        
     }
 }

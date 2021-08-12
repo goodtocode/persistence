@@ -2,10 +2,9 @@
 
 namespace GoodToCode.Shared.Persistence.Abstractions
 {
-    public interface IEntityCosmosDb
+    public interface IEntityCosmosDb : IEntity
     {
-        string id { get; }
-        string PartitionKey { get; }
+        string id { get { return RowKey; } }
         string PartitionKeyPath { get; }
     }
 }

@@ -1,21 +1,16 @@
-﻿using GoodToCode.Shared.Persistence;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
 namespace GoodToCode.Shared.Persistence.StorageTables
 {
     public class StorageTablesServiceConfiguration : IStorageTablesServiceConfiguration
     {
         public string ConnectionString { get; private set; }
-        public string DatabaseName { get; private set; }
-        public string ContainerName { get; private set; }
-        public string PartitionKeyPath { get; private set; }
+        public string TableName { get; private set; }
 
-        public StorageTablesServiceConfiguration(string connectionString, string databaseName, string containerName, string partitionKeyName)
+        public StorageTablesServiceConfiguration(string connectionString, string tableName)
         {
             ConnectionString = connectionString;
-            DatabaseName = databaseName;
-            ContainerName = containerName;
-            PartitionKeyPath = partitionKeyName;
+            TableName = tableName;
         }
     }
 
@@ -25,22 +20,12 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         {
             if (string.IsNullOrEmpty(options.ConnectionString))
             {
-                return ValidateOptionsResult.Fail($"{nameof(options.ConnectionString)} configuration parameter for the Azure Cosmos DB is required");
+                return ValidateOptionsResult.Fail($"{nameof(options.ConnectionString)} configuration parameter for the Azure Storage DB is required");
             }
 
-            if (string.IsNullOrEmpty(options.ContainerName))
+            if (string.IsNullOrEmpty(options.TableName))
             {
-                return ValidateOptionsResult.Fail($"{nameof(options.ContainerName)} configuration parameter for the Azure Cosmos DB is required");
-            }
-
-            if (string.IsNullOrEmpty(options.DatabaseName))
-            {
-                return ValidateOptionsResult.Fail($"{nameof(options.DatabaseName)} configuration parameter for the Azure Cosmos DB is required");
-            }
-
-            if (string.IsNullOrEmpty(options.PartitionKeyPath))
-            {
-                return ValidateOptionsResult.Fail($"{nameof(options.PartitionKeyPath)} configuration parameter for the Azure Cosmos DB is required");
+                return ValidateOptionsResult.Fail($"{nameof(options.TableName)} configuration parameter for the Azure Storage DB is required");
             }
 
             return ValidateOptionsResult.Success;
