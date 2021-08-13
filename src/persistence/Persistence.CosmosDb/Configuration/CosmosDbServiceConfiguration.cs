@@ -6,7 +6,9 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
     public class CosmosDbServiceConfiguration : ICosmosDbServiceConfiguration
     {
         private string tableName;
+        public string DatabaseName { get; private set; }
         public string ConnectionString { get; private set; }
+        public string PartitionKeyPath { get; private set; }
         public string TableName
         {
             get
@@ -18,6 +20,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
 
         public CosmosDbServiceConfiguration(string connectionString, string tableName)
         {
+            PartitionKeyPath = "/PartitionKey";
             ConnectionString = connectionString;
             TableName = tableName;
         }
