@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -34,10 +35,10 @@ namespace GoodToCode.Shared.Persistence.StorageTables
 
         }
 
-        public StorageTablesItemService(IStorageTablesServiceConfiguration dataServiceConfiguration,
+        public StorageTablesItemService(IStorageTablesServiceConfiguration serviceConfiguration,
                            ILogger<StorageTablesItemService<T>> log) : this(log)
         {
-            config = dataServiceConfiguration;
+            config = serviceConfiguration;
             serviceClient = new TableServiceClient(config.ConnectionString);
             tableClient = new TableClient(config.ConnectionString, config.TableName);
         }
@@ -45,8 +46,8 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         public async Task<TableItem> CreateOrGetTableAsync()
         {
             try
-            {
-                table = await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
+            {   
+                table ??= await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
             {
@@ -56,7 +57,6 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             {
                 logger.LogError(ex, ex.Message);
                 if (table == null) logger.LogError($"New table {config.TableName} was not added successfully - error details: {ex.Message}");
-                throw;
             }
 
             return table;
@@ -65,6 +65,11 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         public TableEntity GetItem(string rowKey)
         {
             return tableClient.Query<TableEntity>(ent => ent.RowKey == rowKey).FirstOrDefault();
+        }
+
+        public Pageable<TableEntity> GetItems(Expression<Func<TableEntity, bool>> filter)
+        {
+            return tableClient.Query<TableEntity>(filter);
         }
 
         public Pageable<TableEntity> GetAllItems(string partitionKey)
@@ -83,14 +88,16 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             return queryResultsFilter;
         }
 
-        public async Task DeleteTableAsync() =>
+        public async Task DeleteTableAsync()
+        {            
             await serviceClient.DeleteTableAsync(config.TableName);
-
+        }
 
         public async Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<T> items)
         {
             var returnData = new List<TableEntity>();
 
+            await CreateOrGetTableAsync();
             foreach (var item in items)
             {
                 returnData.Add(await AddItemAsync(item));
@@ -104,6 +111,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             TableEntity entity = default;
             try
             {
+                await CreateOrGetTableAsync();
                 entity = new TableEntity(item.PartitionKey, item.RowKey)
                     {
                         { "Product", "Marker Set" },
@@ -124,23 +132,10 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             return entity;
         }
 
-        public async Task DeleteItemAsync(string partitionKey, string rowKey) =>
-            await tableClient.DeleteEntityAsync(partitionKey, rowKey);
-
-        public Pageable<TableEntity> GetItems(string partitionKey)
+        public async Task DeleteItemAsync(string partitionKey, string rowKey)
         {
-            Pageable<TableEntity> results;
-            try
-            {
-                results = tableClient.Query<TableEntity>(filter: $"PartitionKey eq '{partitionKey}'");
-            }
-            catch (Exception ex)
-            {
-                logger.LogError($"Item {partitionKey} was not queried successfully - error details: {ex.Message}");
-                throw;
-            }
-
-            return results;
+            await CreateOrGetTableAsync();
+            await tableClient.DeleteEntityAsync(partitionKey, rowKey);
         }
     }
 }

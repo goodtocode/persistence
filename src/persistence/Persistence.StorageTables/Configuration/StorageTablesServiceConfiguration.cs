@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using System;
 
 namespace GoodToCode.Shared.Persistence.StorageTables
 {
@@ -6,7 +7,14 @@ namespace GoodToCode.Shared.Persistence.StorageTables
     {
         private string tableName;
         public string ConnectionString { get; private set; }
-        public string TableName { get { return tableName.Replace("-", "").Replace(".", "").Replace(" ", ""); } private set { tableName = value; } }
+        public string TableName
+        {
+            get
+            {
+                return new string(Array.FindAll<char>(tableName.ToCharArray(), (c => (char.IsLetterOrDigit(c)))));
+            }
+            private set { tableName = value; }
+        }
 
         public StorageTablesServiceConfiguration(string connectionString, string tableName)
         {

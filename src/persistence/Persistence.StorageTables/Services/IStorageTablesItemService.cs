@@ -2,7 +2,9 @@
 using Azure.Data.Tables;
 using Azure.Data.Tables.Models;
 using GoodToCode.Shared.Persistence.Abstractions;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.StorageTables
@@ -15,6 +17,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         Task DeleteItemAsync(string partitionKey, string rowKey);
         Task DeleteTableAsync();
         Pageable<TableEntity> GetAllItems(string partitionKey);
-        Pageable<TableEntity> GetItems(string partitionKey);
+        TableEntity GetItem(string rowKey);
+        Pageable<TableEntity> GetItems(Expression<Func<TableEntity, bool>> filter);
     }
 }

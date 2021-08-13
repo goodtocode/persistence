@@ -36,7 +36,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new StorageTablesServiceOptions(
                 configuration["Ciac:Haas:Ingress:StorageTables:ConnectionString"],
-                $"AutomatedTest-{DateTime.UtcNow.Year}-{DateTime.UtcNow.Month}-{DateTime.UtcNow.Day}");
+                $"AutomatedTest-{DateTime.UtcNow:O}");
             SutItem = new StorageTablesItemService<EntityA>(configCosmos, logItem);
         }
 
@@ -65,7 +65,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             Assert.IsTrue(writeItem.RowKey == item.RowKey);
             await SutItem.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
             writeItem = SutItem.GetItem(item.RowKey);
-            Assert.IsTrue(writeItem.RowKey != item.RowKey);
+            Assert.IsTrue(writeItem == null);
         }
 
         [TestCleanup]
