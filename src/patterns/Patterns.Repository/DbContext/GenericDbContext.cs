@@ -21,7 +21,7 @@ namespace GoodToCode.Shared.Patterns.Repository
                                 .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
                                 .ConfigureRefresh(refresh =>
                                 {
-                                    refresh.Register("Reflections:Shared:Sentinel", refreshAll: true)
+                                    refresh.Register("Gtc:Shared:Sentinel", refreshAll: true)
                                            .SetCacheExpiration(new TimeSpan(0, 60, 0));
                                 })
                                 .Select(KeyFilter.Any, LabelFilter.Null)
