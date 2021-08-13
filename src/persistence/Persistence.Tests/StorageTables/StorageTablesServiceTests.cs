@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.Tests
@@ -35,7 +34,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             logItem = LoggerFactory.CreateLogger<StorageTablesItemService<EntityA>>();
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new StorageTablesServiceOptions(
-                configuration["Ciac:Haas:Ingress:StorageTables:ConnectionString"],
+                configuration["Gtc:Shared:Persistence:StorageTables:ConnectionString"],
                 $"AutomatedTest-{DateTime.UtcNow:O}");
             SutItem = new StorageTablesItemService<EntityA>(configCosmos, logItem);
         }

@@ -3,24 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace GoodToCode.Shared.dotNet.System
+namespace GoodToCode.Shared.Persistence.CosmosDb
 {
     public static class ObjectExtensions
     {
-        public static Dictionary<string, string> ToDictionary<T>(this T item)
+        public static TDestination CastOrFill<TDestination>(this object item) where TDestination : new()
         {
-            return item.GetType()
-                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .ToDictionary(prop => prop.Name, prop => (string)prop.GetValue(item, null));
+            var returnValue = new TDestination();
+
+            try
+            {
+                returnValue = item != null ? (TDestination)item : returnValue;
+            }
+            catch (InvalidCastException)
+            {
+                returnValue.Fill(item);
+            }
+
+            return returnValue;
         }
 
-        public static void Fill(this object item, object sourceItem)
+        public static void Fill<T>(this T item, object sourceItem)
         {
             var sourceType = sourceItem.GetType();
 
             foreach (PropertyInfo sourceProperty in sourceType.GetRuntimeProperties())
             {
-                PropertyInfo destinationProperty = item.GetType().GetRuntimeProperty(sourceProperty.Name);
+                PropertyInfo destinationProperty = typeof(T).GetRuntimeProperty(sourceProperty.Name);
                 if (destinationProperty != null && destinationProperty.CanWrite)
                 {
                     // Copy data only for Primitive-ish types including Value types, Guid, String, etc.
@@ -32,6 +41,13 @@ namespace GoodToCode.Shared.dotNet.System
                     }
                 }
             }
+        }
+
+        public static Dictionary<string, string> ToDictionary<T>(this T item)
+        {
+            return item.GetType()
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .ToDictionary(prop => prop.Name, prop => (string)prop.GetValue(item, null));
         }
     }
 }
