@@ -5,12 +5,11 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.Tests
 {
-    [TestClass]
+
     public class CosmosDbServiceTests
     {
         private IConfiguration configuration;
@@ -29,7 +28,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             ///     }
         }
 
-        [TestInitialize]
+        
         public void Initialize()
         {
             logItem = LoggerFactory.CreateLogger<CosmosDbItemService<EntityA>>();
@@ -40,14 +39,14 @@ namespace GoodToCode.Shared.Persistence.Tests
             SutItem = new CosmosDbItemService<EntityA>(configCosmos, logItem);
         }
 
-        [TestMethod]
+        
         public async Task CosmosDb_Create()
         {
             var table = await SutItem.CreateOrGetTableAsync();
             Assert.IsTrue(table != null);
         }
 
-        [TestMethod]
+        
         public async Task CosmosDb_Read()
         {
             var item = new EntityA("PartRead") { SomeData = "Some read data." };
@@ -56,7 +55,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             Assert.IsTrue(readItem.RowKey == item.RowKey);
         }
 
-        [TestMethod]
+        
         public async Task CosmosDb_Write()
         {
             var item = new EntityA("PartWrite") { SomeData = "Some write data." };
