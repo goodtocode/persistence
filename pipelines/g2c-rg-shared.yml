@@ -33,28 +33,28 @@ stages:
       - job: deploy_infrastructure
         dependsOn: deploy_landing_zone
         steps:
-          - template: steps/gtc-rg-shared-infrastructure-steps.yml
+          - template: steps/infrastructure-steps.yml
             parameters:
               armPath: 'infrastructure'
 
       - job: build_src
         dependsOn: deploy_infrastructure
         steps:
-          - template: steps/gtc-rg-shared-src-build-steps.yml
+          - template: steps/src-build-steps.yml
             parameters:
               armPath: 'infrastructure'
 
       - job: test_src
         dependsOn: build_src
         steps:
-          - template: steps/gtc-rg-shared-src-test-steps.yml
+          - template: steps/src-test-steps.yml
             parameters:
               armPath: 'infrastructure'
 
       - job: deploy_nuget
         dependsOn: test_src
         steps:
-          - template: steps/gtc-rg-shared-nuget-deploy-steps.yml
+          - template: steps/nuget-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
 
@@ -73,13 +73,13 @@ stages:
       - job: deploy_infrastructure
         dependsOn: deploy_landing_zone
         steps:
-          - template: steps/gtc-rg-shared-infrastructure-steps.yml
+          - template: steps/infrastructure-steps.yml
             parameters:
               armPath: 'infrastructure'
 
       - job: deploy_nuget
         dependsOn: deploy_infrastructure
         steps:
-          - template: steps/gtc-rg-shared-nuget-deploy-steps.yml
+          - template: steps/nuget-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
