@@ -46,7 +46,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
         public async Task<TableItem> CreateOrGetTableAsync()
         {
             try
-            {   
+            {
                 table ??= await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
@@ -89,21 +89,8 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
         }
 
         public async Task DeleteTableAsync()
-        {            
-            await serviceClient.DeleteTableAsync(config.TableName);
-        }
-
-        public async Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<T> items)
         {
-            var returnData = new List<TableEntity>();
-
-            await CreateOrGetTableAsync();
-            foreach (var item in items)
-            {
-                returnData.Add(await AddItemAsync(item));
-            }
-
-            return returnData;
+            await serviceClient.DeleteTableAsync(config.TableName);
         }
 
         public async Task<TableEntity> AddItemAsync(T item)
@@ -112,12 +99,11 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             try
             {
                 await CreateOrGetTableAsync();
-                entity = new TableEntity(item.PartitionKey, item.RowKey)
-                    {
-                        { "Product", "Marker Set" },
-                        { "Price", 5.00 },
-                        { "Quantity", 21 }
-                    };
+                entity = new TableEntity(item.PartitionKey, item.RowKey);
+                foreach (var prop in item.ToDictionary())
+                {
+                    entity.Add(prop.Key, prop.Value);
+                }
                 await tableClient.AddEntityAsync(entity);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
@@ -130,6 +116,18 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
                 throw;
             }
             return entity;
+        }
+
+        public async Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<T> items)
+        {
+            await CreateOrGetTableAsync();
+
+            var entityList = items.ToTableList<T>();
+            var addEntitiesBatch = new List<TableTransactionAction>();
+            addEntitiesBatch.AddRange(entityList.Select(e => new TableTransactionAction(TableTransactionActionType.Add, e)));
+            var response = await tableClient.SubmitTransactionAsync(addEntitiesBatch).ConfigureAwait(false);
+
+            return entityList;
         }
 
         public async Task DeleteItemAsync(string partitionKey, string rowKey)
