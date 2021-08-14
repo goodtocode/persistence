@@ -112,12 +112,11 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             try
             {
                 await CreateOrGetTableAsync();
-                entity = new TableEntity(item.PartitionKey, item.RowKey)
-                    {
-                        { "Product", "Marker Set" },
-                        { "Price", 5.00 },
-                        { "Quantity", 21 }
-                    };
+                entity = new TableEntity(item.PartitionKey, item.RowKey);
+                foreach(var prop in item.ToDictionary())
+                {
+                    entity.Add(prop.Key, prop.Value);
+                }
                 await tableClient.AddEntityAsync(entity);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
