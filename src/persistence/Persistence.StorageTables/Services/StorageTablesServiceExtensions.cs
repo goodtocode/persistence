@@ -5,7 +5,7 @@ using System;
 
 namespace GoodToCode.Shared.Persistence.StorageTables
 {
-    public static class StorageTablesServiceConfigurationExtensions
+    public static class StorageTablesServiceExtensions
     {
             public static IServiceCollection AddStorageTablesService<T>(this IServiceCollection collection, IConfiguration config) where T : class, IEntity, new()
             {
