@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Analytics.Tests
+namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
     public class TextAnalyzerService : ITextAnalyzerService
     {
