@@ -1,5 +1,5 @@
 parameters:
-- name: armPath 
+- name: armPath
   type: string 
   default: "."
 

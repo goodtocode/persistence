@@ -1,7 +1,10 @@
 parameters:
-- name: armPath 
-  type: string 
+- name: armPath
+  type: string
   default: "."
+- name: AppSettingsConnection
+  type: string 
+  default: "NONE"
 
 steps:
   - task: CmdLine@2
