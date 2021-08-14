@@ -1,7 +1,7 @@
 ﻿using Azure;
 using Azure.AI.TextAnalytics;
 using GoodToCode.Shared.Analytics.Abstractions;
-using System;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,15 +9,34 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Analytics.Tests
 {
-    public class TextAnalyzer : ITextAnalyzer
+    public class TextAnalyzerService : ITextAnalyzerService
     {
+        private readonly ILogger<TextAnalyzerService> logger;
+        private readonly ICognitiveServiceConfiguration config;
         private readonly AzureKeyCredential credentials;
         private readonly TextAnalyticsClient client;
 
-        public TextAnalyzer(string keyCredential, Uri endpoint)
+        private TextAnalyzerService(ILogger<TextAnalyzerService> log)
         {
-            credentials = new AzureKeyCredential(keyCredential);
-            client = new TextAnalyticsClient(endpoint, credentials);
+            logger = log;
+        }
+
+        public TextAnalyzerService(CognitiveServiceOptions options,
+                           ILogger<TextAnalyzerService> log) : this(log)
+        {
+
+            config = options.Value;
+            credentials = new AzureKeyCredential(config.KeyCredential);
+            client = new TextAnalyticsClient(config.Endpoint, credentials);
+
+        }
+
+        public TextAnalyzerService(ICognitiveServiceConfiguration serviceConfiguration,
+                           ILogger<TextAnalyzerService> log) : this(log)
+        {
+            config = serviceConfiguration;
+            credentials = new AzureKeyCredential(config.KeyCredential);
+            client = new TextAnalyticsClient(config.Endpoint, credentials);
         }
 
         public async Task<ISentimentResult> AnalyzeSentimentAsync(string text)
@@ -90,13 +109,9 @@ namespace GoodToCode.Shared.Analytics.Tests
                 {
                     foreach (SentenceOpinion sentenceOpinion in sentence.Opinions)
                     {
-                        Console.WriteLine($"\tTarget: {sentenceOpinion.Target.Text}, Value: {sentenceOpinion.Target.Sentiment}");
-                        Console.WriteLine($"\tTarget positive score: {sentenceOpinion.Target.ConfidenceScores.Positive:0.00}");
-                        Console.WriteLine($"\tTarget negative score: {sentenceOpinion.Target.ConfidenceScores.Negative:0.00}");
                         foreach (AssessmentSentiment assessment in sentenceOpinion.Assessments)
                         {
 
-                            var x = new SentimentConfidence(review.DocumentSentiment.ConfidenceScores.Positive, review.DocumentSentiment.ConfidenceScores.Negative, review.DocumentSentiment.ConfidenceScores.Neutral);
                             returnData.Add(
                                 new OpinionResult(
                                     new SentimentConfidence(review.DocumentSentiment.ConfidenceScores.Positive, review.DocumentSentiment.ConfidenceScores.Negative, review.DocumentSentiment.ConfidenceScores.Neutral),
@@ -184,5 +199,9 @@ namespace GoodToCode.Shared.Analytics.Tests
         {
             return Regex.Split(paragraph, @"(?<=[\.!\?])\s+");
         }
+
+
+
+
     }
 }

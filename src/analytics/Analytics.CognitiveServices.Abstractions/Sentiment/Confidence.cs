@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Analytics.CognitiveServices
+﻿namespace GoodToCode.Shared.Analytics.Abstractions
 {
     public class Confidence
     {

@@ -27,6 +27,7 @@
   <ItemGroup>
     <PackageReference Include="Azure.AI.TextAnalytics" Version="5.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

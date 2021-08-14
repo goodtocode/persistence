@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Persistence.Tests
+namespace GoodToCode.Shared.Analytics.Tests
 {
     public class ListLogger : ILogger
     {

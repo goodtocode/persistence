@@ -1,6 +1,4 @@
-﻿using GoodToCode.Shared.Analytics.CognitiveServices;
-
-namespace GoodToCode.Shared.Analytics.Abstractions
+﻿namespace GoodToCode.Shared.Analytics.Abstractions
 {
     public class OpinionResult
     {
