@@ -58,6 +58,7 @@ stages:
           - template: steps/nuget-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
+              AppSettingsConnection: '$(AppSettingsConnection)'
 
   - stage: production
     variables:
