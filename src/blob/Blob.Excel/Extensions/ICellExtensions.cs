@@ -13,7 +13,7 @@ namespace GoodToCode.Shared.Blob.Excel
             switch (item.CellType)
             {
                 case CellType.String:
-                    return item.StringCellValue;
+                    return item.ToString();
 
                 case CellType.Numeric:
                     if (DateUtil.IsCellDateFormatted(item))

@@ -6,9 +6,9 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
     {
         public ICosmosDbServiceConfiguration Value { get; }
 
-        public CosmosDbServiceOptions(string connectionString, string databaseName, string containerName, string partitionKeyName)
+        public CosmosDbServiceOptions(string connectionString, string tableName)
         {
-            Value = new CosmosDbServiceConfiguration(connectionString, databaseName, containerName, partitionKeyName);
+            Value = new CosmosDbServiceConfiguration(connectionString, tableName);
         }
     }
 }

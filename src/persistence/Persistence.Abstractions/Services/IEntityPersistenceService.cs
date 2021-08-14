@@ -1,8 +1,7 @@
-﻿using GoodToCode.Shared.Persistence.Abstractions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Persistence.CosmosDb
+namespace GoodToCode.Shared.Persistence.Abstractions
 {
     public interface IEntityPersistenceService<T> where T : IEntity, new()
     {

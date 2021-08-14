@@ -1,144 +1,139 @@
-﻿using GoodToCode.Shared.Persistence.Abstractions;
-using Microsoft.Azure.Cosmos;
+﻿using Azure;
+using Azure.Data.Tables;
+using Azure.Data.Tables.Models;
+using GoodToCode.Shared.Persistence.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.CosmosDb
 {
-    public class CosmosDbItemService<T> : ICosmosDbItemService<T> where T : IEntity, new()
+    public class CosmosDbItemService<T> : ICosmosDbItemService<T> where T : class, IEntity, new()
     {
         private readonly ILogger<CosmosDbItemService<T>> logger;
         private readonly ICosmosDbServiceConfiguration config;
-        private CosmosClient client;
-        private Database database;
-        private Container container;
+        private readonly TableServiceClient serviceClient;
+        private readonly TableClient tableClient;
+        private TableItem table;
+
+        private CosmosDbItemService(ILogger<CosmosDbItemService<T>> log)
+        {
+            logger = log;
+        }
 
         public CosmosDbItemService(CosmosDbServiceOptions options,
-                           ILogger<CosmosDbItemService<T>> log)
+                           ILogger<CosmosDbItemService<T>> log) : this(log)
         {
-            logger = log;
+
             config = options.Value;
+            serviceClient = new TableServiceClient(config.ConnectionString);
+            tableClient = new TableClient(config.ConnectionString, config.TableName);
+
         }
 
-        public CosmosDbItemService(ICosmosDbServiceConfiguration dataServiceConfiguration,
-                           ILogger<CosmosDbItemService<T>> log)
+        public CosmosDbItemService(ICosmosDbServiceConfiguration serviceConfiguration,
+                           ILogger<CosmosDbItemService<T>> log) : this(log)
         {
-            logger = log;
-            config = dataServiceConfiguration;
+            config = serviceConfiguration;
+            serviceClient = new TableServiceClient(config.ConnectionString);
+            tableClient = new TableClient(config.ConnectionString, config.TableName);
         }
 
-        private async Task CreateAsync()
+        public async Task<TableItem> CreateOrGetTableAsync()
         {
             try
             {
-                client ??= new CosmosClient(config.ConnectionString);
-                database ??= await client.CreateDatabaseIfNotExistsAsync(config.DatabaseName);
-                container ??= await database.CreateContainerIfNotExistsAsync(config.ContainerName, $"/PartitionKey");
+                table ??= await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
             }
-            catch (CosmosException ex)
+            catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
+            {
+                if (table == null) logger.LogError($"New table {config.TableName} was not added successfully - error details: {ex.Message}");
+            }
+            catch (Exception ex)
             {
                 logger.LogError(ex, ex.Message);
-                if (database == null) logger.LogError($"New database {config.DatabaseName} was not added successfully - error details: {ex.Message}");
-                if (container == null) logger.LogError($"New database {config.DatabaseName} was not added successfully - error details: {ex.Message}");
-                throw;
+                if (table == null) logger.LogError($"New table {config.TableName} was not added successfully - error details: {ex.Message}");
             }
+
+            return table;
         }
 
-        public async Task AddItemAsync(T item)
+        public TableEntity GetItem(string rowKey)
         {
+            return tableClient.Query<TableEntity>(ent => ent.RowKey == rowKey).FirstOrDefault();
+        }
+
+        public Pageable<TableEntity> GetItems(Expression<Func<TableEntity, bool>> filter)
+        {
+            return tableClient.Query<TableEntity>(filter);
+        }
+
+        public Pageable<TableEntity> GetAllItems(string partitionKey)
+        {
+            Pageable<TableEntity> queryResultsFilter;
             try
             {
-                await CreateAsync();
-                await container.CreateItemAsync<T>(item);
+                queryResultsFilter = tableClient.Query<TableEntity>(filter: $"PartitionKey eq '{partitionKey}'");
             }
-            catch (CosmosException ex)
+            catch (Exception ex)
             {
-                logger.LogError($"Item {item.PartitionKey}-{item.id} was not added successfully - error details: {ex.Message}");
+                logger.LogError($"Items {partitionKey} was not queried successfully - error details: {ex.Message}");
                 throw;
             }
 
+            return queryResultsFilter;
         }
 
-        public async Task DeleteItemAsync(string id)
+        public async Task DeleteTableAsync()
         {
-            await DeleteItemAsync(id, id);
+            await serviceClient.DeleteTableAsync(config.TableName);
         }
 
-        public async Task<T> GetItemAsync(Guid id, string partitionKey)
+        public async Task<TableEntity> AddItemAsync(T item)
         {
-            return await GetItemAsync(id.ToString(), partitionKey);
-        }
-
-        public async Task<T> GetItemAsync(string id, string partitionKey)
-        {
+            TableEntity entity = default;
             try
             {
-                await CreateAsync();
-                ItemResponse<T> response = await container.ReadItemAsync<T>(id, new PartitionKey(partitionKey));
-                return response.Resource;
-            }
-            catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                return new T();
-            }
-            catch (CosmosException ex)
-            {
-                logger.LogError($"Item {id} was not queried successfully - error details: {ex.Message}");
-                throw;
-            }
-        }
-
-        public async Task<IEnumerable<T>> GetItemsAsync(string queryString)
-        {
-            var results = new List<T>();
-            try
-            {
-                await CreateAsync();
-                var query = container.GetItemQueryIterator<T>(new QueryDefinition(queryString));
-                while (query.HasMoreResults)
+                await CreateOrGetTableAsync();
+                entity = new TableEntity(item.PartitionKey, item.RowKey);
+                foreach (var prop in item.ToDictionary())
                 {
-                    var response = await query.ReadNextAsync();
-                    results.AddRange(response.ToList());
+                    entity.Add(prop.Key, prop.Value);
                 }
+                await tableClient.AddEntityAsync(entity);
             }
-            catch (CosmosException ex)
+            catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
             {
-                logger.LogError($"Item {queryString} was not queried successfully - error details: {ex.Message}");
+                if (entity == null) logger.LogError($"New entity {item.RowKey} was not added successfully - error details: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Item {item.PartitionKey}-{item.RowKey} was not added successfully - error details: {ex.Message}");
                 throw;
             }
-
-            return results;
+            return entity;
         }
 
-        public async Task UpdateItemAsync(string id, T item)
+        public async Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<T> items)
         {
-            try
-            {
-                await CreateAsync();
-                await container.UpsertItemAsync<T>(item);
-            }
-            catch (CosmosException ex)
-            {
-                logger.LogError($"Item {item.PartitionKey}-{item.id} was not updated successfully - error details: {ex.Message}");
-                throw;
-            }
+            await CreateOrGetTableAsync();
+
+            var entityList = items.ToTableList<T>();
+            var addEntitiesBatch = new List<TableTransactionAction>();
+            addEntitiesBatch.AddRange(entityList.Select(e => new TableTransactionAction(TableTransactionActionType.Add, e)));
+            var response = await tableClient.SubmitTransactionAsync(addEntitiesBatch).ConfigureAwait(false);
+
+            return entityList;
         }
 
-        public async Task DeleteItemAsync(string id, string partitionKey)
+        public async Task DeleteItemAsync(string partitionKey, string rowKey)
         {
-            try
-            {
-                await CreateAsync();
-                await container.DeleteItemAsync<T>(id, new PartitionKey(partitionKey));
-            }
-            catch (CosmosException ex)
-            {
-                logger.LogError($"Item {partitionKey}-{id} was not deleted successfully - error details: {ex.Message}");
-                throw;
-            }
+            await CreateOrGetTableAsync();
+            await tableClient.DeleteEntityAsync(partitionKey, rowKey);
         }
     }
 }

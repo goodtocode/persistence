@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Excel\NpoiBloblReaderTests - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="File\NpoiBloblReaderTests - Copy.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>

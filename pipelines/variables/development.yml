@@ -1,6 +1,6 @@
 variables:
-  - template: common.yml  
   - group: gtc-rg-shared-dev
+  - template: common.yml  
   - name: Environment
     value: 'Development'
   - name: rgName
@@ -13,6 +13,8 @@ variables:
     value: 'Free'
   - name: 'appInsightsName'
     value: 'appi-shared-dev-225'
+  - name: 'cosmosName'
+    value: 'cosmos-shared-dev-225'
   - name: 'kvName'
     value: 'kv-shared-dev-225'
   - name: 'nugetFeeds'

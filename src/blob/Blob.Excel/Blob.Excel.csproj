@@ -39,9 +39,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Blob.Abstractions\Blob.Abstractions.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
   
 </Project>

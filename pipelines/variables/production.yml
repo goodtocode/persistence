@@ -1,6 +1,6 @@
 variables:
-  - template: common.yml  
   - group: gtc-rg-shared-prod
+  - template: common.yml  
   - name: Environment
     value: 'Production'
   - name: rgName
@@ -13,6 +13,8 @@ variables:
     value: 'Standard'
   - name: 'appInsightsName'
     value: 'appi-shared-prod-225'
+  - name: 'cosmosName'
+    value: 'cosmos-shared-prod-225'
   - name: 'kvName'
     value: 'kv-shared-prod-225'    
   - name: 'nugetFeeds'

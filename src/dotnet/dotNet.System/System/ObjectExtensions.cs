@@ -1,10 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace GoodToCode.Shared.dotNet.System
 {
     public static class ObjectExtensions
     {
+        public static Dictionary<string, string> ToDictionary<T>(this T item)
+        {
+            return item.GetType()
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .ToDictionary(prop => prop.Name, prop => (string)prop.GetValue(item, null));
+        }
+
         public static void Fill(this object item, object sourceItem)
         {
             var sourceType = sourceItem.GetType();

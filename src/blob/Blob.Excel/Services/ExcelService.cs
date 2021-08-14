@@ -3,28 +3,35 @@ using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace GoodToCode.Shared.Blob.Excel
 {
     public class ExcelService : IExcelService
-    {       
+    {
+        public string WorkbookName { get; }
+
+        public ExcelService(string workbookName)
+        {
+            WorkbookName = workbookName;
+        }
+
+        public IWorkbookData GetWorkbook(Stream fileStream)
+        {
+            var wb = WorkbookFactory.Create(fileStream);
+            if (wb == null)
+                throw new ArgumentOutOfRangeException("Sheet not found.");
+            return wb.ToWorkbookData(WorkbookName); 
+        }
+
         public ISheetData GetSheet(Stream fileStream, int sheetIndex)
         {
             var currSheet = WorkbookFactory.Create(fileStream).GetSheetAt(sheetIndex);
             if (currSheet == null)
                 throw new ArgumentOutOfRangeException("Sheet not found.");
-            var rows = new List<IRowData>();
-            for(int count = currSheet.FirstRowNum; count < currSheet.LastRowNum; count++)
-            {
-                var row = currSheet.GetRow(count);
-                var cells = row.Cells.GetRange(0, row.Cells.Count - 1).Select(c => new CellData() { CellValue = c.StringCellValue, ColumnIndex = c.ColumnIndex, RowIndex = count, SheetKey = currSheet.SheetName });
-                rows.Add(new RowData(count, cells ));
-            }               
-            return new SheetData(currSheet.SheetName, rows);
+            return currSheet.ToSheetData(WorkbookName, sheetIndex);
         }
 
-        public IColumnData GetColumn(Stream fileStream, int sheet, int column)
+        public IEnumerable<ICellData> GetColumn(Stream fileStream, int sheet, int column)
         {
             ISheetData currSheet = GetSheet(fileStream, sheet);
             if (currSheet == null)

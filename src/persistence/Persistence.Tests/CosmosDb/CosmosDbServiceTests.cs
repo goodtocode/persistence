@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.Tests
 {
-    [TestClass]
+
     public class CosmosDbServiceTests
     {
         private IConfiguration configuration;
-        private ILogger<CosmosDbContainerService<EntityA>> logContainer;
         private ILogger<CosmosDbItemService<EntityA>> logItem;
         private CosmosDbServiceOptions configCosmos;
-        public CosmosDbContainerService<EntityA> SutContainer { get; private set; }
         public CosmosDbItemService<EntityA> SutItem { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
@@ -30,55 +28,49 @@ namespace GoodToCode.Shared.Persistence.Tests
             ///     }
         }
 
-        [TestInitialize]
+        
         public void Initialize()
         {
-            logContainer = LoggerFactory.CreateLogger<CosmosDbContainerService<EntityA>>();
             logItem = LoggerFactory.CreateLogger<CosmosDbItemService<EntityA>>();
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new CosmosDbServiceOptions(
-                configuration["Ciac:Haas:Ingress:CosmosDb:ConnectionString"],
-                configuration["Ciac:Haas:Ingress:CosmosDb:DatabaseName"],
-                $"AutomatedTest-{DateTime.UtcNow.Year}-{DateTime.UtcNow.Month}-{DateTime.UtcNow.Day}",
-                "/PartitionKey");
-            SutContainer = new CosmosDbContainerService<EntityA>(configCosmos, logContainer);
+                configuration["Gtc:Shared:Persistence:CosmosDb:ConnectionString"],
+                $"AutomatedTest-{DateTime.UtcNow:O}"); 
             SutItem = new CosmosDbItemService<EntityA>(configCosmos, logItem);
         }
 
-        [TestMethod]
+        
         public async Task CosmosDb_Create()
         {
-            var db = await SutContainer.CreateDatabaseAsync();
-            Assert.IsTrue(db != null);
+            var table = await SutItem.CreateOrGetTableAsync();
+            Assert.IsTrue(table != null);
         }
 
-        [TestMethod]
+        
         public async Task CosmosDb_Read()
         {
-            var item = new EntityA("PartRead") { SomeData = "Some read data." };
-            await SutContainer.CreateDatabaseAsync();
+            var item = new EntityA("PartRead") { SomeString = "Some read data." };
             await SutItem.AddItemAsync(item);
-            var readItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
-            Assert.IsTrue(readItem.id == item.id);
+            var readItem = SutItem.GetItem(item.RowKey);
+            Assert.IsTrue(readItem.RowKey == item.RowKey);
         }
 
-        [TestMethod]
+        
         public async Task CosmosDb_Write()
         {
-            var item = new EntityA("PartWrite") { SomeData = "Some write data." };
-            await SutContainer.CreateDatabaseAsync();
+            var item = new EntityA("PartWrite") { SomeString = "Some write data." };
             await SutItem.AddItemAsync(item);
-            var writeItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
-            Assert.IsTrue(writeItem.id == item.id);
-            await SutItem.DeleteItemAsync(writeItem.id.ToString(), writeItem.PartitionKey);
-            writeItem = await SutItem.GetItemAsync(item.id.ToString(), item.PartitionKey);
-            Assert.IsTrue(writeItem.id != item.id);
+            var writeItem = SutItem.GetItem(item.RowKey.ToString());
+            Assert.IsTrue(writeItem.RowKey == item.RowKey);
+            await SutItem.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
+            writeItem = SutItem.GetItem(item.RowKey);
+            Assert.IsTrue(writeItem == null);
         }
 
         [TestCleanup]
         public async Task Cleanup()
         {
-            //await SutContainer.DeleteContainerAsync();
+            await SutItem.DeleteTableAsync();
         }
     }
 }
