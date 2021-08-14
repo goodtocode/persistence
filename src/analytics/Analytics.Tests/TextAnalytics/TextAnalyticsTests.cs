@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Analytics.Tests
@@ -36,6 +37,7 @@ namespace GoodToCode.Shared.Analytics.Tests
             SutText = "Ce document est rédigé en Français.";
             var sutResult = await service.DetectLanguageAsync(SutText);
             Assert.IsTrue(sutResult != null);
+            Assert.IsTrue(sutResult.Length > 0);
         }
 
         [TestMethod]
@@ -44,6 +46,7 @@ namespace GoodToCode.Shared.Analytics.Tests
             SutText = "My cat might need to see a veterinarian.";
             var sutResult = await service.ExtractKeyPhrasesAsync(SutText);
             Assert.IsTrue(sutResult != null);
+            Assert.IsTrue(sutResult.Any());
         }
 
         [TestMethod]
@@ -60,6 +63,10 @@ namespace GoodToCode.Shared.Analytics.Tests
                     increased symptoms and family history and history left main disease with total occasional of his RCA was referred for revascularization with open heart surgery.";
             var sutResult = await service.ExtractHealthcareEntitiesAsync(SutText);
             Assert.IsTrue(sutResult != null);
+            Assert.IsTrue(sutResult.Any());
+            var sutFirst = sutResult.FirstOrDefault();
+            Assert.IsTrue(sutFirst.Category.Length > 0);
+            Assert.IsTrue(sutFirst.Text.Length > 0);
         }
 
         [TestMethod]
@@ -68,6 +75,11 @@ namespace GoodToCode.Shared.Analytics.Tests
             SutText = "I had a wonderful trip to Seattle last week.";
             var sutResult = await service.ExtractEntitiesAsync(SutText);
             Assert.IsTrue(sutResult != null);
+            Assert.IsTrue(sutResult.Any());
+            var sutFirst = sutResult.FirstOrDefault();
+            Assert.IsTrue(sutFirst.Category.Length > 0);
+            Assert.IsTrue(sutFirst.Text.Length > 0);
+            Assert.IsTrue(sutFirst.ConfidenceScore > -1);
         }
 
         [TestMethod]
@@ -80,6 +92,10 @@ namespace GoodToCode.Shared.Analytics.Tests
                 "while also being the largest individual shareholder until May 2014.";
             var sutResult = await service.ExtractEntityLinksAsync(SutText);
             Assert.IsTrue(sutResult != null);
+            Assert.IsTrue(sutResult.Any());
+            var sutFirst = sutResult.FirstOrDefault();
+            Assert.IsTrue(sutFirst.Matches.Any());
+            Assert.IsTrue(sutFirst.Name.Length > 0);
         }
 
         [TestMethod]
@@ -88,6 +104,12 @@ namespace GoodToCode.Shared.Analytics.Tests
             SutText = "The food and service were unacceptable, but the concierge were nice.";
             var sutResult = await service.ExtractOpinionAsync(SutText);
             Assert.IsTrue(sutResult != null);
+            Assert.IsTrue(sutResult.Any());
+            var sutFirst = sutResult.FirstOrDefault();
+            Assert.IsTrue(sutFirst.DocumentSentiment != null);
+            Assert.IsTrue(sutFirst.OpinionSentiments != null);
+            Assert.IsTrue(sutFirst.SentenceOpinion != null);
+            Assert.IsTrue(sutFirst.SentenceSentiment != null);
         }
 
         [TestMethod]
@@ -97,6 +119,5 @@ namespace GoodToCode.Shared.Analytics.Tests
             var sutResult = await service.AnalyzeSentimentAsync(SutText);
             Assert.IsTrue(sutResult != null);
         }
-
     }
 }
