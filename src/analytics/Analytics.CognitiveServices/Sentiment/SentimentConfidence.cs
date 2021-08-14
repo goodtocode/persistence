@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.CognitiveServices
+﻿namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
     /// <summary>
     /// Abstraction of Azure.AI.TextAnalytics.TextSentiment
