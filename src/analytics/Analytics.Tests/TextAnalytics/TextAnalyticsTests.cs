@@ -1,4 +1,5 @@
 ﻿using GoodToCode.Shared.Analytics.Abstractions;
+using GoodToCode.Shared.Analytics.CognitiveServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
