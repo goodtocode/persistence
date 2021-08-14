@@ -49,7 +49,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Read()
         {
-            var item = new EntityA("PartRead") { SomeData = "Some read data." };
+            var item = new EntityA("PartRead") { SomeString = "Some read data." };
             await SutItem.AddItemAsync(item);
             var readItem = SutItem.GetItem(item.RowKey);
             Assert.IsTrue(readItem.RowKey == item.RowKey);
@@ -58,7 +58,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Write()
         {
-            var item = new EntityA("PartWrite") { SomeData = "Some write data." };
+            var item = new EntityA("PartWrite") { SomeString = "Some write data." };
             await SutItem.AddItemAsync(item);
             var writeItem = SutItem.GetItem(item.RowKey.ToString());
             Assert.IsTrue(writeItem.RowKey == item.RowKey);

@@ -10,7 +10,8 @@ namespace GoodToCode.Shared.Persistence.Tests
         private string _partitionKey;
         public string PartitionKey { get { return _partitionKey; } set { _partitionKey = value; } }
         public string RowKey { get; set; } = Guid.NewGuid().ToString();
-        public string SomeData { get; set; }
+        public string SomeString { get; set; }
+        public int SomeNumber { get; set; } = 2;
 
         public EntityA() { }
         public EntityA(string partition)
@@ -24,7 +25,8 @@ namespace GoodToCode.Shared.Persistence.Tests
         private string _partitionKey;
         public string PartitionKey { get { return _partitionKey; } set { _partitionKey = value; } }
         public string RowKey { get; set; } = Guid.NewGuid().ToString();
-        public string SomeMoreData { get; set; }
+        public string AnotherString { get; set; }
+        public int AnotherNumber { get; set; } = 5;
 
         public EntityB() { }
         public EntityB(string partition)
