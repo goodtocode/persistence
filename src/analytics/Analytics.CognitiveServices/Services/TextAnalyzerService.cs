@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
-    public class TextAnalyzerService : ITextAnalyzerService, ITextAnalyzerService
+    public class TextAnalyzerService : ITextAnalyzerService
     {
         private readonly ILogger<TextAnalyzerService> logger;
         private readonly ICognitiveServiceConfiguration config;
