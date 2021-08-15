@@ -138,9 +138,9 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return response.Value.Select(x => new EntityResult() { Text = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
         }
 
-        public async Task<IEnumerable<IAnalyticsEntityResult>> ExtractHealthcareEntitiesAsync(string text)
+        public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text)
         {
-            List<IAnalyticsEntityResult> returnData = new List<IAnalyticsEntityResult>();
+            List<IAnalyticsResult> returnData = new List<IAnalyticsResult>();
             string document1 = text;
             List<string> batchInput = new List<string>()
                 {

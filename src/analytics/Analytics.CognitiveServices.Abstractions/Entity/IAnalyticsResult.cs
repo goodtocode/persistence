@@ -1,7 +1,7 @@
 ﻿
 namespace GoodToCode.Shared.Analytics.Abstractions
 {
-    public interface IAnalyticsEntityResult
+    public interface IAnalyticsResult
     {
         string Text { get; }
         string Category { get; }
