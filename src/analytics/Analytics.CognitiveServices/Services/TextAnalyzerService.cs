@@ -16,25 +16,25 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         private readonly AzureKeyCredential credentials;
         private readonly TextAnalyticsClient client;
 
-        private TextAnalyzerService(ILogger<TextAnalyzerService> log)
+        private TextAnalyzerService(ICognitiveServiceConfiguration serviceConfiguration)
         {
-            logger = log;
+            config = serviceConfiguration; 
         }
 
         public TextAnalyzerService(CognitiveServiceOptions options,
-                           ILogger<TextAnalyzerService> log) : this(log)
+                           ILogger<TextAnalyzerService> log) : this(options.Value)
         {
 
-            config = options.Value;
+            logger = log;
             credentials = new AzureKeyCredential(config.KeyCredential);
             client = new TextAnalyticsClient(config.Endpoint, credentials);
 
         }
 
         public TextAnalyzerService(ICognitiveServiceConfiguration serviceConfiguration,
-                           ILogger<TextAnalyzerService> log) : this(log)
+                           ILogger<TextAnalyzerService> log) : this(serviceConfiguration)
         {
-            config = serviceConfiguration;
+            logger = log;
             credentials = new AzureKeyCredential(config.KeyCredential);
             client = new TextAnalyticsClient(config.Endpoint, credentials);
         }

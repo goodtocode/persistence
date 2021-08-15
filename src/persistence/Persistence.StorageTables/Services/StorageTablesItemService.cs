@@ -20,27 +20,26 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         private readonly TableClient tableClient;
         private TableItem table;
 
-        private StorageTablesItemService(ILogger<StorageTablesItemService<T>> log)
+        private StorageTablesItemService(IStorageTablesServiceConfiguration serviceConfiguration)
         {
-            logger = log;
+            config = serviceConfiguration;
         }
 
         public StorageTablesItemService(StorageTablesServiceOptions options,
-                           ILogger<StorageTablesItemService<T>> log) : this(log)
-        {
-
-            config = options.Value;
+                           ILogger<StorageTablesItemService<T>> log) : this(options.Value)
+        {            
             serviceClient = new TableServiceClient(config.ConnectionString);
             tableClient = new TableClient(config.ConnectionString, config.TableName);
+            logger = log;
 
         }
 
         public StorageTablesItemService(IStorageTablesServiceConfiguration serviceConfiguration,
-                           ILogger<StorageTablesItemService<T>> log) : this(log)
-        {
-            config = serviceConfiguration;
+                           ILogger<StorageTablesItemService<T>> log) : this(serviceConfiguration)
+        {            
             serviceClient = new TableServiceClient(config.ConnectionString);
             tableClient = new TableClient(config.ConnectionString, config.TableName);
+            logger = log;
         }
 
         public async Task<TableItem> CreateOrGetTableAsync()
