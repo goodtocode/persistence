@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace GoodToCode.Shared.Analytics.Abstractions
 {
-    public class KeyPhraseResult : ReadOnlyCollection<string>
+    public class KeyPhraseResult : ReadOnlyCollection<string>, IKeyPhrases
     {
         public KeyPhraseResult(IList<string> list) : base(list)
         {

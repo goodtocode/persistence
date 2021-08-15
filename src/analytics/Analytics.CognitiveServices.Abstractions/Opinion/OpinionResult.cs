@@ -1,6 +1,6 @@
 ﻿namespace GoodToCode.Shared.Analytics.Abstractions
 {
-    public class OpinionResult
+    public class OpinionResult : IOpinionResult
     {
         public IConfidence DocumentSentiment { get; set; }
         public ISentimentResult SentenceSentiment { get; set; }
@@ -14,5 +14,5 @@
             SentenceOpinion = opinion;
             OpinionSentiments = sentiment;
         }
-   }
+    }
 }

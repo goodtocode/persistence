@@ -135,12 +135,12 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         public async Task<IEnumerable<EntityResult>> ExtractEntitiesAsync(string text)
         {
             var response = await client.RecognizeEntitiesAsync(text, await DetectLanguageAsync(text));
-            return response.Value.Select(x => new EntityResult() { Text = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), ConfidenceScore = x.ConfidenceScore });
+            return response.Value.Select(x => new EntityResult() { Text = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
         }
 
-        public async Task<IEnumerable<HealthcareEntityResult>> ExtractHealthcareEntitiesAsync(string text)
+        public async Task<IEnumerable<IAnalyticsEntityResult>> ExtractHealthcareEntitiesAsync(string text)
         {
-            List<HealthcareEntityResult> returnData = new List<HealthcareEntityResult>();
+            List<IAnalyticsEntityResult> returnData = new List<IAnalyticsEntityResult>();
             string document1 = text;
             List<string> batchInput = new List<string>()
                 {
@@ -158,7 +158,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                     {
                         foreach (var entity in entitiesInDoc.Entities)
                         {
-                            returnData.Add(new HealthcareEntityResult() { Text = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore.ToString() });
+                            returnData.Add(new HealthcareEntityResult() { Text = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
                         }
                     }
                 }
