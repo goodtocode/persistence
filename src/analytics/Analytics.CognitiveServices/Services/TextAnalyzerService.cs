@@ -103,9 +103,9 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                             returnData.Add(
                                 new OpinionResult(
                                     new SentimentConfidence(review.DocumentSentiment.ConfidenceScores.Positive, review.DocumentSentiment.ConfidenceScores.Negative, review.DocumentSentiment.ConfidenceScores.Neutral),
-                                    new SentimentResult(sentence.Text, (int)sentence.Sentiment, sentence.ConfidenceScores.Positive, sentence.ConfidenceScores.Negative, sentence.ConfidenceScores.Neutral),
-                                    new SentimentResult(sentenceOpinion.Target.Text, (int)sentence.Sentiment, sentenceOpinion.Target.ConfidenceScores.Positive, sentenceOpinion.Target.ConfidenceScores.Negative, sentenceOpinion.Target.ConfidenceScores.Neutral),
-                                    new SentimentResult(assessment.Text, (int)assessment.Sentiment, assessment.ConfidenceScores.Positive, assessment.ConfidenceScores.Negative, assessment.ConfidenceScores.Neutral)
+                                    new SentimentResult(sentence.Text, sentence.Sentiment, sentence.ConfidenceScores.Positive, sentence.ConfidenceScores.Negative, sentence.ConfidenceScores.Neutral),
+                                    new SentimentResult(sentenceOpinion.Target.Text, sentence.Sentiment, sentenceOpinion.Target.ConfidenceScores.Positive, sentenceOpinion.Target.ConfidenceScores.Negative, sentenceOpinion.Target.ConfidenceScores.Neutral),
+                                    new SentimentResult(assessment.Text, assessment.Sentiment, assessment.ConfidenceScores.Positive, assessment.ConfidenceScores.Negative, assessment.ConfidenceScores.Neutral)
                                     ));
                         }
                     }
@@ -162,7 +162,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                 returnValue.AddRange(item.DocumentSentiment.Sentences.Select(x => new SentimentResult(
                     text: x.Text,
                     language: languageIso,
-                    sentiment: (int)x.Sentiment,
+                    sentiment: x.Sentiment,
                     positive: x.ConfidenceScores.Positive,
                     neutral: x.ConfidenceScores.Neutral,
                     negative: x.ConfidenceScores.Negative
@@ -176,7 +176,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
 
             return new SentimentResult(
                 text: result.Sentences.Count > 0 ? result.Sentences.ElementAt(0).Text : string.Empty,
-                sentiment: (int)result.Sentiment,
+                sentiment: result.Sentiment,
                 positive: result.ConfidenceScores.Positive,
                 negative: result.ConfidenceScores.Negative,
                 neutral: result.ConfidenceScores.Neutral
