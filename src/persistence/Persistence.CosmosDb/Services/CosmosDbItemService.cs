@@ -14,34 +14,20 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
 {
     public class CosmosDbItemService<T> : ICosmosDbItemService<T> where T : class, IEntity, new()
     {
-        private readonly ILogger<CosmosDbItemService<T>> logger;
         private readonly ICosmosDbServiceConfiguration config;
         private readonly TableServiceClient serviceClient;
         private readonly TableClient tableClient;
         private TableItem table;
 
-        private CosmosDbItemService(ILogger<CosmosDbItemService<T>> log)
-        {
-            logger = log;
-        }
-
-        public CosmosDbItemService(CosmosDbServiceOptions options,
-                           ILogger<CosmosDbItemService<T>> log) : this(log)
-        {
-
-            config = options.Value;
-            serviceClient = new TableServiceClient(config.ConnectionString);
-            tableClient = new TableClient(config.ConnectionString, config.TableName);
-
-        }
-
-        public CosmosDbItemService(ICosmosDbServiceConfiguration serviceConfiguration,
-                           ILogger<CosmosDbItemService<T>> log) : this(log)
+        public CosmosDbItemService(ICosmosDbServiceConfiguration serviceConfiguration)
         {
             config = serviceConfiguration;
             serviceClient = new TableServiceClient(config.ConnectionString);
             tableClient = new TableClient(config.ConnectionString, config.TableName);
         }
+
+        public CosmosDbItemService(CosmosDbServiceOptions options) : this(options.Value)
+        { }
 
         public async Task<TableItem> CreateOrGetTableAsync()
         {
@@ -49,14 +35,9 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             {
                 table ??= await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
             }
-            catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
+            catch
             {
-                if (table == null) logger.LogError($"New table {config.TableName} was not added successfully - error details: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, ex.Message);
-                if (table == null) logger.LogError($"New table {config.TableName} was not added successfully - error details: {ex.Message}");
+                // Remove: -beta dependency throws unhandled errors when working correctly.
             }
 
             return table;
@@ -75,15 +56,7 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
         public Pageable<TableEntity> GetAllItems(string partitionKey)
         {
             Pageable<TableEntity> queryResultsFilter;
-            try
-            {
-                queryResultsFilter = tableClient.Query<TableEntity>(filter: $"PartitionKey eq '{partitionKey}'");
-            }
-            catch (Exception ex)
-            {
-                logger.LogError($"Items {partitionKey} was not queried successfully - error details: {ex.Message}");
-                throw;
-            }
+            queryResultsFilter = tableClient.Query<TableEntity>(filter: $"PartitionKey eq '{partitionKey}'");
 
             return queryResultsFilter;
         }
@@ -108,13 +81,9 @@ namespace GoodToCode.Shared.Persistence.CosmosDb
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
             {
-                if (entity == null) logger.LogError($"New entity {item.RowKey} was not added successfully - error details: {ex.Message}");
+                // Already exists
             }
-            catch (Exception ex)
-            {
-                logger.LogError($"Item {item.PartitionKey}-{item.RowKey} was not added successfully - error details: {ex.Message}");
-                throw;
-            }
+
             return entity;
         }
 

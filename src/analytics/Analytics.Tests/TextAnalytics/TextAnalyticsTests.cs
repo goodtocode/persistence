@@ -29,7 +29,7 @@ namespace GoodToCode.Shared.Analytics.Tests
             config = new CognitiveServiceOptions(
                 configuration["Gtc:Shared:Analytics:CognitiveService:KeyCredential"],
                 new Uri(configuration["Gtc:Shared:Analytics:CognitiveService:Endpoint"]));
-            service = new TextAnalyzerService(config, log);
+            service = new TextAnalyzerService(config);
         }
 
         [TestMethod]
