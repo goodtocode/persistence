@@ -27,7 +27,7 @@ namespace GoodToCode.Shared.Blob.Excel
             {
                 var row = item.GetRow(count);
                 var rowIndex = count;
-                var cells = row.Cells.GetRange(0, row.Cells.Count - 1).Select(c =>
+                var cells = row.Cells.GetRange(0, row.Cells.Count).Select(c =>
                             new CellData()
                             {
                                 CellValue = c.ToString(),
