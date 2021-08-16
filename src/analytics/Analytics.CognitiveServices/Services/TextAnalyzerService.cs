@@ -15,7 +15,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         private readonly AzureKeyCredential credentials;
         private readonly TextAnalyticsClient client;
 
-        private TextAnalyzerService(ICognitiveServiceConfiguration serviceConfiguration)
+        public TextAnalyzerService(ICognitiveServiceConfiguration serviceConfiguration)
         {
             config = serviceConfiguration;
             credentials = new AzureKeyCredential(config.KeyCredential);
