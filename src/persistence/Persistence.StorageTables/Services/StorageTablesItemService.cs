@@ -20,7 +20,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         private readonly TableClient tableClient;
         private TableItem table;
 
-        private StorageTablesItemService(IStorageTablesServiceConfiguration serviceConfiguration)
+        public StorageTablesItemService(IStorageTablesServiceConfiguration serviceConfiguration)
         {
             config = serviceConfiguration;
         }
