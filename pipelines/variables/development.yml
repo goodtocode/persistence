@@ -10,7 +10,7 @@ variables:
   - name: 'appcsName'
     value: 'appcs-shared-dev-225'
   - name: 'appcsSku'
-    value: 'Standard'
+    value: 'Free'
   - name: 'appInsightsName'
     value: 'appi-shared-dev-225'
   - name: 'cosmosName'
