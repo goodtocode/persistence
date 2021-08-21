@@ -7,7 +7,7 @@ namespace GoodToCode.Shared.Analytics.Abstractions
     {
         public ICognitiveServiceConfiguration Value { get; }
 
-        public CognitiveServiceOptions(string keyCredential, Uri endpoint)
+        public CognitiveServiceOptions(string keyCredential, string endpoint)
         {
             Value = new CognitiveServiceConfiguration(keyCredential, endpoint);
         }

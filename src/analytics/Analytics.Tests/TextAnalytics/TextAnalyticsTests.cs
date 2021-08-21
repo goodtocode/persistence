@@ -28,7 +28,7 @@ namespace GoodToCode.Shared.Analytics.Tests
             configuration = new AppConfigurationFactory().Create();
             config = new CognitiveServiceOptions(
                 configuration["Gtc:Shared:Analytics:CognitiveService:KeyCredential"],
-                new Uri(configuration["Gtc:Shared:Analytics:CognitiveService:Endpoint"]));
+                configuration["Gtc:Shared:Analytics:CognitiveService:Endpoint"]);
             service = new TextAnalyzerService(config);
         }
 

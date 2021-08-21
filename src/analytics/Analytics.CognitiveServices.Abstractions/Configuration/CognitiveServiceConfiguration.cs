@@ -7,18 +7,12 @@ namespace GoodToCode.Shared.Analytics.Abstractions
     {
         public string KeyCredential { get; private set; }
 
-        public Uri Endpoint { get; private set; }
-
-        public CognitiveServiceConfiguration(string keyCredential, Uri endpoint)
-        {
-            KeyCredential = keyCredential;
-            Endpoint = endpoint;
-        }
+        public string Endpoint { get; private set; }
 
         public CognitiveServiceConfiguration(string keyCredential, string endpoint)
         {
             KeyCredential = keyCredential;
-            Endpoint = new Uri(endpoint);
+            Endpoint = endpoint;
         }
     }
 
@@ -29,7 +23,7 @@ namespace GoodToCode.Shared.Analytics.Abstractions
             if (string.IsNullOrEmpty(options.KeyCredential))
                 return ValidateOptionsResult.Fail($"{nameof(options.KeyCredential)} configuration parameter is required");
 
-            if (Uri.IsWellFormedUriString(options.Endpoint.AbsoluteUri.ToString(), UriKind.Absolute))
+            if (Uri.IsWellFormedUriString(options.Endpoint, UriKind.Absolute))
                 return ValidateOptionsResult.Fail($"{nameof(options.Endpoint)} configuration parameter is required");
 
             return ValidateOptionsResult.Success;

@@ -2,6 +2,7 @@
 using Azure.AI.TextAnalytics;
 using GoodToCode.Shared.Analytics.Abstractions;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -19,7 +20,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         {
             config = serviceConfiguration;
             credentials = new AzureKeyCredential(config.KeyCredential);
-            client = new TextAnalyticsClient(config.Endpoint, credentials);
+            client = new TextAnalyticsClient(new Uri(config.Endpoint), credentials);
         }
 
         public TextAnalyzerService(CognitiveServiceOptions options) : this(options.Value)
