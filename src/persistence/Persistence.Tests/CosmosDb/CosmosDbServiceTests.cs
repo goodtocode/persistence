@@ -13,7 +13,7 @@ namespace GoodToCode.Shared.Persistence.Tests
     public class CosmosDbServiceTests
     {
         private IConfiguration configuration;
-        private ILogger<CosmosDbItemService<EntityA>> logItem;
+        private ILogger<CosmosDbServiceTests> log;
         private CosmosDbServiceOptions configCosmos;
         public CosmosDbItemService<EntityA> SutItem { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
@@ -31,12 +31,12 @@ namespace GoodToCode.Shared.Persistence.Tests
         
         public void Initialize()
         {
-            logItem = LoggerFactory.CreateLogger<CosmosDbItemService<EntityA>>();
+            log = LoggerFactory.CreateLogger<CosmosDbServiceTests>();
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new CosmosDbServiceOptions(
                 configuration["Gtc:Shared:Persistence:CosmosDb:ConnectionString"],
                 $"AutomatedTest-{DateTime.UtcNow:O}"); 
-            SutItem = new CosmosDbItemService<EntityA>(configCosmos, logItem);
+            SutItem = new CosmosDbItemService<EntityA>(configCosmos);
         }
 
         

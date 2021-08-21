@@ -36,7 +36,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             configCosmos = new StorageTablesServiceOptions(
                 configuration["Gtc:Shared:Persistence:StorageTables:ConnectionString"],
                 $"AutomatedTest-{DateTime.UtcNow:O}");
-            SutItem = new StorageTablesItemService<EntityA>(configCosmos, logItem);
+            SutItem = new StorageTablesItemService<EntityA>(configCosmos);
         }
 
         [TestMethod]

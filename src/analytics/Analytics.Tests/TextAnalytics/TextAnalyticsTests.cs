@@ -1,4 +1,5 @@
 ﻿using GoodToCode.Shared.Analytics.Abstractions;
+using GoodToCode.Shared.Analytics.CognitiveServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -28,7 +29,7 @@ namespace GoodToCode.Shared.Analytics.Tests
             config = new CognitiveServiceOptions(
                 configuration["Gtc:Shared:Analytics:CognitiveService:KeyCredential"],
                 new Uri(configuration["Gtc:Shared:Analytics:CognitiveService:Endpoint"]));
-            service = new TextAnalyzerService(config, log);
+            service = new TextAnalyzerService(config);
         }
 
         [TestMethod]
@@ -79,17 +80,17 @@ namespace GoodToCode.Shared.Analytics.Tests
             var sutFirst = sutResult.FirstOrDefault();
             Assert.IsTrue(sutFirst.Category.Length > 0);
             Assert.IsTrue(sutFirst.Text.Length > 0);
-            Assert.IsTrue(sutFirst.ConfidenceScore > -1);
+            Assert.IsTrue(sutFirst.Confidence > -1);
         }
 
         [TestMethod]
         public async Task TextAnalytics_Links()
         {
-            SutText = "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975, " +
-                "to develop and sell BASIC interpreters for the Altair 8800. " +
-                "During his career at Microsoft, Gates held the positions of chairman, " +
-                "chief executive officer, president and chief software architect, " +
-                "while also being the largest individual shareholder until May 2014.";
+            SutText = @"Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975, \
+                to develop and sell BASIC interpreters for the Altair 8800. \
+                During his career at Microsoft, Gates held the positions of chairman, \
+                chief executive officer, president and chief software architect, \
+                while also being the largest individual shareholder until May 2014.";
             var sutResult = await service.ExtractEntityLinksAsync(SutText);
             Assert.IsTrue(sutResult != null);
             Assert.IsTrue(sutResult.Any());

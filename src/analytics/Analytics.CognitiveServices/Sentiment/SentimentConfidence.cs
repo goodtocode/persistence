@@ -1,6 +1,6 @@
 ﻿using GoodToCode.Shared.Analytics.Abstractions;
 
-namespace GoodToCode.Shared.Analytics.Tests
+namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
     /// <summary>
     /// Abstraction of Azure.AI.TextAnalytics.TextSentiment

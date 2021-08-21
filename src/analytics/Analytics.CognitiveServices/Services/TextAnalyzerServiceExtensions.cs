@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GoodToCode.Shared.Analytics.Tests
+namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
     public static class TextAnalyzerServiceExtensions
     {

@@ -14,6 +14,12 @@ namespace GoodToCode.Shared.Analytics.Abstractions
             KeyCredential = keyCredential;
             Endpoint = endpoint;
         }
+
+        public CognitiveServiceConfiguration(string keyCredential, string endpoint)
+        {
+            KeyCredential = keyCredential;
+            Endpoint = new Uri(endpoint);
+        }
     }
 
     public class CognitiveServiceConfigurationValidation : IValidateOptions<CognitiveServiceConfiguration>

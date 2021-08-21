@@ -14,33 +14,20 @@ namespace GoodToCode.Shared.Persistence.StorageTables
 {
     public class StorageTablesItemService<T> : IStorageTablesItemService<T> where T : class, IEntity, new()
     {
-        private readonly ILogger<StorageTablesItemService<T>> logger;
         private readonly IStorageTablesServiceConfiguration config;
         private readonly TableServiceClient serviceClient;
         private readonly TableClient tableClient;
         private TableItem table;
 
-        private StorageTablesItemService(ILogger<StorageTablesItemService<T>> log)
-        {
-            logger = log;
-        }
-
-        public StorageTablesItemService(StorageTablesServiceOptions options,
-                           ILogger<StorageTablesItemService<T>> log) : this(log)
-        {
-
-            config = options.Value;
-            serviceClient = new TableServiceClient(config.ConnectionString);
-            tableClient = new TableClient(config.ConnectionString, config.TableName);
-
-        }
-
-        public StorageTablesItemService(IStorageTablesServiceConfiguration serviceConfiguration,
-                           ILogger<StorageTablesItemService<T>> log) : this(log)
+        public StorageTablesItemService(IStorageTablesServiceConfiguration serviceConfiguration)
         {
             config = serviceConfiguration;
             serviceClient = new TableServiceClient(config.ConnectionString);
             tableClient = new TableClient(config.ConnectionString, config.TableName);
+        }
+
+        public StorageTablesItemService(StorageTablesServiceOptions options) : this(options.Value)
+        {            
         }
 
         public async Task<TableItem> CreateOrGetTableAsync()
@@ -51,12 +38,11 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
             {
-                if (table == null) logger.LogError($"New table {config.TableName} was not added successfully - error details: {ex.Message}");
+                // Conflict
             }
-            catch (Exception ex)
+            catch
             {
-                logger.LogError(ex, ex.Message);
-                if (table == null) logger.LogError($"New table {config.TableName} was not added successfully - error details: {ex.Message}");
+                // Throws exceptions on normal operations
             }
 
             return table;
@@ -75,16 +61,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         public Pageable<TableEntity> GetAllItems(string partitionKey)
         {
             Pageable<TableEntity> queryResultsFilter;
-            try
-            {
-                queryResultsFilter = tableClient.Query<TableEntity>(filter: $"PartitionKey eq '{partitionKey}'");
-            }
-            catch (Exception ex)
-            {
-                logger.LogError($"Items {partitionKey} was not queried successfully - error details: {ex.Message}");
-                throw;
-            }
-
+            queryResultsFilter = tableClient.Query<TableEntity>(filter: $"PartitionKey eq '{partitionKey}'");
             return queryResultsFilter;
         }
 
@@ -109,6 +86,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         public async Task<TableEntity> AddItemAsync(T item)
         {
             TableEntity entity = default;
+
             try
             {
                 await CreateOrGetTableAsync();
@@ -121,13 +99,9 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
             {
-                if (entity == null) logger.LogError($"New entity {item.RowKey} was not added successfully - error details: {ex.Message}");
+                // Conflict
             }
-            catch (Exception ex)
-            {
-                logger.LogError($"Item {item.PartitionKey}-{item.RowKey} was not added successfully - error details: {ex.Message}");
-                throw;
-            }
+
             return entity;
         }
 

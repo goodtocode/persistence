@@ -7,37 +7,25 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Analytics.Tests
+namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
     public class TextAnalyzerService : ITextAnalyzerService
     {
-        private readonly ILogger<TextAnalyzerService> logger;
         private readonly ICognitiveServiceConfiguration config;
         private readonly AzureKeyCredential credentials;
         private readonly TextAnalyticsClient client;
 
-        private TextAnalyzerService(ILogger<TextAnalyzerService> log)
-        {
-            logger = log;
-        }
-
-        public TextAnalyzerService(CognitiveServiceOptions options,
-                           ILogger<TextAnalyzerService> log) : this(log)
-        {
-
-            config = options.Value;
-            credentials = new AzureKeyCredential(config.KeyCredential);
-            client = new TextAnalyticsClient(config.Endpoint, credentials);
-
-        }
-
-        public TextAnalyzerService(ICognitiveServiceConfiguration serviceConfiguration,
-                           ILogger<TextAnalyzerService> log) : this(log)
+        public TextAnalyzerService(ICognitiveServiceConfiguration serviceConfiguration)
         {
             config = serviceConfiguration;
             credentials = new AzureKeyCredential(config.KeyCredential);
             client = new TextAnalyticsClient(config.Endpoint, credentials);
         }
+
+        public TextAnalyzerService(CognitiveServiceOptions options) : this(options.Value)
+        {
+        }
+
 
         public async Task<ISentimentResult> AnalyzeSentimentAsync(string text)
         {
@@ -115,9 +103,9 @@ namespace GoodToCode.Shared.Analytics.Tests
                             returnData.Add(
                                 new OpinionResult(
                                     new SentimentConfidence(review.DocumentSentiment.ConfidenceScores.Positive, review.DocumentSentiment.ConfidenceScores.Negative, review.DocumentSentiment.ConfidenceScores.Neutral),
-                                    new SentimentResult(sentence.Text, (int)sentence.Sentiment, sentence.ConfidenceScores.Positive, sentence.ConfidenceScores.Negative, sentence.ConfidenceScores.Neutral),
-                                    new SentimentResult(sentenceOpinion.Target.Text, (int)sentence.Sentiment, sentenceOpinion.Target.ConfidenceScores.Positive, sentenceOpinion.Target.ConfidenceScores.Negative, sentenceOpinion.Target.ConfidenceScores.Neutral),
-                                    new SentimentResult(assessment.Text, (int)assessment.Sentiment, assessment.ConfidenceScores.Positive, assessment.ConfidenceScores.Negative, assessment.ConfidenceScores.Neutral)
+                                    new SentimentResult(sentence.Text, sentence.Sentiment, sentence.ConfidenceScores.Positive, sentence.ConfidenceScores.Negative, sentence.ConfidenceScores.Neutral),
+                                    new SentimentResult(sentenceOpinion.Target.Text, sentence.Sentiment, sentenceOpinion.Target.ConfidenceScores.Positive, sentenceOpinion.Target.ConfidenceScores.Negative, sentenceOpinion.Target.ConfidenceScores.Neutral),
+                                    new SentimentResult(assessment.Text, assessment.Sentiment, assessment.ConfidenceScores.Positive, assessment.ConfidenceScores.Negative, assessment.ConfidenceScores.Neutral)
                                     ));
                         }
                     }
@@ -135,12 +123,12 @@ namespace GoodToCode.Shared.Analytics.Tests
         public async Task<IEnumerable<EntityResult>> ExtractEntitiesAsync(string text)
         {
             var response = await client.RecognizeEntitiesAsync(text, await DetectLanguageAsync(text));
-            return response.Value.Select(x => new EntityResult() { Text = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), ConfidenceScore = x.ConfidenceScore });
+            return response.Value.Select(x => new EntityResult() { Text = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
         }
 
-        public async Task<IEnumerable<HealthcareEntityResult>> ExtractHealthcareEntitiesAsync(string text)
+        public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text)
         {
-            List<HealthcareEntityResult> returnData = new List<HealthcareEntityResult>();
+            List<IAnalyticsResult> returnData = new List<IAnalyticsResult>();
             string document1 = text;
             List<string> batchInput = new List<string>()
                 {
@@ -158,7 +146,7 @@ namespace GoodToCode.Shared.Analytics.Tests
                     {
                         foreach (var entity in entitiesInDoc.Entities)
                         {
-                            returnData.Add(new HealthcareEntityResult() { Text = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore.ToString() });
+                            returnData.Add(new HealthcareEntityResult() { Text = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
                         }
                     }
                 }
@@ -174,7 +162,7 @@ namespace GoodToCode.Shared.Analytics.Tests
                 returnValue.AddRange(item.DocumentSentiment.Sentences.Select(x => new SentimentResult(
                     text: x.Text,
                     language: languageIso,
-                    sentiment: (int)x.Sentiment,
+                    sentiment: x.Sentiment,
                     positive: x.ConfidenceScores.Positive,
                     neutral: x.ConfidenceScores.Neutral,
                     negative: x.ConfidenceScores.Negative
@@ -188,7 +176,7 @@ namespace GoodToCode.Shared.Analytics.Tests
 
             return new SentimentResult(
                 text: result.Sentences.Count > 0 ? result.Sentences.ElementAt(0).Text : string.Empty,
-                sentiment: (int)result.Sentiment,
+                sentiment: result.Sentiment,
                 positive: result.ConfidenceScores.Positive,
                 negative: result.ConfidenceScores.Negative,
                 neutral: result.ConfidenceScores.Neutral

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GoodToCode.Shared.Analytics.Abstractions
+﻿namespace GoodToCode.Shared.Analytics.Abstractions
 {
-    public class HealthcareEntityResult
+    public struct HealthcareEntityResult : IAnalyticsResult
     {
-        public string Text;
-        public string Category;
-        public string SubCategory;
-        public string Confidence;
+        public string Text { get; set; }
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
+        public double Confidence { get; set; }
     }
 }

@@ -11,8 +11,8 @@ variables:
     value: 'archive.zip'
   - name: pipelinesPath
     value: '$(System.DefaultWorkingDirectory)/pipelines'
-  - name: integrationPath
-    value: '$(System.DefaultWorkingDirectory)/integration'
+  - name: infrastructurePath
+    value: '$(System.DefaultWorkingDirectory)/infrastructure'
   - name: srcPath
     value: '$(System.DefaultWorkingDirectory)/src'
   - name: buildConfiguration

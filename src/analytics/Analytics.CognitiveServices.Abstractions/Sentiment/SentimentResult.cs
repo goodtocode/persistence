@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace GoodToCode.Shared.Analytics.Abstractions
 {
@@ -11,7 +12,7 @@ namespace GoodToCode.Shared.Analytics.Abstractions
 
         public string LanguageIso { get; } = "en-US";
 
-        public int Sentiment { get; } = (int)SentimentScore.Neutral;
+        public Enum Sentiment { get; } = SentimentScore.Neutral;
 
         public double Negative { get; }
 
@@ -19,7 +20,7 @@ namespace GoodToCode.Shared.Analytics.Abstractions
 
         public double Positive { get; }
 
-        public SentimentResult(string text, int sentiment, double positive, double neutral, double negative, string language)
+        public SentimentResult(string text, Enum sentiment, double positive, double neutral, double negative, string language)
         {
             Positive = positive;
             Neutral = neutral;
@@ -29,11 +30,11 @@ namespace GoodToCode.Shared.Analytics.Abstractions
             LanguageIso = language;
         }
 
-        public SentimentResult(string text, int sentiment, double positive, double neutral, double negative) : this(text, sentiment, positive, neutral, negative, "en-US")
+        public SentimentResult(string text, Enum sentiment, double positive, double neutral, double negative) : this(text, sentiment, positive, neutral, negative, "en-US")
         {
         }
 
-        public SentimentResult(string text, string language, int sentiment, IConfidence confidence) : this(text, sentiment, confidence.Positive, confidence.Neutral, confidence.Negative, language)
+        public SentimentResult(string text, string language, Enum sentiment, IConfidence confidence) : this(text, sentiment, confidence.Positive, confidence.Neutral, confidence.Negative, language)
         {
         }
     }
