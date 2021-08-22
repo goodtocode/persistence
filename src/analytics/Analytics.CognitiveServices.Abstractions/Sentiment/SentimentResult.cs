@@ -8,7 +8,7 @@ namespace GoodToCode.Shared.Analytics.Abstractions
     /// </summary>
     public class SentimentResult : ISentimentResult
     {
-        public string Text { get; } = string.Empty;
+        public string AnalyzedText { get; } = string.Empty;
 
         public string LanguageIso { get; } = "en-US";
 
@@ -25,7 +25,7 @@ namespace GoodToCode.Shared.Analytics.Abstractions
             Positive = positive;
             Neutral = neutral;
             Negative = negative;
-            Text = text;
+            AnalyzedText = text;
             Sentiment = sentiment;
             LanguageIso = language;
         }

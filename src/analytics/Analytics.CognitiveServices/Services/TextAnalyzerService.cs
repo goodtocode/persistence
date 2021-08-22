@@ -124,7 +124,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         public async Task<IEnumerable<EntityResult>> ExtractEntitiesAsync(string text)
         {
             var response = await client.RecognizeEntitiesAsync(text, await DetectLanguageAsync(text));
-            return response.Value.Select(x => new EntityResult() { Text = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
+            return response.Value.Select(x => new EntityResult() { AnalyzedText = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
         }
 
         public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text)
@@ -147,7 +147,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                     {
                         foreach (var entity in entitiesInDoc.Entities)
                         {
-                            returnData.Add(new HealthcareEntityResult() { Text = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
+                            returnData.Add(new HealthcareEntityResult() { AnalyzedText = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
                         }
                     }
                 }
