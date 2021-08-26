@@ -51,7 +51,6 @@ stages:
           - template: steps/src-test-steps.yml
             parameters:
               armPath: 'infrastructure'
-              AppSettingsConnection: '$(AppSettingsConnection)'
 
       - job: deploy_nuget
         dependsOn: test_src
