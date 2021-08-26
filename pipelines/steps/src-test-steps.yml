@@ -10,8 +10,7 @@ steps:
   - task: CmdLine@2
     inputs:
       script: |
-        echo $(AppSettingsConnection)
-        echo $(appcsKey)
+        echo '$(AppSettingsConnection)''
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet test'
