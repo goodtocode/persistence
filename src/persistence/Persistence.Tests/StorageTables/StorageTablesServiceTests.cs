@@ -67,6 +67,28 @@ namespace GoodToCode.Shared.Persistence.Tests
             Assert.IsTrue(writeItem == null);
         }
 
+        [TestMethod]
+        public async Task StorageTables_WriteList()
+        {
+            var items = new List<EntityA>() { 
+                new EntityA("PartWrite1") { SomeString = "Some write data1." }, 
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite3") { SomeString = "Some write data3." } };
+            foreach(var item in items)
+            {
+                await SutItem.AddItemAsync(item);
+            }
+            foreach(var item in items)
+            {
+                var writeItem = SutItem.GetItem(item.RowKey.ToString());
+                Assert.IsTrue(writeItem.RowKey == item.RowKey);
+                Assert.IsTrue(writeItem["SomeString"]?.ToString() == item.SomeString);
+                await SutItem.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
+                writeItem = SutItem.GetItem(item.RowKey);
+                Assert.IsTrue(writeItem == null);
+            }
+        }
+
         [TestCleanup]
         public async Task Cleanup()
         {
