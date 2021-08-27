@@ -94,7 +94,7 @@ stages:
               armPath: 'infrastructure'
 
       - job: deploy_nuget
-        dependsOn: deploy_infrastructure
+        dependsOn: test_src
         steps:
           - template: steps/nuget-deploy-external-steps.yml
             parameters:
