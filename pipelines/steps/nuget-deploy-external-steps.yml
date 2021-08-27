@@ -16,4 +16,11 @@ steps:
         versionSpec: '*'
         checkLatest: true
 
-    - script: nuget push $(artifactsPath)/drop/*.nupkg $(nugetKey) -src https://api.nuget.org/v3/index.json
+    - task: NuGetCommand@2
+      inputs:
+        command: 'push'
+        feedsToUse: 'select'
+        nuGetFeedType: 'external'
+        includeNuGetOrg: true
+        publishFeedCredentials: '$(nugetServiceConnection)'
+        packagesToPush: $(artifactsPath)/**/*.nupkg    
