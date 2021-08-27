@@ -79,6 +79,20 @@ stages:
             parameters:
               armPath: 'infrastructure'
 
+      - job: build_src
+        dependsOn: deploy_infrastructure
+        steps:
+          - template: steps/src-build-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: test_src
+        dependsOn: build_src
+        steps:
+          - template: steps/src-test-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
       - job: deploy_nuget
         dependsOn: deploy_infrastructure
         steps:
