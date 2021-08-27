@@ -16,4 +16,4 @@ steps:
         versionSpec: '*'
         checkLatest: true
 
-    - script: nuget push $(System.ArtifactsDirectory)/*.nupkg -ApiKey $(nugetKey) -Source https://api.nuget.org/v3/index.json -NonInteractive -Verbosity detailed
+    - script: nuget push $(Build.ArtifactStagingDirectory)/*.nupkg -ApiKey $(nugetKey) -Source https://api.nuget.org/v3/index.json -NonInteractive -Verbosity detailed
