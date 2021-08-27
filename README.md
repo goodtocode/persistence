@@ -1,12 +1,16 @@
-# GoodToCode Stack
+# GoodToCode Shared Library
 
-GoodToCode Stack is a Microservice/Serverless centric collection of common Domain Entities that you often include in software applications. These Entities, like Person and Location, can be assembled and used in your business apps and APIs.
-The goal of the GoodToCode Stack is to quick-start custom software applications by providing easy-to-extend Domain Entities and the APIs/Azure Functions that exposes these entities.
+GoodToCode Shared is a microservice/serverless centric collection of NuGet packages that support common plumbing done in Azure Functions, Web API, Blazor and Razor Pages. GoodToCode Shared is based on serverless, DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
 
-GoodToCode Stack is based on DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
+## .NET Versions
+This library remains current with .NET, updating dependencies 3-6 months after a major release. Current versions are:
+* .NET 5.0
+* .NET Standard 2.1
+* Azure Functions v3 running .NET 5.0
 
-## Installation
-### Environment Variables
+## How-to Setup Environment to run *.Tests.csproj projects
+### Two (2) Environment Variables are required
+The various *.Tests.csproj projects depend on Azure App Configuration to operate. If you wish to execute the test methods:
 1. Create "AzureSettingConnection" (required)
 * Go to portal.azure.com
 * Create or find your Azure App Configuration service connection string
@@ -20,56 +24,33 @@ GoodToCode Stack is based on DDD, onion-architecture, vertical slice and CQRS in
 
     Powershell: $env:ASPNETCORE_ENVIRONMENT="Development"
 
-### Azure App Configuration
+### Each test project includes AppSettingsKey.cs files
+If a test project depends on a configuration setting, you will find an AppSettingsKeys.cs file.
+If a key is required, please add the key by:
 1. Go to portal.azure.com
 2. Create or find your Azure App Configuration service 
-3. Add the following keys, with value from your Azure resources:
-* Stack:Chronology:ApiUrl - {Your-ApiService-Url} - text/plain
-* Stack:Chronology:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
-* Stack:Chronology:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
-* Stack:Locality:ApiUrl - {Your-ApiService-Url} - text/plain
-* Stack:Locality:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
-* Stack:Locality:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
-* Stack:Occurrences:ApiUrl - {Your-ApiService-Url} - text/plain
-* Stack:Occurrences:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
-* Stack:Occurrences:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
-* Stack:Shared:Sentinel - 1 - text/plain
-* Stack:Shared:SqlConnection - {Your-AzureSql-ConnectionString} - text/plain
-* Stack:Subjects:ApiUrl - {Your-ApiService-Url} - text/plain
-* Stack:Subjects:FunctionsCode - {Your-FunctionApp-AppKey} - text/plain
-* Stack:Subjects:FunctionsUrl - {Your-FunctionApp-Url} - text/plain
+3. Add the required keys, with value from your Azure resources. I.e.
+* Gtc:Shared:Sentinel - true - text/plain
 
 ## Namespaces
-### GoodToCode.Chronology
-Includes all Domain Models for any chronological entity such as: Schedules (Schedule entity) and Hours of Operations (TimeRecurring entity)
+### GoodToCode.Shared.Analytics
+Includes all abstractions, classes and service collection extensions for Azure Cognitive Services text analytics. More APIs are added each iteration.
 
-### GoodToCode.Locality
-Includes all Domain Models for any locale-centric entity such as: Locations (Location entity) and LatLongs (LatLong entity)
+### GoodToCode.Shared.Blob
+Includes all abstractions, classes and service collection extensions for Azure Blob Storage, Excel file reading/writing, and CSV reading/writing.
 
-### GoodToCode.Subjects
-Includes all Domain Models for any subject entity such as: People (Person entity) and Businesses (Business entity)
+### GoodToCode.Shared.dotNet
+Includes all extensions for .NET. I.e. convert.ToDictionary<>().
 
-### GoodToCode.Occurrences
-Includes all Domain Models for any occurnce of one or more Chronology + Locality + Subject entities such as: Events (Event entity) and Appointments (Appointment entity)
+### GoodToCode.Shared.Patterns
+Includes all abstractions, classes and service collection extensions for common patterns, architectures and principles. Such as CQRS, Repository, DDD, Service Collection Extension, etc. Serverless patterns are a focus as well.
 
-### GoodToCode.Shared
-Shared kernel on which all projects depend. Primary aspect is GoodToCode.Stack.Abstractions, which allows external applications to code to abstractions of the stack.
+### GoodToCode.Shared.Persistence
+Includes all abstractions, classes and service collection extensions for Azure Storage Tables, CosmosDb, Entity Framework (EF) Core, etc.
 
-## Projects
-### GoodToCode.Presentation.Api: 
-ASP.NET Web API endpoints exposing that vertical's Application Service
+### GoodToCode.Shared.Spatial
+Includes all abstractions, classes and service collection extensions for Geography, Geometry and Spatial operations.
 
-### GoodToCode.Presentation.Functions: 
-Azure Functions HTTP endpoints exposing that vertical's Application Service
 
-### GoodToCode.Application.Services: 
-CQRS Commands and Queries that call aggregate roots.
-
-### GoodToCode.Domain.Models: 
-Domain aggregates and domain models
-
-### GoodToCode.Infrastructure.Persistence: 
-EF Core code first persistence layer for SQL Server, CosmosDb, Azure Storage Tables and PosgreSQL
-
-Disclaimer: This work is under development mostly for internal projects, and is still highly volatile. Watch for any Releases, which will include tested and hardened versions.
+Disclaimer: This work is under development mostly for internal projects, and is still highly volatile. Merges to main branch are tested and pushed to NuGet.org.
 
