@@ -28,7 +28,7 @@ namespace GoodToCode.Shared.Analytics.Tests
             configuration = new AppConfigurationFactory().Create();
             config = new CognitiveServiceOptions(
                 configuration["Gtc:Shared:Analytics:CognitiveService:KeyCredential"],
-                new Uri(configuration["Gtc:Shared:Analytics:CognitiveService:Endpoint"]));
+                configuration["Gtc:Shared:Analytics:CognitiveService:Endpoint"]);
             service = new TextAnalyzerService(config);
         }
 
@@ -67,7 +67,7 @@ namespace GoodToCode.Shared.Analytics.Tests
             Assert.IsTrue(sutResult.Any());
             var sutFirst = sutResult.FirstOrDefault();
             Assert.IsTrue(sutFirst.Category.Length > 0);
-            Assert.IsTrue(sutFirst.Text.Length > 0);
+            Assert.IsTrue(sutFirst.AnalyzedText.Length > 0);
         }
 
         [TestMethod]
@@ -79,7 +79,7 @@ namespace GoodToCode.Shared.Analytics.Tests
             Assert.IsTrue(sutResult.Any());
             var sutFirst = sutResult.FirstOrDefault();
             Assert.IsTrue(sutFirst.Category.Length > 0);
-            Assert.IsTrue(sutFirst.Text.Length > 0);
+            Assert.IsTrue(sutFirst.AnalyzedText.Length > 0);
             Assert.IsTrue(sutFirst.Confidence > -1);
         }
 

@@ -2,6 +2,7 @@
 using Azure.AI.TextAnalytics;
 using GoodToCode.Shared.Analytics.Abstractions;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -19,7 +20,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         {
             config = serviceConfiguration;
             credentials = new AzureKeyCredential(config.KeyCredential);
-            client = new TextAnalyticsClient(config.Endpoint, credentials);
+            client = new TextAnalyticsClient(new Uri(config.Endpoint), credentials);
         }
 
         public TextAnalyzerService(CognitiveServiceOptions options) : this(options.Value)
@@ -123,7 +124,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         public async Task<IEnumerable<EntityResult>> ExtractEntitiesAsync(string text)
         {
             var response = await client.RecognizeEntitiesAsync(text, await DetectLanguageAsync(text));
-            return response.Value.Select(x => new EntityResult() { Text = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
+            return response.Value.Select(x => new EntityResult() { AnalyzedText = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
         }
 
         public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text)
@@ -146,7 +147,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                     {
                         foreach (var entity in entitiesInDoc.Entities)
                         {
-                            returnData.Add(new HealthcareEntityResult() { Text = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
+                            returnData.Add(new HealthcareEntityResult() { AnalyzedText = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
                         }
                     }
                 }

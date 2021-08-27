@@ -51,12 +51,11 @@ stages:
           - template: steps/src-test-steps.yml
             parameters:
               armPath: 'infrastructure'
-              AppSettingsConnection: '$(AppSettingsConnection)'
 
       - job: deploy_nuget
         dependsOn: test_src
         steps:
-          - template: steps/nuget-deploy-steps.yml
+          - template: steps/nuget-deploy-internal-steps.yml
             parameters:
               armPath: 'infrastructure'              
 
@@ -82,6 +81,6 @@ stages:
       - job: deploy_nuget
         dependsOn: deploy_infrastructure
         steps:
-          - template: steps/nuget-deploy-steps.yml
+          - template: steps/nuget-deploy-external-steps.yml
             parameters:
               armPath: 'infrastructure'
