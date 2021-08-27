@@ -11,11 +11,9 @@ steps:
         artifactName: 'drop'
         downloadPath: '$(System.ArtifactsDirectory)'
 
-    - task: NuGetAuthenticate@0
+    - task: NuGetToolInstaller@1
       inputs:
-        nuGetServiceConnections: '$(nugetServiceConnection)'
-    
-    - task: NuGetCommand@2
-      inputs:
-        command: push
-        nuGetFeedType: '$(nugetType)'
+        versionSpec: '*'
+        checkLatest: true
+
+    - script: nuget push $(System.ArtifactsDirectory)/*.nupkg -ApiKey $(nugetKey) -Source https://api.nuget.org/v3/index.json -NonInteractive -Verbosity detailed
