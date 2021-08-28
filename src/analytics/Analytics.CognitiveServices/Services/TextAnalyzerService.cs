@@ -62,10 +62,10 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return returnData;
         }
 
-        public async Task<KeyPhraseResult> ExtractKeyPhrasesAsync(string text)
+        public async Task<KeyPhrases> ExtractKeyPhrasesAsync(string text)
         {
             var response = await client.ExtractKeyPhrasesAsync(text, await DetectLanguageAsync(text));
-            return new KeyPhraseResult(response.Value);
+            return new KeyPhrases(response.Value);
         }
 
         public async Task<LinkedResult> ExtractEntityLinksAsync(string text)
