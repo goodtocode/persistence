@@ -2,7 +2,7 @@
 
 namespace GoodToCode.Shared.Analytics.Abstractions
 {
-    public interface ISentimentResult : IAnalyticsText, IConfidence, ILanguageIso
+    public interface ISentimentResult : IAnalyzedText, IConfidence, ILanguageIso
     {
         Enum Sentiment { get; }
     }
