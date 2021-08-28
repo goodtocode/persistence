@@ -11,7 +11,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         Task<ISentimentResult> AnalyzeSentimentAsync(string text, string languageIso);
         Task<IList<ISentimentResult>> AnalyzeSentimentBatchAsync(string text);
         Task<string> DetectLanguageAsync(string text);
-        Task<IEnumerable<EntityResult>> ExtractEntitiesAsync(string text);
+        Task<IEnumerable<AnalyticsResult>> ExtractEntitiesAsync(string text);
         Task<LinkedResult> ExtractEntityLinksAsync(string text);
         Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text);
         Task<KeyPhrases> ExtractKeyPhrasesAsync(string text);

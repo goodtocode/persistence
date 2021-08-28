@@ -121,10 +121,10 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return response.Value.Iso6391Name;
         }
 
-        public async Task<IEnumerable<EntityResult>> ExtractEntitiesAsync(string text)
+        public async Task<IEnumerable<AnalyticsResult>> ExtractEntitiesAsync(string text)
         {
             var response = await client.RecognizeEntitiesAsync(text, await DetectLanguageAsync(text));
-            return response.Value.Select(x => new EntityResult() { AnalyzedText = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
+            return response.Value.Select(x => new AnalyticsResult() { AnalyzedText = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
         }
 
         public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text)
