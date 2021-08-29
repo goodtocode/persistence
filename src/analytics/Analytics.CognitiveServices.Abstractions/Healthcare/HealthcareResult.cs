@@ -1,6 +1,6 @@
 ﻿namespace GoodToCode.Shared.Analytics.Abstractions
 {
-    public struct HealthcareResult : IAnalyticsResult
+    public class HealthcareResult : IAnalyticsResult
     {
         public string AnalyzedText { get; set; }
         public string Category { get; set; }
