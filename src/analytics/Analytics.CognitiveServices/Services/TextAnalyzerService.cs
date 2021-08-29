@@ -62,10 +62,10 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return returnData;
         }
 
-        public async Task<KeyPhraseResult> ExtractKeyPhrasesAsync(string text)
+        public async Task<KeyPhrases> ExtractKeyPhrasesAsync(string text)
         {
             var response = await client.ExtractKeyPhrasesAsync(text, await DetectLanguageAsync(text));
-            return new KeyPhraseResult(response.Value);
+            return new KeyPhrases(response.Value);
         }
 
         public async Task<LinkedResult> ExtractEntityLinksAsync(string text)
@@ -121,10 +121,10 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return response.Value.Iso6391Name;
         }
 
-        public async Task<IEnumerable<EntityResult>> ExtractEntitiesAsync(string text)
+        public async Task<IEnumerable<AnalyticsResult>> ExtractEntitiesAsync(string text)
         {
             var response = await client.RecognizeEntitiesAsync(text, await DetectLanguageAsync(text));
-            return response.Value.Select(x => new EntityResult() { AnalyzedText = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
+            return response.Value.Select(x => new AnalyticsResult() { AnalyzedText = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
         }
 
         public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text)
@@ -147,7 +147,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                     {
                         foreach (var entity in entitiesInDoc.Entities)
                         {
-                            returnData.Add(new HealthcareEntityResult() { AnalyzedText = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
+                            returnData.Add(new HealthcareResult() { AnalyzedText = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
                         }
                     }
                 }
