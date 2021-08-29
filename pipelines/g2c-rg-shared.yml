@@ -23,8 +23,7 @@ stages:
   - stage: development
     variables:
       - template: variables/development.yml
-    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
-      
+    condition: ne(variables['Build.SourceBranch'], 'refs/heads/main')
     jobs:
       - job: deploy_landing_zone                
         steps:
@@ -63,7 +62,7 @@ stages:
   - stage: production
     variables:
       - template: variables/production.yml
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
 
     jobs:
       - job: deploy_landing_zone                
@@ -79,8 +78,22 @@ stages:
             parameters:
               armPath: 'infrastructure'
 
-      - job: deploy_nuget
+      - job: build_src
         dependsOn: deploy_infrastructure
+        steps:
+          - template: steps/src-build-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: test_src
+        dependsOn: build_src
+        steps:
+          - template: steps/src-test-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+
+      - job: deploy_nuget
+        dependsOn: test_src
         steps:
           - template: steps/nuget-deploy-external-steps.yml
             parameters:
