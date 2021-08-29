@@ -38,9 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Persistence.Abstractions\Persistence.Abstractions.csproj" />
-    <ProjectReference Include="..\Persistence.CosmosDb\Persistence.CosmosDb.csproj" />
-    <ProjectReference Include="..\Persistence.StorageTables\Persistence.StorageTables.csproj" />
+    <ProjectReference Include="..\Workflows.Abstractions\Workflows.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
