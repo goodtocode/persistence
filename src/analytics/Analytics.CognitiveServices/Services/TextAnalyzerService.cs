@@ -147,7 +147,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                     {
                         foreach (var entity in entitiesInDoc.Entities)
                         {
-                            returnData.Add(new HealthcareEntityResult() { AnalyzedText = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
+                            returnData.Add(new HealthcareResult() { AnalyzedText = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
                         }
                     }
                 }
