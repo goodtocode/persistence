@@ -35,20 +35,20 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
 
         public async Task<ISentimentResult> AnalyzeSentimentAsync(string text, string languageIso)
         {
-            ISentimentResult returnData = null;
+            ISentimentResult returnSentiment = null;
             if (text.Length > 0)
             {
                 var result = await client.AnalyzeSentimentAsync(text, languageIso);
-                returnData = ToSentimentResult(result);
+                returnSentiment = result.Value.ToSentimentResult();
             }
-            return returnData;
+            return returnSentiment;
         }
 
         public async Task<IList<ISentimentResult>> AnalyzeSentimentBatchAsync(string text)
         {
-            List<ISentimentResult> returnData;
+            List<ISentimentResult> returnSentiment;
             AnalyzeSentimentResultCollection results = null;
-            var sentences = SplitParagraph(text);
+            var sentences = Regex.Split(text, @"(?<=[\.!\?])\s+");
             string language = "en-US";
             if (sentences.Length > 0)
             {
@@ -57,9 +57,9 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                 results = await client.AnalyzeSentimentBatchAsync(sentences, language);
             }
 
-            returnData = ToSentimentResult(results, language);
+            returnSentiment = results.ToSentimentResult(language);
 
-            return returnData;
+            return returnSentiment;
         }
 
         public async Task<KeyPhrases> ExtractKeyPhrasesAsync(string text)
@@ -154,43 +154,5 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             }
             return returnData;
         }
-
-        public List<ISentimentResult> ToSentimentResult(AnalyzeSentimentResultCollection results, string languageIso)
-        {
-            List<ISentimentResult> returnValue = new List<ISentimentResult>();
-            foreach (var item in results)
-            {
-                returnValue.AddRange(item.DocumentSentiment.Sentences.Select(x => new SentimentResult(
-                    text: x.Text,
-                    language: languageIso,
-                    sentiment: x.Sentiment,
-                    positive: x.ConfidenceScores.Positive,
-                    neutral: x.ConfidenceScores.Neutral,
-                    negative: x.ConfidenceScores.Negative
-                )));
-            }
-            return returnValue;
-        }
-
-        public ISentimentResult ToSentimentResult(DocumentSentiment result)
-        {
-
-            return new SentimentResult(
-                text: result.Sentences.Count > 0 ? result.Sentences.ElementAt(0).Text : string.Empty,
-                sentiment: result.Sentiment,
-                positive: result.ConfidenceScores.Positive,
-                negative: result.ConfidenceScores.Negative,
-                neutral: result.ConfidenceScores.Neutral
-            );
-        }
-
-        public string[] SplitParagraph(string paragraph)
-        {
-            return Regex.Split(paragraph, @"(?<=[\.!\?])\s+");
-        }
-
-
-
-
     }
 }
