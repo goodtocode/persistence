@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Persistence.Tests
+﻿namespace GoodToCode.Shared.Blob.Tests
 {
     public enum LoggerTypes
     {
