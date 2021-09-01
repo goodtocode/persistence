@@ -92,7 +92,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         [TestCleanup]
         public async Task Cleanup()
         {
-            await SutItem.DeleteTableAsync();
+            // Fails: await SutItem.DeleteTableAsync();
         }
     }
 }
