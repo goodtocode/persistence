@@ -35,7 +35,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new CosmosDbServiceOptions(
                 configuration["Gtc:Shared:Persistence:CosmosDb:ConnectionString"],
-                $"AutomatedTest-{DateTime.UtcNow:O}"); 
+                $"AutomatedTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}"); 
             SutItem = new CosmosDbItemService<EntityA>(configCosmos);
         }
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace GoodToCode.Shared.Persistence.Tests
+namespace GoodToCode.Shared.Blob.Tests
 {
     public class LoggerFactory
     {

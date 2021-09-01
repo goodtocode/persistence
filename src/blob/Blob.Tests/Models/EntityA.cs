@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Persistence.Tests
+namespace GoodToCode.Shared.Blob.Tests
 {
     public class EntityA
     {

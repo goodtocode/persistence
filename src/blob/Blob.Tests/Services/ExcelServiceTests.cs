@@ -38,7 +38,7 @@ namespace GoodToCode.Shared.Blob.Tests
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await File.ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
             var excelService = new ExcelService(Path.GetFileName(SutXlsxFile));
@@ -51,7 +51,7 @@ namespace GoodToCode.Shared.Blob.Tests
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await File.ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
             var excelService = new ExcelService(Path.GetFileName(SutXlsxFile));
@@ -73,7 +73,7 @@ namespace GoodToCode.Shared.Blob.Tests
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await File.ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
             var excelService = new ExcelService(Path.GetFileName(SutXlsxFile));
@@ -95,7 +95,7 @@ namespace GoodToCode.Shared.Blob.Tests
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await File.ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
             var excelService = new ExcelService(Path.GetFileName(SutXlsxFile));

@@ -21,9 +21,9 @@ variables:
 
 stages:
   - stage: development
-    variables:
-      - template: variables/development.yml
     condition: ne(variables['Build.SourceBranch'], 'refs/heads/main')
+    variables:
+      - template: variables/development.yml    
     jobs:
       - job: deploy_landing_zone                
         steps:
@@ -60,12 +60,12 @@ stages:
               armPath: 'infrastructure'              
 
   - stage: production
-    variables:
-      - template: variables/production.yml
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+    variables:
+      - template: variables/production.yml    
 
     jobs:
-      - job: deploy_landing_zone                
+      - job: deploy_landing_zone
         steps:
           - template: steps/lz-steps.yml
             parameters:

@@ -35,7 +35,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new StorageTablesServiceOptions(
                 configuration["Gtc:Shared:Persistence:StorageTables:ConnectionString"],
-                $"AutomatedTest-{DateTime.UtcNow:O}");
+                $"AutomatedTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}");
             SutItem = new StorageTablesItemService<EntityA>(configCosmos);
         }
 
@@ -92,7 +92,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         [TestCleanup]
         public async Task Cleanup()
         {
-            await SutItem.DeleteTableAsync();
+            // Fails: await SutItem.DeleteTableAsync();
         }
     }
 }

@@ -40,8 +40,9 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             {
                 // Conflict
             }
-            catch
+            catch (Exception ex)
             {
+                ex = ex;
                 // Throws exceptions on normal operations
             }
 
