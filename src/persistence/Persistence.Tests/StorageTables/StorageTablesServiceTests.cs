@@ -34,8 +34,8 @@ namespace GoodToCode.Shared.Persistence.Tests
             logItem = LoggerFactory.CreateLogger<StorageTablesItemService<EntityA>>();
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new StorageTablesServiceOptions(
-                configuration["Gtc:Shared:Persistence:StorageTables:ConnectionString"],
-                $"AutomatedTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}");
+                configuration[AppConfigurationKeys.StorageTablesConnectionString],
+                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}");
             SutItem = new StorageTablesItemService<EntityA>(configCosmos);
         }
 

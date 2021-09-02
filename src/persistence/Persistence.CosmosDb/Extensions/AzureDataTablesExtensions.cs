@@ -1,6 +1,5 @@
 ﻿using Azure.Data.Tables;
 using GoodToCode.Shared.Persistence.Abstractions;
-using GoodToCode.Shared.Persistence.CosmosDb;
 using System.Collections.Generic;
 using System.Linq;
 
