@@ -27,15 +27,14 @@ namespace GoodToCode.Shared.Persistence.Tests
             ///         await _dataService.AddAsync(myFileContent);
             ///     }
         }
-
         
         public void Initialize()
         {
             log = LoggerFactory.CreateLogger<CosmosDbServiceTests>();
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new CosmosDbServiceOptions(
-                configuration["Gtc:Shared:Persistence:CosmosDb:ConnectionString"],
-                $"AutomatedTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}"); 
+                configuration[AppConfigurationKeys.CosmosDbConnectionString],
+                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}"); 
             SutItem = new CosmosDbItemService<EntityA>(configCosmos);
         }
 
