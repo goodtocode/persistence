@@ -1,4 +1,4 @@
-﻿namespace GoodToCode:Shared
+﻿namespace GoodToCode.Shared.Analytics
 {
     public struct FunctionEndpointNames
     {
