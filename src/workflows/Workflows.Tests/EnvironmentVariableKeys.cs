@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.dotNet
+namespace GoodToCode.Shared.Workflows
 {
     public static class EnvironmentVariables
     {

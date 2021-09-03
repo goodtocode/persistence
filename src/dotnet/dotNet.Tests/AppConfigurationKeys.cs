@@ -1,12 +1,12 @@
-﻿namespace Ciac.Haas.Analytics
+﻿namespace GoodToCode.Shared.dotNet
 {
     public struct AppConfigurationKeys
     {
-        public const string SentinelSetting = "Ciac:Shared:Sentinel";
-        public const string CognitiveServicesEndpoint = "Ciac:Haas:Ingress:CognitiveServices:Endpoint";
-        public const string CognitiveServicesKeyCredential = "Ciac:Haas:Ingress:CognitiveServices:KeyCredential";
-        public const string TextAnalyticsEndpoint = "Ciac:Haas:Ingress:TextAnalytics:Endpoint";
-        public const string TextAnalyticsKeyCredential = "Ciac:Haas:Ingress:TextAnalytics:KeyCredential";
-        public const string StorageTablesConnectionString = "Ciac:Haas:Ingress:StorageTables:ConnectionString";
+        public const string SentinelSetting = "Gtc:Shared:Sentinel";
+        public const string CognitiveServicesEndpoint = "Gtc:Shared:Analytics:CognitiveService:Endpoint";
+        public const string CognitiveServicesKeyCredential = "Gtc:Shared:Analytics:CognitiveService:KeyCredential";
+        public const string TextAnalyticsEndpoint = "Gtc:Shared:Analytics:TextAnalytics:Endpoint";
+        public const string TextAnalyticsKeyCredential = "Gtc:Shared:Analytics:TextAnalytics:KeyCredential";
+        public const string StorageTablesConnectionString = "Gtc:Shared:Persistence:StorageTables:ConnectionString";
     }
 }

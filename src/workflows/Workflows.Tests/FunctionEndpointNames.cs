@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Spatial
+﻿namespace GoodToCode.Shared.Workflows
 {
     public struct FunctionEndpointNames
     {

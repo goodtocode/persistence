@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Patterns
+﻿namespace GoodToCode.Shared.Workflows
 {
     public struct AppConfigurationKeys
     {
