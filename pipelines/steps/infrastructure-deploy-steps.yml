@@ -93,33 +93,3 @@ steps:
         csmParametersFile: "${{ parameters.armPath }}/appcs-appconfigurationstore.parameters.json"
         deploymentMode: "Incremental"
         overrideParameters: -name "$(appcsName)" -sku "$(appcsSku)"
-
-  - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Validate $(cosmosName)"
-    inputs:
-        deploymentScope: "Resource Group"
-        azureResourceManagerConnection: "$(subscriptionName)"
-        subscriptionId: "$(subscriptionId)"
-        action: "Create Or Update Resource Group"
-        resourceGroupName: "$(rgName)"
-        location: "$(locationName)"
-        templateLocation: "Linked artifact"
-        csmFile: "${{ parameters.armPath }}/cosmos-cosmosdb.json"
-        csmParametersFile: "${{ parameters.armPath }}/cosmos-cosmosdb.parameters.json"        
-        deploymentMode: "Validation"
-        overrideParameters: -name "$(cosmosName)"
-
-  - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Deploy $(cosmosName)"
-    inputs:
-        deploymentScope: "Resource Group"
-        azureResourceManagerConnection: "$(subscriptionName)"
-        subscriptionId: "$(subscriptionId)"
-        action: "Create Or Update Resource Group"
-        resourceGroupName: "$(rgName)"
-        location: "$(locationName)"
-        templateLocation: "Linked artifact"
-        csmFile: "${{ parameters.armPath }}/cosmos-cosmosdb.json"
-        csmParametersFile: "${{ parameters.armPath }}/cosmos-cosmosdb.parameters.json"
-        deploymentMode: "Incremental"
-        overrideParameters: -name "$(cosmosName)"
