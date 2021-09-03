@@ -35,6 +35,36 @@ steps:
         overrideParameters: -name "$(cognitiveServicesName)"
 
   - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Validate $(cogtextName)"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "$(subscriptionName)"
+        subscriptionId: "$(subscriptionId)"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "$(rgName)"
+        location: "$(locationName)"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/cogtext-textanalytics.json"
+        csmParametersFile: "${{ parameters.armPath }}/cogtext-textanalytics.parameters.json"
+        deploymentMode: "Validation"
+        overrideParameters: -name "$(cogtextName)"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Deploy $(cogtextName)"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "$(subscriptionName)"
+        subscriptionId: "$(subscriptionId)"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "$(rgName)"
+        location: "$(locationName)"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/cogtext-textanalytics.json"
+        csmParametersFile: "${{ parameters.armPath }}/cogtext-textanalytics.parameters.json"
+        deploymentMode: "Incremental"
+        overrideParameters: -name "$(cogtextName)"
+
+  - task: AzureResourceManagerTemplateDeployment@3
     displayName: "Validate $(appcsName)"
     inputs:
         deploymentScope: "Resource Group"
