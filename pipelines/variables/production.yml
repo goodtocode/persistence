@@ -13,6 +13,14 @@ variables:
     value: 'Standard'
   - name: 'appInsightsName'
     value: 'appi-shared-prod-225'
+  - name: cogName
+    value: 'cog-shared-prod-225'
+  - name: cogsku
+    value: 'S0'
+  - name: cogtextName
+    value: 'cogtext-shared-prod-225'
+  - name: cogtextSku
+    value: 'F0'
   - name: 'cosmosName'
     value: 'cosmos-shared-prod-225'
   - name: 'kvName'
@@ -29,5 +37,3 @@ variables:
     value: 'stsharedprod225'
   - name: workspaceName
     value: 'work-shared-prod-225'
-  - name: cognitiveServicesName
-    value: 'cog-shared-prod-225'

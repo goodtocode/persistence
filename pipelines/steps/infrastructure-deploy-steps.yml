@@ -5,7 +5,7 @@ parameters:
 
 steps:
   - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Validate $(cognitiveServicesName)"
+    displayName: "Validate $(cogName)"
     inputs:
         deploymentScope: "Resource Group"
         azureResourceManagerConnection: "$(subscriptionName)"
@@ -17,10 +17,10 @@ steps:
         csmFile: "${{ parameters.armPath }}/cog-cognitiveservices.json"        
         csmParametersFile: "${{ parameters.armPath }}/cog-cognitiveservices.parameters.json"        
         deploymentMode: "Validation"
-        overrideParameters: -name "$(cognitiveServicesName)"
+        overrideParameters: -name "$(cogName)" -sku "$(cogSku)"
 
   - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Deploy $(cognitiveServicesName)"
+    displayName: "Deploy $(cogName)"
     inputs:
         deploymentScope: "Resource Group"
         azureResourceManagerConnection: "$(subscriptionName)"
@@ -32,7 +32,7 @@ steps:
         csmFile: "${{ parameters.armPath }}/cog-cognitiveservices.json"
         csmParametersFile: "${{ parameters.armPath }}/cog-cognitiveservices.parameters.json"
         deploymentMode: "Incremental"
-        overrideParameters: -name "$(cognitiveServicesName)"
+        overrideParameters: -name "$(cogName)" -sku "$(cogSku)"
 
   - task: AzureResourceManagerTemplateDeployment@3
     displayName: "Validate $(cogtextName)"
@@ -47,7 +47,7 @@ steps:
         csmFile: "${{ parameters.armPath }}/cogtext-textanalytics.json"
         csmParametersFile: "${{ parameters.armPath }}/cogtext-textanalytics.parameters.json"
         deploymentMode: "Validation"
-        overrideParameters: -name "$(cogtextName)"
+        overrideParameters: -name "$(cogtextName)" -sku "$(cogtextSku)"
 
   - task: AzureResourceManagerTemplateDeployment@3
     displayName: "Deploy $(cogtextName)"
@@ -62,7 +62,7 @@ steps:
         csmFile: "${{ parameters.armPath }}/cogtext-textanalytics.json"
         csmParametersFile: "${{ parameters.armPath }}/cogtext-textanalytics.parameters.json"
         deploymentMode: "Incremental"
-        overrideParameters: -name "$(cogtextName)"
+        overrideParameters: -name "$(cogtextName)" -sku "$(cogtextSku)"
 
   - task: AzureResourceManagerTemplateDeployment@3
     displayName: "Validate $(appcsName)"
