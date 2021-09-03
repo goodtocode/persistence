@@ -7,12 +7,12 @@
         public ISentimentResult SentenceOpinion { get; set; }
         public ISentimentResult OpinionSentiments { get; set; }
 
-        public OpinionResult(IConfidence document, ISentimentResult sentence, ISentimentResult opinion, ISentimentResult sentiment)
+        public OpinionResult(IConfidence documentSentiment, ISentimentResult sentenceSentiment, ISentimentResult sentenceOpinion, ISentimentResult opinionSentiments)
         {
-            DocumentSentiment = document;
-            SentenceSentiment = sentence;
-            SentenceOpinion = opinion;
-            OpinionSentiments = sentiment;
+            DocumentSentiment = documentSentiment;
+            SentenceSentiment = sentenceSentiment;
+            SentenceOpinion = sentenceOpinion;
+            OpinionSentiments = opinionSentiments;
         }
     }
 }
