@@ -1,4 +1,4 @@
-﻿namespace GoodToCode:Shared
+﻿namespace Ciac.Haas.Analytics
 {
     public struct FunctionEndpointNames
     {
