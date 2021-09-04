@@ -9,14 +9,14 @@ namespace GoodToCode.Shared.dotNet.Tests
         public IConfiguration Configuration { get; private set; }
         public IConfiguration Create()
         {
-            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+            var environment = Environment.GetEnvironmentVariable(EnvironmentVariableKeys.EnvironmentAspNetCore) ?? EnvironmentVariableDefaults.Environment;
             var builder = new ConfigurationBuilder();
             builder.AddAzureAppConfiguration(options =>
                     options
-                        .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
+                        .Connect(Environment.GetEnvironmentVariable(EnvironmentVariableKeys.AppSettingsConnection))
                         .ConfigureRefresh(refresh =>
                         {
-                            refresh.Register("Gtc:Shared:Sentinel", refreshAll: true)
+                            refresh.Register(AppConfigurationKeys.SentinelSetting, refreshAll: true)
                                     .SetCacheExpiration(new TimeSpan(0, 60, 0));
                         })
                         .Select(KeyFilter.Any, LabelFilter.Null)

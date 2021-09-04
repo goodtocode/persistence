@@ -27,14 +27,14 @@ stages:
     jobs:
       - job: deploy_landing_zone                
         steps:
-          - template: steps/lz-steps.yml
+          - template: steps/lz-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
 
       - job: deploy_infrastructure
         dependsOn: deploy_landing_zone
         steps:
-          - template: steps/infrastructure-steps.yml
+          - template: steps/infrastructure-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
 
@@ -60,21 +60,21 @@ stages:
               armPath: 'infrastructure'              
 
   - stage: production
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+    condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), startsWith(variables['Build.SourceBranch'], 'refs/pull'))
     variables:
       - template: variables/production.yml    
 
     jobs:
       - job: deploy_landing_zone
         steps:
-          - template: steps/lz-steps.yml
+          - template: steps/lz-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
 
       - job: deploy_infrastructure
         dependsOn: deploy_landing_zone
         steps:
-          - template: steps/infrastructure-steps.yml
+          - template: steps/infrastructure-deploy-steps.yml
             parameters:
               armPath: 'infrastructure'
 

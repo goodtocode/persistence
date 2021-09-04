@@ -11,7 +11,6 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
         public HttpRequest SutHttpRequest { get; private set; }
         public ConfigurationBuilder SutConfigurationBuilder { get; private set; }
 
-        private readonly string sentinelKey = "Gtc:Shared:Sentinel";
         private string sentinelValue;
 
         public ConfigurationBuilderTests()
@@ -21,7 +20,7 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
         public void ConfigurationBuilder_GetKey()
         {
             Assert.IsTrue(configuration != null);
-            sentinelValue = configuration[sentinelKey];
+            sentinelValue = configuration[AppConfigurationKeys.SentinelSetting];
             Assert.IsTrue(!string.IsNullOrEmpty(sentinelValue));
         }
     }

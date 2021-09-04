@@ -5,7 +5,7 @@ parameters:
 
 steps:
   - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Validate $(cognitiveServicesName)"
+    displayName: "Validate $(cogName)"
     inputs:
         deploymentScope: "Resource Group"
         azureResourceManagerConnection: "$(subscriptionName)"
@@ -17,10 +17,10 @@ steps:
         csmFile: "${{ parameters.armPath }}/cog-cognitiveservices.json"        
         csmParametersFile: "${{ parameters.armPath }}/cog-cognitiveservices.parameters.json"        
         deploymentMode: "Validation"
-        overrideParameters: -name "$(cognitiveServicesName)"
+        overrideParameters: -name "$(cogName)" -sku "$(cogSku)"
 
   - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Deploy $(cognitiveServicesName)"
+    displayName: "Deploy $(cogName)"
     inputs:
         deploymentScope: "Resource Group"
         azureResourceManagerConnection: "$(subscriptionName)"
@@ -32,7 +32,37 @@ steps:
         csmFile: "${{ parameters.armPath }}/cog-cognitiveservices.json"
         csmParametersFile: "${{ parameters.armPath }}/cog-cognitiveservices.parameters.json"
         deploymentMode: "Incremental"
-        overrideParameters: -name "$(cognitiveServicesName)"
+        overrideParameters: -name "$(cogName)" -sku "$(cogSku)"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Validate $(cogtextName)"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "$(subscriptionName)"
+        subscriptionId: "$(subscriptionId)"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "$(rgName)"
+        location: "$(locationName)"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/cogtext-textanalytics.json"
+        csmParametersFile: "${{ parameters.armPath }}/cogtext-textanalytics.parameters.json"
+        deploymentMode: "Validation"
+        overrideParameters: -name "$(cogtextName)" -sku "$(cogtextSku)"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Deploy $(cogtextName)"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "$(subscriptionName)"
+        subscriptionId: "$(subscriptionId)"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "$(rgName)"
+        location: "$(locationName)"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/cogtext-textanalytics.json"
+        csmParametersFile: "${{ parameters.armPath }}/cogtext-textanalytics.parameters.json"
+        deploymentMode: "Incremental"
+        overrideParameters: -name "$(cogtextName)" -sku "$(cogtextSku)"
 
   - task: AzureResourceManagerTemplateDeployment@3
     displayName: "Validate $(appcsName)"
@@ -63,33 +93,3 @@ steps:
         csmParametersFile: "${{ parameters.armPath }}/appcs-appconfigurationstore.parameters.json"
         deploymentMode: "Incremental"
         overrideParameters: -name "$(appcsName)" -sku "$(appcsSku)"
-
-  - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Validate $(cosmosName)"
-    inputs:
-        deploymentScope: "Resource Group"
-        azureResourceManagerConnection: "$(subscriptionName)"
-        subscriptionId: "$(subscriptionId)"
-        action: "Create Or Update Resource Group"
-        resourceGroupName: "$(rgName)"
-        location: "$(locationName)"
-        templateLocation: "Linked artifact"
-        csmFile: "${{ parameters.armPath }}/cosmos-cosmosdb.json"
-        csmParametersFile: "${{ parameters.armPath }}/cosmos-cosmosdb.parameters.json"        
-        deploymentMode: "Validation"
-        overrideParameters: -name "$(cosmosName)"
-
-  - task: AzureResourceManagerTemplateDeployment@3
-    displayName: "Deploy $(cosmosName)"
-    inputs:
-        deploymentScope: "Resource Group"
-        azureResourceManagerConnection: "$(subscriptionName)"
-        subscriptionId: "$(subscriptionId)"
-        action: "Create Or Update Resource Group"
-        resourceGroupName: "$(rgName)"
-        location: "$(locationName)"
-        templateLocation: "Linked artifact"
-        csmFile: "${{ parameters.armPath }}/cosmos-cosmosdb.json"
-        csmParametersFile: "${{ parameters.armPath }}/cosmos-cosmosdb.parameters.json"
-        deploymentMode: "Incremental"
-        overrideParameters: -name "$(cosmosName)"

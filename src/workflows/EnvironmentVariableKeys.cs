@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Persistence
+namespace Ciac.Haas.Analytics
 {
     public static class EnvironmentVariables
     {
