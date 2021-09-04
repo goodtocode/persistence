@@ -132,8 +132,7 @@ namespace GoodToCode.Shared.Analytics
         [TestMethod]
         public async Task TextAnalytics_Sentiment()
         {
-            //SutText = "I had the best day of my life. I wish you were there with me.";
-            SutText = $"This year was a very difficult challenging year.  The virtual platform did not work as planned--It started and stopped every few seconds.  It got hung up, and would not play.  Even sitting right next to my modem did not help.  I was so disappointed.  I was almost going to request a refund.  I contacted the AACN office and Studio 27 at least 10-12 times!  Also I received my gift box Friday evening5/28.  Evals.  also did not work correctly. The benefits were that we could see the on line on - demand sessions when they were posted.Also the audience was from all over the world - which was great!";
+            SutText = "I had the best day of my life. I wish you were there with me.";            
             try
             {
                 var sutResult = await service.AnalyzeSentimentAsync(SutText);
@@ -148,7 +147,7 @@ namespace GoodToCode.Shared.Analytics
         [TestMethod]
         public async Task TextAnalytics_SentimentBatch()
         {
-            SutText = $"This year was a very difficult challenging year.  The virtual platform did not work as planned--It started and stopped every few seconds.  It got hung up, and would not play.  Even sitting right next to my modem did not help.  I was so disappointed.  I was almost going to request a refund.  I contacted the AACN office and Studio 27 at least 10-12 times!  Also I received my gift box Friday evening5/28.  Evals.  also did not work correctly. The benefits were that we could see the on line on - demand sessions when they were posted.Also the audience was from all over the world - which was great!";
+            SutText = $"This year was a very difficult challenging year. I was so disappointed. I was almost going to request a refund. Evals also did not work correctly. The benefits were that we could see the on line on - demand sessions when they were posted.Also the audience was from all over the world - which was great!";
             try
             {
                 var sutResult = await service.AnalyzeSentimentSentencesAsync(SutText);
