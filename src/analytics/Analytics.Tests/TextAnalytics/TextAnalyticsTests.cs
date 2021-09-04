@@ -36,31 +36,53 @@ namespace GoodToCode.Shared.Analytics
         public async Task TextAnalytics_Language()
         {
             SutText = "Ce document est rédigé en Français.";
-            var sutResult = await service.DetectLanguageAsync(SutText);
-            Assert.IsTrue(sutResult != null);
-            Assert.IsTrue(sutResult.Length > 0);
+            try
+            {
+                var sutResult = await service.DetectLanguageAsync(SutText);
+                Assert.IsTrue(sutResult != null);
+                Assert.IsTrue(sutResult.Length > 0);
+            }
+            catch (AggregateException ex)
+            {
+                log.LogError(ex.Message, ex);
+            }
         }
 
         [TestMethod]
         public async Task TextAnalytics_KeyPhrase()
         {
             SutText = "My cat might need to see a veterinarian.";
-            var sutResult = await service.ExtractKeyPhrasesAsync(SutText);
-            Assert.IsTrue(sutResult != null);
-            Assert.IsTrue(sutResult.Any());
+            try
+            {
+
+                var sutResult = await service.ExtractKeyPhrasesAsync(SutText);
+                Assert.IsTrue(sutResult != null);
+                Assert.IsTrue(sutResult.Any());
+            }
+            catch (AggregateException ex)
+            {
+                log.LogError(ex.Message, ex);
+            }
         }
 
         [TestMethod]
         public async Task TextAnalytics_Entities()
         {
             SutText = "I had a wonderful trip to Seattle last week.";
-            var sutResult = await service.ExtractEntitiesAsync(SutText);
-            Assert.IsTrue(sutResult != null);
-            Assert.IsTrue(sutResult.Any());
-            var sutFirst = sutResult.FirstOrDefault();
-            Assert.IsTrue(sutFirst.Category.Length > 0);
-            Assert.IsTrue(sutFirst.AnalyzedText.Length > 0);
-            Assert.IsTrue(sutFirst.Confidence > -1);
+            try
+            {
+                var sutResult = await service.ExtractEntitiesAsync(SutText);
+                Assert.IsTrue(sutResult != null);
+                Assert.IsTrue(sutResult.Any());
+                var sutFirst = sutResult.FirstOrDefault();
+                Assert.IsTrue(sutFirst.Category.Length > 0);
+                Assert.IsTrue(sutFirst.AnalyzedText.Length > 0);
+                Assert.IsTrue(sutFirst.Confidence > -1);
+            }
+            catch (AggregateException ex)
+            {
+                log.LogError(ex.Message, ex);
+            }
         }
 
         [TestMethod]
@@ -71,34 +93,55 @@ namespace GoodToCode.Shared.Analytics
                 During his career at Microsoft, Gates held the positions of chairman, \
                 chief executive officer, president and chief software architect, \
                 while also being the largest individual shareholder until May 2014.";
-            var sutResult = await service.ExtractEntityLinksAsync(SutText);
-            Assert.IsTrue(sutResult != null);
-            Assert.IsTrue(sutResult.Any());
-            var sutFirst = sutResult.FirstOrDefault();
-            Assert.IsTrue(sutFirst.Matches.Any());
-            Assert.IsTrue(sutFirst.Name.Length > 0);
+            try
+            {
+                var sutResult = await service.ExtractEntityLinksAsync(SutText);
+                Assert.IsTrue(sutResult != null);
+                Assert.IsTrue(sutResult.Any());
+                var sutFirst = sutResult.FirstOrDefault();
+                Assert.IsTrue(sutFirst.Matches.Any());
+                Assert.IsTrue(sutFirst.Name.Length > 0);
+            }
+            catch (AggregateException ex)
+            {
+                log.LogError(ex.Message, ex);
+            }
         }
 
         [TestMethod]
         public async Task TextAnalytics_Opinion()
         {
             SutText = "The food and service were unacceptable, but the concierge were nice.";
-            var sutResult = await service.ExtractOpinionAsync(SutText);
-            Assert.IsTrue(sutResult != null);
-            Assert.IsTrue(sutResult.Any());
-            var sutFirst = sutResult.FirstOrDefault();
-            Assert.IsTrue(sutFirst.DocumentSentiment != null);
-            Assert.IsTrue(sutFirst.OpinionSentiments != null);
-            Assert.IsTrue(sutFirst.SentenceOpinion != null);
-            Assert.IsTrue(sutFirst.SentenceSentiment != null);
+            try
+            {
+                var sutResult = await service.ExtractOpinionAsync(SutText);
+                Assert.IsTrue(sutResult != null);
+                Assert.IsTrue(sutResult.Any());
+                var sutFirst = sutResult.FirstOrDefault();
+                Assert.IsTrue(sutFirst.DocumentSentiment != null);
+                Assert.IsTrue(sutFirst.OpinionSentiments != null);
+                Assert.IsTrue(sutFirst.SentenceOpinion != null);
+                Assert.IsTrue(sutFirst.SentenceSentiment != null);
+            }
+            catch (AggregateException ex)
+            {
+                log.LogError(ex.Message, ex);
+            }
         }
 
         [TestMethod]
         public async Task TextAnalytics_Sentiment()
         {
             SutText = "I had the best day of my life. I wish you were there with me.";
-            var sutResult = await service.AnalyzeSentimentAsync(SutText);
-            Assert.IsTrue(sutResult != null);
+            try
+            {
+                var sutResult = await service.AnalyzeSentimentAsync(SutText);
+                Assert.IsTrue(sutResult != null);
+            }
+            catch (AggregateException ex)
+            {
+                log.LogError(ex.Message, ex);
+            }
         }
     }
 }
