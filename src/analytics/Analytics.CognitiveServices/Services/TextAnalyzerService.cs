@@ -28,9 +28,9 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         }
 
 
-        public async Task<ISentimentResult> AnalyzeSentimentAsync(string text)
+        public async Task<ISentimentResult> AnalyzeSentimentAsync(string text, string languageIso = "en-US")
         {
-            return await AnalyzeSentimentAsync(text, await DetectLanguageAsync(text));
+            return await AnalyzeSentimentAsync(text, languageIso);
         }
 
         public async Task<ISentimentResult> AnalyzeSentimentAsync(string text, string languageIso)
@@ -44,17 +44,15 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return returnSentiment;
         }
 
-        public async Task<IList<ISentimentResult>> AnalyzeSentimentBatchAsync(string text)
+        public async Task<IList<ISentimentResult>> AnalyzeSentimentBatchAsync(string text, string languageIso = "en-US")
         {
             List<ISentimentResult> returnSentiment;
             AnalyzeSentimentResultCollection results = null;
             var sentences = Regex.Split(text, @"(?<=[\.!\?])\s+");
-            string language = "en-US";
             if (sentences.Length > 0)
             {
                 string first = sentences[0];
-                language = await DetectLanguageAsync(first);
-                results = await client.AnalyzeSentimentBatchAsync(sentences, language);
+                results = await client.AnalyzeSentimentBatchAsync(sentences, languageIso);
             }
 
             returnSentiment = results.ToSentimentResult(language);
@@ -62,9 +60,9 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return returnSentiment;
         }
 
-        public async Task<KeyPhrases> ExtractKeyPhrasesAsync(string text)
+        public async Task<KeyPhrases> ExtractKeyPhrasesAsync(string text, string languageIso = "en-US")
         {
-            var response = await client.ExtractKeyPhrasesAsync(text, await DetectLanguageAsync(text));
+            var response = await client.ExtractKeyPhrasesAsync(text, languageIso);
             return new KeyPhrases(response.Value);
         }
 
@@ -121,9 +119,9 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return response.Value.Iso6391Name;
         }
 
-        public async Task<IEnumerable<AnalyticsResult>> ExtractEntitiesAsync(string text)
+        public async Task<IEnumerable<AnalyticsResult>> ExtractEntitiesAsync(string text, string languageIso = "en-US")
         {
-            var response = await client.RecognizeEntitiesAsync(text, await DetectLanguageAsync(text));
+            var response = await client.RecognizeEntitiesAsync(text, languageIso);
             return response.Value.Select(x => new AnalyticsResult() { AnalyzedText = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
         }
     }
