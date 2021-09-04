@@ -30,11 +30,6 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
 
         public async Task<ISentimentResult> AnalyzeSentimentAsync(string text, string languageIso = "en-US")
         {
-            return await AnalyzeSentimentAsync(text, languageIso);
-        }
-
-        public async Task<ISentimentResult> AnalyzeSentimentAsync(string text, string languageIso)
-        {
             ISentimentResult returnSentiment = null;
             if (text.Length > 0)
             {
@@ -55,7 +50,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                 results = await client.AnalyzeSentimentBatchAsync(sentences, languageIso);
             }
 
-            returnSentiment = results.ToSentimentResult(language);
+            returnSentiment = results.ToSentimentResult(languageIso);
 
             return returnSentiment;
         }
@@ -66,7 +61,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return new KeyPhrases(response.Value);
         }
 
-        public async Task<LinkedResult> ExtractEntityLinksAsync(string text)
+        public async Task<LinkedResult> ExtractEntityLinksAsync(string text, string languageIso = "en-US")
         {
             var response = await client.RecognizeLinkedEntitiesAsync(text);
 
@@ -74,7 +69,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             return new LinkedResult(returnData.ToList());
         }
 
-        public async Task<IEnumerable<OpinionResult>> ExtractOpinionAsync(string text)
+        public async Task<IEnumerable<OpinionResult>> ExtractOpinionAsync(string text, string languageIso = "en-US")
         {
             var returnData = new List<OpinionResult>();
 
