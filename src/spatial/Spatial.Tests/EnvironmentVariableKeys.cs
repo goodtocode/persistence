@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Persistence
+namespace GoodToCode.Shared.Spatial
 {
     public static class EnvironmentVariables
     {

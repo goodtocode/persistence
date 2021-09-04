@@ -12,9 +12,9 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
     public class TextAnalyzerService : ITextAnalyzerService
     {
-        private readonly ICognitiveServiceConfiguration config;
-        private readonly AzureKeyCredential credentials;
-        private readonly TextAnalyticsClient client;
+        protected readonly ICognitiveServiceConfiguration config;
+        protected readonly AzureKeyCredential credentials;
+        protected readonly TextAnalyticsClient client;
 
         public TextAnalyzerService(ICognitiveServiceConfiguration serviceConfiguration)
         {
@@ -125,34 +125,6 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         {
             var response = await client.RecognizeEntitiesAsync(text, await DetectLanguageAsync(text));
             return response.Value.Select(x => new AnalyticsResult() { AnalyzedText = x.Text, SubCategory = x.SubCategory, Category = x.Category.ToString(), Confidence = x.ConfidenceScore });
-        }
-
-        public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text)
-        {
-            List<IAnalyticsResult> returnData = new List<IAnalyticsResult>();
-            string document1 = text;
-            List<string> batchInput = new List<string>()
-                {
-                    document1,
-                    string.Empty
-                };
-            var options = new AnalyzeHealthcareEntitiesOptions { };
-            AnalyzeHealthcareEntitiesOperation healthOperation = await client.StartAnalyzeHealthcareEntitiesAsync(batchInput, "en-US", options);
-            await healthOperation.WaitForCompletionAsync();
-            await foreach (AnalyzeHealthcareEntitiesResultCollection documentsInPage in healthOperation.Value)
-            {
-                foreach (AnalyzeHealthcareEntitiesResult entitiesInDoc in documentsInPage)
-                {
-                    if (!entitiesInDoc.HasError)
-                    {
-                        foreach (var entity in entitiesInDoc.Entities)
-                        {
-                            returnData.Add(new HealthcareResult() { AnalyzedText = entity.Text, Category = entity.Category.ToString(), SubCategory = entity.SubCategory, Confidence = entity.ConfidenceScore });
-                        }
-                    }
-                }
-            }
-            return returnData;
         }
     }
 }
