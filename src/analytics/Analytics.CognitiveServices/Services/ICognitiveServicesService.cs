@@ -7,6 +7,6 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
     public interface ICognitiveServicesService : ITextAnalyzerService
     { 
-        Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text);
+        Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text, string languageIso);
     }
 }

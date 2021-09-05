@@ -132,10 +132,25 @@ namespace GoodToCode.Shared.Analytics
         [TestMethod]
         public async Task TextAnalytics_Sentiment()
         {
-            SutText = "I had the best day of my life. I wish you were there with me.";
+            SutText = "I had the best day of my life. I wish you were there with me.";            
             try
             {
                 var sutResult = await service.AnalyzeSentimentAsync(SutText);
+                Assert.IsTrue(sutResult != null);
+            }
+            catch (AggregateException ex)
+            {
+                log.LogError(ex.Message, ex);
+            }
+        }
+
+        [TestMethod]
+        public async Task TextAnalytics_SentimentBatch()
+        {
+            SutText = $"This year was a very difficult challenging year. I was so disappointed. I was almost going to request a refund. Evals also did not work correctly. The benefits were that we could see the on line on - demand sessions when they were posted.Also the audience was from all over the world - which was great!";
+            try
+            {
+                var sutResult = await service.AnalyzeSentimentSentencesAsync(SutText);
                 Assert.IsTrue(sutResult != null);
             }
             catch (AggregateException ex)

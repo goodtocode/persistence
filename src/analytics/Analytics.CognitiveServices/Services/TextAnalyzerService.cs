@@ -27,30 +27,39 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         {
         }
 
-
-        public async Task<ISentimentResult> AnalyzeSentimentAsync(string text, string languageIso = "en-US")
+        public async Task<Tuple<ISentimentResult, IEnumerable<ISentimentResult>>> AnalyzeSentimentAsync(string text, string languageIso = "en-US")
         {
-            ISentimentResult returnSentiment = null;
+            Tuple<ISentimentResult, IEnumerable<ISentimentResult>> returnSentiment = null;
+            var returnSentences = new List<ISentimentResult>();
             if (text.Length > 0)
             {
                 var result = await client.AnalyzeSentimentAsync(text, languageIso);
-                returnSentiment = result.Value.ToSentimentResult();
+                foreach (var sentence in result.Value.Sentences)
+                    returnSentences.Add(
+                        new SentimentResult(sentence.Text, languageIso, sentence.Sentiment,
+                        new Confidence() { Negative = sentence.ConfidenceScores.Negative, Neutral = sentence.ConfidenceScores.Neutral, Positive = sentence.ConfidenceScores.Positive }));
+                returnSentiment = new Tuple<ISentimentResult, IEnumerable<ISentimentResult>>(result.Value.ToSentimentResult(), returnSentences);
             }
             return returnSentiment;
         }
 
-        public async Task<IList<ISentimentResult>> AnalyzeSentimentBatchAsync(string text, string languageIso = "en-US")
+        public async Task<IList<ISentimentResult>> AnalyzeSentimentSentencesAsync(string text, string languageIso = "en-US")
         {
-            List<ISentimentResult> returnSentiment;
+            int batchSize = 10;
+            var returnSentiment = new List<ISentimentResult>();
             AnalyzeSentimentResultCollection results = null;
             var sentences = Regex.Split(text, @"(?<=[\.!\?])\s+");
             if (sentences.Length > 0)
             {
-                string first = sentences[0];
-                results = await client.AnalyzeSentimentBatchAsync(sentences, languageIso);
+                for (int count = 0; count < sentences.Count(); count += batchSize)
+                {
+                    int lengthToCopy = (sentences.Length - count) >= batchSize ? batchSize : (sentences.Length - count);
+                    var batch = new string[lengthToCopy];
+                    Array.Copy(sentences, count, batch, 0, lengthToCopy);
+                    results = await client.AnalyzeSentimentBatchAsync(batch, languageIso);
+                    returnSentiment.AddRange(results.ToSentimentResult(languageIso));
+                }
             }
-
-            returnSentiment = results.ToSentimentResult(languageIso);
 
             return returnSentiment;
         }

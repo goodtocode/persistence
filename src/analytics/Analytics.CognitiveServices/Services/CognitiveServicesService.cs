@@ -15,7 +15,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
         {
         }
 
-        public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text)
+        public async Task<IEnumerable<IAnalyticsResult>> ExtractHealthcareEntitiesAsync(string text, string languageIso = "en-US")
         {
             List<IAnalyticsResult> returnData = new List<IAnalyticsResult>();
             string document1 = text;
@@ -25,7 +25,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
                     string.Empty
                 };
             var options = new AnalyzeHealthcareEntitiesOptions { };
-            AnalyzeHealthcareEntitiesOperation healthOperation = await client.StartAnalyzeHealthcareEntitiesAsync(batchInput, "en-US", options);
+            AnalyzeHealthcareEntitiesOperation healthOperation = await client.StartAnalyzeHealthcareEntitiesAsync(batchInput, languageIso, options);
             await healthOperation.WaitForCompletionAsync();
             await foreach (AnalyzeHealthcareEntitiesResultCollection documentsInPage in healthOperation.Value)
             {

@@ -1,5 +1,6 @@
 ﻿using Azure.AI.TextAnalytics;
 using GoodToCode.Shared.Analytics.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,8 +8,8 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
 {
     public interface ITextAnalyzerService
     {
-        Task<ISentimentResult> AnalyzeSentimentAsync(string text, string languageIso);
-        Task<IList<ISentimentResult>> AnalyzeSentimentBatchAsync(string text, string languageIso);
+        Task<Tuple<ISentimentResult, IEnumerable<ISentimentResult>>> AnalyzeSentimentAsync(string text, string languageIso);
+        Task<IList<ISentimentResult>> AnalyzeSentimentSentencesAsync(string text, string languageIso);
         Task<string> DetectLanguageAsync(string text);
         Task<IEnumerable<AnalyticsResult>> ExtractEntitiesAsync(string text, string languageIso);
         Task<LinkedResult> ExtractEntityLinksAsync(string text, string languageIso);
