@@ -48,7 +48,7 @@ namespace GoodToCode.Shared.Analytics.CognitiveServices
             int batchSize = 10;
             var returnSentiment = new List<ISentimentResult>();
             AnalyzeSentimentResultCollection results = null;
-            var sentences = Regex.Split(text, @"(?<=[\.!\?])\s+");
+            var sentences = Regex.Split(text, @"(?<=[\.!\?])\s+", StringSplitOptions.RemoveEmptyEntries);
             if (sentences.Length > 0)
             {
                 for (int count = 0; count < sentences.Count(); count += batchSize)
