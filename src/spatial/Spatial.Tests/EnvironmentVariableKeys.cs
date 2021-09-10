@@ -16,6 +16,7 @@ namespace GoodToCode.Shared.Spatial
         public const string AppSettingsConnection = "AppSettingsConnection";        
         public const string EnvironmentAspNetCore = "ASPNETCORE_ENVIRONMENT";
         public const string EnvironmentAzureFunctions = "AZURE_FUNCTIONS_ENVIRONMENT";
+        public const string EnvironmentDotNet = "DOTNET_ENVIRONMENT";
     }
 
     public struct EnvironmentVariableDefaults
