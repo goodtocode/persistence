@@ -242,11 +242,9 @@ namespace GoodToCode.Shared.dotNet.System
             if (length == -1) length = itemLength - starting;
             string returnValue;
             if (itemLength > length - (starting + 1))
-            returnValue = length > -1 ? item.Substring(starting, length) : item.Substring(starting);
+                returnValue = length > -1 ? item.Substring(starting, length) : item.Substring(starting);
             else
-            {
                 returnValue = itemLength == length - (starting + 1) ? item.Substring(starting, length - 1) : item;
-            }
 
             return returnValue;
         }
