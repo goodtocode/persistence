@@ -18,6 +18,9 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         private readonly TableClient tableClient;
         private TableItem table;
 
+        public int BatchAtCount { get; private set; } = 500;
+        public int BatchSize { get; private set; } = 100;
+
         public StorageTablesService(IStorageTablesServiceConfiguration serviceConfiguration)
         {
             config = serviceConfiguration;
@@ -41,8 +44,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             }
             catch
             {
-                // Throws various exceptions on normal+successfull operations, ignore.
-                // This is a bug in azure.data.tables
+                throw;
             }
 
             return table;
@@ -75,10 +77,11 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             var returnData = new List<TableEntity>();
 
             await CreateOrGetTableAsync();
-            foreach (var item in items)
-            {
-                returnData.Add(await AddItemAsync(item));
-            }
+            if (items.Count() > BatchAtCount)
+                await SubmitBatchTransactionAsync(items, TableTransactionActionType.Add, BatchSize);
+            else
+                foreach (var item in items)
+                    returnData.Add(await AddItemAsync(item));
 
             return returnData;
         }
@@ -90,11 +93,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             try
             {
                 await CreateOrGetTableAsync();
-                entity = new TableEntity(item.PartitionKey, item.RowKey);
-                foreach(var prop in item.ToDictionary())
-                {
-                    entity.Add(prop.Key, prop.Value);
-                }
+                entity = item.ToTableEntity();
                 await tableClient.AddEntityAsync(entity);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
@@ -105,18 +104,17 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             return entity;
         }
 
-        public async Task<IEnumerable<TableEntity>> AddItemsBatchAsync(IEnumerable<T> items)
-        {
-            return await SubmitBatchTransactionAsync(items, TableTransactionActionType.Add, 100);
-        }
 
         public async Task<IEnumerable<TableEntity>> UpsertItemsAsync(IEnumerable<T> items)
         {
             var returnData = new List<TableEntity>();
 
             await CreateOrGetTableAsync();
-            foreach (var item in items)
-                returnData.Add(await UpsertItemAsync(item));
+            if(items.Count() > BatchAtCount)
+                await SubmitBatchTransactionAsync(items, TableTransactionActionType.UpsertReplace, BatchSize);
+            else
+                foreach (var item in items)
+                    returnData.Add(await UpsertItemAsync(item));
 
             return returnData;
         }
@@ -139,11 +137,6 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             return entity;
         }
 
-        public async Task<IEnumerable<TableEntity>> UpsertItemsBatchAsync(IEnumerable<T> items)
-        {
-            return await SubmitBatchTransactionAsync(items, TableTransactionActionType.UpsertReplace, 100);
-        }
-
         public async Task DeleteItemAsync(string partitionKey, string rowKey)
         {
             await CreateOrGetTableAsync();
@@ -151,18 +144,19 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         }
 
         public async Task<IEnumerable<TableEntity>> SubmitBatchTransactionAsync(IEnumerable<T> items, TableTransactionActionType type, int batchSize)
-        {
-            await CreateOrGetTableAsync();
+        {            
             var returnEntities = items.ToTableList<T>();
-            var batches = returnEntities.ToBatch(batchSize);
-            var addEntitiesBatch = new List<TableTransactionAction>();
-            foreach (var batch in batches)
-            {
-                var batchTransaction = batch.Select(e => new TableTransactionAction(type, e));
-                addEntitiesBatch.AddRange(batchTransaction);
-            }
 
-            var response = await tableClient.SubmitTransactionAsync(addEntitiesBatch);
+            var partitionBatches = returnEntities.GroupBy(g => g.PartitionKey);
+            foreach (var partition in partitionBatches)
+            {
+                var batches = partition.ToList().ToBatch(batchSize);
+                var addEntitiesBatch = new List<TableTransactionAction>();
+                foreach (var batch in batches)
+                    addEntitiesBatch.AddRange(batch.Select(e => new TableTransactionAction(type, e)));
+                await CreateOrGetTableAsync();
+                var response = await tableClient.SubmitTransactionAsync(addEntitiesBatch);
+            }
 
             return returnEntities;
         }

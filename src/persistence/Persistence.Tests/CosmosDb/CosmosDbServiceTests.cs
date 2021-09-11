@@ -20,12 +20,6 @@ namespace GoodToCode.Shared.Persistence.Tests
 
         public CosmosDbServiceTests()
         {
-            ///     private readonly IDataService<IEntity> _dataService;
-            ///     var myFileContent = GetFileContents(myFile);
-            ///     if (myFileContent != null)
-            ///     {
-            ///         await _dataService.AddAsync(myFileContent);
-            ///     }
         }
         
         public void Initialize()
@@ -34,7 +28,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new CosmosDbServiceOptions(
                 configuration[AppConfigurationKeys.CosmosDbConnectionString],
-                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}"); 
+                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd}"); 
             SutItem = new CosmosDbItemService<EntityA>(configCosmos);
         }
 

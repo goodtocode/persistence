@@ -27,7 +27,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new StorageTablesServiceOptions(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
-                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}");
+                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd}");
             SutItem = new StorageTablesService<EntityA>(configCosmos);
         }
 
@@ -85,9 +85,25 @@ namespace GoodToCode.Shared.Persistence.Tests
             var items = new List<EntityA>() {
                 new EntityA("PartWrite1") { SomeString = "Some write data1." },
                 new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
                 new EntityA("PartWrite3") { SomeString = "Some write data3." } };
 
-            await SutItem.AddItemsBatchAsync(items);
+            await SutItem.AddItemsAsync(items);
             foreach (var item in items)
             {
                 var writeItem = SutItem.GetItem(item.RowKey.ToString());
@@ -139,7 +155,7 @@ namespace GoodToCode.Shared.Persistence.Tests
                 new EntityA("PartWrite2") { SomeString = "Some write data2." },
                 new EntityA("PartWrite3") { SomeString = "Some write data3." } };
 
-            await SutItem.UpsertItemsBatchAsync(items);
+            await SutItem.UpsertItemsAsync(items);
             foreach (var item in items)
             {
                 var writeItem = SutItem.GetItem(item.RowKey.ToString());
