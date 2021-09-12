@@ -43,4 +43,19 @@
     <ProjectReference Include="..\Persistence.StorageTables\Persistence.StorageTables.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Assets\IEnumerableRowEntity_600.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\IEnumerableRowEntity_5600.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\IEnumerableRowEntity_5600.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\OpinionFile.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -110,7 +110,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             var returnData = new List<TableEntity>();
 
             await CreateOrGetTableAsync();
-            if(items.Count() > BatchAtCount)
+            if (items.Count() > BatchAtCount)
                 await SubmitBatchTransactionAsync(items, TableTransactionActionType.UpsertReplace, BatchSize);
             else
                 foreach (var item in items)
@@ -144,18 +144,20 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         }
 
         public async Task<IEnumerable<TableEntity>> SubmitBatchTransactionAsync(IEnumerable<T> items, TableTransactionActionType type, int batchSize)
-        {            
+        {
             var returnEntities = items.ToTableList<T>();
 
             var partitionBatches = returnEntities.GroupBy(g => g.PartitionKey);
             foreach (var partition in partitionBatches)
             {
-                var batches = partition.ToList().ToBatch(batchSize);
-                var addEntitiesBatch = new List<TableTransactionAction>();
+                var batches = partition.ToList().ToBatch(batchSize);                
                 foreach (var batch in batches)
+                {
+                    var addEntitiesBatch = new List<TableTransactionAction>();
                     addEntitiesBatch.AddRange(batch.Select(e => new TableTransactionAction(type, e)));
-                await CreateOrGetTableAsync();
-                var response = await tableClient.SubmitTransactionAsync(addEntitiesBatch);
+                    await CreateOrGetTableAsync();
+                    var response = await tableClient.SubmitTransactionAsync(addEntitiesBatch);
+                }
             }
 
             return returnEntities;
