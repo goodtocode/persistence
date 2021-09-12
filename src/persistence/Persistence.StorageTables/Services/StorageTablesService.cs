@@ -42,10 +42,6 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             {
                 // Conflict is ok, ignore
             }
-            catch
-            {
-                throw;
-            }
 
             return table;
         }

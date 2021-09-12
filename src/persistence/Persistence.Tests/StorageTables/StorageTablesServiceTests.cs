@@ -32,13 +32,6 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task StorageTables_CreateOrGetTableAsync()
-        {
-            var table = await SutItem.CreateOrGetTableAsync();
-            Assert.IsTrue(table != null);
-        }
-
-        [TestMethod]
         public async Task StorageTables_GetItem()
         {
             var item = new EntityA("PartRead") { SomeString = "Some read data." };
