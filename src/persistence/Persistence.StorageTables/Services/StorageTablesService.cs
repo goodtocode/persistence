@@ -44,7 +44,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             }
             catch (NullReferenceException)
             {
-                // Means table already exists, ok, ignore
+                // Table already exists, ok, ignore
             }
 
             return table;
