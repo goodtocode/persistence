@@ -5,6 +5,8 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.Tests
@@ -13,78 +15,113 @@ namespace GoodToCode.Shared.Persistence.Tests
     public class StorageTablesServiceTests
     {
         private IConfiguration configuration;
-        private ILogger<StorageTablesItemService<EntityA>> logItem;
-        private StorageTablesServiceOptions configCosmos;
-        public StorageTablesItemService<EntityA> SutItem { get; private set; }
+        private ILogger<StorageTablesService<EntityA>> logItem;
+        private StorageTablesServiceOptions configPersistence;
+        public StorageTablesService<EntityA> serviceEntityA { get; private set; }
+        public StorageTablesService<RowEntity> serviceRowEntity { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
+        private string SutJsonFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/IEnumerableRowEntity_600.json"; } }
 
-        public StorageTablesServiceTests()
-        {
-            ///     private readonly IDataService<IEntity> _dataService;
-            ///     var myFileContent = GetFileContents(myFile);
-            ///     if (myFileContent != null)
-            ///     {
-            ///         await _dataService.AddAsync(myFileContent);
-            ///     }
-        }
+        public StorageTablesServiceTests() { }
 
         [TestInitialize]
         public void Initialize()
         {
-            logItem = LoggerFactory.CreateLogger<StorageTablesItemService<EntityA>>();
+            logItem = LoggerFactory.CreateLogger<StorageTablesService<EntityA>>();
             configuration = new AppConfigurationFactory().Create();
-            configCosmos = new StorageTablesServiceOptions(
+            configPersistence = new StorageTablesServiceOptions(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
-                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd_HH:mm}");
-            SutItem = new StorageTablesItemService<EntityA>(configCosmos);
+                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd}");
+            serviceEntityA = new StorageTablesService<EntityA>(configPersistence);
+            serviceRowEntity = new StorageTablesService<RowEntity>(configPersistence);
         }
 
         [TestMethod]
-        public async Task StorageTables_Create()
-        {
-            var table = await SutItem.CreateOrGetTableAsync();
-            Assert.IsTrue(table != null);
-        }
-
-        [TestMethod]
-        public async Task StorageTables_Read()
+        public async Task StorageTables_GetItem()
         {
             var item = new EntityA("PartRead") { SomeString = "Some read data." };
-            await SutItem.AddItemAsync(item);
-            var readItem = SutItem.GetItem(item.RowKey);
+            await serviceEntityA.AddItemAsync(item);
+            var readItem = serviceEntityA.GetItem(item.RowKey);
             Assert.IsTrue(readItem.RowKey == item.RowKey);
         }
 
         [TestMethod]
-        public async Task StorageTables_Write()
+        public async Task StorageTables_AddItemAsync()
         {
             var item = new EntityA("PartWrite") { SomeString = "Some write data." };
-            await SutItem.AddItemAsync(item);
-            var writeItem = SutItem.GetItem(item.RowKey.ToString());
+            await serviceEntityA.AddItemAsync(item);
+            var writeItem = serviceEntityA.GetItem(item.RowKey.ToString());
             Assert.IsTrue(writeItem.RowKey == item.RowKey);
-            await SutItem.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
-            writeItem = SutItem.GetItem(item.RowKey);
+            await serviceEntityA.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
+            writeItem = serviceEntityA.GetItem(item.RowKey);
             Assert.IsTrue(writeItem == null);
         }
 
         [TestMethod]
-        public async Task StorageTables_WriteList()
+        public async Task StorageTables_AddItemsAsync()
         {
             var items = new List<EntityA>() { 
                 new EntityA("PartWrite1") { SomeString = "Some write data1." }, 
                 new EntityA("PartWrite2") { SomeString = "Some write data2." },
                 new EntityA("PartWrite3") { SomeString = "Some write data3." } };
+
+            await serviceEntityA.AddItemsAsync(items);
             foreach(var item in items)
             {
-                await SutItem.AddItemAsync(item);
-            }
-            foreach(var item in items)
-            {
-                var writeItem = SutItem.GetItem(item.RowKey.ToString());
+                var writeItem = serviceEntityA.GetItem(item.RowKey.ToString());
                 Assert.IsTrue(writeItem.RowKey == item.RowKey);
                 Assert.IsTrue(writeItem["SomeString"]?.ToString() == item.SomeString);
-                await SutItem.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
-                writeItem = SutItem.GetItem(item.RowKey);
+                await serviceEntityA.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
+                writeItem = serviceEntityA.GetItem(item.RowKey);
+                Assert.IsTrue(writeItem == null);
+            }
+        }
+
+        //[TestMethod]
+        public async Task StorageTables_UpsertItemsBatchAsync()
+        {
+            var fileContents = await File.ReadAllBytesAsync(SutJsonFile);
+            var items = await JsonSerializer.DeserializeAsync<IEnumerable<RowEntity>>(new MemoryStream(fileContents));
+
+            await serviceRowEntity.UpsertItemsAsync(items);
+            foreach (var item in items)
+            {
+                var writeItem = serviceEntityA.GetItem(item.RowKey.ToString());
+                Assert.IsTrue(writeItem.RowKey == item.RowKey);
+                await serviceEntityA.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
+                writeItem = serviceEntityA.GetItem(item.RowKey);
+                Assert.IsTrue(writeItem == null);
+            }
+        }
+
+        [TestMethod]
+        public async Task StorageTables_UpsertItemAsync()
+        {
+            var item = new EntityA("PartWrite") { SomeString = "Some write data." };
+            await serviceEntityA.UpsertItemAsync(item);
+            var writeItem = serviceEntityA.GetItem(item.RowKey.ToString());
+            Assert.IsTrue(writeItem.RowKey == item.RowKey);
+            await serviceEntityA.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
+            writeItem = serviceEntityA.GetItem(item.RowKey);
+            Assert.IsTrue(writeItem == null);
+        }
+
+        [TestMethod]
+        public async Task StorageTables_UpsertItemsAsync()
+        {
+            var items = new List<EntityA>() {
+                new EntityA("PartWrite1") { SomeString = "Some write data1." },
+                new EntityA("PartWrite2") { SomeString = "Some write data2." },
+                new EntityA("PartWrite3") { SomeString = "Some write data3." } };
+
+            await serviceEntityA.UpsertItemsAsync(items);
+            foreach (var item in items)
+            {
+                var writeItem = serviceEntityA.GetItem(item.RowKey.ToString());
+                Assert.IsTrue(writeItem.RowKey == item.RowKey);
+                Assert.IsTrue(writeItem["SomeString"]?.ToString() == item.SomeString);
+                await serviceEntityA.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
+                writeItem = serviceEntityA.GetItem(item.RowKey);
                 Assert.IsTrue(writeItem == null);
             }
         }
