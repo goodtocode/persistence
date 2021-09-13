@@ -60,7 +60,7 @@ stages:
               armPath: 'infrastructure'              
 
   - stage: production
-    condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/pull')))
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/pull'))
     variables:
       - template: variables/production.yml    
 

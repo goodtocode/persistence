@@ -78,7 +78,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
 
             await CreateOrGetTableAsync();
             if (items.Count() > BatchAtCount)
-                await SubmitBatchTransactionAsync(items, TableTransactionActionType.Add, BatchSize);
+                returnData.AddRange(await SubmitBatchTransactionAsync(items, TableTransactionActionType.Add, BatchSize));
             else
                 foreach (var item in items)
                     returnData.Add(await AddItemAsync(item));
@@ -111,7 +111,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
 
             await CreateOrGetTableAsync();
             if (items.Count() > BatchAtCount)
-                await SubmitBatchTransactionAsync(items, TableTransactionActionType.UpsertReplace, BatchSize);
+                returnData.AddRange(await SubmitBatchTransactionAsync(items, TableTransactionActionType.UpsertReplace, BatchSize));
             else
                 foreach (var item in items)
                     returnData.Add(await UpsertItemAsync(item));
