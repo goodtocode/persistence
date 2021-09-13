@@ -60,10 +60,10 @@ stages:
               armPath: 'infrastructure'              
 
   - stage: production
-    condition: and(startsWith(variables['Build.SourceBranch'], 'refs/pull'))
+    condition: startsWith(variables['Build.SourceBranch'], 'refs/pull')
     variables:
       - template: variables/production.yml    
-      
+
     jobs:
       - job: deploy_landing_zone
         steps:
