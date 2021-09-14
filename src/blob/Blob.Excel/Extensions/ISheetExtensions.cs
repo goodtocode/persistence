@@ -26,19 +26,22 @@ namespace GoodToCode.Shared.Blob.Excel
             for (int count = firstRow; count < item.LastRowNum; count++)
             {
                 var row = item.GetRow(count);
-                var rowIndex = count;
-                var cells = row.Cells.GetRange(0, row.Cells.Count).Select(c =>
-                            new CellData()
-                            {
-                                CellValue = c.ToString(),
-                                ColumnName = (header != null ? header.GetCell(c.ColumnIndex).ToString() : c.ColumnIndex.ToString()),
-                                ColumnIndex = c.ColumnIndex,
-                                RowIndex = rowIndex,
-                                SheetName = item.SheetName,
-                                SheetIndex = sheetIndex,
-                                WorkbookName = workbookName
-                            });
-                rows.Add(new RowData(count, cells));
+                if (row != null)
+                {
+                    var rowIndex = count;
+                    var cells = row.Cells.GetRange(0, row.Cells.Count).Select(c =>
+                                new CellData()
+                                {
+                                    CellValue = c.ToString(),
+                                    ColumnName = header != null ? header.GetCell(c.ColumnIndex).ToString() : c.ColumnIndex.ToString(),
+                                    ColumnIndex = c.ColumnIndex,
+                                    RowIndex = rowIndex,
+                                    SheetName = item.SheetName ?? string.Empty,
+                                    SheetIndex = sheetIndex,
+                                    WorkbookName = workbookName ?? string.Empty
+                                });
+                    rows.Add(new RowData(count, cells));
+                }
             }
             return new SheetData(item.SheetName, rows);
         }
