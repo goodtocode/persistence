@@ -31,12 +31,12 @@ namespace GoodToCode.Shared.Blob.Excel
                             new CellData()
                             {
                                 CellValue = c.ToString(),
-                                ColumnName = (header != null ? header.GetCell(c.ColumnIndex).ToString() : c.ColumnIndex.ToString()),
+                                ColumnName = header != null ? header.GetCell(c.ColumnIndex).ToString() : c.ColumnIndex.ToString(),
                                 ColumnIndex = c.ColumnIndex,
                                 RowIndex = rowIndex,
-                                SheetName = item.SheetName,
+                                SheetName = item.SheetName ?? string.Empty,
                                 SheetIndex = sheetIndex,
-                                WorkbookName = workbookName
+                                WorkbookName = workbookName ?? string.Empty
                             });
                 rows.Add(new RowData(count, cells));
             }
