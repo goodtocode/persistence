@@ -45,7 +45,7 @@ namespace GoodToCode.Shared.Blob.Tests
         public void ExcelFile_ToSheetData()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
-            var wb = reader.ReadFile(SutXlsxFile);
+            var wb = reader.ReadFile(@"C:\Temp\Q1-100.xlsx");
             foreach (var sheet in wb)
             {
                 var sheetData = sheet.ToSheetData(Path.GetFileName(SutXlsxFile));
