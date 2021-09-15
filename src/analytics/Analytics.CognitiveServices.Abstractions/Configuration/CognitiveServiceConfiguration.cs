@@ -5,9 +5,9 @@ namespace GoodToCode.Shared.Analytics.Abstractions
 {
     public class CognitiveServiceConfiguration : ICognitiveServiceConfiguration
     {
-        public string KeyCredential { get; private set; }
+        public string KeyCredential { get; set; }
 
-        public string Endpoint { get; private set; }
+        public string Endpoint { get; set; }
 
         public CognitiveServiceConfiguration(string keyCredential, string endpoint)
         {
