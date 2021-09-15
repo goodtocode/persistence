@@ -11,15 +11,10 @@
 
   <ItemGroup>
     <Compile Remove="CognitiveServices.Abstractions\**" />
-    <Compile Remove="CognitiveServices\**" />
     <EmbeddedResource Remove="CognitiveServices.Abstractions\**" />
-    <EmbeddedResource Remove="CognitiveServices\**" />
     <None Remove="CognitiveServices.Abstractions\**" />
-    <None Remove="CognitiveServices\**" />
     <SpecFlowFeatureFiles Remove="CognitiveServices.Abstractions\**" />
-    <SpecFlowFeatureFiles Remove="CognitiveServices\**" />
     <SpecFlowObsoleteCodeBehindFiles Remove="CognitiveServices.Abstractions\**" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="CognitiveServices\**" />
   </ItemGroup>
 
   <ItemGroup>
