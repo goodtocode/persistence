@@ -15,5 +15,17 @@
         public string WorkbookName { get; set; }
 
         public int RowIndex { get; set; }
+
+        public CellData() { }
+
+        public CellData(ICellData cell)
+        {            
+            SheetIndex = cell.SheetIndex;
+            SheetName = cell.SheetName;
+            ColumnIndex = cell.ColumnIndex;
+            ColumnName = cell.ColumnName;
+            RowIndex = cell.RowIndex;
+            CellValue = cell.CellValue;
+        }
     }
 }
