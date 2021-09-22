@@ -14,6 +14,22 @@ namespace GoodToCode.Shared.dotNet.System
                 .ToDictionary(prop => prop.Name, prop => (string)prop.GetValue(item, null));
         }
 
+        public static TDestination CastOrFill<TDestination>(this object item) where TDestination : new()
+        {
+            var returnValue = new TDestination();
+
+            try
+            {
+                returnValue = item != null ? (TDestination)item : returnValue;
+            }
+            catch (InvalidCastException)
+            {
+                returnValue.Fill(item);
+            }
+
+            return returnValue;
+        }
+
         public static void Fill(this object item, object sourceItem)
         {
             var sourceType = sourceItem.GetType();
