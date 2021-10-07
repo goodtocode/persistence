@@ -16,7 +16,8 @@ namespace GoodToCode.Shared.Blob.Excel
         public static ISheetData ToSheetData(this ISheet item, string workbookName, int sheetIndex = 0, bool hasHeaderRow = true)
         {
             IRow header = null;
-            var rows = new List<IRowData>();
+            var cells = new List<ICellData>();
+            var rows = new List<IRowData>();            
             int firstRow = item.FirstRowNum;
             if (hasHeaderRow && firstRow == 0)
             {
@@ -29,7 +30,7 @@ namespace GoodToCode.Shared.Blob.Excel
                 if (row != null)
                 {
                     var rowIndex = count;
-                    var cells = row.Cells.GetRange(0, row.Cells.Count).Select(c =>
+                    var rowCells = row.Cells.GetRange(0, row.Cells.Count).Select(c =>
                                 new CellData()
                                 {
                                     CellValue = c.ToString(),
@@ -40,10 +41,11 @@ namespace GoodToCode.Shared.Blob.Excel
                                     SheetIndex = sheetIndex,
                                     WorkbookName = workbookName ?? string.Empty
                                 });
-                    rows.Add(new RowData(count, cells));
+                    rows.Add(new RowData(count, rowCells));
+                    cells.AddRange(rowCells);
                 }
             }
-            return new SheetData(item.SheetName, rows);
+            return new SheetData(item.SheetName, rows, cells);
         }
     }
 }
