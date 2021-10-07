@@ -8,17 +8,19 @@ namespace GoodToCode.Shared.Blob.Abstractions
         public int SheetIndex { get; set; }
         public string SheetName { get; set; }
 
+        public IEnumerable<ICellData> Cells { get; set; }
         public IEnumerable<IRowData> Rows { get; set; }
 
         public string WorkbookName { get; set; }
 
-        public SheetData(string sheetName, IEnumerable<IRowData> rows)
+        public SheetData(string sheetName, IEnumerable<IRowData> rows, IEnumerable<ICellData> cells)
         {
             SheetName = sheetName;
             Rows = rows;
+            Cells = cells;
         }
 
-        public SheetData(int sheetIndex, string sheetName, IEnumerable<IRowData> rows) : this(sheetName, rows)
+        public SheetData(int sheetIndex, string sheetName, IEnumerable<IRowData> rows, IEnumerable<ICellData> cells) : this(sheetName, rows, cells)
         {
             SheetIndex = sheetIndex;
         }
@@ -35,8 +37,7 @@ namespace GoodToCode.Shared.Blob.Abstractions
 
         public ICellData GetCell(int rowIndex, int columnIndex)
         {
-            var row = Rows.Where(r => r.RowIndex == rowIndex).FirstOrDefault();
-            return row.Cells.Where(y => y.ColumnIndex == columnIndex).FirstOrDefault();
+            return Cells.Where(r => r.RowIndex == rowIndex && r.ColumnIndex == columnIndex).FirstOrDefault();
         }
     }
 }

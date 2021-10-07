@@ -39,8 +39,8 @@ namespace GoodToCode.Shared.Blob.Tests
             var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
-            var npoiService = new ExcelService();
-            var sheet = npoiService.GetSheet(stream, 0);
+            var excelService = new ExcelService();
+            var sheet = excelService.GetSheet(stream, 0);
             Assert.IsTrue(sheet.Rows.Count() > 0);
         }
 
@@ -52,8 +52,8 @@ namespace GoodToCode.Shared.Blob.Tests
             var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
-            var NpoiService = new ExcelService();
-            var rows = NpoiService.GetRow(stream, 0, 1);
+            var excelService = new ExcelService();
+            var rows = excelService.GetRow(stream, 0, 1);
             Assert.IsTrue(rows.Cells.Any());
         }
 
@@ -65,9 +65,39 @@ namespace GoodToCode.Shared.Blob.Tests
             var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
             var stream = new MemoryStream(bytes);
             // Service
-            var NpoiService = new ExcelService();
-            var cell = NpoiService.GetCell(stream, 0, 1, 1);
+            var excelService = new ExcelService();
+            var cell = excelService.GetCell(stream, 0, 1, 1);
             Assert.IsTrue(cell.ToString().Length > 0);
+        }
+
+        [TestMethod]
+        public async Task ExcelService_Cells()
+        {
+            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            // Input is stream
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var stream = new MemoryStream(bytes);
+            // Service
+            var excelService = new ExcelService();
+            var sheet = excelService.GetSheet(stream, 0);
+            Assert.IsTrue(sheet.Cells.Count() > 0);
+            var itemWithData = sheet.Cells.Where(x => !string.IsNullOrWhiteSpace(x.CellValue));
+            Assert.IsTrue(itemWithData.Any());
+        }
+
+        [TestMethod]
+        public async Task ExcelService_Rows()
+        {
+            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            // Input is stream
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var stream = new MemoryStream(bytes);
+            // Service
+            var excelService = new ExcelService();
+            var sheet = excelService.GetSheet(stream, 0);
+            Assert.IsTrue(sheet.Rows.Count() > 0);
+            var itemWithData = sheet.Rows.Where(x => x.RowIndex > 0);
+            Assert.IsTrue(itemWithData.Any());
         }
     }
 }
