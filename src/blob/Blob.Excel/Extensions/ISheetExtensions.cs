@@ -8,12 +8,12 @@ namespace GoodToCode.Shared.Blob.Excel
 {
     public static class ISheetExtensions
     {
-        public static SheetData ToSheetData(this ISheet item, int sheetIndex = 0, bool hasHeaderRow = true)
+        public static ISheetData ToSheetData(this ISheet item, int sheetIndex = 0, bool hasHeaderRow = true)
         {
             return ToSheetData(item, DateTime.UtcNow.ToString("s"), sheetIndex, hasHeaderRow);
         }
 
-        public static SheetData ToSheetData(this ISheet item, string workbookName, int sheetIndex = 0, bool hasHeaderRow = true)
+        public static ISheetData ToSheetData(this ISheet item, string workbookName, int sheetIndex = 0, bool hasHeaderRow = true)
         {
             IRow header = null;
             var rows = new List<IRowData>();

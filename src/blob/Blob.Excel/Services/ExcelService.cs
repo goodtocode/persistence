@@ -1,4 +1,5 @@
 ﻿using NPOI.SS.UserModel;
+using GoodToCode.Shared.Blob.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,39 +8,43 @@ namespace GoodToCode.Shared.Blob.Excel
 {
     public class ExcelService : IExcelService
     {
-        public IWorkbook GetWorkbook(Stream fileStream)
+        private string defaultWorkbook = "book1.xlsx";
+
+        public IWorkbookData GetWorkbook(Stream fileStream)
         {
-            return WorkbookFactory.Create(fileStream);
+            return GetWorkbook(fileStream, defaultWorkbook);
         }
 
-        public ISheet GetSheet(Stream fileStream, int sheet)
+        public IWorkbookData GetWorkbook(Stream fileStream, string name)
+        {
+            return WorkbookFactory.Create(fileStream).ToWorkbookData(name);
+        }
+
+        public ISheetData GetSheet(Stream fileStream, int sheet)
         {
             IWorkbook currWorkbook = WorkbookFactory.Create(fileStream);
-            return currWorkbook.GetSheetAt(sheet);
+            return currWorkbook.GetSheetAt(sheet).ToSheetData();
         }
 
-        public IEnumerable<ICell> GetColumn(Stream fileStream, int sheet, int column)
+        public IEnumerable<ICellData> GetColumn(Stream fileStream, int sheet, int column)
         {
-            ISheet currSheet = GetSheet(fileStream, sheet);
-
-            foreach (IRow rowItem in currSheet)
-                yield return rowItem.GetCell(column);
+            return GetSheet(fileStream, sheet).GetColumn(column);
         }
 
-        public IRow GetRow(Stream fileStream, int sheet, int row)
+        public IRowData GetRow(Stream fileStream, int sheet, int row)
         {
-            ISheet currSheet = GetSheet(fileStream, sheet);
+            ISheetData currSheet = GetSheet(fileStream, sheet);
             if (currSheet == null)
                 throw new ArgumentOutOfRangeException("Sheet not found.");
             return currSheet.GetRow(row);
         }
 
-        public ICell GetCell(Stream fileStream, int sheet, int row, int cell)
+        public ICellData GetCell(Stream fileStream, int sheet, int row, int cell)
         {
-            ISheet currSheet = GetSheet(fileStream, sheet);
+            ISheetData currSheet = GetSheet(fileStream, sheet);
             if (currSheet == null)
                 throw new ArgumentOutOfRangeException("Sheet not found.");
-            return currSheet.GetRow(row).GetCell(cell);
+            return currSheet.GetCell(cell, row);
         }
     }
 }

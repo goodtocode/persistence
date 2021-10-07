@@ -6,7 +6,7 @@ namespace GoodToCode.Shared.Blob.Excel
 {
     public static class IWorkbookExtensions
     {
-        public static WorkbookData ToWorkbookData(this IWorkbook item, string workbookName)
+        public static IWorkbookData ToWorkbookData(this IWorkbook item, string workbookName)
         {
             var sheetMeta = new List<ISheetMetadata>();
             for (int count = 0; count < item.NumberOfSheets -1; count++)

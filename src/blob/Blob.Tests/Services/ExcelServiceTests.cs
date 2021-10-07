@@ -32,7 +32,7 @@ namespace GoodToCode.Shared.Blob.Tests
         }
 
         [TestMethod]
-        public async Task NpoiService_GetSheet()
+        public async Task ExcelService_GetSheet()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
@@ -41,11 +41,11 @@ namespace GoodToCode.Shared.Blob.Tests
             // Service
             var npoiService = new ExcelService();
             var sheet = npoiService.GetSheet(stream, 0);
-            Assert.IsTrue(sheet.LastRowNum > 0);
+            Assert.IsTrue(sheet.Rows.Count() > 0);
         }
 
         [TestMethod]
-        public async Task NpoiService_GetRow()
+        public async Task ExcelService_GetRow()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
@@ -58,7 +58,7 @@ namespace GoodToCode.Shared.Blob.Tests
         }
 
         [TestMethod]
-        public async Task NpoiService_GetCell()
+        public async Task ExcelService_GetCell()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
