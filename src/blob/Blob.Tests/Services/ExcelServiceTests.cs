@@ -16,7 +16,7 @@ namespace GoodToCode.Shared.Blob.Tests
         private readonly string executingPath;
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
 
-        private string SutXlsFile { get { return @$"{AssetsFolder}/TestFile.xls"; } }
+        private string SutOpinionFile { get { return @$"{AssetsFolder}/OpinionFile.xlsx"; } }
         private string SutXlsxFile { get { return @$"{AssetsFolder}/TestFile.xlsx"; } }        
 
         public ISheetData SutXls { get; private set; }
@@ -34,9 +34,9 @@ namespace GoodToCode.Shared.Blob.Tests
         [TestMethod]
         public async Task ExcelService_GetWorkbook()
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(SutOpinionFile), $"{SutOpinionFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutOpinionFile);
             var stream = new MemoryStream(bytes);
             // Service
             var excelService = new ExcelService();
