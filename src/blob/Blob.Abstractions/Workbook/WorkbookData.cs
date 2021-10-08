@@ -6,9 +6,9 @@ namespace GoodToCode.Shared.Blob.Abstractions
     {
         public string WorkbookName { get; set; }
 
-        public IEnumerable<ISheetMetadata> Sheets { get; set; }
+        public IEnumerable<ISheetData> Sheets { get; set; }
 
-        public WorkbookData(string workbookName, IEnumerable<ISheetMetadata> sheets)
+        public WorkbookData(string workbookName, IEnumerable<ISheetData> sheets)
         {
             WorkbookName = workbookName;
             Sheets = sheets;
