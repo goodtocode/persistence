@@ -17,7 +17,7 @@ namespace GoodToCode.Shared.Blob.Excel
         {
             IRow header = null;
             var cells = new List<ICellData>();
-            var rows = new List<IRowData>();            
+            var rows = new List<IRowData>();
             int firstRow = item.FirstRowNum;
             if (hasHeaderRow && firstRow == 0)
             {
@@ -45,7 +45,7 @@ namespace GoodToCode.Shared.Blob.Excel
                     cells.AddRange(rowCells);
                 }
             }
-            return new SheetData(sheetIndex, item.SheetName, rows);
+            return new SheetData(sheetIndex, item.SheetName, rows, cells);
         }
     }
 }

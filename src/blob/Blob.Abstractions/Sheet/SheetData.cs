@@ -13,11 +13,12 @@ namespace GoodToCode.Shared.Blob.Abstractions
 
         public string WorkbookName { get; set; }
 
-        public SheetData(int sheetIndex, string sheetName, IEnumerable<IRowData> rows)
+        public SheetData(int sheetIndex, string sheetName, IEnumerable<IRowData> rows, IEnumerable<ICellData> cells)
         {
+            SheetIndex = sheetIndex;
             SheetName = sheetName;
             Rows = rows;
-            SheetIndex = sheetIndex;
+            Cells = cells;
         }
 
         public IEnumerable<ICellData> GetColumn(int columnIndex)
