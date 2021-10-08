@@ -20,10 +20,15 @@ namespace GoodToCode.Shared.Blob.Excel
             return WorkbookFactory.Create(fileStream).ToWorkbookData(name);
         }
 
-        public ISheetData GetSheet(Stream fileStream, int sheet)
+        public ISheetData GetSheet(Stream fileStream, int sheet, string name)
         {
             IWorkbook currWorkbook = WorkbookFactory.Create(fileStream);
-            return currWorkbook.GetSheetAt(sheet).ToSheetData();
+            return currWorkbook.GetSheetAt(sheet).ToSheetData(name);
+        }
+
+        public ISheetData GetSheet(Stream fileStream, int sheet)
+        {
+            return GetSheet(fileStream, sheet, defaultWorkbook);
         }
 
         public IEnumerable<ICellData> GetColumn(Stream fileStream, int sheet, int column)

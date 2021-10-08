@@ -8,6 +8,7 @@ namespace GoodToCode.Shared.Blob.Abstractions
         public int SheetIndex { get; set; }
         public string SheetName { get; set; }
 
+        public IEnumerable<ICellData> Cells { get; set; }
         public IEnumerable<IRowData> Rows { get; set; }
 
         public string WorkbookName { get; set; }
@@ -31,8 +32,7 @@ namespace GoodToCode.Shared.Blob.Abstractions
 
         public ICellData GetCell(int rowIndex, int columnIndex)
         {
-            var row = Rows.Where(r => r.RowIndex == rowIndex).FirstOrDefault();
-            return row.Cells.Where(y => y.ColumnIndex == columnIndex).FirstOrDefault();
+            return Cells.Where(r => r.RowIndex == rowIndex && r.ColumnIndex == columnIndex).FirstOrDefault();
         }
     }
 }
