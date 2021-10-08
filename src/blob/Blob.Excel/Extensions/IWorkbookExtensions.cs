@@ -9,7 +9,7 @@ namespace GoodToCode.Shared.Blob.Excel
         public static IWorkbookData ToWorkbookData(this IWorkbook item, string workbookName)
         {
             var sheets = new List<ISheetMetadata>();
-            for (int count = 0; count < item.NumberOfSheets -1; count++)
+            for (int count = 0; count < item.NumberOfSheets; count++)
             {
                 var st = item.GetSheetAt(count);
                 var sheet = st.ToSheetData(count, workbookName);
