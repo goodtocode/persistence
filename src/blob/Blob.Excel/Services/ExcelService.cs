@@ -23,7 +23,7 @@ namespace GoodToCode.Shared.Blob.Excel
         public ISheetData GetSheet(Stream fileStream, int sheet, string name)
         {
             IWorkbook currWorkbook = WorkbookFactory.Create(fileStream);
-            return currWorkbook.GetSheetAt(sheet).ToSheetData(name);
+            return currWorkbook.GetSheetAt(sheet).ToSheetData(sheet, name);
         }
 
         public ISheetData GetSheet(Stream fileStream, int sheet)

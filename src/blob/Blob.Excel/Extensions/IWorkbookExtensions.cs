@@ -8,14 +8,14 @@ namespace GoodToCode.Shared.Blob.Excel
     {
         public static IWorkbookData ToWorkbookData(this IWorkbook item, string workbookName)
         {
-            var sheetMeta = new List<ISheetMetadata>();
+            var sheets = new List<ISheetMetadata>();
             for (int count = 0; count < item.NumberOfSheets -1; count++)
             {
                 var st = item.GetSheetAt(count);
-                var sheet = st.ToSheetData(workbookName);
-                sheetMeta.Add(sheet);
+                var sheet = st.ToSheetData(count, workbookName);
+                sheets.Add(sheet);
             }
-            return new WorkbookData(workbookName, sheetMeta);
+            return new WorkbookData(workbookName, sheets);
         }
     }
 }

@@ -4,6 +4,6 @@ namespace GoodToCode.Shared.Blob.Abstractions
 {
     public interface IWorkbookData : IWorkbookMetadata
     {
-        IEnumerable<ISheetMetadata> SheetMetadata { get; }
+        IEnumerable<ISheetMetadata> Sheets { get; }
     }
 }

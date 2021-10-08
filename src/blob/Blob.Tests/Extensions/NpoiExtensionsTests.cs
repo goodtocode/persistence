@@ -38,7 +38,7 @@ namespace GoodToCode.Shared.Blob.Tests
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             var wb = reader.ReadFile(SutXlsxFile);
             var workbookData = wb.ToWorkbookData(Path.GetFileName(SutXlsxFile));
-            Assert.IsTrue(workbookData.SheetMetadata.Any(), $"workbookData.SheetMetadata.Any={workbookData.SheetMetadata.Any()}");
+            Assert.IsTrue(workbookData.Sheets.Any(), $"workbookData.SheetMetadata.Any={workbookData.Sheets.Any()}");
         }
 
         [TestMethod]
@@ -46,10 +46,10 @@ namespace GoodToCode.Shared.Blob.Tests
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             var wb = reader.ReadFile(SutXlsxFile);
-            foreach (var sheet in wb)
+            for(var count = 0; count < wb.NumberOfSheets; count++)
             {
-                var sheetData = sheet.ToSheetData(Path.GetFileName(SutXlsxFile));
-                Assert.IsTrue(sheetData.SheetName.Length > 0 || 
+                var sheetData = wb.GetSheetAt(count).ToSheetData(count, Path.GetFileName(SutXlsxFile));
+                Assert.IsTrue(sheetData.SheetName.Length > 0 ||
                 sheetData.Rows.Any(), $"sheetData.Rows.Any={sheetData.Rows.Any()}");
             }
         }

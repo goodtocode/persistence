@@ -10,14 +10,14 @@ namespace GoodToCode.Shared.Blob.Excel
     {
         public static ISheetData ToSheetData(this ISheet item, int sheetIndex = 0, bool hasHeaderRow = true)
         {
-            return ToSheetData(item, DateTime.UtcNow.ToString("s"), sheetIndex, hasHeaderRow);
+            return ToSheetData(item, sheetIndex, DateTime.UtcNow.ToString("s"), hasHeaderRow);
         }
 
-        public static ISheetData ToSheetData(this ISheet item, string workbookName, int sheetIndex = 0, bool hasHeaderRow = true)
+        public static ISheetData ToSheetData(this ISheet item, int sheetIndex, string workbookName, bool hasHeaderRow = true)
         {
             IRow header = null;
             var cells = new List<ICellData>();
-            var rows = new List<IRowData>();            
+            var rows = new List<IRowData>();
             int firstRow = item.FirstRowNum;
             if (hasHeaderRow && firstRow == 0)
             {
@@ -45,7 +45,7 @@ namespace GoodToCode.Shared.Blob.Excel
                     cells.AddRange(rowCells);
                 }
             }
-            return new SheetData(item.SheetName, rows, cells);
+            return new SheetData(sheetIndex, item.SheetName, rows, cells);
         }
     }
 }
