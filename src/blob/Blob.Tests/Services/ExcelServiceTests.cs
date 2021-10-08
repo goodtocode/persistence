@@ -32,6 +32,19 @@ namespace GoodToCode.Shared.Blob.Tests
         }
 
         [TestMethod]
+        public async Task ExcelService_GetWorkbook()
+        {
+            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            // Input is stream
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var stream = new MemoryStream(bytes);
+            // Service
+            var excelService = new ExcelService();
+            var wb = excelService.GetWorkbook(stream);
+            Assert.IsTrue(wb.Sheets.Count() > 0);
+        }
+
+        [TestMethod]
         public async Task ExcelService_GetSheet()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
