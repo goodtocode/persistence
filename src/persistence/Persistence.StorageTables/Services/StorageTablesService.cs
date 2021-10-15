@@ -18,7 +18,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         private readonly TableClient tableClient;
         private TableItem table;
 
-        public int BatchAtCount { get; private set; } = 500;
+        public int BatchAtCount { get; private set; } = 200;
         public int BatchSize { get; private set; } = 100;
 
         public StorageTablesService(IStorageTablesServiceConfiguration serviceConfiguration)
@@ -36,7 +36,8 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         {
             try
             {
-                table ??= await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
+                if (table == null)
+                    table = await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
             {
