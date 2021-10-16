@@ -26,7 +26,7 @@ namespace GoodToCode.Shared.Blob.Csv
                     else
                     {
                         var rowDict = rowExp.ToDictionary(x => x.Key, y => y.Value);
-                        var rowCells = rowDict.Select((c, i) => new CellData() { ColumnIndex = i, ColumnName = c.Key, CellValue = c.Value.ToString() });
+                        var rowCells = rowDict.Select((c, i) => new CellData() {RowIndex = currRow, ColumnIndex = i, ColumnName = c.Key, CellValue = c.Value.ToString() });
                         var rowToAdd = new RowData(currRow, rowCells);
                         rowsToAdd.Add(rowToAdd);
                         cellsToAdd.AddRange(rowCells);
