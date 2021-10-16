@@ -73,6 +73,37 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             return queryResultsFilter;
         }
 
+        public async Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<Dictionary<string, object>> items)
+        {
+            var returnData = new List<TableEntity>();
+
+            await CreateOrGetTableAsync();
+            foreach (var item in items)
+                returnData.Add(await AddItemAsync(item));
+
+            return returnData;
+        }
+
+        public async Task<TableEntity> AddItemAsync(Dictionary<string, object> item)
+        {
+            TableEntity entity = default;
+
+            try
+            {
+                await CreateOrGetTableAsync();
+                entity.PartitionKey = item.GetValueOrDefault("PartitionKey").ToString();
+                entity.RowKey = item.GetValueOrDefault("RowKey").ToString();
+                entity.Concat(item);
+                await tableClient.AddEntityAsync(entity);
+            }
+            catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
+            {
+                // Conflict is ok, ignore
+            }
+
+            return entity;
+        }
+
         public async Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<T> items)
         {
             var returnData = new List<TableEntity>();
