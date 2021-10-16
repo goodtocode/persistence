@@ -38,7 +38,7 @@ namespace GoodToCode.Shared.Blob.Tests
             var wb = reader.ReadFile(SutXlsxFile);
             SutXlsx = wb.GetSheetAt(0).ToSheetData(0, Path.GetFileName(SutXlsxFile));
             Assert.IsTrue(SutXlsx != null);
-            Assert.IsTrue(SutXlsx.Rows.Count() > 0, $"SutXlsx.Rows.Count={SutXlsx.Rows.Count()} > 0");
+            Assert.IsTrue(SutXlsx.Rows.Any(), $"SutXlsx.Rows.Count={SutXlsx.Rows.Count()} > 0");
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace GoodToCode.Shared.Blob.Tests
             var sheet = reader.ReadFile(SutXlsxFile).GetSheetAt(0);
             SutXlsx = sheet.ToSheetData(0, Path.GetFileName(SutXlsxFile));
             Assert.IsTrue(SutXlsx != null);
-            Assert.IsTrue(SutXlsx.Rows.Count() > 0, $"SutXlsx.Rows.Count={SutXlsx.Rows.Count()} > 0");
+            Assert.IsTrue(SutXlsx.Rows.Any(), $"SutXlsx.Rows.Count={SutXlsx.Rows.Count()} > 0");
         }
 
         [TestMethod]

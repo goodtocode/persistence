@@ -41,7 +41,7 @@ namespace GoodToCode.Shared.Blob.Tests
             // Service
             var excelService = new ExcelService();
             var wb = excelService.GetWorkbook(stream);
-            Assert.IsTrue(wb.Sheets.Count() > 0);
+            Assert.IsTrue(wb.Sheets.Any());
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace GoodToCode.Shared.Blob.Tests
             // Service
             var excelService = new ExcelService();
             var sheet = excelService.GetSheet(stream, 0);
-            Assert.IsTrue(sheet.Rows.Count() > 0);
+            Assert.IsTrue(sheet.Rows.Any());
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace GoodToCode.Shared.Blob.Tests
             // Service
             var excelService = new ExcelService();
             var workbook = excelService.GetWorkbook(stream);
-            Assert.IsTrue(workbook.Sheets.Count() > 0);
+            Assert.IsTrue(workbook.Sheets.Any());
             var itemWithData = workbook.Sheets.Where(s => s.Rows.Where(x => x.RowIndex > 0).Any());
             Assert.IsTrue(itemWithData.Any());
             // ToDictionary for unrolling into a row for persistence
@@ -114,7 +114,7 @@ namespace GoodToCode.Shared.Blob.Tests
             // Service
             var excelService = new ExcelService();
             var sheet = excelService.GetSheet(stream, 0);
-            Assert.IsTrue(sheet.Rows.Count() > 0);
+            Assert.IsTrue(sheet.Rows.Any());
             var itemWithData = sheet.Rows.Where(x => x.RowIndex > 0);
             Assert.IsTrue(itemWithData.Any());
             // ToDictionary for unrolling into a row for persistence
@@ -135,7 +135,7 @@ namespace GoodToCode.Shared.Blob.Tests
             // Service
             var excelService = new ExcelService();
             var row = excelService.GetRow(stream, 0, 2);
-            Assert.IsTrue(row.Cells.Count() > 0);
+            Assert.IsTrue(row.Cells.Any());
             var itemWithData = row.Cells.Where(x => !string.IsNullOrWhiteSpace(x.CellValue));
             Assert.IsTrue(itemWithData.Any());
             // ToDictionary for unrolling into a row for persistence

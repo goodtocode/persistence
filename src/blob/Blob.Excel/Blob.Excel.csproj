@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blob.Abstractions\Blob.Abstractions.csproj" />
+    <ProjectReference Include="..\Blob.Csv\Blob.Csv.csproj" />
   </ItemGroup>
   
 </Project>
