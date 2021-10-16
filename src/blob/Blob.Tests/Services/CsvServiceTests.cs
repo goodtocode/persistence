@@ -81,6 +81,8 @@ namespace GoodToCode.Shared.Blob.Tests
             Assert.IsTrue(sheet.Rows.Any());
             var itemWithData = sheet.Rows.Where(x => x.RowIndex > 0);
             Assert.IsTrue(itemWithData.Any());
+            var notInSingleSheet = sheet.Cells.Where(x => x.SheetIndex != 0);
+            Assert.IsTrue(!notInSingleSheet.Any());
             // ToDictionary for unrolling into a row for persistence
             var dict = sheet.ToDictionary();
             Assert.IsTrue(dict.Any());
@@ -102,6 +104,8 @@ namespace GoodToCode.Shared.Blob.Tests
             Assert.IsTrue(row.Cells.Any());
             var itemWithData = row.Cells.Where(x => !string.IsNullOrWhiteSpace(x.CellValue));
             Assert.IsTrue(itemWithData.Any());
+            var notInSingleSheet = row.Cells.Where(x => x.SheetIndex != 0);
+            Assert.IsTrue(!notInSingleSheet.Any());
             // ToDictionary for unrolling into a row for persistence
             var dict = row.ToDictionary();
             Assert.IsTrue(dict.Any());
