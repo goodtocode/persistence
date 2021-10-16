@@ -35,5 +35,15 @@ namespace GoodToCode.Shared.Blob.Abstractions
         {
             return Cells.Where(r => r.RowIndex == rowIndex && r.ColumnIndex == columnIndex).FirstOrDefault();
         }
+
+        public IEnumerable<Dictionary<string, object>> ToDictionary()
+        {
+            var returnDict = new List<Dictionary<string, object>>();
+
+            foreach (var row in Rows)
+                returnDict.Add(row.ToDictionary());
+
+            return returnDict;
+        }
     }
 }

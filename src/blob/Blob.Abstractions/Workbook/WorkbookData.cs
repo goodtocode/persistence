@@ -13,5 +13,15 @@ namespace GoodToCode.Shared.Blob.Abstractions
             WorkbookName = workbookName;
             Sheets = sheets;
         }
+
+        public IEnumerable<IEnumerable<Dictionary<string, object>>> ToDictionary()
+        {
+            var returnDict = new List<IEnumerable<Dictionary<string, object>>>();
+
+            foreach (var sheet in Sheets)
+                returnDict.Add(sheet.ToDictionary());
+
+            return returnDict;
+        }
     }
 }

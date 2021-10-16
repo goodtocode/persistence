@@ -14,5 +14,16 @@ namespace GoodToCode.Shared.Blob.Abstractions
             RowIndex = rowIndex;
             Cells = cells;
         }
+
+        public Dictionary<string, object> ToDictionary()
+        {
+            var returnDict = new Dictionary<string, object>();
+
+            foreach (var cell in Cells)
+                if(!string.IsNullOrWhiteSpace(cell.ColumnName) && cell.CellValue != null)
+                    returnDict.Add(cell.ColumnName, cell.CellValue);
+
+            return returnDict;
+        }
     }
 }

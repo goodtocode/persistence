@@ -8,7 +8,7 @@ namespace GoodToCode.Shared.Blob.Excel
 {
     public class ExcelService : IExcelService
     {
-        private string defaultWorkbook = "book1.xlsx";
+        private readonly string defaultWorkbook = "book1.xlsx";
 
         public IWorkbookData GetWorkbook(Stream fileStream)
         {

@@ -9,6 +9,6 @@ namespace GoodToCode.Shared.Blob.Abstractions
         IEnumerable<ICellData> GetColumn(int columnIndex);
         IRowData GetRow(int rowIndex);
         ICellData GetCell(int columnIndex, int rowIndex);
-
+        IEnumerable<Dictionary<string, object>> ToDictionary();
     }
 }

@@ -32,12 +32,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
     <PackageReference Include="NPOI" Version="2.5.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blob.Abstractions\Blob.Abstractions.csproj" />
+    <ProjectReference Include="..\Blob.Csv\Blob.Csv.csproj" />
   </ItemGroup>
   
 </Project>

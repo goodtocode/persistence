@@ -7,6 +7,16 @@ namespace GoodToCode.Shared.Persistence.StorageTables
 {
     public static class AzureDataTablesExtensions
     {
+        public static TableEntity ToTableEntity(this Dictionary<string, object> item, string partitionKey, string rowKey)
+        {
+            var entity = new TableEntity(partitionKey, rowKey);
+
+            foreach (var prop in item)
+                entity.Add(prop.Key, prop.Value);
+
+            return entity;
+        }
+
         public static TableEntity ToTableEntity<T>(this T item) where T : IEntity
         {
             var entity = new TableEntity(item.PartitionKey, item.RowKey);
