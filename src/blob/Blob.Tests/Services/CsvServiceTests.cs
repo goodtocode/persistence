@@ -15,9 +15,7 @@ namespace GoodToCode.Shared.Blob.Tests
     {
         private readonly string executingPath;
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
-
-        private string SutOpinionFile { get { return @$"{AssetsFolder}/OpinionFile.xlsx"; } }
-        private string SutXlsxFile { get { return @$"{AssetsFolder}/TestFile.xlsx"; } }        
+        private string SutCsvFile { get { return @$"{AssetsFolder}/TestFile.csv"; } }        
 
         public ISheetData SutXls { get; private set; }
         public ISheetData SutXlsx { get; private set; }
@@ -34,9 +32,9 @@ namespace GoodToCode.Shared.Blob.Tests
         [TestMethod]
         public async Task CsvService_GetSheet()
         {
-            Assert.IsTrue(File.Exists(SutOpinionFile), $"{SutOpinionFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(SutCsvFile), $"{SutCsvFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutOpinionFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
             var stream = new MemoryStream(bytes);
             // Service
             var csvService = new CsvService();
@@ -47,9 +45,9 @@ namespace GoodToCode.Shared.Blob.Tests
         [TestMethod]
         public async Task CsvService_GetRow()
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(SutCsvFile), $"{SutCsvFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
             var stream = new MemoryStream(bytes);
             // Service
             var csvService = new CsvService();
@@ -60,9 +58,9 @@ namespace GoodToCode.Shared.Blob.Tests
         [TestMethod]
         public async Task CsvService_GetCell()
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(SutCsvFile), $"{SutCsvFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
             var stream = new MemoryStream(bytes);
             // Service
             var csvService = new CsvService();
@@ -73,9 +71,9 @@ namespace GoodToCode.Shared.Blob.Tests
         [TestMethod]
         public async Task CsvService_Sheets()
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(SutCsvFile), $"{SutCsvFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
             var stream = new MemoryStream(bytes);
             // Service
             var csvService = new CsvService();
@@ -94,9 +92,9 @@ namespace GoodToCode.Shared.Blob.Tests
         [TestMethod]
         public async Task CsvService_Rows()
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(SutCsvFile), $"{SutCsvFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
             var stream = new MemoryStream(bytes);
             // Service
             var csvService = new CsvService();
@@ -115,9 +113,9 @@ namespace GoodToCode.Shared.Blob.Tests
         [TestMethod]
         public async Task CsvService_Cells()
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            Assert.IsTrue(File.Exists(SutCsvFile), $"{SutCsvFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
             // Input is stream
-            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+            var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
             var stream = new MemoryStream(bytes);
             // Service
             var csvService = new CsvService();

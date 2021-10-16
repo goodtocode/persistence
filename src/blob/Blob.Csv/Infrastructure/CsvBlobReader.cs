@@ -22,8 +22,8 @@ namespace GoodToCode.Shared.Blob.Csv
             using (var csv = new CsvReader(new StreamReader(fileStream), CultureInfo.InvariantCulture))
             {
                 records = csv.GetRecords<dynamic>();
-            }
-            sheet = records.ToSheetData();
+                sheet = records.ToSheetData();
+            }            
 
             return sheet;
         }
@@ -31,13 +31,15 @@ namespace GoodToCode.Shared.Blob.Csv
         public ISheetData ReadFile(string file)
         {
             IEnumerable<dynamic> records;
+            ISheetData sheet;
             using (var reader = new StreamReader(file))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 records = csv.GetRecords<dynamic>();
+                sheet = records.ToSheetData();
             }
             
-            return records.ToSheetData();
+            return sheet;
         }
 
         public async Task<ISheetData> ReadFileAsync(string blobConnectionString, string blobContainer, string blobFileName)
@@ -45,14 +47,14 @@ namespace GoodToCode.Shared.Blob.Csv
             BlobServiceClient blobServiceClient = new BlobServiceClient(blobConnectionString);
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(blobContainer);
             BlobClient blobClient = containerClient.GetBlobClient(blobFileName);
-            ISheetData returnData = null;
+            ISheetData sheet = null;
             if (await blobClient.ExistsAsync())
             {
                 var response = await blobClient.DownloadAsync();
-                returnData = new CsvBlobReader().ReadFile(response.Value.Content);
+                sheet = new CsvBlobReader().ReadFile(response.Value.Content);
             }
 
-            return returnData;
+            return sheet;
         }
     }
 }
