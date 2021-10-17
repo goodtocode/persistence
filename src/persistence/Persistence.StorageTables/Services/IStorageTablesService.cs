@@ -13,6 +13,8 @@ namespace GoodToCode.Shared.Persistence.StorageTables
     {
         Task<TableEntity> AddItemAsync(T item);
         Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<T> items);
+        Task<TableEntity> AddItemAsync(Dictionary<string, object> item);
+        Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<Dictionary<string, object>> items);
         Task<TableItem> CreateOrGetTableAsync();
         Task DeleteItemAsync(string partitionKey, string rowKey);
         Task DeleteTableAsync();
