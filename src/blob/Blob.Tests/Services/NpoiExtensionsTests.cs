@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace GoodToCode.Shared.Blob.Tests
+namespace GoodToCode.Shared.Blob.Unit.Tests
 {
     [TestClass]
     public class NpoiExtensionsTests
@@ -15,8 +15,6 @@ namespace GoodToCode.Shared.Blob.Tests
         private readonly NpoiBlobReader reader;
         private readonly string executingPath;
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
-
-        private string SutXlsFile { get { return @$"{AssetsFolder}/TestFile.xls"; } }
         private string SutXlsxFile { get { return @$"{AssetsFolder}/TestFile.xlsx"; } }        
 
         public ISheetData SutXls { get; private set; }

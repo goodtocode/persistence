@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 
-namespace GoodToCode.Shared.Blob.Tests
+namespace GoodToCode.Shared.Blob.Unit.Tests
 {
     public static class PathFactory
     {

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Blob.Tests
+namespace GoodToCode.Shared.Blob.Unit.Tests
 {
     [TestClass]
     public class CsvServiceTests
