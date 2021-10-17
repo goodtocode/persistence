@@ -6,6 +6,7 @@ namespace GoodToCode.Shared.Blob.Csv
 {
     public static class DynamicExtensions
     {
+        private const string defaultSheetName = "Sheet 1";
         public static ISheetData ToSheetData(this IEnumerable<dynamic> item, bool hasHeaderRow = true)
         {
 
@@ -34,7 +35,7 @@ namespace GoodToCode.Shared.Blob.Csv
                     currRow++;
                 }
             }
-            returnSheet = new SheetData(0, "", rowsToAdd, cellsToAdd);
+            returnSheet = new SheetData(0, defaultSheetName, rowsToAdd, cellsToAdd);
 
             return returnSheet;
         }
