@@ -41,6 +41,8 @@ namespace GoodToCode.Shared.Persistence.Tests
         public async Task StorageTables_Dictionary_AddItemAsync()
         {
             var item = new Dictionary<string, object>();
+            item.Add("PartitionKey", "Partition1");
+            item.Add("RowKey", Guid.NewGuid().ToString());
             item.Add("RowIndex", "1");
             item.Add("Column1", "This is the cell value.");
             var returnTable = await serviceEntityA.AddItemAsync(item);            
@@ -54,10 +56,14 @@ namespace GoodToCode.Shared.Persistence.Tests
             var items = new List<Dictionary<string, object>>();
 
             var itemToAdd1 = new Dictionary<string, object>();
+            itemToAdd1.Add("PartitionKey", "Partition1");
+            itemToAdd1.Add("RowKey", Guid.NewGuid().ToString());
             itemToAdd1.Add("RowIndex", "1");
             itemToAdd1.Add("Column1", "This is the cell value #1.");
             items.Add(itemToAdd1);
             var itemToAdd2 = new Dictionary<string, object>();
+            itemToAdd2.Add("PartitionKey", "Partition1");
+            itemToAdd2.Add("RowKey", Guid.NewGuid().ToString());
             itemToAdd2.Add("RowIndex", "2");
             itemToAdd2.Add("Column1", "This is the cell value #2.");
             items.Add(itemToAdd2);
