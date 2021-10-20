@@ -86,8 +86,12 @@ namespace GoodToCode.Shared.Persistence.StorageTables
 
         public async Task<TableEntity> AddItemAsync(Dictionary<string, object> item)
         {
-            TableEntity entity = default;
+            TableEntity entity = new TableEntity();
 
+            if(item.GetValueOrDefault("PartitionKey") == null)
+                throw new ArgumentException("PartitionKey is required in the dictionary");
+            if (item.GetValueOrDefault("RowKey") == null)
+                throw new ArgumentException("RowKey is required in the dictionary");
             try
             {
                 await CreateOrGetTableAsync();
