@@ -76,6 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blob.Abstractions\Blob.Abstractions.csproj" />
     <ProjectReference Include="..\Blob.Excel\Blob.Excel.csproj" />
   </ItemGroup>
 
