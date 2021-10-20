@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace GoodToCode.Shared.Persistence.Tests
 {
     [TestClass]
-    public class StorageTablesServiceTests
+    public class StorageTables_Service_GenericTests
     {
         private IConfiguration configuration;
         private ILogger<StorageTablesService<EntityA>> logItem;
@@ -22,7 +22,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         public Dictionary<string, StringValues> SutReturn { get; private set; }
         private string SutJsonFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/IEnumerableRowEntity_600.json"; } }
 
-        public StorageTablesServiceTests() { }
+        public StorageTables_Service_GenericTests() { }
 
         [TestInitialize]
         public void Initialize()
@@ -37,7 +37,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task StorageTables_GetItem()
+        public async Task StorageTables_Generic_GetItem()
         {
             var item = new EntityA("PartRead") { SomeString = "Some read data." };
             await serviceEntityA.AddItemAsync(item);
@@ -46,7 +46,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task StorageTables_AddItemAsync()
+        public async Task StorageTables_Generic_AddItemAsync()
         {
             var item = new EntityA("PartWrite") { SomeString = "Some write data." };
             await serviceEntityA.AddItemAsync(item);
@@ -58,7 +58,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task StorageTables_AddItemsAsync()
+        public async Task StorageTables_Generic_AddItemsAsync()
         {
             var items = new List<EntityA>() { 
                 new EntityA("PartWrite1") { SomeString = "Some write data1." }, 
@@ -78,7 +78,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         //[TestMethod]
-        public async Task StorageTables_UpsertItemsBatchAsync()
+        public async Task StorageTables_Generic_UpsertItemsBatchAsync()
         {
             var fileContents = await File.ReadAllBytesAsync(SutJsonFile);
             var items = await JsonSerializer.DeserializeAsync<IEnumerable<RowEntity>>(new MemoryStream(fileContents));
@@ -95,7 +95,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task StorageTables_UpsertItemAsync()
+        public async Task StorageTables_Generic_UpsertItemAsync()
         {
             var item = new EntityA("PartWrite") { SomeString = "Some write data." };
             await serviceEntityA.UpsertItemAsync(item);
@@ -107,7 +107,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task StorageTables_UpsertItemsAsync()
+        public async Task StorageTables_Generic_UpsertItemsAsync()
         {
             var items = new List<EntityA>() {
                 new EntityA("PartWrite1") { SomeString = "Some write data1." },
