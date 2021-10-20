@@ -88,6 +88,10 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         {
             TableEntity entity = default;
 
+            if(item.GetValueOrDefault("PartitionKey") == null)
+                throw new ArgumentException("PartitionKey is required in the dictionary");
+            if (item.GetValueOrDefault("RowKey") == null)
+                throw new ArgumentException("RowKey is required in the dictionary");
             try
             {
                 await CreateOrGetTableAsync();
