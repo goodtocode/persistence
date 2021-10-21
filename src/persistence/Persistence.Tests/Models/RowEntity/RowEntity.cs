@@ -6,6 +6,25 @@ using System.Text.Json.Serialization;
 
 namespace GoodToCode.Shared.Persistence.Tests
 {
+
+    public class CellData : ICellData, ICellMetadata, ISheetMetadata, IWorkbookMetadata, IColumnMetadata, IRowMetadata
+    {
+        public CellData() { }
+        public CellData(ICellData cell)
+        {
+            CellValue = cell.CellValue;
+            ColumnIndex = cell.ColumnIndex;
+            
+        }
+
+        public string CellValue { get; set; }
+        public int ColumnIndex { get; set; }
+        public string ColumnName { get; set; }
+        public int SheetIndex { get; set; }
+        public string SheetName { get; set; }
+        public string WorkbookName { get; set; }
+        public int RowIndex { get; set; }
+    }
     public class RowEntity : IRowEntity
     {
         [JsonInclude]
