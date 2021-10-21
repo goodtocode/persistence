@@ -7,11 +7,12 @@ namespace GoodToCode.Shared.dotNet.System
 {
     public static class ObjectExtensions
     {
-        public static Dictionary<string, string> ToDictionary<T>(this T item)
+        public static Dictionary<string, string> ToDictionaryString<T>(this T item)
         {
             return item.GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .ToDictionary(prop => prop.Name, prop => (string)prop.GetValue(item, null));
+                    .Where(x => x.PropertyType.IsPrimitive || x.PropertyType.IsValueType || x.PropertyType == typeof(Guid) || x.PropertyType == typeof(string))
+                .ToDictionary(prop => prop.Name, prop => prop.GetValue(item, null).ToString());
         }
 
         public static TDestination CastOrFill<TDestination>(this object item) where TDestination : new()

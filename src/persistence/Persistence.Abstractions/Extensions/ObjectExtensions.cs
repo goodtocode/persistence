@@ -13,6 +13,7 @@ namespace GoodToCode.Shared.Persistence.Abstractions
             Dictionary<string, object> returnData = null;
             returnData = item.GetType()
                             .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                                .Where(x => x.PropertyType.IsPrimitive || x.PropertyType.IsValueType || x.PropertyType == typeof(Guid) || x.PropertyType == typeof(string))
                             .ToDictionary(prop => prop.Name, prop => (object)prop.GetValue(item, null));
             return returnData; 
         }
