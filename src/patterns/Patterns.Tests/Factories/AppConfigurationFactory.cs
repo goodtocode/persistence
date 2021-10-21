@@ -13,7 +13,7 @@ namespace GoodToCode.Shared.dotNet.Tests
             var builder = new ConfigurationBuilder();
             builder.AddAzureAppConfiguration(options =>
                     options
-                        .Connect(Environment.GetEnvironmentVariable("AppSettingsConnection"))
+                        .Connect(Environment.GetEnvironmentVariable("GTC_SHARED_CONNECTION"))
                         .ConfigureRefresh(refresh =>
                         {
                             refresh.Register("Gtc:Shared:Sentinel", refreshAll: true)

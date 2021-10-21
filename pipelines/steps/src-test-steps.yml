@@ -11,6 +11,6 @@ steps:
       projects: |
         $(srcPath)/**/*.csproj
     env:
-      AppSettingsConnection: $(AppSettingsConnection)
+      GTC_SHARED_CONNECTION: $(appcsConnection)
       ASPNETCORE_ENVIRONMENT: $(ASPNETCORE_ENVIRONMENT)
     continueOnError: false
