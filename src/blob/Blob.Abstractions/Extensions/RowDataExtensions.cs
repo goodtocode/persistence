@@ -12,7 +12,8 @@ namespace GoodToCode.Shared.Blob.Abstractions
             foreach (var row in item)
             {
                 var props = row.GetType()
-                    .GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(x => x.PropertyType.IsPrimitive)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                        .Where(x => x.PropertyType.IsPrimitive || x.PropertyType.IsValueType || x.PropertyType == typeof(Guid) || x.PropertyType == typeof(string))
                     .ToDictionary(prop => prop.Name, prop => (object)prop.GetValue(row, null));
                 foreach (var prop in props)
                     returnDict.Add(prop.Key, prop.Value);
