@@ -53,5 +53,23 @@ namespace GoodToCode.Shared.Persistence.Abstractions
                 }
             }
         }
+
+        public static void Fill<T>(this T item, IEnumerable<KeyValuePair<string, object>> sourceList)
+        {
+            foreach(var sourceItem in sourceList)
+            {
+                PropertyInfo destinationProperty = typeof(T).GetRuntimeProperty(sourceItem.Key);
+                if (destinationProperty != null && destinationProperty.CanWrite)
+                {
+                    // Copy data only for Primitive-ish types including Value types, Guid, String, etc.
+                    Type destinationPropertyType = destinationProperty.PropertyType;
+                    if (destinationPropertyType.GetTypeInfo().IsPrimitive || destinationPropertyType.GetTypeInfo().IsValueType
+                        || (destinationPropertyType == typeof(string)) || (destinationPropertyType == typeof(Guid)))
+                    {
+                        destinationProperty.SetValue(item, sourceItem.Value, null);
+                    }
+                }
+            }
+        }
     }
 }
