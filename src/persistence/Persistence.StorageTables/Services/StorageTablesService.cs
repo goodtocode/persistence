@@ -61,9 +61,30 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             return tableClient.Query<TableEntity>(ent => ent.RowKey == rowKey).FirstOrDefault();
         }
 
+        public T GetAndCastItem(string rowKey)
+        {
+            var returnItem = new T();
+            var result = tableClient.Query<TableEntity>(ent => ent.RowKey == rowKey).FirstOrDefault();
+            returnItem.Fill(result);
+            return returnItem;
+        }
+
         public Pageable<TableEntity> GetItems(Expression<Func<TableEntity, bool>> filter)
         {
             return tableClient.Query<TableEntity>(filter);
+        }
+
+        public IEnumerable<T> GetAndCastItems(Expression<Func<TableEntity, bool>> filter)
+        {
+            var returnList = new List<T>();
+            var results = tableClient.Query<TableEntity>(filter);                           
+            foreach(var result in results)
+            {
+                var castItem = new T();
+                castItem.Fill(result);
+                returnList.Add(castItem);
+            }
+            return returnList;
         }
 
         public Pageable<TableEntity> GetAllItems(string partitionKey)

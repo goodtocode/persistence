@@ -20,6 +20,8 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         Task DeleteTableAsync();
         Pageable<TableEntity> GetAllItems(string partitionKey);
         TableEntity GetItem(string rowKey);
+        T GetAndCastItem(string rowKey);        
         Pageable<TableEntity> GetItems(Expression<Func<TableEntity, bool>> filter);
+        IEnumerable<T> GetAndCastItems(Expression<Func<TableEntity, bool>> filter);
     }
 }
