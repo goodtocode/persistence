@@ -56,6 +56,19 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             await serviceClient.DeleteTableAsync(config.TableName);
         }
 
+        public async Task DeletePartitionAsync(string partitionKey)
+        {
+            await CreateOrGetTableAsync();
+            foreach(var item in GetItems(r => r.PartitionKey == partitionKey))
+                await tableClient.DeleteEntityAsync(partitionKey, item.RowKey);
+        }
+
+        public async Task DeleteItemAsync(string partitionKey, string rowKey)
+        {
+            await CreateOrGetTableAsync();
+            await tableClient.DeleteEntityAsync(partitionKey, rowKey);
+        }
+
         public TableEntity GetItem(string rowKey)
         {
             return tableClient.Query<TableEntity>(ent => ent.RowKey == rowKey).FirstOrDefault();
@@ -192,12 +205,6 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             }
 
             return entity;
-        }
-
-        public async Task DeleteItemAsync(string partitionKey, string rowKey)
-        {
-            await CreateOrGetTableAsync();
-            await tableClient.DeleteEntityAsync(partitionKey, rowKey);
         }
 
         public async Task<IEnumerable<TableEntity>> SubmitBatchTransactionAsync(IEnumerable<T> items, TableTransactionActionType type, int batchSize)
