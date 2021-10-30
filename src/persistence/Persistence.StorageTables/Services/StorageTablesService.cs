@@ -131,7 +131,8 @@ namespace GoodToCode.Shared.Persistence.StorageTables
                 await CreateOrGetTableAsync();
                 entity.PartitionKey = item.GetValueOrDefault("PartitionKey").ToString();
                 entity.RowKey = item.GetValueOrDefault("RowKey").ToString();
-                entity.Concat(item);
+                foreach(var row in item)
+                    entity.TryAdd(row.Key, row.Value);
                 await tableClient.AddEntityAsync(entity);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
