@@ -24,7 +24,7 @@ namespace GoodToCode.Shared.Blob.Excel
                 header = item.GetRow(firstRow);
                 firstRow = 1;
             }
-            for (int count = firstRow; count < item.LastRowNum; count++)
+            for (int count = firstRow; count <= item.LastRowNum; count++)
             {
                 var row = item.GetRow(count);
                 if (row != null)

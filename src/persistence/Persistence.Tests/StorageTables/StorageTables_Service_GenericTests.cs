@@ -29,7 +29,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             configuration = new AppConfigurationFactory().Create();
             configPersistence = new StorageTablesServiceOptions(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
-                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd}");
+                $"UnitTest-{DateTime.UtcNow:yyyy-MM-dd}");
             ServiceEntityA = new StorageTablesService<EntityA>(configPersistence);
             ServiceRowEntity = new StorageTablesService<RowEntity>(configPersistence);
         }

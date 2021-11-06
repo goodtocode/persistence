@@ -5,8 +5,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Shared.Persistence.Tests
@@ -14,6 +13,7 @@ namespace GoodToCode.Shared.Persistence.Tests
     [TestClass]
     public class StorageTables_Service_EntityTests
     {
+        private List<string> recyclePartitionKeys = new List<string>();
         private IConfiguration configuration;
         private ILogger<StorageTablesService<NamedEntity>> logItem;
         private StorageTablesServiceOptions configPersistence;
@@ -30,7 +30,7 @@ namespace GoodToCode.Shared.Persistence.Tests
             configuration = new AppConfigurationFactory().Create();
             configPersistence = new StorageTablesServiceOptions(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
-                $"AutoTest-{DateTime.UtcNow:yyyy-MM-dd}");
+                $"UnitTest-{DateTime.UtcNow:yyyy-MM-dd}");
             serviceNamedEntity = new StorageTablesService<NamedEntity>(configPersistence);
         }
 
@@ -39,6 +39,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         {
             var item = TextAnalyzerResultFactory.CreateNamedEntity();
             await serviceNamedEntity.AddItemAsync(item);
+            recyclePartitionKeys.Add(item.PartitionKey);
             var readItem = serviceNamedEntity.GetItem(item.RowKey);
             Assert.IsTrue(readItem.RowKey == item.RowKey);
         }
@@ -48,6 +49,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         {
             var item = TextAnalyzerResultFactory.CreateNamedEntity();
             await serviceNamedEntity.AddItemAsync(item);
+            recyclePartitionKeys.Add(item.PartitionKey);
             var writeItem = serviceNamedEntity.GetItem(item.RowKey.ToString());
             Assert.IsTrue(writeItem.RowKey == item.RowKey);
             await serviceNamedEntity.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
@@ -61,7 +63,8 @@ namespace GoodToCode.Shared.Persistence.Tests
             var items = TextAnalyzerResultFactory.CreateNamedEntities(); ;
 
             await serviceNamedEntity.AddItemsAsync(items);
-            foreach(var item in items)
+            recyclePartitionKeys.AddRange(items.Select(x => x.PartitionKey));
+            foreach (var item in items)
             {
                 var writeItem = serviceNamedEntity.GetItem(item.RowKey.ToString());
                 Assert.IsTrue(writeItem.RowKey == item.RowKey);
@@ -74,7 +77,8 @@ namespace GoodToCode.Shared.Persistence.Tests
         [TestCleanup]
         public async Task Cleanup()
         {
-            // Fails: await SutItem.DeleteTableAsync();
+            foreach (var paritionKey in recyclePartitionKeys.Distinct())
+                await serviceNamedEntity.DeletePartitionAsync(paritionKey);
         }
     }
 }
