@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace GoodToCode.Shared.dotNet.System
@@ -52,7 +53,7 @@ namespace GoodToCode.Shared.dotNet.System
             if (item.Length >= firstCharacters.Length)
                 if (item.SubstringSafe(0, firstCharacters.Length) == firstCharacters)
                     returnValue = true;
-            
+
             return returnValue;
         }
 
@@ -73,6 +74,40 @@ namespace GoodToCode.Shared.dotNet.System
             if (item.Length >= lastCharacters.Length)
                 if (item.SubstringRight(lastCharacters.Length) == lastCharacters)
                     returnValue = true;
+
+            return returnValue;
+        }
+
+        public static bool IsValidIdentifier(this string item)
+        {
+            var returnValue = false;
+            var firstChar = true;
+            foreach (var character in item)
+            {
+                switch (char.GetUnicodeCategory(character))
+                {
+                    case UnicodeCategory.UppercaseLetter:
+                    case UnicodeCategory.LowercaseLetter:
+                    case UnicodeCategory.TitlecaseLetter:
+                    case UnicodeCategory.ModifierLetter:
+                    case UnicodeCategory.OtherLetter:
+                        returnValue = true;
+                        break;
+                    case UnicodeCategory.LetterNumber:
+                    case UnicodeCategory.NonSpacingMark:
+                    case UnicodeCategory.SpacingCombiningMark:
+                    case UnicodeCategory.DecimalDigitNumber:
+                    case UnicodeCategory.ConnectorPunctuation:
+                    case UnicodeCategory.Format:
+                        returnValue = !firstChar;
+                        break;
+                    default:
+                        returnValue = false;
+                        break;
+                }
+                if (!returnValue) break;
+                firstChar = false;
+            }
 
             return returnValue;
         }
@@ -112,6 +147,11 @@ namespace GoodToCode.Shared.dotNet.System
             return returnValue;
         }
 
+        public static string ToIdentifier(this string item)
+        {
+            return item.Replace(" ", "").Replace("-", "_").Replace(".", "");
+        }
+
         public static short ToInt16(this string item)
         {
             var returnValue = default(short);
@@ -144,11 +184,11 @@ namespace GoodToCode.Shared.dotNet.System
         }
 
         public static Guid ToGuid(this string item)
-        { 
+        {
             var returnValue = default(Guid);
 
             if (String.IsNullOrEmpty(item) == false)
-                if(!Guid.TryParse(item, out returnValue))
+                if (!Guid.TryParse(item, out returnValue))
                     returnValue = default(Guid);
 
             return returnValue;
@@ -200,7 +240,7 @@ namespace GoodToCode.Shared.dotNet.System
 
         public static DateTime ToDateTime(this string item)
         {
-            var returnValue = default(DateTime);            
+            var returnValue = default(DateTime);
             item = item.Trim();
             if (item.IsInteger() == true & item.Length == 8)
                 item = item.Substring(0, 2) + "-" + item.Substring(2, 2) + "-" + item.Substring(4, 4);
@@ -216,7 +256,7 @@ namespace GoodToCode.Shared.dotNet.System
             var returnValue = new Uri("http://localhost:80", UriKind.RelativeOrAbsolute);
 
             if (String.IsNullOrEmpty(item) == false)
-            try
+                try
                 {
                     returnValue = new Uri(item);
                 }
@@ -253,7 +293,7 @@ namespace GoodToCode.Shared.dotNet.System
         {
             var returnValue = new List<string>();
             if (!string.IsNullOrWhiteSpace(item))
-            returnValue = item.TrimEnd(separator).Split(separator).AsEnumerable<string>().Select(s => s.Trim()).ToList();
+                returnValue = item.TrimEnd(separator).Split(separator).AsEnumerable<string>().Select(s => s.Trim()).ToList();
             return returnValue;
         }
     }
