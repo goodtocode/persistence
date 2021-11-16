@@ -56,6 +56,12 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             await serviceClient.DeleteTableAsync(config.TableName);
         }
 
+        public async Task DeletePartitionsAsync(IEnumerable<string> partitionKeys)
+        {
+            foreach (var partition in partitionKeys)
+                await DeletePartitionAsync(partition);
+        }
+
         public async Task DeletePartitionAsync(string partitionKey)
         {
             await CreateOrGetTableAsync();

@@ -17,6 +17,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         Task<IEnumerable<TableEntity>> AddItemsAsync(IEnumerable<Dictionary<string, object>> items);
         Task<TableItem> CreateOrGetTableAsync();
         Task DeletePartitionAsync(string partitionKey);
+        Task DeletePartitionsAsync(IEnumerable<string> partitionKeys);
         Task DeleteItemAsync(string partitionKey, string rowKey);
         Task DeleteTableAsync();
         Pageable<TableEntity> GetAllItems(string partitionKey);
