@@ -36,8 +36,9 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         {
             try
             {
-                if (table == null)
-                    table = await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
+                if (table != null) 
+                    return table;
+                table = await serviceClient.CreateTableIfNotExistsAsync(config.TableName);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
             {
