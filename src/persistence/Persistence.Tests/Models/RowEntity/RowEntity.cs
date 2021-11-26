@@ -31,6 +31,8 @@ namespace GoodToCode.Shared.Persistence.Tests
         public string PartitionKey { get; private set; }
         [JsonInclude]
         public string RowKey { get; private set; }
+        [JsonInclude]
+        public DateTimeOffset? Timestamp { get; private set; }
         public string WorkbookName { get; private set; }
         public int SheetIndex { get; private set; }
         [JsonInclude]
@@ -38,7 +40,7 @@ namespace GoodToCode.Shared.Persistence.Tests
         [JsonInclude]
         public int RowIndex { get; private set; }
         [JsonInclude]
-        public IEnumerable<ICellData> Cells { get; private set; }
+        public IEnumerable<ICellData> Cells { get; private set; }        
 
         public RowEntity() { }
 

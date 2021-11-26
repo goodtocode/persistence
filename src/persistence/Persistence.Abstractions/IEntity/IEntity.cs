@@ -6,5 +6,6 @@ namespace GoodToCode.Shared.Persistence.Abstractions
     {
         string RowKey { get; }
         string PartitionKey { get; }
+        DateTimeOffset? Timestamp { get; }
     }
 }
