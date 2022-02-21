@@ -9,10 +9,13 @@ namespace GoodToCode.Shared.Persistence.Tests
         public IConfiguration Configuration { get; private set; }
         public IConfiguration Create()
         {
-            var connection = Environment.GetEnvironmentVariable(EnvironmentVariableKeys.AppConfigurationConnection);
             var environment = Environment.GetEnvironmentVariable(EnvironmentVariableKeys.EnvironmentAspNetCore) ?? EnvironmentVariableDefaults.Environment;
             var builder = new ConfigurationBuilder();
+            builder
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{environment}.json");
 
+            var connection = Environment.GetEnvironmentVariable(EnvironmentVariableKeys.AppConfigurationConnection);
             if (connection?.Length > 0)
             {
                 builder.AddAzureAppConfiguration(options =>
@@ -26,9 +29,7 @@ namespace GoodToCode.Shared.Persistence.Tests
                         .Select(KeyFilter.Any, LabelFilter.Null)
                         .Select(KeyFilter.Any, environment));
             }
-            builder
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{environment}.json");
+
             Configuration = builder.Build();
             return Configuration;
         }

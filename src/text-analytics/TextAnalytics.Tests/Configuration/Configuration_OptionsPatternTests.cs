@@ -34,7 +34,7 @@ namespace GoodToCode.Shared.TextAnalytics
         [TestMethod]
         public void Configuration_CognitiveServicesOptions()
         {
-            var section = configuration.GetSection(AppConfigurationKeys.TextAnalytics);
+            var section = configuration.GetSection(AppConfigurationKeys.TextAnalyticsSection);
             // Azure App Configuration does not support sections
             Assert.IsTrue(section?.Value == null);
         }
