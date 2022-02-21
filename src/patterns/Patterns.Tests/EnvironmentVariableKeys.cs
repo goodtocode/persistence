@@ -13,7 +13,7 @@ namespace GoodToCode.Shared.Patterns
 
     public struct EnvironmentVariableKeys
     {
-        public const string AppConfigurationConnection = "GTC_SHARED_CONNECTION";        
+        public const string AppConfigurationConnection = "GTC_SHARED_CONNECTION";
         public const string EnvironmentAspNetCore = "ASPNETCORE_ENVIRONMENT";
         public const string EnvironmentAzureFunctions = "AZURE_FUNCTIONS_ENVIRONMENT";
         public const string EnvironmentDotNet = "DOTNET_ENVIRONMENT";

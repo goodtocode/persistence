@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace GoodToCode.Shared.dotNet.Tests
+namespace GoodToCode.Shared.Spatial.Tests
 {
     public class HttpRequestFactory
     {

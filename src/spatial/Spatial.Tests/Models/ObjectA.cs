@@ -1,5 +1,5 @@
 ﻿
-namespace GoodToCode.Shared.dotNet.Tests
+namespace GoodToCode.Shared.Spatial.Tests
 {
     public class ObjectA
     {

@@ -2,26 +2,33 @@
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using System;
 
-namespace GoodToCode.Shared.dotNet.Tests
+namespace GoodToCode.Shared.Patterns.Tests
 {
     public class AppConfigurationFactory
     {
         public IConfiguration Configuration { get; private set; }
         public IConfiguration Create()
         {
-            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+            var connection = Environment.GetEnvironmentVariable(EnvironmentVariableKeys.AppConfigurationConnection);
+            var environment = Environment.GetEnvironmentVariable(EnvironmentVariableKeys.EnvironmentAspNetCore) ?? EnvironmentVariableDefaults.Environment;
             var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfiguration(options =>
+
+            if (connection?.Length > 0)
+            {
+                builder.AddAzureAppConfiguration(options =>
                     options
-                        .Connect(Environment.GetEnvironmentVariable("GTC_SHARED_CONNECTION"))
+                        .Connect(connection)
                         .ConfigureRefresh(refresh =>
                         {
-                            refresh.Register("Gtc:Shared:Sentinel", refreshAll: true)
+                            refresh.Register(AppConfigurationKeys.SentinelKey, refreshAll: true)
                                     .SetCacheExpiration(new TimeSpan(0, 60, 0));
                         })
                         .Select(KeyFilter.Any, LabelFilter.Null)
-                        .Select(KeyFilter.Any, environment)
-                    );
+                        .Select(KeyFilter.Any, environment));
+            }
+            builder
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{environment}.json");
             Configuration = builder.Build();
             return Configuration;
         }
