@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.dotNet.Tests
+﻿namespace GoodToCode.Shared.Spatial.Tests
 {
     public enum LoggerTypes
     {

@@ -20,7 +20,7 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
         public void ConfigurationBuilder_GetKey()
         {
             Assert.IsTrue(configuration != null);
-            sentinelValue = configuration[AppConfigurationKeys.SentinelSetting];
+            sentinelValue = configuration[AppConfigurationKeys.SentinelKey];
             Assert.IsTrue(!string.IsNullOrEmpty(sentinelValue));
         }
     }

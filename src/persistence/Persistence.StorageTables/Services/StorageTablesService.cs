@@ -42,11 +42,15 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)
             {
-                // Conflict is ok, ignore
+                // Table was created, ok, ignore
             }
             catch (NullReferenceException)
             {
                 // Table already exists, ok, ignore
+            }
+            catch (ArgumentNullException)
+            {
+                // Table was created, ok, ignore
             }
 
             return table;

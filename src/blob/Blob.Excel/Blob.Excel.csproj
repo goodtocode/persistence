@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>GoodToCode.Shared.Blob.Excel</AssemblyName>
     <RootNamespace>GoodToCode.Shared.Blob.Excel</RootNamespace>
     <Product>GoodToCode.Shared.Blob.Excel</Product>
-    <Version>5.20.1</Version>
+    <Version>6.22.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>GoodToCode</Company>    

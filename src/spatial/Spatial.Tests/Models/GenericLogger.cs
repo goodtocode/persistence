@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.dotNet.Tests
+namespace GoodToCode.Shared.Spatial.Tests
 {
     public class GenericLogger<T> : ILogger<T>
     {

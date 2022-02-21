@@ -26,7 +26,6 @@ namespace GoodToCode.Shared.dotNet.Tests.Identity
             clientId = configuration["Gtc:Shared:Tests:AzureAd:ClientId"];
         }
 
-        [TestMethod]
         public async Task TokenContext_IsAuthenticated()
         {
             SutTokenContext = new TokenContext(audience, clientId, tenantId);
