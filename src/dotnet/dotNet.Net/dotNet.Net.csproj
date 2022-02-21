@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>GoodToCode.Shared.dotNet.Net</AssemblyName>
     <RootNamespace>GoodToCode.Shared.dotNet.Net</RootNamespace>
-    <Version>6.20.1</Version>
+    <Version>6.22.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>GoodToCode</Company>

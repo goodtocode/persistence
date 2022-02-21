@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>GoodToCode.Shared.Spatial.Tests</AssemblyName>
     <RootNamespace>GoodToCode.Shared.Spatial.Tests</RootNamespace>
-    <Version>6.20.1</Version>
+    <Version>6.22.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
