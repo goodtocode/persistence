@@ -1,4 +1,5 @@
 # GoodToCode Shared Library
+[![Build Status](https://dev.azure.com/GoodToCode/GoodToCode.com/_apis/build/status/g2c-rg-shared?branchName=main)](https://dev.azure.com/GoodToCode/GoodToCode.com/_build/latest?definitionId=62&branchName=main)
 
 GoodToCode Shared is a microservice/serverless centric collection of NuGet packages that support common plumbing done in Azure Functions, Web API, Blazor and Razor Pages. GoodToCode Shared is based on serverless, DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
 
