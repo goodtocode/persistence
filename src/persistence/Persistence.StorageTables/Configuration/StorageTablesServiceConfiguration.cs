@@ -11,7 +11,7 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         {
             get
             {
-                return new string(Array.FindAll<char>(tableName.ToCharArray(), (c => (char.IsLetterOrDigit(c)))));
+                return string.IsNullOrWhiteSpace(tableName) ? string.Empty : new string(Array.FindAll<char>(tableName.ToCharArray(), c => char.IsLetterOrDigit(c)));
             }
             private set { tableName = value; }
         }
