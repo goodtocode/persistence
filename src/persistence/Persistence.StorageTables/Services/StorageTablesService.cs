@@ -129,6 +129,15 @@ namespace GoodToCode.Shared.Persistence.StorageTables
             return returnData;
         }
 
+        public async Task<TableEntity> AddItemAsync(Dictionary<string, object> item, string partitionKey, string rowKey)
+        {
+            if (item.GetValueOrDefault("PartitionKey") == null)
+                item.TryAdd("PartitionKey", partitionKey);
+            if (item.GetValueOrDefault("RowKey") == null)
+                item.TryAdd("RowKey", rowKey);
+            return await AddItemAsync(item);
+        }
+
         public async Task<TableEntity> AddItemAsync(Dictionary<string, object> item)
         {
             TableEntity entity = new TableEntity();

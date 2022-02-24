@@ -38,6 +38,17 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         [TestMethod]
+        public async Task StorageTables_Dictionary_AddItemAndKeys()
+        {
+            var item = new Dictionary<string, object>();
+            item.Add("RowIndex", "1");
+            item.Add("Column1", "This is the cell value.");
+            var returnTable = await serviceEntityA.AddItemAsync(item, "Partition1", Guid.NewGuid().ToString());
+            Assert.IsTrue(returnTable.Count > 0);
+            await serviceEntityA.DeleteItemAsync(returnTable.PartitionKey, returnTable.RowKey);
+        }
+
+        [TestMethod]
         public async Task StorageTables_Dictionary_AddItemAsync()
         {
             var item = new Dictionary<string, object>();
