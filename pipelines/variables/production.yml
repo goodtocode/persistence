@@ -13,16 +13,6 @@ variables:
     value: 'Standard'
   - name: 'appInsightsName'
     value: 'appi-shared-prod-225'
-  - name: cogName
-    value: 'cog-shared-prod-225'
-  - name: cogsku
-    value: 'S0'
-  - name: cogtextName
-    value: 'cogtext-shared-prod-225'
-  - name: cogtextSku
-    value: 'S'
-  - name: 'cosmosName'
-    value: 'cosmos-shared-prod-225'
   - name: 'kvName'
     value: 'kv-shared-prod-225'    
   - name: 'nugetServiceConnection'

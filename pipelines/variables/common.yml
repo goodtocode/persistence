@@ -1,4 +1,8 @@
 variables:
+  - name: appcsConnectionKey
+    value: 'GTC_SHARED_STORAGE'
+  - name: stConnectionKey
+    value: 'GTC_SHARED_CONNECTION'
   - name: artifactsPath
     value: '$(Build.ArtifactStagingDirectory)'
   - name: archiveFile
