@@ -11,7 +11,7 @@ variables:
     value: 'appcs-shared-dev-225'
   - name: 'appcsSku'
     value: 'Standard'
-  - name: 'appInsightsName'
+  - name: 'appiName'
     value: 'appi-shared-dev-225'
   - name: cogName
     value: 'cog-shared-dev-225'
@@ -21,8 +21,6 @@ variables:
     value: 'cogtext-shared-dev-225'
   - name: cogtextSku
     value: 'F0'
-  - name: 'cosmosName'
-    value: 'cosmos-shared-dev-225'
   - name: 'kvName'
     value: 'kv-shared-dev-225'
   - name: 'nugetServiceConnection'
@@ -31,7 +29,7 @@ variables:
     value: 'select'
   - name: 'nugetType'
     value: 'internal'
-  - name: storageName
+  - name: stName
     value: 'stshareddev225'
-  - name: workspaceName
+  - name: workName
     value: 'work-shared-dev-225'
