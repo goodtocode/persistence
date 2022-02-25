@@ -23,8 +23,6 @@ variables:
     value: 'F0'
   - name: 'kvName'
     value: 'kv-shared-prod-225'
-  - name: 'nugetFeed'
-    value: 'GoodToCode.com/GoodToCode'
   - name: 'nugetServiceConnection'
     value: 'gtc-nuget-prod-001'
   - name: 'nugetFeeds'

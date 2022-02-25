@@ -57,7 +57,7 @@ stages:
           - template: steps/nuget-deploy-internal-steps.yml
             parameters:
               artifactsPath: '$(artifactsPath)'
-              nugetFeed: '$(nugetFeed)'
+              nugetId: '$(nugetId)'
 
   - stage: production
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
