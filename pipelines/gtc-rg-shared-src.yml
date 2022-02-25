@@ -85,7 +85,12 @@ stages:
       - job: deploy_nuget
         dependsOn: test_src
         steps:
-          - template: steps/nuget-deploy-external-steps.yml
+          - template: steps/dotnet-pack-steps.yml
             parameters:
               artifactsPath: '$(artifactsPath)'
-              nugetServiceConnection: '$(nugetServiceConnection)'
+              srcPath: '$(srcPath)'
+              
+          - template: steps/nuget-deploy-internal-steps.yml
+            parameters:
+              artifactsPath: '$(artifactsPath)'
+              nugetId: '$(nugetId)'
