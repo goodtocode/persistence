@@ -20,7 +20,7 @@ variables:
   - name: cogtextName
     value: 'cogtext-shared-prod-225'
   - name: cogtextSku
-    value: 'S0'
+    value: 'S'
   - name: 'kvName'
     value: 'kv-shared-prod-225'
   - name: 'nugetServiceConnection'
