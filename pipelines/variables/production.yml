@@ -31,7 +31,7 @@ variables:
     value: 'select'
   - name: 'nugetType'
     value: 'external'
-  - name: storageName
+  - name: stName
     value: 'stsharedprod225'
-  - name: workspaceName
+  - name: workName
     value: 'work-shared-prod-225'

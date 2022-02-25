@@ -31,7 +31,7 @@ variables:
     value: 'select'
   - name: 'nugetType'
     value: 'internal'
-  - name: storageName
+  - name: stName
     value: 'stshareddev225'
-  - name: workspaceName
+  - name: workName
     value: 'work-shared-dev-225'

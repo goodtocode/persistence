@@ -58,6 +58,7 @@ stages:
               appcsSku: '$(appcsSku)'
 
       - job: deploy_cognitive
+        dependsOn: deploy_landing_zone
         steps:
           - template: steps/cog-deploy-steps.yml
             parameters:
@@ -107,6 +108,7 @@ stages:
               appcsSku: '$(appcsSku)'
 
       - job: deploy_cognitive
+        dependsOn: deploy_landing_zone
         steps:
           - template: steps/cog-deploy-steps.yml
             parameters:
