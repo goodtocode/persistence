@@ -11,7 +11,7 @@ variables:
     value: 'appcs-shared-prod-225'
   - name: 'appcsSku'
     value: 'Standard'
-  - name: 'appInsightsName'
+  - name: 'appiName'
     value: 'appi-shared-prod-225'
   - name: cogName
     value: 'cog-shared-prod-225'
