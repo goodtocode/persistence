@@ -1,7 +1,7 @@
 parameters:
 - name: artifactsPath
   type: string 
-  default: "."
+  default: $(Build.ArtifactStagingDirectory)
 - name: srcPath 
   type: string 
   default: "."
@@ -33,7 +33,7 @@ steps:
       command: pack
       projects: |
         $(srcPath)/**/$(srcProject)
-      arguments: '--output $(Build.ArtifactStagingDirectory)'
+      arguments: '--output ${{ parameters.artifactsPath }}'
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
