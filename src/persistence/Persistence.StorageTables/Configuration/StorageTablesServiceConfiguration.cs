@@ -29,11 +29,11 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         public ValidateOptionsResult Validate(string name, StorageTablesServiceConfiguration options)
         {
             if (string.IsNullOrEmpty(options.ConnectionString))
-                return ValidateOptionsResult.Fail($"{nameof(options.ConnectionString)} configuration parameter for the Azure Storage DB is required");
+                return ValidateOptionsResult.Fail($"{nameof(options.ConnectionString)} ConnectionString for the Azure Storage DB is required");
             if (string.IsNullOrEmpty(options.TableName))
                 return ValidateOptionsResult.Fail($"{nameof(options.TableName)} TableName for the Azure Storage DB is required");
-            if(new Regex("^[A-Za-z][A-Za-z0-9]{2,62}$").IsMatch(options.TableName))
-                return ValidateOptionsResult.Fail($"{nameof(options.TableName)} configuration parameter for the Azure Storage DB is required");
+            if(!new Regex("^[A-Za-z][A-Za-z0-9]{2,62}$").IsMatch(options.TableName))
+                return ValidateOptionsResult.Fail($"{nameof(options.TableName)} TableName cannot begin with numbers or be over 63 characters");
             return ValidateOptionsResult.Success;
         }
     }
