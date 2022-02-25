@@ -57,6 +57,20 @@ stages:
               appcsName: '$(appcsName)'
               appcsSku: '$(appcsSku)'
 
+      - job: deploy_cognitive
+        steps:
+          - template: steps/cog-deploy-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+              subscriptionId: '$(subscriptionId)'
+              subscriptionName: '$(subscriptionName)'
+              rgName: '$(rgName)'
+              rgLocation: '$(rgLocation)'
+              rgEnvironment: '$(rgEnvironment)'
+              cogName: '$(cogName)'
+              cogSku: '$(cogSku)'
+              cogtextName: '$(cogtextName)'
+              cogtextSku: '$(cogtextSku)'
 
   - stage: production
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
@@ -91,3 +105,18 @@ stages:
               rgEnvironment: '$(rgEnvironment)'
               appcsName: '$(appcsName)'
               appcsSku: '$(appcsSku)'
+
+      - job: deploy_cognitive
+        steps:
+          - template: steps/cog-deploy-steps.yml
+            parameters:
+              armPath: 'infrastructure'
+              subscriptionId: '$(subscriptionId)'
+              subscriptionName: '$(subscriptionName)'
+              rgName: '$(rgName)'
+              rgLocation: '$(rgLocation)'
+              rgEnvironment: '$(rgEnvironment)'
+              cogName: '$(cogName)'
+              cogSku: '$(cogSku)'
+              cogtextName: '$(cogtextName)'
+              cogtextSku: '$(cogtextSku)'
