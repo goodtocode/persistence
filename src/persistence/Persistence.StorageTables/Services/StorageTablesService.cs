@@ -152,7 +152,11 @@ namespace GoodToCode.Shared.Persistence.StorageTables
                 entity.PartitionKey = item.GetValueOrDefault("PartitionKey").ToString();
                 entity.RowKey = item.GetValueOrDefault("RowKey").ToString();
                 foreach(var row in item)
-                    entity.TryAdd(row.Key, row.Value);
+                {
+                    var cleansedKey = string.IsNullOrWhiteSpace(row.Key) ? row.GetHashCode().ToString() : new string(Array.FindAll<char>(row.Key.ToCharArray(), c => char.IsLetterOrDigit(c)));
+                    cleansedKey = cleansedKey.Length > 64 ? cleansedKey.Substring(0, 63) : cleansedKey;
+                    entity.TryAdd(cleansedKey, row.Value);
+                }                    
                 await tableClient.AddEntityAsync(entity);
             }
             catch (RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.Conflict)

@@ -28,27 +28,26 @@ namespace GoodToCode.Shared.Persistence.Tests
         }
 
         [TestMethod]
-        public void StorageTables_Service_Green()
+        public void StorageTables_Configuration_Green()
         {
             var validator = new StorageTablesServiceConfigurationValidation().Validate(null, (StorageTablesServiceConfiguration)configPersistence.Value);
             Assert.IsTrue(validator.Succeeded);
         }
 
         [TestMethod]
-        public void StorageTables_Service_Red_Length()
+        public void StorageTables_Configuration_Red_Length()
         {
             // TableName cannot be over 63 chars
             var invalidTableName = new StorageTablesServiceOptions(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
                 $"TooLong1234567890123456789012345678901234567890123456789012345678901234567890");
             var validator = new StorageTablesServiceConfigurationValidation().Validate(null, (StorageTablesServiceConfiguration)invalidTableName.Value);
-            Assert.IsFalse(validator.Succeeded);
-            Assert.IsTrue(validator.Failed);
-            Assert.IsTrue(validator.FailureMessage.Length > 0);
+            Assert.IsTrue(validator.Succeeded);
+            Assert.IsFalse(validator.Failed);
         }
 
         [TestMethod]
-        public void StorageTables_Service_Red_FirstChar()
+        public void StorageTables_Configuration_Red_FirstChar()
         {
             // TableName cannot be over 63 chars
             var invalidTableName = new StorageTablesServiceOptions(

@@ -12,7 +12,9 @@ namespace GoodToCode.Shared.Persistence.StorageTables
         {
             get
             {
-                return string.IsNullOrWhiteSpace(tableName) ? string.Empty : new string(Array.FindAll<char>(tableName.ToCharArray(), c => char.IsLetterOrDigit(c)));
+                var cleansedName = string.IsNullOrWhiteSpace(tableName) ? string.Empty : new string(Array.FindAll<char>(tableName.ToCharArray(), c => char.IsLetterOrDigit(c)));
+                cleansedName = cleansedName.Length > 64 ? cleansedName.Substring(0, 63) : cleansedName;
+                return cleansedName;
             }
             private set { tableName = value; }
         }
