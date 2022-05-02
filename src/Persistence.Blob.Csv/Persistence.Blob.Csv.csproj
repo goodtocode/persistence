@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.Blob.Csv</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Blob.Csv</RootNamespace>
+    <AssemblyName>GoodToCode.Persistence.Blob.Csv</AssemblyName>
+    <RootNamespace>GoodToCode.Persistence.Blob.Csv</RootNamespace>
     <Product>GoodToCode.Shared.Blob.Csv</Product>
     <Version>6.22.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

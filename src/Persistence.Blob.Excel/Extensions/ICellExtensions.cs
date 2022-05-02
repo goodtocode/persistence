@@ -1,7 +1,7 @@
 ﻿using NPOI.SS.UserModel;
 using System;
 
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Persistence.Blob.Excel
 {
     public static class ICellExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace GoodToCode.Shared.Persistence.StorageTables
+namespace GoodToCode.Persistence.Azure.StorageTables
 {
     public class StorageTablesServiceOptions : IOptions<IStorageTablesServiceConfiguration>
     {

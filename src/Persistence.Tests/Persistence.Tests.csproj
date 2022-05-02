@@ -57,6 +57,8 @@
     <ProjectReference Include="..\Persistence.Abstractions\Persistence.Abstractions.csproj" />
     <ProjectReference Include="..\Persistence.Azure.CosmosDb\Persistence.Azure.CosmosDb.csproj" />
     <ProjectReference Include="..\Persistence.Azure.StorageTables\Persistence.Azure.StorageTables.csproj" />
+    <ProjectReference Include="..\Persistence.Blob.Csv\Persistence.Blob.Csv.csproj" />
+    <ProjectReference Include="..\Persistence.Blob.Excel\Persistence.Blob.Excel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

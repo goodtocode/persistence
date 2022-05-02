@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Persistence.Blob.Excel
 {
     public interface IExcelService
     {

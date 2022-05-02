@@ -3,7 +3,7 @@ using NPOI.SS.UserModel;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Persistence.Blob.Excel
 {
     public class NpoiBlobReader
     {

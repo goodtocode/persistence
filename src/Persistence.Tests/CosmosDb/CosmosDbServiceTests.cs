@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Persistence.CosmosDb;
+﻿using GoodToCode.Persistence.Azure.CosmosDb;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;

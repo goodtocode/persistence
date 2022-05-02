@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GoodToCode.Shared.Persistence.CosmosDb
+namespace GoodToCode.Persistence.Azure.CosmosDb
 {
     public static class CosmosDbServiceConfigurationExtensions
     {

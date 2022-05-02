@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace GoodToCode.Shared.Persistence.CosmosDb
+namespace GoodToCode.Persistence.Azure.CosmosDb
 {
     public class CosmosDbServiceOptions : IOptions<ICosmosDbServiceConfiguration>
     {

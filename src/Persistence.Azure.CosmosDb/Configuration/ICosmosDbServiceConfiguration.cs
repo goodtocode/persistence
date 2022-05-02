@@ -1,6 +1,6 @@
 ﻿using GoodToCode.Persistence.Abstractions;
 
-namespace GoodToCode.Shared.Persistence.CosmosDb
+namespace GoodToCode.Persistence.Azure.CosmosDb
 {
     public interface ICosmosDbServiceConfiguration : IPersistenceServiceConfiguration
     {

@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Blob.Excel
+﻿namespace GoodToCode.Persistence.Blob.Excel
 {
     public enum SupportedFileTypes
     {

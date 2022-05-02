@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace GoodToCode.Shared.Blob.Csv
+namespace GoodToCode.Persistence.Blob.Csv
 {
     public interface ICsvService
     {

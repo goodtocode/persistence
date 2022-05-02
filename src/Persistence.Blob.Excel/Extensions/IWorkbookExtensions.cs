@@ -2,7 +2,7 @@
 using NPOI.SS.UserModel;
 using System.Collections.Generic;
 
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Persistence.Blob.Excel
 {
     public static class IWorkbookExtensions
     {

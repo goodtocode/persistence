@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GoodToCode.Shared.Blob.Csv
+namespace GoodToCode.Persistence.Blob.Csv
 {
     public static class DynamicExtensions
     {

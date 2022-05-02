@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>GoodToCode.Shared.Persistence.StorageTables</AssemblyName>
-    <RootNamespace>GoodToCode.Shared.Persistence.StorageTables</RootNamespace>
-    <Product>GoodToCode.Shared.Persistence.StorageTables</Product>
+    <AssemblyName>GoodToCode.Persistence.Azure.StorageTables</AssemblyName>
+    <RootNamespace>GoodToCode.Persistence.Azure.StorageTables</RootNamespace>
+	<Product>GoodToCode.Shared.Persistence.StorageTables</Product>
     <Version>6.22.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

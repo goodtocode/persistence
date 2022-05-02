@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Blob.Csv
+﻿namespace GoodToCode.Persistence.Blob.Csv
 {
     public enum SupportedFileTypes
     {

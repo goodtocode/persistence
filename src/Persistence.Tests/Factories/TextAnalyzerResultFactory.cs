@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GoodToCode.Persistence.Abstractions;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GoodToCode.Persistence.Tests
