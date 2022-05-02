@@ -45,6 +45,7 @@ stages:
               appcsKey: '$(appcsConnectionKey)'
               appcsConnection: '$(appcsConnection)'
               rgEnvironment: '$(rgEnvironment)'
+              arguments: '--filter TestCategory!=Load'
 
       - job: deploy_nuget
         dependsOn: test_src
