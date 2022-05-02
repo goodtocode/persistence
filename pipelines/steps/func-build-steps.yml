@@ -1,25 +1,31 @@
 parameters:
-- name: artifactsPath
-  type: string 
-  default: '.'
-- name: archiveFile
-  type: string 
-  default: '*.zip'
-- name: funcPath
-  type: string 
-  default: '.'
-- name: funcProject
-  type: string 
-  default: '*.csproj'
-- name: nugetPathFile
-  type: string 
-  default: ".nuget/NuGet.config"
-- name: buildConfiguration
-  type: string 
-  default: "Release"
-- name: tempPath
-  type: string 
-  default: './ymltemp'
+  - name: artifactsPath
+    type: string 
+    default: '.'
+  - name: archiveFile
+    type: string 
+    default: '*.zip'
+  - name: funcPath
+    type: string 
+    default: '.'
+  - name: funcProject
+    type: string 
+    default: '*.csproj'
+  - name: nugetPathFile
+    type: string 
+    default: ".nuget/NuGet.config"
+  - name: buildConfiguration
+    type: string 
+    default: "Release"
+  - name: tempPath
+    type: string 
+    default: './ymltemp'
+  - name: scriptsPath 
+    type: string 
+    default: "./pipelines/scripts"
+  - name: versionToReplace
+    type: string 
+    default: "1.0.0"
 
 steps:
   - task: DeleteFiles@1
@@ -34,6 +40,13 @@ steps:
       packageType: 'sdk'
       version: '6.x'
       includePreviewVersions: true
+
+  - task: PowerShell@2
+    displayName: 'Set-Version.ps1'
+    inputs:
+      filePath: '${{ parameters.scriptsPath }}/Set-Version.ps1'
+      arguments: '-Path ${{ parameters.funcPath }} -VersionToReplace ${{ parameters.funcPath }}'
+      workingDirectory: '${{ parameters.scriptsPath }}'
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'

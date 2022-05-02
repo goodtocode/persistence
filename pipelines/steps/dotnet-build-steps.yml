@@ -1,22 +1,25 @@
 parameters:
-- name: artifactsPath
-  type: string 
-  default: "."
-- name: srcPath 
-  type: string 
-  default: "."
-- name: srcProject
-  type: string 
-  default: "*.csproj"
-- name: scriptsPath 
-  type: string 
-  default: "./pipelines/scripts"
-- name: nugetPathFile
-  type: string 
-  default: ".nuget/NuGet.config"
-- name: buildConfiguration
-  type: string 
-  default: "Release"
+  - name: artifactsPath
+    type: string 
+    default: "."
+  - name: srcPath 
+    type: string 
+    default: "."
+  - name: srcProject
+    type: string 
+    default: "*.csproj"
+  - name: nugetPathFile
+    type: string 
+    default: ".nuget/NuGet.config"
+  - name: buildConfiguration
+    type: string 
+    default: "Release"
+  - name: scriptsPath 
+    type: string 
+    default: "./pipelines/scripts"
+  - name: versionToReplace
+    type: string 
+    default: "1.0.0"
 
 steps:
   - task: UseDotNet@2
@@ -30,7 +33,7 @@ steps:
     displayName: 'Set-Version.ps1'
     inputs:
       filePath: '${{ parameters.scriptsPath }}/Set-Version.ps1'
-      arguments: '-Path ${{ parameters.srcPath }} -VersionToReplace 6.22.1 -Major 6'
+      arguments: '-Path ${{ parameters.srcPath }} -VersionToReplace ${{ parameters.srcPath }}'
       workingDirectory: '${{ parameters.scriptsPath }}'
 
   - task: DotNetCoreCLI@2
