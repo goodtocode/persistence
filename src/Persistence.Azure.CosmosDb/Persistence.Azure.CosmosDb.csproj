@@ -13,11 +13,11 @@
     <PackageTags>.NET C# EF Core DDD Web API Azure Functions</PackageTags>
     <Description>GoodToCode shared aspect-oriented (AOP) library for cross-cutting utility concerns.</Description>
     <Copyright>Copyright (c) GoodToCode. All rights reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/goodtocode/shared</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/goodtocode/persistence</PackageProjectUrl>
     <PackageIcon>storeicon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/goodtocode/shared</RepositoryUrl>
+    <RepositoryUrl>https://github.com/goodtocode/persistence</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/goodtocode/shared/projects/1</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/goodtocode/persistence/projects/1</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>

@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace GoodToCode.Persistence.Tests
 {
@@ -25,12 +25,7 @@ namespace GoodToCode.Persistence.Tests
         public HttpRequest CreateHttpRequest(string queryStringKey, string queryStringValue)
         {
             IQueryFeature queryFeature = new QueryFeature(new QueryCollection(LocalConverter.ToDictionary(queryStringKey, queryStringValue)));
-            IHttpRequestFeature feature = new HttpRequestFeature
-            {
-                Method = method,
-            };
             IFeatureCollection features = new FeatureCollection();
-            features.Set(feature);
             features.Set(queryFeature);
             var context = new DefaultHttpContext(features);
             return context.Request;
@@ -42,7 +37,7 @@ namespace GoodToCode.Persistence.Tests
             {
                 QueryString = $"?{queryStringKey}={queryStringValue}",
                 Method = method,
-                Body = JsonConvert.SerializeObject(content).ToStream()
+                Body = JsonSerializer.Serialize(content).ToStream()
             };
             IFeatureCollection features = new FeatureCollection();
             features.Set(feature);
@@ -55,7 +50,7 @@ namespace GoodToCode.Persistence.Tests
             IHttpRequestFeature feature = new HttpRequestFeature
             {
                 Method = method,
-                Body = JsonConvert.SerializeObject(content).ToStream()
+                Body = JsonSerializer.Serialize(content).ToStream()
             };
             IFeatureCollection features = new FeatureCollection();
             features.Set(feature);
