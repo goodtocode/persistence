@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Persistence.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

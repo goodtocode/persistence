@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace GoodToCode.Shared.Blob.Abstractions
+namespace GoodToCode.Persistence.Abstractions
 {
     public class SheetData : ISheetData
     {

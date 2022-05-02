@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace GoodToCode.Shared.Blob.Abstractions
+namespace GoodToCode.Persistence.Abstractions
 {
     public static class RowDataExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Blob.Abstractions
+﻿namespace GoodToCode.Persistence.Abstractions
 {
     public class CellData : ICellData
     {

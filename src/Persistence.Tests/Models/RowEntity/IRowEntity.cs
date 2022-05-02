@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Persistence.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using System.Collections.Generic;
 
 namespace GoodToCode.Persistence.Tests

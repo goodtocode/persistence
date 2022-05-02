@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Blob.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using System;
 
 namespace GoodToCode.Persistence.Tests

@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Persistence.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 
 namespace GoodToCode.Shared.Persistence.StorageTables
 {

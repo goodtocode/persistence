@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Blob.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

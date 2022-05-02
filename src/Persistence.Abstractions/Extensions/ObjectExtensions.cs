@@ -1,10 +1,10 @@
-﻿using GoodToCode.Shared.Persistence.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace GoodToCode.Shared.Persistence.Abstractions
+namespace GoodToCode.Persistence.Abstractions
 {
     public static class ObjectExtensions
     {

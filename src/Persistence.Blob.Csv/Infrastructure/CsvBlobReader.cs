@@ -1,6 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using CsvHelper;
-using GoodToCode.Shared.Blob.Abstractions;
+using GoodToCode.Persistence.Abstractions;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;

@@ -1,7 +1,7 @@
 ﻿using Azure;
 using Azure.Data.Tables;
 using Azure.Data.Tables.Models;
-using GoodToCode.Shared.Persistence.Abstractions;
+using GoodToCode.Persistence.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

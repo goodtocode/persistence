@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace GoodToCode.Shared.Persistence.Abstractions
+namespace GoodToCode.Persistence.Abstractions
 {
     public static class IEnumerableExtensions
     {

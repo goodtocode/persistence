@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Persistence.Abstractions
+namespace GoodToCode.Persistence.Abstractions
 {
     public interface IEntityPersistenceService<T> where T : IEntity, new()
     {
