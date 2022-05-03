@@ -15,7 +15,5 @@ variables:
     value: '$(System.DefaultWorkingDirectory)/pipelines/scripts'
   - name: srcPath
     value: '$(System.DefaultWorkingDirectory)/src'
-  - name: subscriptionService
-    value: 'gtc-sandbox-001'
   - name: buildConfiguration
     value: 'Release'
