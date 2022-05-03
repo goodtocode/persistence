@@ -7,6 +7,8 @@ variables:
     value: 'gtc-rg-persistence-dev-001'
   - name: rgLocation
     value: 'West US 2'
+  - name: 'appcsName'
+    value: 'appcs-persistence-dev-001'
   - name: 'appiName'
     value: 'appi-persistence-dev-001'
   - name: 'kvName'
