@@ -25,9 +25,6 @@ parameters:
   - name: subscriptionService
     type: string 
     default: "gtc-sandbox-001"
-  - name: nugetService
-    type: string 
-    default: "$(nugetService)"
 
 variables:
   - template: variables/common.yml
