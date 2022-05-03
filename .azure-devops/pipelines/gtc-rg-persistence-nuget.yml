@@ -15,8 +15,19 @@ pr:
 pool:
   vmImage: 'ubuntu-latest'
 
+parameters:
+  - name: appcsEnvironmentVariable
+    type: string 
+    default: "GTC_PERSISTENCE_CONNECTION"
+  - name: appcsConnection
+    type: string 
+    default: "$(appcsConnection)"
+  - name: nugetService
+    type: string 
+    default: "gtc-nuget-001"
+
 variables:
-  - template: ../../variables/common.yml
+  - template: ../variables/common.yml
 
 stages:
   - stage: development
@@ -37,10 +48,10 @@ stages:
         steps:
           - template: ../steps/dotnet-test-steps.yml
             parameters:
-              unitPath: '$(System.DefaultWorkingDirectory)/src'
+              testPath: '$(System.DefaultWorkingDirectory)/src'
               arguments: '--filter TestCategory!=Integration'
-              appcsEnvironmentVariable: '$(appcsEnvironmentVariable)'
-              appcsConnection: '$(appcsConnection)'
+              appcsEnvironmentVariable: '${{ parameters.appcsEnvironmentVariable }}'
+              appcsConnection: '${{ parameters.appcsConnection }}'
               rgEnvironment: '$(rgEnvironment)'
 
       - job: pack_src
@@ -50,18 +61,16 @@ stages:
             parameters:
               artifactsPath: '$(artifactsPath)'
               scriptsPath: '$(scriptsPath)'
-              srcPath: '$(srcPath)'
+              srcP  ath: '$(srcPath)'
 
       - job: deploy_nuget
         dependsOn: pack_src
         steps:
           - template: ../steps/nuget-deploy-internal-steps.yml
-            parameters:
-              unitPath: '$(System.DefaultWorkingDirectory)/src'
+            parameters:              
               arguments: '--filter TestCategory!=Integration'
-              appcsEnvironmentVariable: '$(appcsEnvironmentVariable)'
-              appcsConnection: '$(appcsConnection)'
-              rgEnvironment: '$(rgEnvironment)'
+              artifactsPath: '$(artifactsPath)'
+              nugetService:  '${{ parameters.nugetService }}'
 
   - stage: production
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
@@ -81,8 +90,26 @@ stages:
         steps:
           - template: ../steps/dotnet-test-steps.yml
             parameters:
-              unitPath: '$(System.DefaultWorkingDirectory)/src'
+              testPath: '$(System.DefaultWorkingDirectory)/src'
               arguments: '--filter TestCategory!=Integration'
-              appcsEnvironmentVariable: '$(appcsEnvironmentVariable)'
-              appcsConnection: '$(appcsConnection)'
+              appcsEnvironmentVariable: '${{ parameters.appcsEnvironmentVariable }}'
+              appcsConnection: '${{ parameters.appcsConnection }}'
               rgEnvironment: '$(rgEnvironment)'
+
+      - job: pack_src
+        dependsOn: test_src
+        steps:
+          - template: ../steps/dotnet-pack-steps.yml
+            parameters:
+              artifactsPath: '$(artifactsPath)'
+              scriptsPath: '$(scriptsPath)'
+              srcP  ath: '$(srcPath)'
+
+      - job: deploy_nuget
+        dependsOn: pack_src
+        steps:
+          - template: ../steps/nuget-deploy-internal-steps.yml
+            parameters:              
+              arguments: '--filter TestCategory!=Integration'
+              artifactsPath: '$(artifactsPath)'
+              nugetService:  '${{ parameters.nugetService }}'

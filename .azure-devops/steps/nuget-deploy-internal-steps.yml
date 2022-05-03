@@ -5,7 +5,7 @@ parameters:
   - name: nugetFile
     type: string 
     default: "*.nupkg"
-  - name: nugetFeed
+  - name: nugetService
     type: string 
   - name: nugetType
     type: string 
@@ -29,5 +29,5 @@ steps:
       packagesToPush: '${{ parameters.artifactsPath }}/**/${{ parameters.nugetFile }};'
       feedsToUse: '${{ parameters.nugetFeeds }}'
       nuGetFeedType: '${{ parameters.nugetType }}'
-      publishVstsFeed: '${{ parameters.nugetFeed }}'
+      publishVstsFeed: '${{ parameters.nugetService }}'
       allowPackageConflicts: true      
