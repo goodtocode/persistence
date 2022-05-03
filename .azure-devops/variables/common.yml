@@ -1,0 +1,19 @@
+variables:
+  - name: artifactsPath
+    value: '$(Build.ArtifactStagingDirectory)'
+  - name: tempPath
+    value: '$(Agent.TempDirectory)/ymltemp'
+  - name: archiveFile
+    value: 'archive.zip'
+  - name: pipelinesPath
+    value: '$(System.DefaultWorkingDirectory)/pipelines'
+  - name: infrastructurePath
+    value: '$(System.DefaultWorkingDirectory)/infrastructure'
+  - name: testsPath
+    value: '$(System.DefaultWorkingDirectory)/tests'
+  - name: scriptsPath
+    value: '$(System.DefaultWorkingDirectory)/pipelines/scripts'
+  - name: srcPath
+    value: '$(System.DefaultWorkingDirectory)/src'
+  - name: buildConfiguration
+    value: 'Release'

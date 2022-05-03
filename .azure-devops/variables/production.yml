@@ -1,0 +1,21 @@
+variables:
+  - group: gtc-rg-persistence-prod
+  - template: common.yml
+  - name: rgEnvironment
+    value: 'Production'
+  - name: rgName
+    value: 'gtc-rg-persistence-prod-001'
+  - name: rgLocation
+    value: 'West US 2'
+  - name: 'appiName'
+    value: 'appi-persistence-prod-001'
+  - name: 'kvName'
+    value: 'kv-persistence-prod-001'
+  - name: 'nugetFeeds'
+    value: 'select'
+  - name: 'nugetType'
+    value: 'internal'
+  - name: stName
+    value: 'stpersistenceprod001'
+  - name: workName
+    value: 'work-persistence-prod-001'
