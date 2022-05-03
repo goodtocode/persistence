@@ -1,8 +1,4 @@
 variables:
-  - name: tenantId
-    value: "00000000-0000-0000-0000-000000000000"
-  - name: subscriptionId
-    value: "00000000-0000-0000-0000-000000000000"
   - name: subscriptionService
     value: "gtc-sandbox-001"
   - name: artifactsPath

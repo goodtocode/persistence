@@ -24,7 +24,7 @@ parameters:
     default: "$(subscriptionId)"
   - name: subscriptionService
     type: string 
-    default: "$(subscriptionName)"
+    default: "$(subscriptionService)"
   - name: nugetService
     type: string 
     default: "$(nugetService)"
