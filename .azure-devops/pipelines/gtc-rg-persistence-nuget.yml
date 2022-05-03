@@ -25,6 +25,9 @@ parameters:
   - name: nugetService
     type: string 
     default: "gtc-nuget-001"
+  - name: nugetId
+    type: string 
+    default: "$(nugetId)"
 
 variables:
   - template: ../variables/common.yml
@@ -68,9 +71,8 @@ stages:
         steps:
           - template: ../steps/nuget-deploy-internal-steps.yml
             parameters:              
-              arguments: '--filter TestCategory!=Integration'
               artifactsPath: '$(artifactsPath)'
-              nugetService:  '${{ parameters.nugetService }}'
+              nugetId:  '${{ parameters.nugetId }}'
 
   - stage: production
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
@@ -108,8 +110,7 @@ stages:
       - job: deploy_nuget
         dependsOn: pack_src
         steps:
-          - template: ../steps/nuget-deploy-internal-steps.yml
+          - template: ../steps/nuget-deploy-external-steps.yml
             parameters:              
-              arguments: '--filter TestCategory!=Integration'
               artifactsPath: '$(artifactsPath)'
               nugetService:  '${{ parameters.nugetService }}'
