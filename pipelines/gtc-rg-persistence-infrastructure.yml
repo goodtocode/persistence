@@ -15,6 +15,20 @@ pr:
 pool:
   vmImage: 'ubuntu-latest'
 
+parameters:
+  - name: tenantId
+    type: string 
+    default: "$(tenantId)"
+  - name: subscriptionId
+    type: string 
+    default: "$(subscriptionId)"
+  - name: subscriptionService
+    type: string 
+    default: "$(subscriptionName)"
+  - name: nugetService
+    type: string 
+    default: "$(nugetService)"
+
 variables:
   - template: variables/common.yml
       
@@ -31,7 +45,7 @@ stages:
             parameters:
               armPath: '$(infrastructurePath)'
               subscriptionId: '$(subscriptionId)'
-              subscriptionName: '$(subscriptionName)'
+              subscriptionService: '$(subscriptionService)'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appiName: '$(appiName)'
@@ -46,7 +60,7 @@ stages:
             parameters:
               armPath: '$(infrastructurePath)'
               subscriptionId: '$(subscriptionId)'
-              subscriptionName: '$(subscriptionName)'
+              subscriptionService: '$(subscriptionService)'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appcsName: '$(appcsName)'
@@ -64,7 +78,7 @@ stages:
             parameters:
               armPath: '$(infrastructurePath)'
               subscriptionId: '$(subscriptionId)'
-              subscriptionName: '$(subscriptionName)'
+              subscriptionService: '$(subscriptionService)'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appiName: '$(appiName)'
