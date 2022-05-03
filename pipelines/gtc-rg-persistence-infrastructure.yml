@@ -15,11 +15,6 @@ pr:
 pool:
   vmImage: 'ubuntu-latest'
 
-parameters:
-  - name: subscriptionService 
-    type: string 
-    default: "gtc-sandbox-001"
-
 variables:
   - template: variables/common.yml
       
@@ -36,7 +31,7 @@ stages:
             parameters:
               armPath: '$(infrastructurePath)'
               subscriptionId: '$(subscriptionId)'
-              subscriptionService: '${{ parameters.subscriptionService }}'
+              subscriptionService: '$(subscriptionService)'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appiName: '$(appiName)'
@@ -51,7 +46,7 @@ stages:
             parameters:
               armPath: '$(infrastructurePath)'
               subscriptionId: '$(subscriptionId)'
-              subscriptionService: '${{ parameters.subscriptionService }}'
+              subscriptionService: '$(subscriptionService)'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appcsName: '$(appcsName)'
@@ -69,7 +64,7 @@ stages:
             parameters:
               armPath: '$(infrastructurePath)'
               subscriptionId: '$(subscriptionId)'
-              subscriptionService: '${{ parameters.subscriptionService }}'
+              subscriptionService: '$(subscriptionService)'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appiName: '$(appiName)'
