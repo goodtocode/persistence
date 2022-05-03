@@ -35,8 +35,8 @@ stages:
           - template: steps/landingzone-infrastructure-steps.yml
             parameters:
               armPath: '$(infrastructurePath)'
-              subscriptionId: '$(subscriptionId)'
-              subscriptionService: '${{ parameters.subscriptionService }}'
+              subscriptionId: 'asdfasdf'
+              subscriptionService: 'gtc-sandbox-001'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appiName: '$(appiName)'
@@ -50,8 +50,8 @@ stages:
           - template: steps/appcs-infrastructure-steps.yml
             parameters:
               armPath: '$(infrastructurePath)'
-              subscriptionId: '$(subscriptionId)'
-              subscriptionService: '${{ parameters.subscriptionService }}'
+              subscriptionId: 'asdfasdf'
+              subscriptionService: 'gtc-sandbox-001'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appcsName: '$(appcsName)'
@@ -68,8 +68,8 @@ stages:
           - template: steps/landingzone-infrastructure-steps.yml
             parameters:
               armPath: '$(infrastructurePath)'
-              subscriptionId: '$(subscriptionId)'
-              subscriptionService: '${{ parameters.subscriptionService }}'
+              subscriptionId: 'asdfasdf'
+              subscriptionService: 'gtc-sandbox-001'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appiName: '$(appiName)'
