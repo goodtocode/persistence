@@ -1,45 +1,23 @@
 variables:
-  - group: COMPANY-rg-PRODUCT-dev
+  - group: gtc-rg-persistence-dev
   - template: common.yml
   - name: rgEnvironment
     value: 'Development'
   - name: rgName
-    value: 'rg-PRODUCT-dev-001'
+    value: 'gtc-rg-persistence-dev-001'
   - name: rgLocation
     value: 'West US 2'
   - name: 'appiName'
-    value: 'appi-PRODUCT-dev-001'
-  - name: 'cogName'
-    value: 'cog-PRODUCT-dev-001'
-  - name: cogsku
-    value: 'S0'
-  - name: 'cogtextName'
-    value: 'cogtext-PRODUCT-dev-001'
-  - name: cogtextSku
-    value: 'F0'
-  - name: 'funcName'
-    value: 'func-PRODUCT-dev-001'
+    value: 'appi-persistence-dev-001'
   - name: 'kvName'
-    value: 'kv-PRODUCT-dev-001'
-  - name: 'logicName'
-    value: 'logic-PRODUCT-NAME-dev-001'
+    value: 'kv-persistence-dev-001'
   - name: 'nugetServiceConnection'
-    value: 'COMPANY-nuget-prod-001'
+    value: 'gtc-nuget-001'
   - name: 'nugetFeeds'
     value: 'select'
   - name: 'nugetType'
     value: 'internal'
-  - name: 'nugetId'
-    value: '00000000-0000-0000-0000-000000000000'
   - name: stName
-    value: 'stPRODUCTdev001'
-  - name: 'stblobcnName'
-    value: 'stblobcn-PRODUCT-dev-001'
-  - name: 'stblobcnNameLower'
-    value: "$[lower(replace(variables['stblobcnName'], '-', ''))]"
-  - name: 'teamscnName'
-    value: 'teamscn-PRODUCT-dev-001'
-  - name: 'teamscnNameLower'
-    value: "$[lower(replace(variables['teamscnName'], '-', ''))]"
+    value: 'stpersistencedev001'
   - name: workName
-    value: 'work-PRODUCT-dev-001'
+    value: 'work-persistence-dev-001'
