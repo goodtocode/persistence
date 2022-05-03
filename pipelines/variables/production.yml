@@ -11,8 +11,6 @@ variables:
     value: 'appi-persistence-prod-001'
   - name: 'kvName'
     value: 'kv-persistence-prod-001'
-  - name: 'nugetServiceConnection'
-    value: 'gtc-nuget-001'
   - name: 'nugetFeeds'
     value: 'select'
   - name: 'nugetType'
