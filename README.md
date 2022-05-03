@@ -1,7 +1,7 @@
-# GoodToCode Persistence Library
-[![Build Status](https://dev.azure.com/GoodToCode/GoodToCode.com/_apis/build/status/g2c-rg-shared?branchName=main)](https://dev.azure.com/GoodToCode/GoodToCode.com/_build/latest?definitionId=62&branchName=main)
+# GoodToCode Persistence for Azure and O365
+[![Build Status](https://dev.azure.com/GoodToCode/GoodToCode.com/_apis/build/status/g2c-rg-persistence?branchName=main)](https://dev.azure.com/GoodToCode/GoodToCode.com/_build/latest?definitionId=62&branchName=main)
 
-GoodToCode Persistence is a cross-cutting (AOP) centric collection of projects that support common plumbing done in Azure Functions, Web API, Blazor and Razor Pages. GoodToCode Persistence is based on serverless, DDD, onion-architecture, vertical slice and CQRS in .NET Core and EF Core code-first.
+GoodToCode Persistence for Azure and O365 is a cross-cutting (AOP) centric collection of projects that support common plumbing done in Azure Storage Tables, O365 Files, Azure CosmosDb and Azure SQL.
 
 ## Prerequisites
 You will need the following tools:
@@ -34,11 +34,11 @@ Follow these steps to get your development environment set up:
 	
 To accopmlish this in appsettings.*.json
 1. Open all instances of appsettings.Development.json and appsettings.Production.json
-2. Copy your Azure Service Bus Connection String from the Azure Portal
+2. Copy your Azure Storage Account and Azure CosmosDb Connection Strings from the Azure Portal
 3. Paste your connection string over the following setting:
 	"ConnectionStrings": {
-		"StorageTablesConnection": "AZURESTORAGE_CONNECTION_STRING_HERE",
-		"ServiceBusConnection": "AZURESERVICEBUS_CONNECTION_STRING_HERE"
+		"CosmosDb": "AZURECOSMOSDB_CONNECTION_STRING",
+		"StorageTables": "AZURESTORAGE_CONNECTION_STRING"
 	}
 4. Repeat for both Development and Production
 5. Save all instances of appsettings.Development.json and appsettings.Production.json
@@ -53,7 +53,6 @@ Includes all abstractions, classes and service collection extensions for Azure B
 
 ### GoodToCode.Persistence.Azure
 Includes all abstractions, classes and service collection extensions for Azure Storage Tables, CosmosDb, Entity Framework (EF) Core, etc.
-
 
 ## Contact
 * [GitHub Repo](https://www.github.com/goodtocode/persistence)
