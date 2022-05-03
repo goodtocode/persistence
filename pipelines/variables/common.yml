@@ -1,6 +1,4 @@
 variables:
-  - name: subscriptionService
-    value: "gtc-sandbox-001"
   - name: artifactsPath
     value: '$(Build.ArtifactStagingDirectory)'
   - name: tempPath
