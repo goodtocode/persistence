@@ -9,6 +9,8 @@ variables:
     value: 'West US 2'
   - name: 'appcsName'
     value: 'appcs-persistence-dev-001'
+  - name: 'appcsSku'
+    value: 'free'
   - name: 'appiName'
     value: 'appi-persistence-dev-001'
   - name: 'kvName'
