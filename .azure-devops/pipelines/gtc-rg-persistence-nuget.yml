@@ -61,7 +61,7 @@ stages:
             parameters:
               artifactsPath: '$(artifactsPath)'
               scriptsPath: '$(scriptsPath)'
-              srcP  ath: '$(srcPath)'
+              srcPath: '$(srcPath)'
 
       - job: deploy_nuget
         dependsOn: pack_src
@@ -103,7 +103,7 @@ stages:
             parameters:
               artifactsPath: '$(artifactsPath)'
               scriptsPath: '$(scriptsPath)'
-              srcP  ath: '$(srcPath)'
+              srcPath: '$(srcPath)'
 
       - job: deploy_nuget
         dependsOn: pack_src
