@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>GoodToCode.Persistence.Azure.CosmosDb</AssemblyName>
     <RootNamespace>GoodToCode.Persistence.Azure.CosmosDb</RootNamespace>
-	<Product>GoodToCode.Shared.Persistence.CosmosDb</Product>
+	<Product>GoodToCode.Persistence.Azure.CosmosDb</Product>
     <Version>6.22.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
