@@ -13,7 +13,7 @@ namespace GoodToCode.Persistence.Tests
 
     public struct EnvironmentVariableKeys
     {
-        public const string AppConfigurationConnection = "GTC_PERSISTENCE_CONNECTION";
+        public const string AppConfigurationConnection = "GTC_ANALYTICS_CONNECTION";        
         public const string EnvironmentAspNetCore = "ASPNETCORE_ENVIRONMENT";
         public const string EnvironmentAzureFunctions = "AZURE_FUNCTIONS_ENVIRONMENT";
         public const string EnvironmentDotNet = "DOTNET_ENVIRONMENT";

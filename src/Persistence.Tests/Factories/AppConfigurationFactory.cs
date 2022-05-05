@@ -9,8 +9,8 @@ namespace GoodToCode.Persistence.Tests
         public IConfiguration Configuration { get; private set; }
         public IConfiguration Create()
         {
-            var builder = new ConfigurationBuilder();
             var environment = Environment.GetEnvironmentVariable(EnvironmentVariableKeys.EnvironmentAspNetCore) ?? EnvironmentVariableDefaults.Environment;
+            var builder = new ConfigurationBuilder();
             builder
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{environment}.json");
