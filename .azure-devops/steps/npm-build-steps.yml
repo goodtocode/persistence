@@ -17,9 +17,6 @@ parameters:
   - name: versionToReplace
     type: string 
     default: "1.0.0"
-  - name: majorVersionToSet 
-    type: string 
-    default: ""
 
 steps:
   - task: PowerShell@2
