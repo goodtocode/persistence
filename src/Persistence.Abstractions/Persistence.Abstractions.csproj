@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>GoodToCode.Persistence.Abstractions</AssemblyName>
     <RootNamespace>GoodToCode.Persistence.Abstractions</RootNamespace>
-    <Product>GoodToCode.Shared.Persistence.Abstractions</Product>
+    <Product>GoodToCode.Persistence.Abstractions</Product>
     <Version>6.22.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
