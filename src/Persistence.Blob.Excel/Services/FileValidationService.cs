@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace GoodToCode.Shared.Blob.Excel
+namespace GoodToCode.Persistence.Blob.Excel
 {
     public class FileValidationService : IFileValidationService
     {

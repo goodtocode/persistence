@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace GoodToCode.Shared.Blob.Csv
+namespace GoodToCode.Persistence.Blob.Csv
 {
     public class FileValidationService : IFileValidationService
     {

@@ -3,7 +3,7 @@ using GoodToCode.Persistence.Abstractions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GoodToCode.Shared.Persistence.CosmosDb
+namespace GoodToCode.Persistence.Azure.CosmosDb
 {
     public static class AzureDataTablesExtensions
     {

@@ -1,4 +1,4 @@
-﻿using GoodToCode.Shared.Persistence.StorageTables;
+﻿using GoodToCode.Persistence.Azure.StorageTables;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoodToCode.Shared.Blob.Csv
+namespace GoodToCode.Persistence.Blob.Csv
 {
     public interface IFileValidationService
     {

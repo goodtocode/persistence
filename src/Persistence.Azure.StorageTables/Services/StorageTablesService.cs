@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Persistence.StorageTables
+namespace GoodToCode.Persistence.Azure.StorageTables
 {
     public class StorageTablesService<T> : IStorageTablesService<T> where T : class, IEntity, new()
     {

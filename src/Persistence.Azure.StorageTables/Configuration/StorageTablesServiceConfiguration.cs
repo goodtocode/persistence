@@ -2,7 +2,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace GoodToCode.Shared.Persistence.StorageTables
+namespace GoodToCode.Persistence.Azure.StorageTables
 {
     public class StorageTablesServiceConfiguration : IStorageTablesServiceConfiguration
     {

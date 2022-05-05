@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GoodToCode.Persistence.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 

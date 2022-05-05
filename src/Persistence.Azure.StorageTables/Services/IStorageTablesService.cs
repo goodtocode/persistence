@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Persistence.StorageTables
+namespace GoodToCode.Persistence.Azure.StorageTables
 {
     public interface IStorageTablesService<T> where T : class, IEntity, new()
     {

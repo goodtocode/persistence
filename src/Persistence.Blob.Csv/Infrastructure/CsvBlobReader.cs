@@ -6,7 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace GoodToCode.Shared.Blob.Csv
+namespace GoodToCode.Persistence.Blob.Csv
 {
     public class CsvBlobReader
     {
