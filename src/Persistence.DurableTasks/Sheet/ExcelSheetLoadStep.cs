@@ -4,11 +4,11 @@ using System.IO;
 
 namespace GoodToCode.Persistence.DurableTasks
 {
-    public class ExcelSheetLoadActivity
+    public class ExcelSheetLoadStep
     {
         private readonly IExcelService service;
 
-        public ExcelSheetLoadActivity(IExcelService serviceExcel)
+        public ExcelSheetLoadStep(IExcelService serviceExcel)
         {
             service = serviceExcel;
         }

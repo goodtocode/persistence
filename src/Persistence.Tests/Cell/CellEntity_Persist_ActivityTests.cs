@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class CellEntity_Persist_ActivityTests
+    public class CellEntity_Persist_StepTests
     {
         private readonly IConfiguration configuration;
-        private readonly ILogger<CellEntity_Persist_ActivityTests> logItem;
+        private readonly ILogger<CellEntity_Persist_StepTests> logItem;
         private readonly StorageTablesServiceConfiguration configStorage;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public CellEntity_Persist_ActivityTests()
+        public CellEntity_Persist_StepTests()
         {
-            logItem = LoggerFactory.CreateLogger<CellEntity_Persist_ActivityTests>();
+            logItem = LoggerFactory.CreateLogger<CellEntity_Persist_StepTests>();
             configuration = new AppConfigurationFactory().Create();
             configStorage = new StorageTablesServiceConfiguration(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
@@ -35,7 +35,7 @@ namespace GoodToCode.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task CellEntity_Persist_Activity()       
+        public async Task CellEntity_Persist_Step()       
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
 
@@ -43,7 +43,7 @@ namespace GoodToCode.Persistence.Tests
             { 
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new CellPersistActivity(configStorage);
+                var workflow = new CellPersistStep(configStorage);
                 var results = await workflow.ExecuteAsync(CellFactory.CreateCellEntity());
                 Assert.IsTrue(results.Any(), "Failed to persist.");
             }

@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace GoodToCode.Persistence.DurableTasks
 {
-    public class ExcelColumnSearchActivity
+    public class ExcelColumnSearchStep
     {
         private readonly IExcelService service;
 
-        public ExcelColumnSearchActivity(IExcelService serviceExcel)
+        public ExcelColumnSearchStep(IExcelService serviceExcel)
         {
             service = serviceExcel;
         }

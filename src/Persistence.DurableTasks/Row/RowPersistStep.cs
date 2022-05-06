@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Persistence.DurableTasks
 {
-    public class RowPersistActivity
+    public class RowPersistStep
     {
         private readonly IStorageTablesService<RowEntity> servicePersist;
 
-        public RowPersistActivity(IStorageTablesServiceConfiguration config)
+        public RowPersistStep(IStorageTablesServiceConfiguration config)
         {
             servicePersist = new StorageTablesService<RowEntity>(config);
         }

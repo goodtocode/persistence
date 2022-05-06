@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Workbook_Persist_ActivityTests
+    public class Workbook_Persist_StepTests
     {
         private readonly IConfiguration configuration;
-        private readonly ILogger<Workbook_Persist_ActivityTests> logItem;
+        private readonly ILogger<Workbook_Persist_StepTests> logItem;
         private readonly StorageTablesServiceConfiguration configStorage;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public Workbook_Persist_ActivityTests()
+        public Workbook_Persist_StepTests()
         {
-            logItem = LoggerFactory.CreateLogger<Workbook_Persist_ActivityTests>();
+            logItem = LoggerFactory.CreateLogger<Workbook_Persist_StepTests>();
             configuration = new AppConfigurationFactory().Create();
             configStorage = new StorageTablesServiceConfiguration(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
@@ -35,7 +35,7 @@ namespace GoodToCode.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task Workbook_Persist_Activity()
+        public async Task Workbook_Persist_Step()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
 
@@ -43,7 +43,7 @@ namespace GoodToCode.Persistence.Tests
             {
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new WorkbookPersistActivity(configStorage);
+                var workflow = new WorkbookPersistStep(configStorage);
                 var results = await workflow.ExecuteAsync(WorkbookFactory.CreateWorkbookData(), "Partition1");
                 Assert.IsTrue(results.Any(), "Failed to persist.");
             }

@@ -14,22 +14,22 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Excel_Column_ActivityTests
+    public class Excel_Column_StepTests
     {
-        private readonly ILogger<Excel_Column_ActivityTests> logItem;
+        private readonly ILogger<Excel_Column_StepTests> logItem;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
 
-        public Excel_Column_ActivityTests()
+        public Excel_Column_StepTests()
         {
-            logItem = LoggerFactory.CreateLogger<Excel_Column_ActivityTests>();
+            logItem = LoggerFactory.CreateLogger<Excel_Column_StepTests>();
         }
 
         [TestMethod]
-        public async Task Excel_Column_Load_Activity()       
+        public async Task Excel_Column_Load_Step()       
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
 
@@ -37,7 +37,7 @@ namespace GoodToCode.Persistence.Tests
             { 
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new ExcelColumnLoadActivity(new ExcelService());
+                var workflow = new ExcelColumnLoadStep(new ExcelService());
                 var results = workflow.Execute(itemToAnalyze, 0, 3);
                 Assert.IsTrue(results.Any(), "No results from analytics service.");
             }
@@ -49,7 +49,7 @@ namespace GoodToCode.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task Excel_Column_Search_Activity()
+        public async Task Excel_Column_Search_Step()
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
 
@@ -57,7 +57,7 @@ namespace GoodToCode.Persistence.Tests
             {
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new ExcelColumnSearchActivity(new ExcelService());
+                var workflow = new ExcelColumnSearchStep(new ExcelService());
                 var results = workflow.Execute(itemToAnalyze, "DocName", "*");
                 Assert.IsTrue(results.Any(), "No results from analytics service.");
             }

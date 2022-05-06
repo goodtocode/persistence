@@ -14,22 +14,22 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Csv_Column_ActivityTests
+    public class Csv_Column_StepTests
     {
-        private readonly ILogger<Csv_Column_ActivityTests> logItem;
+        private readonly ILogger<Csv_Column_StepTests> logItem;
         private static string SutCsvFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.csv"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
 
-        public Csv_Column_ActivityTests()
+        public Csv_Column_StepTests()
         {
-            logItem = LoggerFactory.CreateLogger<Csv_Column_ActivityTests>();
+            logItem = LoggerFactory.CreateLogger<Csv_Column_StepTests>();
         }
 
         [TestMethod]
-        public async Task Csv_Column_Load_Activity()
+        public async Task Csv_Column_Load_Step()
         {
             Assert.IsTrue(File.Exists(SutCsvFile), $"{SutCsvFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
 
@@ -37,7 +37,7 @@ namespace GoodToCode.Persistence.Tests
             {
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new CsvColumnLoadActivity(new CsvService());
+                var workflow = new CsvColumnLoadStep(new CsvService());
                 var results = workflow.Execute(itemToAnalyze, 3);
                 Assert.IsTrue(results.Any(), "No results from analytics service.");
             }
@@ -49,7 +49,7 @@ namespace GoodToCode.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task Csv_Column_Search_Activity()
+        public async Task Csv_Column_Search_Step()
         {
             Assert.IsTrue(File.Exists(SutCsvFile), $"{SutCsvFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
 
@@ -57,7 +57,7 @@ namespace GoodToCode.Persistence.Tests
             {
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new CsvColumnSearchActivity(new CsvService());
+                var workflow = new CsvColumnSearchStep(new CsvService());
                 var results = workflow.Execute(itemToAnalyze, "DocName", "*");
                 Assert.IsTrue(results.Any(), "No results from analytics service.");
             }

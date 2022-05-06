@@ -1,17 +1,16 @@
 ﻿using Azure.Data.Tables;
 using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Azure.StorageTables;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Persistence.DurableTasks
 {
-    public class CellPersistActivity
+    public class ColumnPersistStep
     {
         private readonly IStorageTablesService<CellEntity> servicePersist;
 
-        public CellPersistActivity(IStorageTablesServiceConfiguration config)
+        public ColumnPersistStep(IStorageTablesServiceConfiguration config)
         {
             servicePersist = new StorageTablesService<CellEntity>(config);
         }
@@ -23,8 +22,6 @@ namespace GoodToCode.Persistence.DurableTasks
 
         public async Task<TableEntity> ExecuteAsync(CellEntity entity)
         {
-            if (string.IsNullOrWhiteSpace(entity.PartitionKey) || string.IsNullOrWhiteSpace(entity.RowKey))
-                throw new ArgumentException("PartitionKey and RowKey are required.", entity.GetType().Name);
             return await servicePersist.AddItemAsync(entity);
         }
     }
