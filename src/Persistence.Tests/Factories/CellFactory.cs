@@ -5,6 +5,11 @@ namespace GoodToCode.Persistence.Tests
 {
     public class CellFactory
     {
+        public static CellEntity CreateCellEntity()
+        {
+            return new CellEntity(Guid.NewGuid().ToString(), CreateCellData());
+        }
+
         public static CellData CreateCellData()
         {
             return new CellData()

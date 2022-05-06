@@ -1,4 +1,4 @@
-﻿namespace GoodToCode.Shared.Persistence
+﻿namespace GoodToCode.Persistence
 {
     public struct FunctionEndpointNames
     {

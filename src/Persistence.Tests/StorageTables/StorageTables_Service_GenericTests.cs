@@ -37,7 +37,7 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Generic_GetItem()
         {
-            var item = new EntityA("PartRead") { SomeString = "Some read data." };
+            var item = new EntityA("PartRead") { SomeData = "Some read data." };
             await ServiceEntityA.AddItemAsync(item);
             var readItem = ServiceEntityA.GetItem(item.RowKey);
             Assert.IsTrue(readItem.RowKey == item.RowKey);
@@ -46,7 +46,7 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Generic_GetAndCastItem()
         {
-            var item = new EntityA("PartRead") { SomeString = "Some read data." };
+            var item = new EntityA("PartRead") { SomeData = "Some read data." };
             await ServiceEntityA.AddItemAsync(item);
             var readItem = ServiceEntityA.GetAndCastItem(item.RowKey);
             Assert.IsTrue(readItem.RowKey == item.RowKey);
@@ -55,7 +55,7 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Generic_GetItems()
         {
-            var item = new EntityA("PartRead") { SomeString = "Some read data." };
+            var item = new EntityA("PartRead") { SomeData = "Some read data." };
             await ServiceEntityA.AddItemAsync(item);
             var readItem = ServiceEntityA.GetItems(x => x.RowKey == item.RowKey);
             Assert.IsTrue(readItem.FirstOrDefault().RowKey == item.RowKey);
@@ -64,7 +64,7 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Generic_GetAndCastItems()
         {
-            var item = new EntityA("PartRead") { SomeString = "Some read data." };
+            var item = new EntityA("PartRead") { SomeData = "Some read data." };
             await ServiceEntityA.AddItemAsync(item);
             var readItem = ServiceEntityA.GetAndCastItems(x => x.RowKey == item.RowKey);
             Assert.IsTrue(readItem.FirstOrDefault().RowKey == item.RowKey);
@@ -73,7 +73,7 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Generic_GetAllItems()
         {
-            var item = new EntityA("PartRead") { SomeString = "Some read data." };
+            var item = new EntityA("PartRead") { SomeData = "Some read data." };
             await ServiceEntityA.AddItemAsync(item);
             var readItem = ServiceEntityA.GetItems(x => x.RowKey == item.RowKey);
             Assert.IsTrue(readItem.FirstOrDefault().RowKey == item.RowKey);
@@ -82,7 +82,7 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Generic_AddItemAsync()
         {
-            var item = new EntityA("PartWrite") { SomeString = "Some write data." };
+            var item = new EntityA("PartWrite") { SomeData = "Some write data." };
             await ServiceEntityA.AddItemAsync(item);
             var writeItem = ServiceEntityA.GetItem(item.RowKey.ToString());
             Assert.IsTrue(writeItem.RowKey == item.RowKey);
@@ -95,16 +95,16 @@ namespace GoodToCode.Persistence.Tests
         public async Task StorageTables_Generic_AddItemsAsync()
         {
             var items = new List<EntityA>() { 
-                new EntityA("PartWrite1") { SomeString = "Some write data1." }, 
-                new EntityA("PartWrite2") { SomeString = "Some write data2." },
-                new EntityA("PartWrite3") { SomeString = "Some write data3." } };
+                new EntityA("PartWrite1") { SomeData = "Some write data1." }, 
+                new EntityA("PartWrite2") { SomeData = "Some write data2." },
+                new EntityA("PartWrite3") { SomeData = "Some write data3." } };
 
             await ServiceEntityA.AddItemsAsync(items);
             foreach(var item in items)
             {
                 var writeItem = ServiceEntityA.GetItem(item.RowKey.ToString());
                 Assert.IsTrue(writeItem.RowKey == item.RowKey);
-                Assert.IsTrue(writeItem["SomeString"]?.ToString() == item.SomeString);
+                Assert.IsTrue(writeItem["SomeData"]?.ToString() == item.SomeData);
                 await ServiceEntityA.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
                 writeItem = ServiceEntityA.GetItem(item.RowKey);
                 Assert.IsTrue(writeItem == null);
@@ -131,7 +131,7 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task StorageTables_Generic_UpsertItemAsync()
         {
-            var item = new EntityA("PartWrite") { SomeString = "Some write data." };
+            var item = new EntityA("PartWrite") { SomeData = "Some write data." };
             await ServiceEntityA.UpsertItemAsync(item);
             var writeItem = ServiceEntityA.GetItem(item.RowKey.ToString());
             Assert.IsTrue(writeItem.RowKey == item.RowKey);
@@ -144,16 +144,16 @@ namespace GoodToCode.Persistence.Tests
         public async Task StorageTables_Generic_UpsertItemsAsync()
         {
             var items = new List<EntityA>() {
-                new EntityA("PartWrite1") { SomeString = "Some write data1." },
-                new EntityA("PartWrite2") { SomeString = "Some write data2." },
-                new EntityA("PartWrite3") { SomeString = "Some write data3." } };
+                new EntityA("PartWrite1") { SomeData = "Some write data1." },
+                new EntityA("PartWrite2") { SomeData = "Some write data2." },
+                new EntityA("PartWrite3") { SomeData = "Some write data3." } };
 
             await ServiceEntityA.UpsertItemsAsync(items);
             foreach (var item in items)
             {
                 var writeItem = ServiceEntityA.GetItem(item.RowKey.ToString());
                 Assert.IsTrue(writeItem.RowKey == item.RowKey);
-                Assert.IsTrue(writeItem["SomeString"]?.ToString() == item.SomeString);
+                Assert.IsTrue(writeItem["SomeData"]?.ToString() == item.SomeData);
                 await ServiceEntityA.DeleteItemAsync(writeItem.PartitionKey, writeItem.RowKey);
                 writeItem = ServiceEntityA.GetItem(item.RowKey);
                 Assert.IsTrue(writeItem == null);

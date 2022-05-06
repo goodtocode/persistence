@@ -59,6 +59,7 @@
     <ProjectReference Include="..\Persistence.Azure.StorageTables\Persistence.Azure.StorageTables.csproj" />
     <ProjectReference Include="..\Persistence.Blob.Csv\Persistence.Blob.Csv.csproj" />
     <ProjectReference Include="..\Persistence.Blob.Excel\Persistence.Blob.Excel.csproj" />
+    <ProjectReference Include="..\Persistence.DurableTasks\Persistence.DurableTasks.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,6 +70,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\IEnumerableRowEntity_5600.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\OpinionFile.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\OpinionFile.xlsx">
