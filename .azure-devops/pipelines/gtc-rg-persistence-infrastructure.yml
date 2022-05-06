@@ -19,6 +19,12 @@ parameters:
   - name: appcsConnection
     type: string 
     default: "$(appcsConnection)"
+  - name: appcsKeys
+    type: object
+    default: [ "Shared:Sentinel", "ConnectionStrings:CosmosDb", "ConnectionStrings:StorageTables" ]
+  - name: appcsValues
+    type: object
+    default: [ "1", "$(cosmosConnection)", "$(stConnection)" ]
   - name: subscriptionId
     type: string
     default: "$(subscriptionId)"
@@ -28,12 +34,6 @@ parameters:
 
 variables:
   - template: ../variables/common.yml
-  - name: appcsKeys
-    type: object
-    default: [ "Shared:Sentinel", "ConnectionStrings:CosmosDb", "ConnectionStrings:StorageTables" ]
-  - name: appcsValues
-    type: object
-    default: [ "1", "$(cosmosConnection)", "$(stConnection)" ]
       
 stages:
   - stage: development
@@ -80,8 +80,8 @@ stages:
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appcsName: '$(appcsName)'
-              appcsKeys: '$(appcsKeys)'  
-              appcsValues: '$(appcsValues)'
+              appcsKeys: '${{ parameters.appcsKeys }}'
+              appcsValues: '${{ parameters.appcsValues }}'
 
   - stage: production
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
