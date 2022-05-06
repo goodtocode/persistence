@@ -16,12 +16,24 @@ pool:
   vmImage: 'ubuntu-latest'
 
 parameters:
+  - name: appcsConnection
+    type: string 
+    default: "$(appcsConnection)"
+  - name: subscriptionId
+    type: string
+    default: "$(subscriptionId)"
   - name: subscriptionService 
     type: string 
     default: "gtc-sandbox-001"
 
 variables:
   - template: ../variables/common.yml
+  - name: appcsKeys
+    type: object
+    default: [ "Shared:Sentinel", "ConnectionStrings:CosmosDb", "ConnectionStrings:StorageTables" ]
+  - name: appcsValues
+    type: object
+    default: [ "1", "$(cosmosConnection)", "$(stConnection)" ]
       
 stages:
   - stage: development
@@ -35,7 +47,7 @@ stages:
           - template: ../steps/landingzone-infrastructure-steps.yml
             parameters:
               armPath: '$(infrastructurePath)'
-              subscriptionId: '$(subscriptionId)'
+              subscriptionId: '${{ parameters.subscriptionId }}'
               subscriptionService: '${{ parameters.subscriptionService }}'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
@@ -50,12 +62,26 @@ stages:
           - template: ../steps/appcs-infrastructure-steps.yml
             parameters:
               armPath: '$(infrastructurePath)'
-              subscriptionId: '$(subscriptionId)'
+              subscriptionId: '${{ parameters.subscriptionId }}'
               subscriptionService: '${{ parameters.subscriptionService }}'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
               appcsName: '$(appcsName)'
-              appcsSku: '$(appcsSku)'              
+              appcsSku: '$(appcsSku)'
+
+      - job: deploy_appcs_settings
+        dependsOn: deploy_appcs_infrastructure
+        steps:
+          - template: ../steps/appcs-settings-steps.yml
+            parameters:
+              armPath: '$(infrastructurePath)'
+              subscriptionId: '${{ parameters.subscriptionId }}'
+              subscriptionService: '${{ parameters.subscriptionService }}'
+              rgName: '$(rgName)'
+              rgLocation: '$(rgLocation)'
+              appcsName: '$(appcsName)'
+              appcsKeys: '$(appcsKeys)'  
+              appcsValues: '$(appcsValues)'
 
   - stage: production
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
@@ -68,7 +94,7 @@ stages:
           - template: ../steps/landingzone-infrastructure-steps.yml
             parameters:
               armPath: '$(infrastructurePath)'
-              subscriptionId: '$(subscriptionId)'
+              subscriptionId: '${{ parameters.subscriptionId }}'
               subscriptionService: '${{ parameters.subscriptionService }}'
               rgName: '$(rgName)'
               rgLocation: '$(rgLocation)'
