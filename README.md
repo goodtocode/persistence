@@ -1,7 +1,11 @@
 # GoodToCode Persistence for Azure and O365
-[![Build Status](https://dev.azure.com/GoodToCode/GoodToCode.com/_apis/build/status/g2c-rg-persistence?branchName=main)](https://dev.azure.com/GoodToCode/GoodToCode.com/_build/latest?definitionId=62&branchName=main)
-
 GoodToCode Persistence for Azure and O365 is a cross-cutting (AOP) centric collection of projects that support common plumbing done in Azure Storage Tables, O365 Files, Azure CosmosDb and Azure SQL.
+
+## Pipeline: gtc-persistence-infrastructure
+[![Build Status](https://dev.azure.com/GoodToCode/GoodToCode.com/_apis/build/status/gtc-rg-persistence-infrastructure?branchName=main)](https://dev.azure.com/GoodToCode/GoodToCode.com/_build/latest?definitionId=107&branchName=main)
+
+## Pipeline: gtc-persistence-nuget
+[![Build Status](https://dev.azure.com/GoodToCode/GoodToCode.com/_apis/build/status/gtc-rg-persistence-nuget?branchName=main)](https://dev.azure.com/GoodToCode/GoodToCode.com/_build/latest?definitionId=108&branchName=main)
 
 ## Prerequisites
 You will need the following tools:

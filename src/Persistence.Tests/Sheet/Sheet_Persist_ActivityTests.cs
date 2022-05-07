@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Sheet_Persist_ActivityTests
+    public class Sheet_Persist_StepTests
     {
         private readonly IConfiguration configuration;
-        private readonly ILogger<Sheet_Persist_ActivityTests> logItem;
+        private readonly ILogger<Sheet_Persist_StepTests> logItem;
         private readonly StorageTablesServiceConfiguration configStorage;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public Sheet_Persist_ActivityTests()
+        public Sheet_Persist_StepTests()
         {
-            logItem = LoggerFactory.CreateLogger<Sheet_Persist_ActivityTests>();
+            logItem = LoggerFactory.CreateLogger<Sheet_Persist_StepTests>();
             configuration = new AppConfigurationFactory().Create();
             configStorage = new StorageTablesServiceConfiguration(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
@@ -41,7 +41,7 @@ namespace GoodToCode.Persistence.Tests
 
             try
             { 
-                var workflow = new SheetPersistActivity(configStorage);
+                var workflow = new SheetPersistStep(configStorage);
                 var results = await workflow.ExecuteAsync(SheetFactory.CreateSheetData(), "Partition1");
                 Assert.IsTrue(results.Any(), "Failed to persist.");
             }

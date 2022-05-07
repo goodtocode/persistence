@@ -1,22 +1,22 @@
 ﻿using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Blob.Csv;
-using System.Collections.Generic;
 using System.IO;
 
 namespace GoodToCode.Persistence.DurableTasks
 {
-    public class CsvColumnLoadActivity
+    public class CsvSheetLoadStep
     {
         private readonly ICsvService service;
 
-        public CsvColumnLoadActivity(ICsvService serviceCsv)
+        public CsvSheetLoadStep(ICsvService serviceCsv)
         {
             service = serviceCsv;
         }
 
-        public  IEnumerable<ICellData> Execute(Stream CsvStream, int columnToAnalyze)
+        public ISheetData Execute(Stream CsvStream)
         {
-            return service.GetColumn(CsvStream, columnToAnalyze);
+            var sheet = service.GetSheet(CsvStream);
+            return sheet;
         }
     }
 }

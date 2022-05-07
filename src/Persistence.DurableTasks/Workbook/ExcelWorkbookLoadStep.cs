@@ -5,18 +5,19 @@ using System.IO;
 
 namespace GoodToCode.Persistence.DurableTasks
 {
-    public class ExcelColumnLoadActivity
+    public class ExcelWorkbookLoadStep
     {
         private readonly IExcelService service;
 
-        public ExcelColumnLoadActivity(IExcelService serviceExcel)
+        public ExcelWorkbookLoadStep(IExcelService serviceExcel)
         {
             service = serviceExcel;
         }
 
-        public  IEnumerable<ICellData> Execute(Stream excelStream, int sheetToAnalyze, int columnToAnalyze)
+        public IEnumerable<ISheetData> Execute(Stream excelStream, string documentName)
         {
-            return service.GetColumn(excelStream, sheetToAnalyze, columnToAnalyze);
+            var wb = service.GetWorkbook(excelStream, documentName);
+            return wb.Sheets;
         }
     }
 }

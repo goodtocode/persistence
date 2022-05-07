@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GoodToCode.Persistence.DurableTasks
 {
-    public class WorkbookPersistActivity
+    public class WorkbookPersistStep
     {
-        private readonly SheetPersistActivity activityPersist;
+        private readonly SheetPersistStep activityPersist;
 
-        public WorkbookPersistActivity(IStorageTablesServiceConfiguration config)
+        public WorkbookPersistStep(IStorageTablesServiceConfiguration config)
         {
-            activityPersist = new SheetPersistActivity(config);
+            activityPersist = new SheetPersistStep(config);
         }
 
         public async Task<IEnumerable<TableEntity>> ExecuteAsync(IWorkbookData entity, string paritionKey)

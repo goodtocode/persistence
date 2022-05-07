@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace GoodToCode.Persistence.DurableTasks
 {
-    public class CsvColumnSearchActivity
+    public class CsvColumnSearchStep
     {
         private readonly ICsvService service;
 
-        public CsvColumnSearchActivity(ICsvService serviceCsv)
+        public CsvColumnSearchStep(ICsvService serviceCsv)
         {
             service = serviceCsv;
         }
