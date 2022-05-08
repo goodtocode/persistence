@@ -26,9 +26,9 @@ namespace GoodToCode.Persistence.Abstractions
 
         public CellEntity() { }
 
-        public CellEntity(string rowKey, ICellData cell)
-        {            
-            PartitionKey = cell.SheetName;
+        public CellEntity(string partitionKey, string rowKey, ICellData cell)
+        {
+            PartitionKey = partitionKey;
             RowKey = rowKey;
             WorkbookName = cell.WorkbookName;
             SheetIndex = cell.SheetIndex;
@@ -37,10 +37,6 @@ namespace GoodToCode.Persistence.Abstractions
             ColumnIndex = cell.ColumnIndex;
             ColumnName = cell.ColumnName;
             CellValue = cell.CellValue;
-        }
-
-        public CellEntity(ICellData cell) : this(Guid.NewGuid().ToString(), cell)
-        {
         }
     }
 }

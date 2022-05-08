@@ -10,9 +10,12 @@ namespace GoodToCode.Persistence.Abstractions
     public class RowEntity : IRowEntity
     {
         [JsonInclude]
-        public string PartitionKey { get; }
+        public string PartitionKey { get; private set; }
         [JsonInclude]
-        public string RowKey { get; }
+        public string RowKey { get; private set; }
+        [JsonInclude]
+        public DateTimeOffset? Timestamp { get; set; } = DateTime.UtcNow;
+
         public string WorkbookName { get; private set; }
         public int SheetIndex { get; private set; }
         [JsonInclude]
@@ -20,9 +23,7 @@ namespace GoodToCode.Persistence.Abstractions
         [JsonInclude]
         public int RowIndex { get; }
         [JsonInclude]
-        public IEnumerable<ICellData> Cells { get; }
-
-        public DateTimeOffset? Timestamp { get; }
+        public IEnumerable<ICellData> Cells { get; }        
 
         public RowEntity() 
         {

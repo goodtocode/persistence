@@ -11,5 +11,11 @@ namespace GoodToCode.Persistence.Tests
             var row = new List<RowData>() { new RowData(1, cells) };
             return new SheetData(0, "Sheet1", row, cells);
         }
+
+        public static SheetEntity CreateSheetEntity()
+        {
+            var row = new List<RowData>() { RowFactory.CreateRowEntity() };
+            return new SheetEntity();
+        }
     }
 }

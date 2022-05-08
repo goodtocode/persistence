@@ -7,7 +7,7 @@ namespace GoodToCode.Persistence.Tests
     {
         public static CellEntity CreateCellEntity()
         {
-            return new CellEntity(Guid.NewGuid().ToString(), CreateCellData());
+            return new CellEntity("Sheet1", Guid.NewGuid().ToString(), CreateCellData());
         }
 
         public static CellData CreateCellData()

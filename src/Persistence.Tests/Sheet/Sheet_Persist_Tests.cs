@@ -31,7 +31,7 @@ namespace GoodToCode.Persistence.Tests
         {
             try
             {
-                var sheet = SheetFactory.CreateSheetData();
+                var sheet = SheetFactory.CreateSheetEntity();
                 var results = new List<TableEntity>();
                 foreach (RowEntity row in sheet.Rows)
                     results.Add(await new StorageTablesService<RowEntity>(configStorage).AddItemAsync(row));

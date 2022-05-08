@@ -1,16 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace GoodToCode.Persistence.Abstractions
 {
-    public class SheetData : ISheetData
+    public class SheetEntity : ISheetEntity
     {
-        public string WorkbookName { get; set; }
+        [JsonInclude]
+        public string PartitionKey { get; private set; }
+        [JsonInclude]
+        public string RowKey { get; private set; }
+        [JsonInclude]
+        public DateTimeOffset? Timestamp { get; set; } = DateTime.UtcNow;
         public int SheetIndex { get; set; }
         public string SheetName { get; set; }
         public IEnumerable<IRowData> Rows { get; set; }
+        public string WorkbookName { get; set; }
 
-        public SheetData(int sheetIndex, string sheetName, IEnumerable<IRowData> rows)
+        public SheetEntity(int sheetIndex, string sheetName, IEnumerable<IRowData> rows)
         {
             SheetIndex = sheetIndex;
             SheetName = sheetName;

@@ -38,7 +38,7 @@ namespace GoodToCode.Persistence.Tests
 
             try
             {
-                var workbooks = WorkbookFactory.CreateWorkbookData();
+                var workbooks = WorkbookFactory.CreateWorkbookEntity();
                 var results = new List<TableEntity>();
                 foreach (var sheet in workbooks.Sheets)
                     foreach(RowEntity row in sheet.Rows)

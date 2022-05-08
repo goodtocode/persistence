@@ -29,7 +29,7 @@ namespace GoodToCode.Persistence.Tests
         public async Task CellEntity_Persist_Step()       
         {
             var entity = CellFactory.CreateCellEntity();
-            Assert.IsTrue(string.IsNullOrWhiteSpace(entity.PartitionKey) || string.IsNullOrWhiteSpace(entity.RowKey), $"PartitionKey and RowKey are required. {entity.GetType().Name}");
+            Assert.IsFalse(string.IsNullOrWhiteSpace(entity.PartitionKey) || string.IsNullOrWhiteSpace(entity.RowKey), $"PartitionKey and RowKey are required. {entity.GetType().Name}");
 
             try
             {
