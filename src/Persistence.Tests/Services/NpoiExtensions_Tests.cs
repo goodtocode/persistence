@@ -10,7 +10,7 @@ using System.Reflection;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class NpoiExtensionsTests
+    public class NpoiExtensions_Tests
     {
         private readonly NpoiBlobReader reader;
         private readonly string executingPath;
@@ -21,13 +21,13 @@ namespace GoodToCode.Persistence.Tests
         public ISheetData SutXlsx { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public NpoiExtensionsTests()
+        public NpoiExtensions_Tests()
         {
             reader = new NpoiBlobReader();
             // Visual Studio vs. dotnet test execute different folders
             executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);                        
             executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();
-            executingPath = Directory.Exists(AssetsFolder) ? executingPath : $"{Directory.GetParent(executingPath)}/bin/Debug/net5.0";
+            
         }
 
         [TestMethod]

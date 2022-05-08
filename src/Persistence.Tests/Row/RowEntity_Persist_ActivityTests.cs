@@ -37,12 +37,12 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task RowEntity_Persist_Fake()       
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            var row = RowFactory.CreateRowData();
 
             try
-            { 
-                var workflow = new RowPersistStep(configStorage);
-                var results = await workflow.ExecuteAsync(RowFactory.CreateRowData(), "Partition1");
+            {
+                var entity = new RowEntity(Guid.NewGuid().ToString(), row.Cells);
+                var results = await new StorageTablesService<CellEntity>(configStorage).AddItemAsync(entity.ToDictionary());
                 Assert.IsTrue(results.Any(), "Failed to persist.");
             }
             catch (Exception ex)

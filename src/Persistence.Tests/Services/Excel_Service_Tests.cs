@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class ExcelServiceTests
+    public class Excel_Service_Tests
     {
         private readonly string executingPath;
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
@@ -23,12 +23,12 @@ namespace GoodToCode.Persistence.Tests
         public ISheetData SutXlsx { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public ExcelServiceTests()
+        public Excel_Service_Tests()
         {
             // Visual Studio vs. dotnet test execute different folders
             executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);                        
             executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();
-            executingPath = Directory.Exists(AssetsFolder) ? executingPath : $"{Directory.GetParent(executingPath)}/bin/Debug/net5.0";
+            
         }
 
         [TestMethod]
