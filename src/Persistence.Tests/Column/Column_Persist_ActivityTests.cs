@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Column_Persist_StepTests
+    public class Column_Persist_Tests
     {
         private readonly IConfiguration configuration;
-        private readonly ILogger<Column_Persist_StepTests> logItem;
+        private readonly ILogger<Column_Persist_Tests> logItem;
         private readonly StorageTablesServiceConfiguration configStorage;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public Column_Persist_StepTests()
+        public Column_Persist_Tests()
         {
-            logItem = LoggerFactory.CreateLogger<Column_Persist_StepTests>();
+            logItem = LoggerFactory.CreateLogger<Column_Persist_Tests>();
             configuration = new AppConfigurationFactory().Create();
             configStorage = new StorageTablesServiceConfiguration(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],
@@ -37,14 +37,13 @@ namespace GoodToCode.Persistence.Tests
         [TestMethod]
         public async Task Column_Persist_Step()       
         {
-            Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
+            var entity = CellFactory.CreateCellEntity();
+            Assert.IsTrue(string.IsNullOrWhiteSpace(entity.PartitionKey) || string.IsNullOrWhiteSpace(entity.RowKey), $"PartitionKey and RowKey are required. {entity.GetType().Name}");
+            IEnumerable<CellEntity> entities = new List<CellEntity>() { entity };
 
             try
-            { 
-                var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
-                Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new ColumnPersistStep(configStorage);
-                var results = await workflow.ExecuteAsync(CellFactory.CreateCellEntity());
+            {
+                var results = await new StorageTablesService<CellEntity>(configStorage).AddItemsAsync(entities);
                 Assert.IsTrue(results.Any(), "Failed to persist.");
             }
             catch (Exception ex)

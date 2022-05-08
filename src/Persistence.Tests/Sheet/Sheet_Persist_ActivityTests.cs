@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Sheet_Persist_StepTests
+    public class Sheet_Persist_Tests
     {
         private readonly IConfiguration configuration;
-        private readonly ILogger<Sheet_Persist_StepTests> logItem;
+        private readonly ILogger<Sheet_Persist_Tests> logItem;
         private readonly StorageTablesServiceConfiguration configStorage;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public Sheet_Persist_StepTests()
+        public Sheet_Persist_Tests()
         {
-            logItem = LoggerFactory.CreateLogger<Sheet_Persist_StepTests>();
+            logItem = LoggerFactory.CreateLogger<Sheet_Persist_Tests>();
             configuration = new AppConfigurationFactory().Create();
             configStorage = new StorageTablesServiceConfiguration(
                 configuration[AppConfigurationKeys.StorageTablesConnectionString],

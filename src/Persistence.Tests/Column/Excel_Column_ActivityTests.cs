@@ -14,18 +14,18 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Excel_Column_StepTests
+    public class Excel_Column_Tests
     {
-        private readonly ILogger<Excel_Column_StepTests> logItem;
+        private readonly ILogger<Excel_Column_Tests> logItem;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
 
-        public Excel_Column_StepTests()
+        public Excel_Column_Tests()
         {
-            logItem = LoggerFactory.CreateLogger<Excel_Column_StepTests>();
+            logItem = LoggerFactory.CreateLogger<Excel_Column_Tests>();
         }
 
         [TestMethod]
