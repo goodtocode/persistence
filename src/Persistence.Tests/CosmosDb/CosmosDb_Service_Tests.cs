@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
 
-    public class CosmosDbServiceTests
+    public class CosmosDb_Service_Tests
     {
         private IConfiguration configuration;
-        private ILogger<CosmosDbServiceTests> log;
+        private ILogger<CosmosDb_Service_Tests> log;
         private CosmosDbServiceOptions configCosmos;
         public CosmosDbItemService<EntityA> SutItem { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public CosmosDbServiceTests()
+        public CosmosDb_Service_Tests()
         {
         }
         
         public void Initialize()
         {
-            log = LoggerFactory.CreateLogger<CosmosDbServiceTests>();
+            log = LoggerFactory.CreateLogger<CosmosDb_Service_Tests>();
             configuration = new AppConfigurationFactory().Create();
             configCosmos = new CosmosDbServiceOptions(
                 configuration[AppConfigurationKeys.CosmosDbConnectionString],
