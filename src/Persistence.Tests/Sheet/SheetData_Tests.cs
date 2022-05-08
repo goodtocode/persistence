@@ -7,12 +7,12 @@ using System.Linq;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class SheetDataTests
+    public class SheetData_Tests
     {
         private ILogger logger;
-        public SheetDataTests()
+        public SheetData_Tests()
         {
-            logger = LoggerFactory.CreateLogger<SheetDataTests>();
+            logger = LoggerFactory.CreateLogger<SheetData_Tests>();
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@ namespace GoodToCode.Persistence.Tests
         {
             try
             {
-                foreach (var sheet in WorkbookFactory.CreateWorkbookData().Sheets)
+                foreach (var sheet in WorkbookDataFactory.CreateWorkbookData().Sheets)
                 {
                     var rows = sheet.Rows.ToDictionary();
                     Assert.IsTrue(rows.Any());

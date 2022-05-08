@@ -5,20 +5,16 @@ namespace GoodToCode.Persistence.Abstractions
 {
     public class SheetData : ISheetData
     {
+        public string WorkbookName { get; set; }
         public int SheetIndex { get; set; }
         public string SheetName { get; set; }
-
-        public IEnumerable<ICellData> Cells { get; set; }
         public IEnumerable<IRowData> Rows { get; set; }
 
-        public string WorkbookName { get; set; }
-
-        public SheetData(int sheetIndex, string sheetName, IEnumerable<IRowData> rows, IEnumerable<ICellData> cells)
+        public SheetData(int sheetIndex, string sheetName, IEnumerable<IRowData> rows)
         {
             SheetIndex = sheetIndex;
             SheetName = sheetName;
             Rows = rows;
-            Cells = cells;
         }
 
         public IEnumerable<ICellData> GetColumn(int columnIndex)
@@ -33,7 +29,7 @@ namespace GoodToCode.Persistence.Abstractions
 
         public ICellData GetCell(int rowIndex, int columnIndex)
         {
-            return Cells.Where(r => r.RowIndex == rowIndex && r.ColumnIndex == columnIndex).FirstOrDefault();
+            return GetRow(rowIndex).Cells.Where(r => r.ColumnIndex == columnIndex).FirstOrDefault();
         }
 
         public IEnumerable<Dictionary<string, object>> ToDictionary()

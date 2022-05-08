@@ -1,5 +1,4 @@
-﻿using GoodToCode.Persistence.DurableTasks;
-using GoodToCode.Persistence.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Blob.Excel;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
@@ -14,22 +13,19 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Excel_Sheet_StepTests
+    public class Excel_Workbook_Tests
     {
-        private readonly ILogger<Excel_Sheet_StepTests> logItem;
+        private readonly ILogger<Excel_Workbook_Tests> logItem;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
-        public CellEntity SutRow { get; private set; }
-        public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-
-        public Excel_Sheet_StepTests()
+        public Excel_Workbook_Tests()
         {
-            logItem = LoggerFactory.CreateLogger<Excel_Sheet_StepTests>();
+            logItem = LoggerFactory.CreateLogger<Excel_Workbook_Tests>();
         }
 
         [TestMethod]
-        public async Task Excel_Sheet_Load_Step()       
+        public async Task Excel_Workbook_Load_Step()       
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
 
@@ -37,9 +33,8 @@ namespace GoodToCode.Persistence.Tests
             { 
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new  ExcelSheetLoadStep(new ExcelService());
-                var results = workflow.Execute(itemToAnalyze, 0);
-                Assert.IsTrue(results.Rows.Any(), "No results from Excel service.");
+                var results = new ExcelService().GetWorkbook(itemToAnalyze, Path.GetFileName(SutXlsxFile));
+                Assert.IsTrue(results.Sheets.Any(), "No results from Excel service.");
             }
             catch (Exception ex)
             {

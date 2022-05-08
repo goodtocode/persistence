@@ -1,8 +1,5 @@
-﻿using GoodToCode.Persistence.Abstractions;
-using GoodToCode.Persistence.Blob.Excel;
-using Microsoft.Extensions.Primitives;
+﻿using GoodToCode.Persistence.Blob.Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +8,7 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class ExcelServiceTests
+    public class Excel_Service_Tests
     {
         private readonly string executingPath;
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
@@ -19,16 +16,12 @@ namespace GoodToCode.Persistence.Tests
         private string SutOpinionFile { get { return @$"{AssetsFolder}/OpinionFile.xlsx"; } }
         private string SutXlsxFile { get { return @$"{AssetsFolder}/TestFile.xlsx"; } }        
 
-        public ISheetData SutXls { get; private set; }
-        public ISheetData SutXlsx { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
-
-        public ExcelServiceTests()
+        public Excel_Service_Tests()
         {
             // Visual Studio vs. dotnet test execute different folders
             executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);                        
             executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();
-            executingPath = Directory.Exists(AssetsFolder) ? executingPath : $"{Directory.GetParent(executingPath)}/bin/Debug/net5.0";
+            
         }
 
         [TestMethod]

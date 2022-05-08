@@ -1,8 +1,6 @@
-﻿using GoodToCode.Persistence.DurableTasks;
-using GoodToCode.Persistence.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Blob.Excel;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -14,18 +12,14 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Excel_Column_StepTests
+    public class Excel_Column_Tests
     {
-        private readonly ILogger<Excel_Column_StepTests> logItem;
+        private readonly ILogger<Excel_Column_Tests> logItem;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
-        public CellEntity SutRow { get; private set; }
-        public IEnumerable<CellEntity> SutRows { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-
-        public Excel_Column_StepTests()
+        public Excel_Column_Tests()
         {
-            logItem = LoggerFactory.CreateLogger<Excel_Column_StepTests>();
+            logItem = LoggerFactory.CreateLogger<Excel_Column_Tests>();
         }
 
         [TestMethod]
@@ -37,8 +31,7 @@ namespace GoodToCode.Persistence.Tests
             { 
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new ExcelColumnLoadStep(new ExcelService());
-                var results = workflow.Execute(itemToAnalyze, 0, 3);
+                var results = new ExcelService().GetColumn(itemToAnalyze, 0, 3);
                 Assert.IsTrue(results.Any(), "No results from analytics service.");
             }
             catch (Exception ex)
@@ -57,9 +50,22 @@ namespace GoodToCode.Persistence.Tests
             {
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new ExcelColumnSearchStep(new ExcelService());
-                var results = workflow.Execute(itemToAnalyze, "DocName", "*");
-                Assert.IsTrue(results.Any(), "No results from analytics service.");
+
+                var returnCells = new List<ICellData>();
+                var wb = new ExcelService().GetWorkbook(itemToAnalyze, "DocName");
+                foreach (var sheet in wb.Sheets)
+                {
+                    if (!sheet.Rows.Any()) throw new ArgumentException("Passed sheet does not have any rows.");
+                    var header = sheet.GetRow(1);
+                    var foundCells = header.Cells.Where(c => c.ColumnName.Contains('*'));
+                    foreach (var cell in foundCells)
+                    {
+                        var newCells = sheet.GetColumn(cell.ColumnIndex);
+                        returnCells.AddRange(newCells);
+                    }
+                }
+                
+                Assert.IsTrue(returnCells.Any(), "No results from analytics service.");
             }
             catch (Exception ex)
             {

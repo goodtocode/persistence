@@ -1,8 +1,5 @@
-﻿using GoodToCode.Persistence.Abstractions;
-using GoodToCode.Persistence.Blob.Csv;
-using Microsoft.Extensions.Primitives;
+﻿using GoodToCode.Persistence.Blob.Csv;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,22 +8,17 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class CsvServiceTests
+    public class Csv_Service_Tests
     {
         private readonly string executingPath;
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
         private string SutCsvFile { get { return @$"{AssetsFolder}/TestFile.csv"; } }        
 
-        public ISheetData SutXls { get; private set; }
-        public ISheetData SutXlsx { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
-
-        public CsvServiceTests()
+        public Csv_Service_Tests()
         {
             // Visual Studio vs. dotnet test execute different folders
             executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);                        
-            executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();
-            executingPath = Directory.Exists(AssetsFolder) ? executingPath : $"{Directory.GetParent(executingPath)}/bin/Debug/net5.0";
+            executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();            
         }
 
         [TestMethod]
@@ -81,9 +73,7 @@ namespace GoodToCode.Persistence.Tests
             Assert.IsTrue(sheet.Rows.Any());
             var itemWithData = sheet.Rows.Where(x => x.RowIndex > 0);
             Assert.IsTrue(itemWithData.Any());
-            var notInSingleSheet = sheet.Cells.Where(x => x.SheetIndex != 0);
-            Assert.IsTrue(!notInSingleSheet.Any());
-            // ToDictionary for unrolling into a row for persistence
+            // ToDictionary for unrolling into a row for TableEntity persistence
             var dict = sheet.ToDictionary();
             Assert.IsTrue(dict.Any());
             Assert.IsTrue(dict.FirstOrDefault().Any());
@@ -106,7 +96,7 @@ namespace GoodToCode.Persistence.Tests
             Assert.IsTrue(itemWithData.Any());
             var notInSingleSheet = row.Cells.Where(x => x.SheetIndex != 0);
             Assert.IsTrue(!notInSingleSheet.Any());
-            // ToDictionary for unrolling into a row for persistence
+            // ToDictionary for unrolling into a row for TableEntity persistence
             var dict = row.ToDictionary();
             Assert.IsTrue(dict.Any());
             Assert.IsTrue(dict.Any());
