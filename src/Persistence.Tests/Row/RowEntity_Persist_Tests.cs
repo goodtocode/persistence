@@ -35,14 +35,14 @@ namespace GoodToCode.Persistence.Tests
         }
 
         [TestMethod]
-        public async Task RowEntity_Persist_Fake()       
+        public async Task RowEntity_Persist()       
         {
             var row = RowFactory.CreateRowData();
 
             try
             {
                 var entity = new RowEntity(Guid.NewGuid().ToString(), row.Cells);
-                var results = await new StorageTablesService<CellEntity>(configStorage).AddItemAsync(entity.ToDictionary());
+                var results = await new StorageTablesService<RowEntity>(configStorage).AddItemAsync(entity);
                 Assert.IsTrue(results.Any(), "Failed to persist.");
             }
             catch (Exception ex)

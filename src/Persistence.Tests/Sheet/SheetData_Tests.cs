@@ -7,12 +7,12 @@ using System.Linq;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class SheetDataTests
+    public class SheetData_Tests
     {
         private ILogger logger;
-        public SheetDataTests()
+        public SheetData_Tests()
         {
-            logger = LoggerFactory.CreateLogger<SheetDataTests>();
+            logger = LoggerFactory.CreateLogger<SheetData_Tests>();
         }
 
         [TestMethod]

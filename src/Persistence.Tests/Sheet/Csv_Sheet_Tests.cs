@@ -22,7 +22,6 @@ namespace GoodToCode.Persistence.Tests
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-
         public Csv_Sheet_Tests()
         {
             logItem = LoggerFactory.CreateLogger<Csv_Sheet_Tests>();
@@ -37,8 +36,7 @@ namespace GoodToCode.Persistence.Tests
             { 
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutCsvFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new  CsvSheetLoadStep(new CsvService());
-                var results = workflow.Execute(itemToAnalyze);
+                var results = new CsvService().GetSheet(itemToAnalyze);
                 Assert.IsTrue(results.Rows.Any(), "No results from Csv service.");
             }
             catch (Exception ex)

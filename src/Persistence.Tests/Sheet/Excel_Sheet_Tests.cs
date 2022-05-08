@@ -1,7 +1,6 @@
 ﻿using GoodToCode.Persistence.DurableTasks;
 using GoodToCode.Persistence.Abstractions;
-using GoodToCode.Persistence.Azure.StorageTables;
-using Microsoft.Extensions.Configuration;
+using GoodToCode.Persistence.Blob.Excel;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,35 +14,31 @@ using System.Threading.Tasks;
 namespace GoodToCode.Persistence.Tests
 {
     [TestClass]
-    public class Sheet_Persist_Tests
+    public class Excel_Sheet_Tests
     {
-        private readonly IConfiguration configuration;
-        private readonly ILogger<Sheet_Persist_Tests> logItem;
-        private readonly StorageTablesServiceConfiguration configStorage;
+        private readonly ILogger<Excel_Sheet_Tests> logItem;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
         public CellEntity SutRow { get; private set; }
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-        public Sheet_Persist_Tests()
+
+        public Excel_Sheet_Tests()
         {
-            logItem = LoggerFactory.CreateLogger<Sheet_Persist_Tests>();
-            configuration = new AppConfigurationFactory().Create();
-            configStorage = new StorageTablesServiceConfiguration(
-                configuration[AppConfigurationKeys.StorageTablesConnectionString],
-                $"UnitTest-{DateTime.UtcNow:yyyy-MM-dd}-Sheet");
+            logItem = LoggerFactory.CreateLogger<Excel_Sheet_Tests>();
         }
 
         [TestMethod]
-        public async Task Sheet_Persist_Fake()
+        public async Task Excel_Sheet_Load_Step()       
         {
             Assert.IsTrue(File.Exists(SutXlsxFile), $"{SutXlsxFile} does not exist. Executing: {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}");
 
             try
             { 
-                var workflow = new SheetPersistStep(configStorage);
-                var results = await workflow.ExecuteAsync(SheetFactory.CreateSheetData(), "Partition1");
-                Assert.IsTrue(results.Any(), "Failed to persist.");
+                var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
+                Stream itemToAnalyze = new MemoryStream(bytes);
+                var results = new ExcelService().GetSheet(itemToAnalyze, 0);
+                Assert.IsTrue(results.Rows.Any(), "No results from Excel service.");
             }
             catch (Exception ex)
             {
