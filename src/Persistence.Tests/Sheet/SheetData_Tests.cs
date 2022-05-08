@@ -20,7 +20,7 @@ namespace GoodToCode.Persistence.Tests
         {
             try
             {
-                foreach (var sheet in WorkbookFactory.CreateWorkbookData().Sheets)
+                foreach (var sheet in WorkbookDataFactory.CreateWorkbookData().Sheets)
                 {
                     var rows = sheet.Rows.ToDictionary();
                     Assert.IsTrue(rows.Any());

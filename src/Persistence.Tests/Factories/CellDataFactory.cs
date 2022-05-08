@@ -3,13 +3,8 @@ using System;
 
 namespace GoodToCode.Persistence.Tests
 {
-    public class CellFactory
+    public class CellDataFactory
     {
-        public static CellEntity CreateCellEntity()
-        {
-            return new CellEntity("Sheet1", Guid.NewGuid().ToString(), CreateCellData());
-        }
-
         public static CellData CreateCellData()
         {
             return new CellData()

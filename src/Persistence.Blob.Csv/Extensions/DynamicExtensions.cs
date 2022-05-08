@@ -35,7 +35,7 @@ namespace GoodToCode.Persistence.Blob.Csv
                     currRow++;
                 }
             }
-            returnSheet = new SheetData(0, defaultSheetName, rowsToAdd, cellsToAdd);
+            returnSheet = new SheetData(0, defaultSheetName, rowsToAdd);
 
             return returnSheet;
         }

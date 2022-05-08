@@ -16,7 +16,6 @@ namespace GoodToCode.Persistence.Blob.Excel
         public static ISheetData ToSheetData(this ISheet item, int sheetIndex, string workbookName, bool hasHeaderRow = true)
         {
             IRow header = null;
-            var cells = new List<ICellData>();
             var rows = new List<IRowData>();
             int firstRow = item.FirstRowNum;
             if (hasHeaderRow && firstRow == 0)
@@ -42,10 +41,9 @@ namespace GoodToCode.Persistence.Blob.Excel
                                     WorkbookName = workbookName ?? string.Empty
                                 });
                     rows.Add(new RowData(count, rowCells));
-                    cells.AddRange(rowCells);
                 }
             }
-            return new SheetData(sheetIndex, item.SheetName, rows, cells);
+            return new SheetData(sheetIndex, item.SheetName, rows);
         }
     }
 }

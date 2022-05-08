@@ -73,9 +73,7 @@ namespace GoodToCode.Persistence.Tests
             Assert.IsTrue(sheet.Rows.Any());
             var itemWithData = sheet.Rows.Where(x => x.RowIndex > 0);
             Assert.IsTrue(itemWithData.Any());
-            var notInSingleSheet = sheet.Cells.Where(x => x.SheetIndex != 0);
-            Assert.IsTrue(!notInSingleSheet.Any());
-            // ToDictionary for unrolling into a row for persistence
+            // ToDictionary for unrolling into a row for TableEntity persistence
             var dict = sheet.ToDictionary();
             Assert.IsTrue(dict.Any());
             Assert.IsTrue(dict.FirstOrDefault().Any());
@@ -98,7 +96,7 @@ namespace GoodToCode.Persistence.Tests
             Assert.IsTrue(itemWithData.Any());
             var notInSingleSheet = row.Cells.Where(x => x.SheetIndex != 0);
             Assert.IsTrue(!notInSingleSheet.Any());
-            // ToDictionary for unrolling into a row for persistence
+            // ToDictionary for unrolling into a row for TableEntity persistence
             var dict = row.ToDictionary();
             Assert.IsTrue(dict.Any());
             Assert.IsTrue(dict.Any());
