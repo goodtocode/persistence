@@ -1,8 +1,5 @@
-﻿using GoodToCode.Persistence.Abstractions;
-using GoodToCode.Persistence.Blob.Excel;
-using Microsoft.Extensions.Primitives;
+﻿using GoodToCode.Persistence.Blob.Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -18,10 +15,6 @@ namespace GoodToCode.Persistence.Tests
 
         private string SutOpinionFile { get { return @$"{AssetsFolder}/OpinionFile.xlsx"; } }
         private string SutXlsxFile { get { return @$"{AssetsFolder}/TestFile.xlsx"; } }        
-
-        public ISheetData SutXls { get; private set; }
-        public ISheetData SutXlsx { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public Excel_Service_Tests()
         {

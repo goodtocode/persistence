@@ -1,5 +1,4 @@
-﻿using GoodToCode.Persistence.DurableTasks;
-using GoodToCode.Persistence.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Blob.Excel;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
@@ -37,9 +36,8 @@ namespace GoodToCode.Persistence.Tests
             { 
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new ExcelWorkbookLoadStep(new ExcelService());
-                var results = workflow.Execute(itemToAnalyze, Path.GetFileName(SutXlsxFile));
-                Assert.IsTrue(results.Any(), "No results from Excel service.");
+                var results = new ExcelService().GetWorkbook(itemToAnalyze, Path.GetFileName(SutXlsxFile));
+                Assert.IsTrue(results.Sheets.Any(), "No results from Excel service.");
             }
             catch (Exception ex)
             {

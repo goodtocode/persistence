@@ -1,13 +1,10 @@
 ﻿using GoodToCode.Persistence.Azure.StorageTables;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Persistence.Tests
@@ -20,8 +17,6 @@ namespace GoodToCode.Persistence.Tests
         private StorageTablesServiceOptions configPersistence;
         public StorageTablesService<EntityA> serviceEntityA { get; private set; }
         public StorageTablesService<RowEntity> serviceRowEntity { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
-        private string SutJsonFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/IEnumerableRowEntity_600.json"; } }
 
         public StorageTables_Service_DictionaryTests() { }
 
@@ -91,9 +86,8 @@ namespace GoodToCode.Persistence.Tests
         }
 
         [TestCleanup]
-        public async Task Cleanup()
+        public void Cleanup()
         {
-            // Fails: await SutItem.DeleteTableAsync();
         }
     }
 }

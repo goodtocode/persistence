@@ -1,8 +1,6 @@
 ﻿using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Blob.Excel;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,13 +13,10 @@ namespace GoodToCode.Persistence.Tests
         private readonly NpoiBlobReader reader;
         private readonly string executingPath;
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
-
         private string SutXlsFile { get { return @$"{AssetsFolder}/TestFile.xls"; } }
         private string SutXlsxFile { get { return @$"{AssetsFolder}/TestFile.xlsx"; } }        
-
         public ISheetData SutXls { get; private set; }
         public ISheetData SutXlsx { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public NpoiFileReader_Tests()
         {
@@ -29,7 +24,6 @@ namespace GoodToCode.Persistence.Tests
             // Visual Studio vs. dotnet test execute different folders
             executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();
-            
         }
 
         public void ExcelFile_Workbook_Xlsx()

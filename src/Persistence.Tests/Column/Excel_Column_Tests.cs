@@ -1,8 +1,6 @@
-﻿using GoodToCode.Persistence.DurableTasks;
-using GoodToCode.Persistence.Abstractions;
+﻿using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Blob.Excel;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -18,9 +16,6 @@ namespace GoodToCode.Persistence.Tests
     {
         private readonly ILogger<Excel_Column_Tests> logItem;
         private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
-        public CellEntity SutRow { get; private set; }
-        public IEnumerable<CellEntity> SutRows { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public Excel_Column_Tests()
         {

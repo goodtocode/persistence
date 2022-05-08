@@ -1,7 +1,6 @@
 ﻿using GoodToCode.Persistence.Azure.StorageTables;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -18,8 +17,6 @@ namespace GoodToCode.Persistence.Tests
         private ILogger<StorageTablesService<NamedEntity>> logItem;
         private StorageTablesServiceOptions configPersistence;
         public StorageTablesService<NamedEntity> serviceNamedEntity { get; private set; }        
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
-        private static string SutFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
 
         public StorageTables_Service_EntityTests() { }
 

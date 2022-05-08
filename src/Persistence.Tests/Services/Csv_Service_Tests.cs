@@ -1,8 +1,5 @@
-﻿using GoodToCode.Persistence.Abstractions;
-using GoodToCode.Persistence.Blob.Csv;
-using Microsoft.Extensions.Primitives;
+﻿using GoodToCode.Persistence.Blob.Csv;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,10 +13,6 @@ namespace GoodToCode.Persistence.Tests
         private readonly string executingPath;
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
         private string SutCsvFile { get { return @$"{AssetsFolder}/TestFile.csv"; } }        
-
-        public ISheetData SutXls { get; private set; }
-        public ISheetData SutXlsx { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public Csv_Service_Tests()
         {

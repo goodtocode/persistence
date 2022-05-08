@@ -1,8 +1,6 @@
 ﻿using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Blob.Csv;
-using GoodToCode.Persistence.DurableTasks;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -18,9 +16,6 @@ namespace GoodToCode.Persistence.Tests
     {
         private readonly ILogger<Csv_Column_Tests> logItem;
         private static string SutCsvFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.csv"; } }
-        public CellEntity SutRow { get; private set; }
-        public IEnumerable<CellEntity> SutRows { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public Csv_Column_Tests()
         {

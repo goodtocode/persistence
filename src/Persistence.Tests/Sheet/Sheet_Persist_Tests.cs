@@ -1,9 +1,7 @@
 ﻿using Azure.Data.Tables;
-using GoodToCode.Persistence.Abstractions;
 using GoodToCode.Persistence.Azure.StorageTables;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -18,10 +16,6 @@ namespace GoodToCode.Persistence.Tests
         private readonly IConfiguration configuration;
         private readonly ILogger<Sheet_Persist_Tests> logItem;
         private readonly StorageTablesServiceConfiguration configStorage;
-        private static string SutXlsxFile { get { return @$"{PathFactory.GetProjectSubfolder("Assets")}/OpinionFile.xlsx"; } }
-        public CellEntity SutRow { get; private set; }
-        public IEnumerable<CellEntity> SutRows { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public Sheet_Persist_Tests()
         {

@@ -1,10 +1,8 @@
 ﻿using GoodToCode.Persistence.Azure.CosmosDb;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GoodToCode.Persistence.Tests
@@ -16,7 +14,6 @@ namespace GoodToCode.Persistence.Tests
         private ILogger<CosmosDb_Service_Tests> log;
         private CosmosDbServiceOptions configCosmos;
         public CosmosDbItemService<EntityA> SutItem { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
 
         public CosmosDb_Service_Tests()
         {

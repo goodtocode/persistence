@@ -1,8 +1,5 @@
-﻿using GoodToCode.Persistence.Abstractions;
-using GoodToCode.Persistence.Blob.Csv;
-using Microsoft.Extensions.Primitives;
+﻿using GoodToCode.Persistence.Blob.Csv;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -17,16 +14,11 @@ namespace GoodToCode.Persistence.Tests
         private string AssetsFolder { get { return @$"{executingPath}/Assets"; } }
         private string SutCsvFile { get { return @$"{AssetsFolder}/TestFile.csv"; } }        
 
-        public ISheetData SutXls { get; private set; }
-        public ISheetData SutXlsx { get; private set; }
-        public Dictionary<string, StringValues> SutReturn { get; private set; }
-
         public RowData_Tests()
         {
             // Visual Studio vs. dotnet test execute different folders
             executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);                        
-            executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();
-            
+            executingPath = Directory.Exists(AssetsFolder) ? executingPath : Directory.GetCurrentDirectory();            
         }
 
         [TestMethod]
