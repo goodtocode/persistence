@@ -22,7 +22,6 @@ namespace GoodToCode.Persistence.Tests
         public IEnumerable<CellEntity> SutRows { get; private set; }
         public Dictionary<string, StringValues> SutReturn { get; private set; }
 
-
         public Excel_Column_Tests()
         {
             logItem = LoggerFactory.CreateLogger<Excel_Column_Tests>();
@@ -37,8 +36,7 @@ namespace GoodToCode.Persistence.Tests
             { 
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new ExcelColumnLoadStep(new ExcelService());
-                var results = workflow.Execute(itemToAnalyze, 0, 3);
+                var results = new ExcelService().GetColumn(itemToAnalyze, 0, 3);
                 Assert.IsTrue(results.Any(), "No results from analytics service.");
             }
             catch (Exception ex)
@@ -57,9 +55,22 @@ namespace GoodToCode.Persistence.Tests
             {
                 var bytes = await FileFactoryService.GetInstance().ReadAllBytesAsync(SutXlsxFile);
                 Stream itemToAnalyze = new MemoryStream(bytes);
-                var workflow = new ExcelColumnSearchStep(new ExcelService());
-                var results = workflow.Execute(itemToAnalyze, "DocName", "*");
-                Assert.IsTrue(results.Any(), "No results from analytics service.");
+
+                var returnCells = new List<ICellData>();
+                var wb = new ExcelService().GetWorkbook(itemToAnalyze, "DocName");
+                foreach (var sheet in wb.Sheets)
+                {
+                    if (!sheet.Rows.Any()) throw new ArgumentException("Passed sheet does not have any rows.");
+                    var header = sheet.GetRow(1);
+                    var foundCells = header.Cells.Where(c => c.ColumnName.Contains('*'));
+                    foreach (var cell in foundCells)
+                    {
+                        var newCells = sheet.GetColumn(cell.ColumnIndex);
+                        returnCells.AddRange(newCells);
+                    }
+                }
+                
+                Assert.IsTrue(returnCells.Any(), "No results from analytics service.");
             }
             catch (Exception ex)
             {
