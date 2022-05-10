@@ -21,13 +21,12 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>GoodToCode.Shared.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>GoodToCode.Persistence.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.5.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
     <PackageReference Include="NPOI" Version="2.5.6" />
