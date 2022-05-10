@@ -2,7 +2,6 @@
 using Azure.Data.Tables;
 using Azure.Data.Tables.Models;
 using GoodToCode.Persistence.Abstractions;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
