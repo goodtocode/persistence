@@ -16,6 +16,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 parameters:
+  - name: kvUri
+    type: string 
+    default: "$(kvUri)"
   - name: appcsConnection
     type: string 
     default: "$(appcsConnection)"
